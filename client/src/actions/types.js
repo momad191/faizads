@@ -1,0 +1,163 @@
+export const SET_ALERT = 'SET_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAIL = 'REGISTER_FAIL';
+export const USER_LOADED = 'USER_LOADED';
+export const AUTH_ERROR = 'AUTH_ERROR';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGOUT = 'LOGOUT';
+export const GET_PROFILE = 'GET_PROFILE';
+export const GET_PROFILES = 'GET_PROFILES';
+export const GET_REPOS = 'GET_REPOS';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const CLEAR_PROFILE = 'CLEAR_PROFILE';
+export const PROFILE_ERROR = 'PROFILE_ERROR';
+export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';
+export const GET_POSTS = 'GET_POSTS';
+export const GET_POST = 'GET_POST';
+export const POST_ERROR = 'POST_ERROR';
+export const UPDATE_LIKES = 'UPDATE_LIKES'; 
+export const UPDATE_CLICKS = 'UPDATE_CLICKS';
+export const DELETE_POST = 'DELETE_POST';
+export const ADD_POST = 'ADD_POST';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const REMOVE_COMMENT = 'REMOVE_COMMENT';
+
+
+// Category
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const CATEGORY_ERROR = 'CATEGORY_ERROR';
+export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+export const ADD_CATEGORY= 'ADD_CATEGORY';
+export const GET_CATEGORY= 'GET_CATEGORY';
+
+  
+
+//Market
+export const GET_MARKETS = 'GET_MARKETS';
+export const MARKET_ERROR = 'MARKET_ERROR';
+export const DELETE_MARKET = 'DELETE_MARKET';
+export const ADD_MARKET = 'ADD_MARKET';
+export const GET_MARKET = 'GET_MARKET';
+
+ 
+
+//Question
+export const GET_QUESTIONS = 'GET_QUESTIONS';
+export const QUESTION_ERROR = 'QUESTION_ERROR';
+export const DELETE_QUESTION = 'DELETE_QUESTION';
+export const ADD_QUESTION = 'ADD_QUESTION';
+export const GET_QUESTION = 'GET_QUESTION';
+
+ 
+
+
+//STARS
+export const UPDATE_FIVESTARS = 'UPDATE_FIVESTARS';
+export const UPDATE_FOURSTARS = 'UPDATE_FOURSTARS';
+export const UPDATE_THREESTARS = 'UPDATE_THREESTARS';
+export const UPDATE_TWOSTARS = 'UPDATE_TWOSTARS';
+export const UPDATE_ONESTARS = 'UPDATE_ONESTARS';
+
+
+
+
+
+
+//Country
+export const GET_COUNTRIES = 'GET_COUNTRIES';
+export const COUNTRY_ERROR = 'COUNTRY_ERROR';
+export const DELETE_COUNTRY = 'DELETE_COUNTRY';
+export const ADD_COUNTRY = 'ADD_COUNTRY';
+export const GET_COUNTRY = 'GET_COUNTRY';
+
+
+
+//REQUESTS
+export const ADD_PROFITREQUEST = 'ADD_PROFITREQUEST';
+export const PROFITREQUEST_ERROR = 'PROFITREQUEST_ERROR';
+
+
+//SUBSCRIPTION
+
+export const SUBSCRIPTION_SUCCESS = 'ADD_PROFITREQUEST';
+export const SUBSCRIPTION_FAIL = 'SUBSCRIPTION_FAIL';
+
+
+// VISUALCODE
+export const VISUALCODE_SUCCESS = 'VISUALCODE_SUCCESS';
+export const VISUALCODE_FAIL = 'VISUALCODE_FAIL';
+
+
+
+
+// PAY
+export const PAY_SUCCESS = 'PAY_SUCCESS';
+export const PAY_FAIL = 'PAY_FAIL';
+
+ 
+
+//shop
+
+export const GET_SHOP = 'GET_SHOP';
+export const SHOP_ERROR = 'SHOP_ERROR';
+export const CLEAR_SHOP = 'CLEAR_SHOP';
+export const UPDATE_SHOP = 'UPDATE_SHOP';
+export const GET_SHOPS = 'GET_SHOPS';
+
+
+
+//FOLLOWUPS
+export const FOLLOWUP_ERROR = 'FOLLOWUP_ERROR';
+export const ADD_FOLLOWUP = 'ADD_FOLLOWUP';
+export const DELETE_FOLLOWUP = 'DELETE_FOLLOWUP';
+
+ 
+ 
+export const UPDATE_FOLLOWERS = 'UPDATE_FOLLOWERS'; 
+export const FOLLOWERS_ERROR = 'FOLLOWERS_ERROR';
+
+//RATINGS
+export const RATING_ERROR = 'RATING_ERROR';
+export const ADD_RATING = 'ADD_RATING';
+export const DELETE_RATING = 'DELETE_RATING';
+export const GET_RATING = 'GET_RATING';
+
+
+
+ 
+
+//REPORTS
+export const REPORT_ERROR = 'REPORT_ERROR';
+export const ADD_REPORT = 'ADD_REPORT';
+ 
+   
+
+
+//REPORTS
+export const MESSAGE_ERROR = 'MESSAGE_ERROR';
+export const ADD_MESSAGE = 'ADD_MESSAGE';
+export const ADD_SUBMESSAGE = 'ADD_SUBMESSAGE';
+export const GET_MESSAGE = 'GET_MESSAGE';
+export const DELETE_SUBMESSAGE = 'DELETE_SUBMESSAGE';
+
+export const DELETE_MESSAGE = 'DELETE_MESSAGE';
+export const GET_SUBMESSAGE = 'GET_SUBMESSAGE';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
