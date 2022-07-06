@@ -282,6 +282,10 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
 </Fragment>
 
     )
+ 
+    {i18next.language === 'ar' && moment.locale('ar'); }
+    {i18next.language === 'en' && moment.locale('en'); }
+    {i18next.language === 'fr' && moment.locale('fr'); }
 
   return (
     <Fragment>
@@ -301,8 +305,8 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
       <center>
         <div className="side-columns">
          <ul className="price">
-         <li className="header">المجانية </li>
-         <li className="grey">اتصل بنا</li>
+         <li className="header">المجانية</li>
+         <li className="grey">لمدة شهر/ 0.00</li>
          <li className="boldy">{user.first_name}  {user.last_name} </li>
          <li className="boldy"> {user.email} </li>
          <li className="boldy"> {user.country_name}</li>
@@ -314,28 +318,35 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
 
 
 
-      
+
+     
       
 {(moment(subscription.membership_renewal_expiry_date).isAfter(Date.now())) ?(
   <Fragment>
     <center>
     <div className="Dash-button-still-subscription">
   {/* <p class="login-title"> {subscription.membership_class}  الاشتراك الحالي  </p> */}
-  <p class="login-title">الاشتراك الحالي الخطة {subscription.membership_class && subscription.membership_class}   </p>
+  {subscription.membership_class &&(
+  <Fragment> 
+  <p class="login-title">الاشتراك الحالي الخطة {subscription.membershiptype.m_t_AR_name && subscription.membershiptype.m_t_AR_name}   </p>
 
    <p> 
      ينتهي اشتراكك في يوم <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment> 
 </p>
- 
+</Fragment>
+)}
  
  </div>
  </center>
   </Fragment>
+
+ 
   ):(
 
   subscriptionFormArabic
 
   )}
+
 
 
   
@@ -352,6 +363,7 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
   <div className="side-columns">
    <ul className="price">
    <li className="header">Free </li>
+   <li className="grey">0.00/ For a Month </li>
    <li className="boldy">{user.first_name}  {user.last_name} </li>
    <li className="boldy"> {user.email} </li>
    <li className="boldy"> {user.country_name}</li>
@@ -378,12 +390,15 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
 <center>
 <div className="Dash-button-still-subscription">
 {/* <p class="login-title"> {subscription.membership_class}  Current Subscription  </p> */}
-<p class="login-title"> Current Subscription: {subscription.membership_class && subscription.membership_class} Plan   </p>
+{subscription.membership_class &&(
+  <Fragment>
+<p class="login-title"> Current Subscription: {subscription.membershiptype.m_t_EN_name && subscription.membershiptype.m_t_EN_name}    </p>
 
 <p> 
 Your subscription expires <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment> 
 </p>
-
+</Fragment>
+)}
 
 </div>
 </center>
@@ -391,7 +406,6 @@ Your subscription expires <Moment format='YYYY/MM/DD'>{subscription.membership_r
 ):(
   subscriptionFormEnglish
 )}
-
 
 
 

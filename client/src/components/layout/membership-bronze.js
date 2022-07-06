@@ -2,6 +2,7 @@ import React, { Fragment, useEffect ,useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import moment from 'moment';
+import 'moment/locale/ar';
 import Moment from 'react-moment';
 import { addSubscription } from '../../actions/auth';
 
@@ -133,8 +134,10 @@ const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
 
  }, []);
 
-
-  
+ 
+ {i18next.language === 'ar' && moment.locale('ar'); }
+ {i18next.language === 'en' && moment.locale('en'); }
+ {i18next.language === 'fr' && moment.locale('fr'); }
  
   return (
     <Fragment>
@@ -144,7 +147,7 @@ const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
       <NavbarEnglish />
       )}
  
-
+ 
      <div className="aqle3-main" >
       <div className="mainword2">
 
@@ -156,7 +159,7 @@ const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
          <div className="side-columns">
          <ul className="price">
          <li className="bronze">البرونزية </li>
-         <li className="grey">$ 11.00 / شهريا</li>
+         <li className="grey">$ 11.00 / لمدة شهر </li>
          <li className="boldy">{user.first_name}  {user.last_name} </li>
          <li className="boldy"> {user.email} </li>
          <li className="boldy"> {user.country_name}</li>
@@ -177,12 +180,16 @@ const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
 
       <center>  <div style={{width:''}} id="paypal-button-container"></div></center> 
       
+  {subscription.membership_class &&(
+  <Fragment>
+
+ 
       {(moment(subscription.membership_renewal_expiry_date).isAfter(Date.now())) &&(
   <Fragment>
     <center>
     <div className="Dash-button-still-subscription">
   {/* <p class="login-title"> {subscription.membership_class}  الاشتراك الحالي  </p> */}
-  <p class="login-title">الاشتراك الحالي الخطة {subscription.membership_class && subscription.membership_class}   </p>
+  <p class="login-title">الاشتراك الحالي الخطة {subscription.membershiptype.m_t_AR_name && subscription.membershiptype.m_t_AR_name}   </p>
 
    <p> 
      ينتهي اشتراكك في يوم <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment> 
@@ -193,6 +200,10 @@ const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
  </center>
   </Fragment>
   )}
+
+</Fragment>
+      )}
+
 
 
       </form>
@@ -215,7 +226,7 @@ const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
           <div className="side-columns">
            <ul className="price">
            <li className="bronze">Bronze </li>
-           <li className="grey">$ 11.00 / Monthly</li>
+           <li className="grey">$ 11.00 / For a Month</li>
            <li className="boldy">{user.first_name}  {user.last_name} </li>
            <li className="boldy"> {user.email} </li>
            <li className="boldy"> {user.country_name}</li>
@@ -240,15 +251,16 @@ const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
         <center>  <div style={{width:''}} id="paypal-button-container"></div></center> 
 
         
-
+{subscription.membership_class &&(
+  <Fragment>
 
         {(moment(subscription.membership_renewal_expiry_date).isAfter(Date.now())) &&(
     <Fragment>
       <center>
       <div className="Dash-button-still-subscription">
     {/* <p class="login-title"> Current Subscription: {subscription.membership_class}    </p> */}
-    <p class="login-title"> Current Subscription: {subscription.membership_class && subscription.membershiptype.m_t_EN_name} Plan   </p>
-
+    <p class="login-title"> Current Subscription: {subscription.membershiptype.m_t_EN_name && subscription.membershiptype.m_t_EN_name}    </p>
+ 
  
      <p> 
      Your subscription expires <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment> 
@@ -259,7 +271,8 @@ const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
    </center>
     </Fragment>
     )}
-
+  </Fragment>
+)}
 
 
         </form>

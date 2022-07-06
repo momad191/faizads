@@ -243,7 +243,7 @@ const Dashboard = ({
    <Fragment>
   
  <center> 
-
+ 
    <Link to='/membership/prices' className="Dash-button-end-subscription">
  البدء باختيار خطتك
 </Link>
@@ -323,7 +323,7 @@ const Dashboard = ({
 <Link className="Dash-button-special "> مرحبا {user.first_name && user.first_name}  { user.last_name && user.last_name}  </Link>
 </center>
 </Fragment>
-)} 
+)}  
 
  
 </Fragment>

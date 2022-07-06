@@ -127,8 +127,10 @@ const Golden = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
  }, []);
 
 
- 
- 
+ {i18next.language === 'ar' && moment.locale('ar'); }
+ {i18next.language === 'en' && moment.locale('en'); }
+ {i18next.language === 'fr' && moment.locale('fr'); }
+  
   return (
     <Fragment>
 
@@ -148,7 +150,7 @@ const Golden = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
         <div className="side-columns">
          <ul className="price">
          <li className="gold">الذهبية </li>
-         <li className="grey">$ 31.00 / شهريا</li>
+         <li className="grey">$ 31.00 / لمدة شهر </li>
          <li className="boldy">{user.first_name}  {user.last_name} </li>
          <li className="boldy"> {user.email} </li>
          <li className="boldy"> {user.country_name}</li>
@@ -172,12 +174,14 @@ const Golden = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
  <center>  <div style={{width:''}} id="paypal-button-container"></div></center> 
 
 
+ {subscription.membership_class &&(
+  <Fragment>
   {(moment(subscription.membership_renewal_expiry_date).isAfter(Date.now())) &&(
   <Fragment>
     <center>
     <div className="Dash-button-still-subscription">
   {/* <p class="login-title"> {subscription.membership_class}  الاشتراك الحالي  </p> */}
-  <p class="login-title">الاشتراك الحالي الخطة {subscription.membership_class && subscription.membership_class}   </p>
+  <p class="login-title">الاشتراك الحالي الخطة {subscription.membershiptype.m_t_AR_name && subscription.membershiptype.m_t_AR_name}   </p>
 
 
    <p> 
@@ -190,6 +194,8 @@ const Golden = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
   </Fragment>
   )}
 
+</Fragment>
+ )}
 
       </form>
       </center>
@@ -208,7 +214,7 @@ const Golden = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
   <div className="side-columns">
    <ul className="price">
    <li className="gold">golden </li>
-   <li className="grey">$ 31.00 / Monthly</li>
+   <li className="grey">$ 31.00 / For a Month</li>
    <li className="boldy">{user.first_name}  {user.last_name} </li>
    <li className="boldy"> {user.email} </li>
    <li className="boldy"> {user.country_name}</li>
@@ -232,13 +238,16 @@ const Golden = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
 <center>  <div style={{width:''}} id="paypal-button-container"></div></center> 
  
 
+{subscription.membership_class &&(
+  <Fragment>
+
 {(moment(subscription.membership_renewal_expiry_date).isAfter(Date.now())) &&(
 <Fragment>
 <center>
 <div className="Dash-button-still-subscription">
 {/* <p class="login-title"> Current Subscription:{subscription.membership_class}    </p> */}
-<p class="login-title"> Current Subscription: {subscription.membership_class && subscription.membership_class} Plan   </p>
-
+<p class="login-title"> Current Subscription: {subscription.membershiptype.m_t_EN_name && subscription.membershiptype.m_t_EN_name}    </p>
+ 
 <p> 
 Your subscription expires <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment> 
 </p>
@@ -249,6 +258,10 @@ Your subscription expires <Moment format='YYYY/MM/DD'>{subscription.membership_r
 </Fragment>
 )}
 
+
+
+</Fragment>
+)}
 
 </form>
 </center>
