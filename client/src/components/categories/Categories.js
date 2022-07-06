@@ -7,9 +7,13 @@ import ConfirmButton from "./ConfirmButton";
 import axios from 'axios';
 import Spinner from '../layout/Spinner';
 import Navbar from '../layout/Navbar';
+import NavbarEnglish from '../layout/NavbarEnglish';
+import { useTranslation } from 'react-i18next';
   
   
 const Categories = ({loading , deleteCategory}) => {
+  const [t, i18next] = useTranslation()
+  const [user,setUser]= useState([])
 
   const [showProperties,setShowProperties]= useState('noneDisplayI')  
   const [showCars,setShowCars]= useState('noneDisplayI') 
@@ -223,6 +227,16 @@ const Categories = ({loading , deleteCategory}) => {
 
 
     useEffect(() => {
+
+      axios.get('/api/auth')
+      .then(res => {
+        setUser(res.data)
+      }) 
+      .catch((err) => {
+        console.log(err);
+      })
+
+
         axios.get('/api/categories/properties')
         .then(res => {
           //console.log(res);
@@ -336,61 +350,66 @@ const Categories = ({loading , deleteCategory}) => {
         .catch((err) => {
           console.log(err);
         })
+
+
+     
         
  
-      }, []);
+      }, [user]);
 
 
 
 
-      return loading ? (
-        <Spinner />
-      ) : ( 
+      const CategoriesValid = ( 
         <div>
           
  
-        <div className="aqle3-main">
-        <div className="mainword2">
-        <Navbar />
+
         <div className="mainForm">
         <center>
-        <div className="dash-title"> التصنيفات الاساسية </div>
-        <Link to="/ar/dashboard/main" className="Action-button-plus-admin">  <i className="fa fa-arrow-left fa-1x"></i> رجوع </Link>
-        <Link to="/dashboard/categories/Addcategory" className="Action-button-plus-admin">  <i className="fa fa-plus fa-1x"></i> اضافة   </Link>
+        <div className="dash-title"> {t('categories_management_title')} </div>
+ 
+     
+        <Link to="/dashboard/main" className="Action-button-plus-admin">  <i className="fa fa-arrow-left fa-1x"></i> {t('backButton')} </Link>
+        <Link to="/dashboard/categories/Addcategory" className="Action-button-plus-admin">  <i className="fa fa-plus fa-1x"></i> {t('addButton')}   </Link>
         </center>
-
-  <div onClick={clickProperties} className="Action-button-plus-admin">   عقارات   </div>
-  <div onClick={clickCars} className="Action-button-plus-admin">   سيارات   </div>
-  <div onClick={clickJobs} className="Action-button-plus-admin">   وظائف   </div>
-  <div onClick={clickServices} className="Action-button-plus-admin">   خدمات   </div>
-  <div onClick={clickClassifieds} className="Action-button-plus-admin">   سلع خرى   </div>
-  <div onClick={clickElectronics} className="Action-button-plus-admin">   الالكترونيات   </div>
-  <div onClick={clickAnimals} className="Action-button-plus-admin">   حيوانات   </div>
-  <div onClick={clickFurniture} className="Action-button-plus-admin">   اثاث   </div>
-  <div onClick={clickPersonalitems} className="Action-button-plus-admin">   مستلزمات شخصية   </div>
-  <div onClick={clickFooddrinks} className="Action-button-plus-admin">   أطعمة ومشروبات   </div>
-
+ 
+ 
+  <div onClick={clickProperties} className="Action-button-plus-admin">   {t('categories_properties')}   </div>
+  <div onClick={clickCars} className="Action-button-plus-admin">   {t('categories_cars')}   </div>
+  <div onClick={clickJobs} className="Action-button-plus-admin">   {t('categories_Jobs')}    </div>
+  <div onClick={clickServices} className="Action-button-plus-admin">   {t('categories_Services')}   </div>
+  <div onClick={clickClassifieds} className="Action-button-plus-admin">    {t('categories_Classifieds')}   </div>
+  <div onClick={clickElectronics} className="Action-button-plus-admin">    {t('categories_Electronics')}   </div>
+  <div onClick={clickAnimals} className="Action-button-plus-admin">    {t('categories_Animals')}   </div>
+  <div onClick={clickFurniture} className="Action-button-plus-admin">   {t('categories_Furniture')}    </div>
+  <div onClick={clickPersonalitems} className="Action-button-plus-admin">   {t('categories_Personalitems')}    </div>
+  <div onClick={clickFooddrinks} className="Action-button-plus-admin">   {t('categories_Fooddrinks')}   </div>
+ 
+  
 
 
  <div className='' style={{width:'100%',display:'flex'}}>
 
 
  {/* /////////////////////////////////////////////// العقارات//////////////////////////////////////////////// */}
- <div className={showProperties} style={{width:'80%'}}>
+ <div className={showProperties} style={{width:'90%'}}>
   
- <div className="dash-title"> العقارات ( {getProperties.length})</div>
-
+ <div className="dash-title"> {t('categories_properties')} - {getProperties.length} </div>
+ 
  
   {currentResultsProperties
    .map(category => (
- 
+  
   <center>
   <div class="main-list" key={category._id}>
 
 
   <div className="title-in-list">
   <a class="title-in-list" href="#">
-  {category.c_AR_name}  </a>
+  {i18next.language === 'ar'&& category.c_AR_name}
+  {i18next.language === 'en'&& category.c_EN_name}    
+  </a>
   </div>
 
  
@@ -401,17 +420,27 @@ const Categories = ({loading , deleteCategory}) => {
 
    
     <div>
-	<p class="list-details"><span className="redColor">وصف:</span>{category.c_description} </p>
+	<p class="list-details"><span className="redColor">{t('desc_title')}:</span>{category.c_description} </p>
 
 
 	<p class="list-button">
   <button class="Action-button-status">  <i class="fa fa-eye fa-1x"></i>  </button> 
-	<Link to={`/ar/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
+	<Link to={`/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
 
-    <ConfirmButton
+          { i18next.language === 'ar' &&(
+            <ConfirmButton
             dialog={["", "هل أنت متأكد؟", "تأكيد الحذف"]}
             action={() => deleteCategory(category._id)}
               />
+          )}
+
+          { i18next.language === 'en' &&(
+            <ConfirmButton
+            dialog={["", "?are you sure", "Confirm deletion"]}
+            action={() => deleteCategory(category._id)}
+              />
+          )}
+           
 
 	{/* <button class="Action-button-delete">  <i class="fa fa-close fa-1x"></i>  </button> */}
 	</p>
@@ -425,7 +454,7 @@ const Categories = ({loading , deleteCategory}) => {
 {visible < getProperties.length && (
   <center> 
   <button   onClick={loadMore} 
-      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> المزيد </button> 
+      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> {t('moreButton')} </button> 
       </center>
   )}
 
@@ -443,7 +472,7 @@ const Categories = ({loading , deleteCategory}) => {
 
  {/* /////////////////////////////////////////////// السيارات//////////////////////////////////////////////// */}
  <div className={showCars} style={{width:'88%'}}>
- <div className="dash-title"> السيارات ( {getCars.length})</div>
+ <div className="dash-title"> {t('categories_cars')} - {getCars.length}</div>
 
   {currentResultsCars
    .map(category => (
@@ -454,7 +483,9 @@ const Categories = ({loading , deleteCategory}) => {
 
   <div className="title-in-list">
   <a class="title-in-list" href="#">
-  {category.c_AR_name}  </a>
+  {i18next.language === 'ar'&& category.c_AR_name}
+  {i18next.language === 'en'&& category.c_EN_name} 
+   </a>
   </div>
 
 
@@ -465,17 +496,28 @@ const Categories = ({loading , deleteCategory}) => {
 
    
     <div>
-	<p class="list-details"><span className="redColor">وصف:</span>{category.c_description} </p>
+	<p class="list-details"><span className="redColor">{t('desc_title')}:</span>{category.c_description} </p>
 
 
 	<p class="list-button">
   <button class="Action-button-status">  <i class="fa fa-eye fa-1x"></i>  </button> 
-	<Link to={`/ar/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
+	<Link to={`/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
 
-    <ConfirmButton
+
+
+         { i18next.language === 'ar' &&(
+            <ConfirmButton
             dialog={["", "هل أنت متأكد؟", "تأكيد الحذف"]}
             action={() => deleteCategory(category._id)}
               />
+          )}
+
+          { i18next.language === 'en' &&(
+            <ConfirmButton
+            dialog={["", "?are you sure", "Confirm deletion"]}
+            action={() => deleteCategory(category._id)}
+              />
+          )}
 
 	{/* <button class="Action-button-delete">  <i class="fa fa-close fa-1x"></i>  </button> */}
 	</p>
@@ -489,7 +531,7 @@ const Categories = ({loading , deleteCategory}) => {
 {visible < getCars.length && (
   <center> 
   <button   onClick={loadMore} 
-      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> المزيد </button> 
+      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> {t('moreButton')} </button> 
       </center>
   )}
 
@@ -503,7 +545,7 @@ const Categories = ({loading , deleteCategory}) => {
 
  {/* /////////////////////////////////////////////// الوظائف//////////////////////////////////////////////// */}
  <div className={showJobs} style={{width:'88%'}}>
- <div className="dash-title"> الوظائف ( {getJobs.length})</div>
+ <div className="dash-title"> {t('categories_Jobs')} - {getJobs.length}</div>
 
   {currentResultsJobs
    .map(category => (
@@ -514,7 +556,9 @@ const Categories = ({loading , deleteCategory}) => {
 
   <div className="title-in-list">
   <a class="title-in-list" href="#">
-  {category.c_AR_name}  </a>
+  {i18next.language === 'ar'&& category.c_AR_name}
+  {i18next.language === 'en'&& category.c_EN_name} 
+   </a>
   </div>
 
 
@@ -525,17 +569,26 @@ const Categories = ({loading , deleteCategory}) => {
 
    
     <div>
-	<p class="list-details"><span className="redColor">وصف:</span>{category.c_description} </p>
+	<p class="list-details"><span className="redColor">{t('desc_title')}:</span>{category.c_description} </p>
 
 
 	<p class="list-button">
   <button class="Action-button-status">  <i class="fa fa-eye fa-1x"></i>  </button> 
-	<Link to={`/ar/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
+	<Link to={`/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
 
-    <ConfirmButton
+       { i18next.language === 'ar' &&(
+            <ConfirmButton
             dialog={["", "هل أنت متأكد؟", "تأكيد الحذف"]}
             action={() => deleteCategory(category._id)}
               />
+          )}
+
+          { i18next.language === 'en' &&(
+            <ConfirmButton
+            dialog={["", "?are you sure", "Confirm deletion"]}
+            action={() => deleteCategory(category._id)}
+              />
+          )}
 
 	{/* <button class="Action-button-delete">  <i class="fa fa-close fa-1x"></i>  </button> */}
 	</p>
@@ -549,7 +602,7 @@ const Categories = ({loading , deleteCategory}) => {
 {visible < getJobs.length && (
   <center> 
   <button   onClick={loadMore} 
-      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> المزيد </button> 
+      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> {t('moreButton')} </button> 
       </center>
   )}
 
@@ -567,7 +620,7 @@ const Categories = ({loading , deleteCategory}) => {
 
  {/* /////////////////////////////////////////////// الخدمات//////////////////////////////////////////////// */}
  <div className={showServices} style={{width:'88%'}}>
- <div className="dash-title"> الخدمات ( {getServices.length})</div>
+ <div className="dash-title"> {t('categories_Services')} - {getServices.length}</div>
 
   {currentResultsServices
    .map(category => (
@@ -578,7 +631,9 @@ const Categories = ({loading , deleteCategory}) => {
 
   <div className="title-in-list">
   <a class="title-in-list" href="#">
-  {category.c_AR_name}  </a>
+  {i18next.language === 'ar'&& category.c_AR_name}
+  {i18next.language === 'en'&& category.c_EN_name} 
+   </a>
   </div>
 
 
@@ -589,17 +644,26 @@ const Categories = ({loading , deleteCategory}) => {
 
    
     <div>
-	<p class="list-details"><span className="redColor">وصف:</span>{category.c_description} </p>
+	<p class="list-details"><span className="redColor">{t('desc_title')}:</span>{category.c_description} </p>
 
 
 	<p class="list-button">
   <button class="Action-button-status">  <i class="fa fa-eye fa-1x"></i>  </button> 
-	<Link to={`/ar/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
+	<Link to={`/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
 
-    <ConfirmButton
+        { i18next.language === 'ar' &&(
+            <ConfirmButton
             dialog={["", "هل أنت متأكد؟", "تأكيد الحذف"]}
             action={() => deleteCategory(category._id)}
               />
+          )}
+
+          { i18next.language === 'en' &&(
+            <ConfirmButton
+            dialog={["", "?are you sure", "Confirm deletion"]}
+            action={() => deleteCategory(category._id)}
+              />
+          )}
 
 	{/* <button class="Action-button-delete">  <i class="fa fa-close fa-1x"></i>  </button> */}
 	</p>
@@ -613,7 +677,7 @@ const Categories = ({loading , deleteCategory}) => {
 {visible < getServices.length && (
   <center> 
   <button   onClick={loadMore} 
-      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> المزيد </button> 
+      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> {t('moreButton')} </button> 
       </center>
   )}
 
@@ -633,7 +697,7 @@ const Categories = ({loading , deleteCategory}) => {
 
  {/* ///////////////////////////////////////////السلع والمنتجات //////////////////////////////////////////////// */}
  <div className={showClassifieds} style={{width:'88%'}}>
- <div className="dash-title"> سلع ( {getClassifieds.length})</div>
+ <div className="dash-title"> {t('categories_Classifieds')} - {getClassifieds.length}</div>
 
   {currentResultsClassifieds
    .map(category => (
@@ -644,7 +708,9 @@ const Categories = ({loading , deleteCategory}) => {
 
   <div className="title-in-list">
   <a class="title-in-list" href="#">
-  {category.c_AR_name}  </a>
+  {i18next.language === 'ar'&& category.c_AR_name}
+  {i18next.language === 'en'&& category.c_EN_name} 
+   </a>
   </div>
 
 
@@ -655,17 +721,26 @@ const Categories = ({loading , deleteCategory}) => {
 
    
     <div>
-	<p class="list-details"><span className="redColor">وصف:</span>{category.c_description} </p>
+	<p class="list-details"><span className="redColor">{t('desc_title')}:</span>{category.c_description} </p>
 
 
 	<p class="list-button">
   <button class="Action-button-status">  <i class="fa fa-eye fa-1x"></i>  </button> 
-	<Link to={`/ar/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
+	<Link to={`/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
 
-    <ConfirmButton
+        { i18next.language === 'ar' &&(
+            <ConfirmButton
             dialog={["", "هل أنت متأكد؟", "تأكيد الحذف"]}
             action={() => deleteCategory(category._id)}
               />
+          )}
+
+          { i18next.language === 'en' &&(
+            <ConfirmButton
+            dialog={["", "?are you sure", "Confirm deletion"]}
+            action={() => deleteCategory(category._id)}
+              />
+          )}
 
 	{/* <button class="Action-button-delete">  <i class="fa fa-close fa-1x"></i>  </button> */}
 	</p>
@@ -679,7 +754,7 @@ const Categories = ({loading , deleteCategory}) => {
 {visible < getClassifieds.length && (
   <center> 
   <button   onClick={loadMore} 
-      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> المزيد </button> 
+      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> {t('moreButton')} </button> 
       </center>
   )}
 
@@ -693,14 +768,16 @@ const Categories = ({loading , deleteCategory}) => {
 
  {/* ///////////////////////////////////////////الاجهزة //////////////////////////////////////////////// */}
  <div className={showElectronics} style={{width:'88%'}}>
- <div className="dash-title"> سوق الأجهزة ( {getElectronics.length})</div>
+ <div className="dash-title"> {t('categories_Electronics')} - {getElectronics.length}</div>
   {currentResultsElectronics
    .map(category => (
   <center>
   <div class="main-list" key={category._id}>
   <div className="title-in-list">
   <a class="title-in-list" href="#">
-  {category.c_AR_name}  </a>
+  {i18next.language === 'ar'&& category.c_AR_name}
+  {i18next.language === 'en'&& category.c_EN_name} 
+   </a>
   </div>
 
   {category.image && (
@@ -709,17 +786,26 @@ const Categories = ({loading , deleteCategory}) => {
 
    
     <div>
-	<p class="list-details"><span className="redColor">وصف:</span>{category.c_description} </p>
+	<p class="list-details"><span className="redColor">{t('desc_title')}:</span>{category.c_description} </p>
 
 
 	<p class="list-button">
   <button class="Action-button-status">  <i class="fa fa-eye fa-1x"></i>  </button> 
-	<Link to={`/ar/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
+	<Link to={`/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
 
-    <ConfirmButton
+       { i18next.language === 'ar' &&(
+            <ConfirmButton
             dialog={["", "هل أنت متأكد؟", "تأكيد الحذف"]}
             action={() => deleteCategory(category._id)}
               />
+          )}
+
+          { i18next.language === 'en' &&(
+            <ConfirmButton
+            dialog={["", "?are you sure", "Confirm deletion"]}
+            action={() => deleteCategory(category._id)}
+              />
+          )}
 
 	{/* <button class="Action-button-delete">  <i class="fa fa-close fa-1x"></i>  </button> */}
 	</p>
@@ -733,7 +819,7 @@ const Categories = ({loading , deleteCategory}) => {
 {visible < getElectronics.length && (
   <center> 
   <button   onClick={loadMore} 
-      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> المزيد </button> 
+      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> {t('moreButton')} </button> 
       </center>
   )}
 
@@ -748,14 +834,17 @@ const Categories = ({loading , deleteCategory}) => {
 
  {/* ///////////////////////////////////////////بداية الحيوانات //////////////////////////////////////////////// */}
  <div className={showAnimals} style={{width:'88%'}}>
- <div className="dash-title"> الحيوانات والمواشي والطيور ( {getAnimals.length})</div>
+ <div className="dash-title"> {t('categories_Animals')} - {getAnimals.length}</div>
   {currentResultsAnimals
    .map(category => (
   <center>
   <div class="main-list" key={category._id}>
   <div className="title-in-list">
   <a class="title-in-list" href="#">
-  {category.c_AR_name}  </a>
+  {i18next.language === 'ar'&& category.c_AR_name}
+  {i18next.language === 'en'&& category.c_EN_name} 
+  
+    </a>
   </div>
 
   {category.image && (
@@ -764,17 +853,26 @@ const Categories = ({loading , deleteCategory}) => {
 
    
     <div>
-	<p class="list-details"><span className="redColor">وصف:</span>{category.c_description} </p>
+	<p class="list-details"><span className="redColor">{t('desc_title')}:</span>{category.c_description} </p>
 
 
 	<p class="list-button">
   <button class="Action-button-status">  <i class="fa fa-eye fa-1x"></i>  </button> 
-	<Link to={`/ar/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
+	<Link to={`/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
 
-    <ConfirmButton
+          { i18next.language === 'ar' &&(
+            <ConfirmButton
             dialog={["", "هل أنت متأكد؟", "تأكيد الحذف"]}
             action={() => deleteCategory(category._id)}
               />
+          )}
+
+          { i18next.language === 'en' &&(
+            <ConfirmButton
+            dialog={["", "?are you sure", "Confirm deletion"]}
+            action={() => deleteCategory(category._id)}
+              />
+          )}
 
 	{/* <button class="Action-button-delete">  <i class="fa fa-close fa-1x"></i>  </button> */}
 	</p>
@@ -788,7 +886,7 @@ const Categories = ({loading , deleteCategory}) => {
 {visible < getAnimals.length && (
   <center> 
   <button   onClick={loadMore} 
-      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> المزيد </button> 
+      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> {t('moreButton')} </button> 
       </center>
   )}
 
@@ -804,14 +902,16 @@ const Categories = ({loading , deleteCategory}) => {
 
  {/* ///////////////////////////////////////////بداية الاثاث //////////////////////////////////////////////// */}
  <div className={showFurniture} style={{width:'88%'}}>
- <div className="dash-title"> الاثاث ( {getFurniture.length})</div>
+ <div className="dash-title"> {t('categories_Furniture')} - {getFurniture.length}</div>
   {currentResultsFurniture
    .map(category => (
   <center>
   <div class="main-list" key={category._id}>
   <div className="title-in-list">
   <a class="title-in-list" href="#">
-  {category.c_AR_name}  </a>
+  {i18next.language === 'ar'&& category.c_AR_name}
+  {i18next.language === 'en'&& category.c_EN_name} 
+    </a>
   </div>
 
   {category.image && (
@@ -820,17 +920,26 @@ const Categories = ({loading , deleteCategory}) => {
 
    
     <div>
-	<p class="list-details"><span className="redColor">وصف:</span>{category.c_description} </p>
+	<p class="list-details"><span className="redColor">{t('desc_title')}:</span>{category.c_description} </p>
 
 
 	<p class="list-button">
   <button class="Action-button-status">  <i class="fa fa-eye fa-1x"></i>  </button> 
-	<Link to={`/ar/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
+	<Link to={`/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
 
-    <ConfirmButton
+        { i18next.language === 'ar' &&(
+            <ConfirmButton
             dialog={["", "هل أنت متأكد؟", "تأكيد الحذف"]}
             action={() => deleteCategory(category._id)}
               />
+          )}
+
+          { i18next.language === 'en' &&(
+            <ConfirmButton
+            dialog={["", "?are you sure", "Confirm deletion"]}
+            action={() => deleteCategory(category._id)}
+              />
+          )}
 
 	{/* <button class="Action-button-delete">  <i class="fa fa-close fa-1x"></i>  </button> */}
 	</p>
@@ -844,7 +953,7 @@ const Categories = ({loading , deleteCategory}) => {
 {visible < getFurniture.length && (
   <center> 
   <button   onClick={loadMore} 
-      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> المزيد </button> 
+      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> {t('moreButton')} </button> 
       </center>
   )}
 
@@ -861,14 +970,16 @@ const Categories = ({loading , deleteCategory}) => {
 
  {/* ///////////////////////////////////////////بداية المستلزمات الشخصية //////////////////////////////////////////////// */}
  <div className={showPersonalitems} style={{width:'88%'}}>
- <div className="dash-title"> مستلزمات شخصية ( {getPersonalitems.length})</div>
+ <div className="dash-title"> {t('categories_Personalitems')} - {getPersonalitems.length}</div>
   {currentResultsPersonalitems
    .map(category => (
   <center>
   <div class="main-list" key={category._id}>
   <div className="title-in-list">
   <a class="title-in-list" href="#">
-  {category.c_AR_name}  </a>
+  {i18next.language === 'ar'&& category.c_AR_name}
+  {i18next.language === 'en'&& category.c_EN_name} 
+   </a>
   </div>
 
   {category.image && (
@@ -877,17 +988,26 @@ const Categories = ({loading , deleteCategory}) => {
 
    
     <div>
-	<p class="list-details"><span className="redColor">وصف:</span>{category.c_description} </p>
+	<p class="list-details"><span className="redColor">{t('desc_title')}:</span>{category.c_description} </p>
 
 
 	<p class="list-button">
   <button class="Action-button-status">  <i class="fa fa-eye fa-1x"></i>  </button> 
-	<Link to={`/ar/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
+	<Link to={`/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
 
-    <ConfirmButton
+         { i18next.language === 'ar' &&(
+            <ConfirmButton
             dialog={["", "هل أنت متأكد؟", "تأكيد الحذف"]}
             action={() => deleteCategory(category._id)}
               />
+          )}
+
+          { i18next.language === 'en' &&(
+            <ConfirmButton
+            dialog={["", "?are you sure", "Confirm deletion"]}
+            action={() => deleteCategory(category._id)}
+              />
+          )}
 
 	{/* <button class="Action-button-delete">  <i class="fa fa-close fa-1x"></i>  </button> */}
 	</p>
@@ -901,7 +1021,7 @@ const Categories = ({loading , deleteCategory}) => {
 {visible < getPersonalitems.length && (
   <center> 
   <button   onClick={loadMore} 
-      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> المزيد </button> 
+      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> {t('moreButton')} </button> 
       </center>
   )}
 
@@ -919,33 +1039,44 @@ const Categories = ({loading , deleteCategory}) => {
 
  {/* ///////////////////////////////////////////بداية الاكل والشراب //////////////////////////////////////////////// */}
  <div className={showFooddrinks} style={{width:'88%'}}>
- <div className="dash-title"> اطعمة ومشروبات ( {getFooddrinks.length})</div>
+ <div className="dash-title"> {t('categories_Fooddrinks')} - {getFooddrinks.length}</div>
   {currentResultsFooddrinks
    .map(category => (
   <center>
   <div class="main-list" key={category._id}>
   <div className="title-in-list">
   <a class="title-in-list" href="#">
-  {category.c_AR_name}  </a>
+  {i18next.language === 'ar'&& category.c_AR_name}
+  {i18next.language === 'en'&& category.c_EN_name} 
+   </a>
   </div>
 
   {category.image && (
   <img src={category.image} style={{ width: '120px', height:'80px',marginBottom:''}} />
   )}
 
-   
+    
     <div>
-	<p class="list-details"><span className="redColor">وصف:</span>{category.c_description} </p>
+	<p class="list-details"><span className="redColor">{t('desc_title')}:</span>{category.c_description} </p>
 
 
 	<p class="list-button">
   <button class="Action-button-status">  <i class="fa fa-eye fa-1x"></i>  </button> 
-	<Link to={`/ar/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
+	<Link to={`/dashboard/categories/editCategory/${category._id}`} style={{textDecoration:'none'}}> <button class="Action-button-status">     <i className="fa fa-edit fa-1x"></i>   </button> </Link> 
 
-    <ConfirmButton
+         { i18next.language === 'ar' &&(
+            <ConfirmButton
             dialog={["", "هل أنت متأكد؟", "تأكيد الحذف"]}
             action={() => deleteCategory(category._id)}
               />
+          )}
+
+          { i18next.language === 'en' &&(
+            <ConfirmButton
+            dialog={["", "?are you sure", "Confirm deletion"]}
+            action={() => deleteCategory(category._id)}
+              />
+          )}
 
 	{/* <button class="Action-button-delete">  <i class="fa fa-close fa-1x"></i>  </button> */}
 	</p>
@@ -959,7 +1090,7 @@ const Categories = ({loading , deleteCategory}) => {
 {visible < getFooddrinks.length && (
   <center> 
   <button   onClick={loadMore} 
-      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> المزيد </button> 
+      className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> {t('moreButton')} </button> 
       </center>
   )}
 
@@ -969,24 +1100,32 @@ const Categories = ({loading , deleteCategory}) => {
 {/* ///////////////////////////////////////////////نهاية الاكل والشراب//////////////////////////////////////////////// */}
 
 
+ 
 
-
-
-
-
-
-
-
-
-
-</div>
-        </div>
+           </div>
         </div>
         </div>
 
-
-        </div>
     )
+
+ 
+const notValidPage =(
+  <Fragment>
+         <center> 
+       <Spinner />
+      </center>
+  </Fragment>
+)
+  
+    return(
+      <div className="aqle3-main">
+      <div className="mainword2">
+      {i18next.language === 'ar'&&(<Navbar />)}
+      {i18next.language === 'en'&&(<NavbarEnglish />)}
+    {user.validity === "super" || user.validity === "admin"  ?  CategoriesValid : notValidPage}
+    </div>
+    </div>
+    );
 }
  
 

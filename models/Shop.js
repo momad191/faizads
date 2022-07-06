@@ -92,7 +92,7 @@ shop_whatsaap: {
       type: String
     },
  
-
+ 
     clicks: [
       {
         shop: {

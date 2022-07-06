@@ -7,7 +7,7 @@
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
 
-
+ 
  
 html {
 	  
@@ -83,7 +83,7 @@ ul.middlenav {
 
 
   ul.middlenav  a{
-	font-family: foonty;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-size:33px;
 	font-weight:bold;
 	text-align: right;
@@ -94,12 +94,12 @@ ul.middlenav {
 
   }
 
-
+  
  
  
 ul.topnavEN { 
   /* position:fixed; */
-  width:96%;
+  width:100%;
   list-style-type: none;
   margin: 0;
   padding-bottom: 5px;
@@ -113,7 +113,7 @@ ul.topnavEN {
 
 ul.topnav { 
 	/* position:fixed; */
-	width:96%;
+	width:100%;
 	list-style-type: none;
 	margin: 0;
 	padding-bottom: 5px;
@@ -134,11 +134,11 @@ ul.topnav li a {
   text-align: center;
   padding: 1% 1%;
   text-decoration: none;
-  font-family:Arial, Helvetica, sans-serif;
-  font-size:17px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size:15px;
   font-weight:bold;
   float: right;
-  margin-right: 0.3%;
+  margin-right: 0%;
 }
 
 
@@ -150,7 +150,7 @@ ul.topnavEN li a {
 	text-align: center;
 	padding: 1% 1%;
 	text-decoration: none;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-size:17px;
 	font-weight:bold;
 	float: left;
@@ -189,11 +189,7 @@ ul.topnavEN li a.LogoutColor { background-color:#D70505;color:white;}
   
   ul.topnav li a.active {display: none;}
   
-  ul.topnav  {width:90%;}
-
-
-
-
+  ul.topnav  {width:100%;}
 }
 
 @media screen and (max-width: 1000px) { ul.topnav li a {display: none;}}
@@ -223,7 +219,7 @@ ul.topnavEN li a.LogoutColor { background-color:#D70505;color:white;}
 	color:#000;
 	text-align:center;
 	direction:rtl;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	padding: 5px 0px;
     font-size: 19px;
 	font-weight:bold;
@@ -359,7 +355,7 @@ ul.topnavEN li a.LogoutColor { background-color:#D70505;color:white;}
 	text-align:center;
 	text-align:center;
 	text-decoration:none;
-	font-family:foonty ;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-size:33px;
 	direction:rtl;
 	color:#FF5733;
@@ -367,7 +363,7 @@ ul.topnavEN li a.LogoutColor { background-color:#D70505;color:white;}
 
 .container1 h1{
 	text-align:center;
-	font-family:foonty ;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ;
 	font-size:33px;
 	font-weight: 900;
 	direction:rtl;
@@ -492,7 +488,7 @@ ul.topnavEN li a.LogoutColor { background-color:#D70505;color:white;}
 
 .mainword h1{
 	text-align:center;
-	font-family:foonty ;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ;
 	font-size:19px;
 	direction:rtl;
 	color:#000;
@@ -503,7 +499,7 @@ ul.topnavEN li a.LogoutColor { background-color:#D70505;color:white;}
 
 .mainword h2{
 	text-align:center;
-	font-family:foonty ;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ;
 	font-size:15px;
 	direction:rtl;
 	color:#000;
@@ -673,7 +669,7 @@ ul.topnavEN li a.LogoutColor { background-color:#D70505;color:white;}
 
 .main-destination-click h2{
 	text-align:left;
-	font-family:foonty ;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ;
 	font-size:19px;
 	font-weight:normal;
 	direction:ltr;
@@ -709,11 +705,10 @@ ul.topnavEN li a.LogoutColor { background-color:#D70505;color:white;}
 	font-weight:bold;
 	direction:ltr;
 	color:#1c75b1;
-	opacity: 2.9;	
 	margin-bottom:20px;	
-  float:none;
-  font-size:17px;
-font-family: Arial, Helvetica, sans-serif;
+	float:none;
+	font-size:15px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-decoration:none;
 }
 
@@ -735,7 +730,7 @@ font-family: Arial, Helvetica, sans-serif;
 	text-align:center;
 	font-size:17px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	direction:ltr;
 	color:#fff;
 	opacity: 2.9;	
@@ -748,7 +743,7 @@ font-family: Arial, Helvetica, sans-serif;
 	text-align:right;
 	font-size:17px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	direction:rtl;
 	color:#000;
 	opacity: 2.9;	
@@ -759,7 +754,7 @@ font-family: Arial, Helvetica, sans-serif;
 	text-align:center;
 	font-size:22px;
 	font-weight:bold;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	direction:rtl;
 	color:#1c75b1;
 	opacity: 2.9;	
@@ -769,12 +764,13 @@ font-family: Arial, Helvetica, sans-serif;
 .DashBoxList{
 	list-style-type: square;
 	list-style-position: outside;
-	 
+	  
  
 }
 .DashBoxTitle{
 	text-align:center;
-	font-size:30px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size:20px;
 	font-weight:bold;
 	direction:ltr;
 	color:#fff;
@@ -802,18 +798,15 @@ font-family: Arial, Helvetica, sans-serif;
 	opacity: 2.9;	
 	margin-bottom:50px;	
 	margin-top:40px;	
-	 
-	 
 }
-
+ 
 .new-ad-title{
 	text-align:center;
 	font-size:22px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
-	direction:ltr;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color:#1c75b1;
-	margin-bottom:20px;	
+	margin-bottom:10px;	
 	margin-top:40px;	
 	 
 	 
@@ -821,12 +814,12 @@ font-family: Arial, Helvetica, sans-serif;
 
 .pricing-title{
 	text-align:center;
-	font-size:32px;
+	font-size:25px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	direction:ltr;
 	color:#1c75b1;
-	opacity: 2.9;	
+	 	
 	margin-bottom:20px;	
 	margin-top:20px;	
 }
@@ -835,8 +828,8 @@ font-family: Arial, Helvetica, sans-serif;
 	text-align:center;
 	font-size:22px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
-	direction:ltr;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	 
 	color:#1c75b1;
 	opacity: 2.9;	
 	margin-bottom:20px;	
@@ -845,8 +838,9 @@ font-family: Arial, Helvetica, sans-serif;
 
 .details-title{
 	text-align:center;
-	font-size:20px;
+	font-size:17px;
 	font-weight:bold;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	direction:ltr;
 	color:#1c75b1;
 	opacity: 2.9;	
@@ -858,12 +852,13 @@ font-family: Arial, Helvetica, sans-serif;
  
 }
 
-
+ 
 .dash-title{
+	
 	text-align:center;
-	font-size:43px;
+	font-size:33px;
 	font-weight:bold;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color:#FF5733;
 	margin-bottom:10px;	
 	margin-top:20px;		  
@@ -871,7 +866,7 @@ font-family: Arial, Helvetica, sans-serif;
 }
 
 .about-title{
-	text-align:right;
+	text-align:center;
 	font-size:15px;
 	font-weight:bold;
 	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -1089,7 +1084,7 @@ font-family: Arial, Helvetica, sans-serif;
 
 .main-destination h1{
 	text-align:center;
-	font-family:foonty ;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ;
 	font-size:19px;
 	direction:rtl;
 	color:#000;
@@ -1102,7 +1097,7 @@ font-family: Arial, Helvetica, sans-serif;
 
 .main-destination h2{
 	text-align:center;
-	font-family:foonty ;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ;
 	font-size:19px;
 	direction:rtl;
 	color:#000;
@@ -1117,7 +1112,7 @@ font-family: Arial, Helvetica, sans-serif;
 /* -------------------------------------واجهة المدونة----------------------------------- */
 .main-blog{
 background-color:#FBFCFC;
-font-family:foonty ;
+font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ;
 padding:10px;
 float:right;
 width:100%;
@@ -1165,7 +1160,7 @@ direction:rtl;
   border-color: #cacaca;
   text-align: center;
   font-size:22px;
-  font-family:foonty ;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ;
   transition: 0.4s;
 }
 
@@ -1232,7 +1227,7 @@ color:#FF5733;
  
 .main-topic h1{	
  
- font-family:foonty ;
+ font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ;
  font-size:43px;
  color:#000;
  float:right;
@@ -1245,7 +1240,7 @@ color:#FF5733;
 margin-top:20px;
  text-decoration:  overline 3px #1c75b1;
  text-decoration-style: wavy;
- font-family:foonty ;
+ font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ;
  font-size:24px;
  color:#000;
  float:right;
@@ -1255,7 +1250,7 @@ margin-top:20px;
  
 }
 .main-topic p{	
-font-family:foonty ;
+font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ;
 font-size:17px;
 font-weight:300;
 color:#000;
@@ -1460,8 +1455,8 @@ margin-top: 10%;
 .button-statistics {
 	display: inline-block;
 	padding: 3px 6px;
-	font-size: 19px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	text-align: center;
 	text-decoration: none;
@@ -1481,8 +1476,8 @@ margin-top: 10%;
   .button-statistics1 {
 	display: inline-block;
 	padding: 3px 6px;
-	font-size: 19px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	text-align: center;
 	text-decoration: none;
@@ -1504,8 +1499,8 @@ margin-top: 10%;
   .button-statistics2 {
 	display: inline-block;
 	padding: 3px 6px;
-	font-size: 19px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	text-align: center;
 	text-decoration: none;
@@ -1629,7 +1624,8 @@ input[type=number] {
 	float:none;
 	font-size: 22px; 
 	font-weight: bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	margin-bottom: 10px;
 	
   
   }
@@ -1661,8 +1657,17 @@ input[type=number] {
   font-size: 15px; 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: normal;
-
+  direction: rtl;
 }
+.smallTextEnglish{
+	width: 100%;
+	text-align:center;
+	float:none;
+	font-size: 15px; 
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: normal;
+	direction: ltr;
+  }
 
      
 
@@ -1682,9 +1687,9 @@ input[type=number] {
 	
 	padding: 22px 2%  ;
    font-size: 22px; 
-   font-family: Arial, Helvetica, sans-serif;
+   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
    font-weight: bold;
-	color:#000;	
+	color:#1c75b1;	
 	transition: width 0.4s ease-in-out;
 }
 
@@ -1704,11 +1709,13 @@ input[type=number] {
 		float:none;
 		margin-bottom:10px;
 		padding: 4px 0px;
-	   font-size: 22px; 
+	   font-size: 15px; 
 	   font-weight: bold;
+	   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	  
 		color:#000;	
 		transition: width 0.4s ease-in-out;
+		
 	}
 
 
@@ -1717,16 +1724,16 @@ input[type=number] {
 		border-right: 2px solid #1c75b1;
 		border-top: 2px solid #1c75b1;
 		border-bottom: 2px solid #1c75b1;
-		 border-radius:5px 5px;
-		 width: 100%;
-		 text-align:center;
+		border-radius:5px 5px;
+	    width: 100%;
+		text-align:center;
 		direction:ltr;
 		float:none;
 		margin-bottom:10px;
 		padding: 2px 2px;
-	   font-size: 12px; 
-	   font-weight: bold;
-	  
+	    font-size: 15px; 
+	    font-weight: bold;
+	    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		color:#000;	
 		transition: width 0.4s ease-in-out;
 		
@@ -1789,15 +1796,21 @@ input[type=number] {
 	   color:#000;	
 		 
 	}
+	.middle-text-primary{
+		font-size: 34px; 
+		font-weight: bold;
+		font-family: Arial, Helvetica, sans-serif;
+		 color:#1c75b1;	
 
-	.login-input{
-		border-radius: 15px 0px 15px 0px;
+	}
+	.login-input-textarea{
+		border-radius: 15px 15px 15px 15px;
 		border-left: 2px solid #1c75b1;
 		border-right: 2px solid #1c75b1;
 		border-top: 2px solid #1c75b1;
 		border-bottom: 2px solid #1c75b1;
 		 width: 100%;
-		height: 40px;
+		height: 90px;
 		 text-align:center;
 		direction:ltr;
 		float:none;
@@ -1805,12 +1818,34 @@ input[type=number] {
 		margin-top:10px;
 		margin-left:0px;
 		padding: 0px 0px;
-	   font-size: 17px; 
+	   font-size: 13px; 
 	   font-weight: bold;
-	   font-family: Arial, Helvetica, sans-serif;
+	   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		color:#000;	
 		transition: width 0.4s ease-in-out;
 	}
+	.login-input{
+		border-radius: 15px 15px 15px 15px;
+		border-left: 2px solid #1c75b1;
+		border-right: 2px solid #1c75b1;
+		border-top: 2px solid #1c75b1;
+		border-bottom: 2px solid #1c75b1;
+		 width: 100%;
+		height: 50px;
+		 text-align:center;
+		direction:ltr;
+		float:none;
+		margin-bottom:10px;
+		margin-top:10px;
+		margin-left:0px;
+		padding: 10px;
+	   font-size: 14px; 
+	   font-weight: bold;
+	   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		color:#000;	
+		transition: width 0.4s ease-in-out;
+	}
+
 
 	.login-input:focus{
 		border: 2px solid  #1c75b1;   
@@ -1819,9 +1854,14 @@ input[type=number] {
 
 	.login-input:hover{
 		border: 2px solid  #1c75b1;   
-	 
-	}
+		background-color: #a1cdeb;
 
+	}
+	.login-input-textarea:hover{
+		border: 2px solid  #1c75b1;   
+		background-color: #a1cdeb;
+
+	}
 
 .Forminput{
 	border-radius: 15px;
@@ -1909,7 +1949,7 @@ input[type=number] {
 	padding: 15px 0px;
     font-size: 19px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	cursor:pointer;
 }
 
@@ -1924,7 +1964,7 @@ input[type=number] {
 	padding: 15px 0px;
     font-size: 17px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	cursor:pointer;
 }
 
@@ -2326,12 +2366,12 @@ display: inline-block;
 	background-color:#00a800;
 	border-radius:15px;
 	color:#fff;
-	width:40%;
+	width:50%;
 	text-align:center;
-	direction:rtl;
 	margin-bottom:10px;
 	padding: 15px 0px;
-    font-size: 19px;
+    font-size: 17px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight:bold;
 	cursor:pointer;
 		
@@ -2369,6 +2409,16 @@ display: inline-block;
 	border-radius: 4px;
 }
 
+.contact-for-shop{
+	font-size: 15px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: 660;
+	font-display:inherit;
+	font-style: italic;
+	padding: 5px;
+	color : #1c75b1;
+}
+
 .contact-form{
 	width:100%;
 		
@@ -2388,7 +2438,7 @@ display: inline-block;
 	margin-bottom:10px;
 	padding: 15px 12px;
     font-size: 19px;
-    font-family:foonty ;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ;
 	color:#000;	
 }
 
@@ -2411,7 +2461,7 @@ display: inline-block;
 	margin-bottom:10px;
 	padding: 10px 8px;
     font-size: 19px;
-    font-family:foonty ;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ;
 	cursor:pointer;
 		
 }
@@ -2437,7 +2487,7 @@ display: inline-block;
   }
 
   .sidenavnone a {
-	padding: 10px 8px 8px 0px;
+	
 	text-align:center;
 	width:100%;
 	border-bottom: 1px solid #1c75b1;
@@ -2455,8 +2505,6 @@ display: inline-block;
 	font-size: 26px;
 	margin-left: 0px;
   }
-
- 
   .sideNavHome {
 	height: 100%;
 	width: 100%;
@@ -2496,12 +2544,12 @@ display: inline-block;
 	transition: 0.3s;
 	
   }
-
+ 
   .categoryListButtonTop{
-  text-align: right;
-  font-size: 17px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
+  text-align: center;
+  font-size: 15px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
   margin-top: 0px;
   
   background-color:#008000;
@@ -2509,10 +2557,18 @@ display: inline-block;
   color:#fff;
   border:none;
   width:100%;
-  height:40px;
+  height:auto;
   cursor:pointer;
+  padding: 10px;
+  border-radius: 15px;
  
-  
+   
+}
+.categoryListButtonTop:hover{
+
+	background-color:#1c75b1;
+	color:#FBFCFC;
+
 }
 
 
@@ -2536,15 +2592,15 @@ display: inline-block;
 
 .categoryListButton img{ 
 float: right;
-margin-right:2%;
+margin-right:1%;
 width: 25px;
 height: 25px;
 }
  
   .categoryListButton{
 	text-align: center;
-	font-size: 15px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	margin-top: 0px;
 
@@ -2585,11 +2641,14 @@ height: 25px;
 .sidenav a {
   padding: 10px 8px 8px 20px;
   float:left;
-  text-align:left;
-  width:220px;
+  text-align:right;
+  width:100%;
   border-bottom: 1px solid #1c75b1;
   text-decoration: none;
-  font-size: 22px;
+  font-size: 17px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-style:normal;
   color: #000;
   background-color:#fff;
   display: block;
@@ -2771,7 +2830,7 @@ height: 25px;
 	margin-bottom:10px;
 	padding: 10px 8px;
     font-size: 19px;
-    font-family:foonty ;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; ;
 	cursor:pointer;
 		
 }
@@ -2781,7 +2840,7 @@ height: 25px;
 }
 .detail-picture{
 	width:100%; 
-	height:450px;
+	height:auto;
 	border-radius: 0px 0px 0px 0px;
 }
 
@@ -2845,6 +2904,9 @@ ul.Dash-nav {
   border-bottom: 2px solid #002147;
   text-align: center;
   border-radius: 30px 0px 30px 0px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size:15px;
+  font-weight:bold;
 }
  
 ul.Dash-nav li {float: left;}
@@ -2855,13 +2917,13 @@ ul.Dash-nav li a {
   text-align: center;
   padding: 8px 10px;
   text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif ;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size:15px;
   font-weight:bold;
   background-color:#fff;
-  margin-right:10px;
+  margin-right:20px;
   margin-bottom:10px;
-  width:200px;
+  width:230px;
   border-radius: 15px;
   
 }
@@ -2907,22 +2969,23 @@ ul.Dash-nav li.left {float: left;}
 }
 
 .selectedMarket {	
-	width:120px;
-	height:30px;
+	width:140px;
+	height:40px;
 	display: inline-block;
 	text-align:center;
 	cursor:pointer;
 	background-color:#1c75b1;
-	color:white;
+	color:#eee;
 	margin-bottom:10px;
 	margin-left:1%;
 	font-size:15px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	text-decoration:none;
-	padding:6px;
-	border-radius:15px 0px 15px 10px;
-	border: 1px solid #cacaca;
+	padding:8px;
+	border-radius:10px;
+	border: 1px solid #fff;
+	
 }
  
 .selectedMarket:hover {	
@@ -2943,7 +3006,7 @@ ul.Dash-nav li.left {float: left;}
 	margin-left:1%;
 	font-size:15px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	text-decoration:none;
 	padding:6px;
 	border-radius:15px;
@@ -3001,13 +3064,34 @@ background-color:#68686C;
 	padding:6px;
 	border-radius:15px;
 	border: white;
-	
-
 }
 
 .Action-button-plus-admin:hover{	
 	background-color:#68686C;
 	}
+
+
+	.Action-button-plus-admin-active {	
+		position:relative;
+		width:160px;
+		height:30px; 
+		display: inline-block;
+		text-align:center;
+		cursor:pointer;
+		background-color:#008000;
+		color:white;
+		margin-bottom:10px;
+		margin-left:1%;
+		font-size:15px;
+		font-weight:bold;
+		font-family: Arial, Helvetica, sans-serif;
+		text-decoration:none;
+		padding:6px;
+		border-radius:15px;
+		border: white;
+	}
+	
+	
 
 .Action-button-edit {
 	height:auto;
@@ -3113,10 +3197,12 @@ background-color:#68686C;
 	margin-bottom:10px;
 	border: 1px solid #fff;
 	font-weight:bold;
-	font-size:19px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size:13px;
 	text-decoration: none;
 	border-radius: 15px;
 	padding: 10px;
+
 	
 }
 
@@ -3132,8 +3218,8 @@ background-color:#68686C;
 	margin-right:10px;
 	border: 1px solid #fff;
 	font-weight:bold;
-	font-size:15px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-size:13px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	text-decoration: none;
 	border-radius: 10px;
@@ -3170,7 +3256,7 @@ background-color:#68686C;
 	text-decoration: none;
 	font-size:17px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	background-color: #fff;
 	margin-right:5px;
 	margin-bottom:5px;
@@ -3188,9 +3274,9 @@ background-color:#68686C;
 	text-align: center;
 	padding: 12px 20px;
 	text-decoration: none;
-	font-size:17px;
+	font-size:15px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	background-color: #fff;
 	margin-right:5px;
 	margin-bottom:5px;
@@ -3211,9 +3297,9 @@ background-color:#68686C;
 	text-align: center;
 	padding: 12px 20px;
 	text-decoration: none;
-	font-size:17px;
+	font-size:15px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	background-color: #1c75b1;
 	margin-right:5px;
 	margin-bottom:5px;
@@ -3279,16 +3365,16 @@ background-color:#68686C;
 	display:inline-block;
 	color: #fff;
 	text-align: center;
-	padding: 10px 10px;
+	padding: 0px 0px;
 	text-decoration: none;
-	font-size:18px;
+	font-size:15px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	background-color:#009900;
-	margin-right:5px;
+
 	margin-bottom:15px;
 	margin-top:5px;
-	width:450px;
+	width:50%;
 	height: 80px;
 	border-radius:15px;
 	border: 2px solid #add8e6;
@@ -3302,9 +3388,9 @@ background-color:#68686C;
   text-align: center;
   padding: 10px 10px;
   text-decoration: none;
-  font-size:17px;
+  font-size:15px;
   font-weight:bold;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color:#fff;
   margin-right:5px;
   margin-bottom:15px;
@@ -3431,20 +3517,35 @@ background-color:#68686C;
 	width:100%;
 }
  
-
  
- .list-details{ 
-	 direction: rtl;
+  
+.list-details{ 
+ 
+	border-bottom:none; 
+	color:#000;
+	font-size:15px;
+	font-weight:bold; 
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	text-decoration:none;	
+	text-align:center; 
+	padding: 10px;
+	width: 100%;
+	direction: rtl;
+	
+}
+
+ .list-details-english{ 
+ 
 	 border-bottom:none; 
 	 color:#000;
-	 font-size:17px;
-	 font-weight:normal; 
-	 font-family:Arial, Helvetica, sans-serif;
+	 font-size:15px;
+	 font-weight:bold; 
+	 font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	 text-decoration:none;	
-	 text-align:justify; 
+	 text-align:center; 
 	 padding: 10px;
-	  
 	 width: 100%;
+	 direction: ltr;
 	 
  }
  
@@ -3486,8 +3587,8 @@ background-color:#68686C;
  .main-list{
 	margin-left:0px; 
 	margin-right:0px;
-	margin-bottom:10px;
-	margin-top:30px; 
+	margin-bottom:5px;
+	margin-top:10px; 
 	border-bottom: 5px solid #002147; 
 	border-top: 5px solid #002147;
 	border-right: 5px solid #002147;
@@ -3603,8 +3704,8 @@ background-color:#68686C;
 
 
 .loadMorebtnSearch {
-	font-size: 23px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	text-align: center;
 	width: 80px;
@@ -3634,9 +3735,9 @@ background-color:#68686C;
 }
 
 .PurposebtnON {
-	font-size: 15px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-weight: bold;
+	font-size: 17px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: 660;
 	text-align: center;
 	width: 200px;
 	border: none; 
@@ -3653,9 +3754,9 @@ background-color:#68686C;
 
 
 .Purposebtn {
-	font-size: 15px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-weight: bold;
+	font-size: 17px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: 660;
 	text-align: center;
 	width: 200px;
 	border: none; 
@@ -3677,6 +3778,29 @@ background-color:#68686C;
 	cursor: pointer;
 }
 
+.Purposebtn-home {
+	font-size: 17px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: 660;
+	text-align: center;
+	width: 100%;
+	border: none; 
+	background-color: #008CBA;
+	color: #fff;
+	padding: 10px;
+	border-radius: 5px;
+	margin-bottom: 8px;
+	margin-top: 0px;
+	cursor: pointer;
+	border: 1px solid #add8e6;
+	
+}
+.Purposebtn-home:hover {
+	background-color: #add8e6;
+	color: #000;
+	border: 1px solid #008CBA;
+	cursor: pointer;
+}
 
 .loadMorebtn {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -3744,8 +3868,8 @@ background-color:#68686C;
 	background-color: #008000;
 	border-color: #d6e9c6;
 	color: #f1f1f1;
-	font-size: 19px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight:900;
 	border-radius: 10px;
 	padding: 10px;
@@ -3758,18 +3882,20 @@ background-color:#68686C;
 }
 .alert-success .alert-link {
 	color: #2b542c;
-}
+} 
 .alert-info {
 	background-color: #d9edf7;
 	border-color: #0275d8;
 	color: #000;
-	font-size: 20px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-weight:900;
-	border-radius: 10px;
-	padding: 10px;
+	font-size: 17px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-weight:600;
+	border-radius: 15px;
+	padding: 0px;
 	float: none;
 	margin-right:0px ;
+	width: 80%;
+	
 }
 .alert-info hr {
 	border-top-color: #a6e1ec;
@@ -3782,7 +3908,7 @@ background-color:#68686C;
 	border-color: #bce8f1;
 	color: #fff;
 	font-size: 19px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight:400;
 	border-radius: 10px;
 	padding: 5px;
@@ -3982,15 +4108,59 @@ background-color:#68686C;
 @media screen and (max-width: 600px) {.image-in-list{width:100%;height: 300px; float: none; margin-right: 0px;margin-top: 0px; border-left: 0px solid #fff;} }
 
 
-
+.button-in-list-home-small{
+	font-size: 13px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: bold;
+	background-color:#0275d8;
+	color:#fff;
+	border: 0px solid #fff;
+	margin: 0.9px;
+	padding: 5px;
+	border-radius: 6px;
+	direction: none;
+}
+.button-in-list-home-premium{
+	font-size: 13px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: bold;
+	background-color:#4b12b6;
+	color:#fff;
+	border: 1px solid #fff;
+	margin-bottom: -100px;
+	padding: 5px;
+	border-radius: 10px;
+}
+ 
+.button-in-list-home-big:hover{
+	background-color:#0275d8;
+	color:#eee;
+}
+.button-in-list-home-big{
+	font-size: 13px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: bold;
+	background-color:#eee;
+	color:#000;
+	border: 1px solid #0275d8;
+	margin: 0.5px;
+	padding: 8px;
+	border-radius: 8px;
+	width:90%;
+	height:30px;
+	overflow: hidden;
+	cursor: pointer;
+	padding: 5px;
+}
 
 .title-in-list-home{
 	width: 100%;
+	height:50px;
 	 /* background-color: #fff; */
 	color:#000;
-	font-size:19px;
+	font-size:15px;
 	font-weight:bold; 
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	text-decoration:none;
 	padding-top: 0px;
 	padding-bottom: 0px;
@@ -4009,6 +4179,18 @@ background-color:#68686C;
 	padding-bottom: 5px;
 }
 
+.title-in-list-complete{
+	width: 100%;
+	background-color: #00a800;
+	color:#fff;
+	font-size:15px;
+	font-weight:bold; 
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	text-decoration:none;
+	padding-top: 5px;
+	padding-bottom: 7px;
+}
+
 .title-in-list-premium-home{
 	width: 100%;
 	/* background-color: #fff; */
@@ -4016,6 +4198,7 @@ background-color:#68686C;
 	font-size:15px;
 	font-weight:bold; 
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	direction: rtl;
 	text-decoration:none;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -4029,12 +4212,15 @@ background-color:#68686C;
 	font-weight:bold; 
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	text-decoration:none;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 4px;
+	padding-bottom: 4px;
 }
 
 .section-list{
-	display: flex;
+	display:flex;
+	margin-bottom: 5px;
+	margin-right: 5px;
+
 }
 
 @media screen and (max-width: 600px) {.section-list{display: block;} }
@@ -4137,7 +4323,7 @@ background-color:#68686C;
   .columns {
 	float: right;
 	width: 260px;
-	padding: 8px;
+	padding: 10px;
 	border-radius: 15px 15px 10px 10px;
   }
   
@@ -4148,6 +4334,8 @@ background-color:#68686C;
 	padding: 0;
 	-webkit-transition: 0.3s;
 	transition: 0.3s;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: bold;
   }
   
   .price:hover {
@@ -4157,7 +4345,7 @@ background-color:#68686C;
   .price .header {
  
 	background-color: #1c75b1;
-	color: white;
+	color: #fff;
 	font-size: 25px;
 	border-radius: 10px 10px 0px 0px;
   }
@@ -4194,7 +4382,7 @@ background-color:#68686C;
 	height: 40px;
 	font-size: 13px;
 	font-weight: normal;
-	font-family:Verdana, Geneva, Tahoma, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
   .price .grey {
@@ -4361,13 +4549,20 @@ background-color:#68686C;
   }
  
 
+  .vertical-menu-wrapper-home-ENglish{
+  
+	direction: ltr;
+	margin-top: 0%;
+	margin-right: 0%;
+	width: 60%;
+  }
+
   .vertical-menu-wrapper-home{
-    text-align: center;
-	display: flex;
+  
 	direction: rtl;
 	margin-top: 0%;
 	margin-right: 0%;
-	width: 80%;
+	width: 60%;
   }
 
   .vertical-menu-wrapper{
@@ -4392,10 +4587,11 @@ background-color:#68686C;
 
   .vertical-menu-active-home  {
 	text-align: center;
-	width: 250px;
-    margin-right: 1%;
-	border-radius: 15px 0px 15px 0px;
-    padding: 15px;
+	width: 150px;
+	border: 1px solid #eee;
+    margin-right: 0%;
+	border-radius: 15px ;
+    padding: 5px;
 	background-color:#1c75b1;
 	color: #fff;
 	text-decoration: none;
@@ -4506,8 +4702,8 @@ background-color:#68686C;
 	list-style: none;
 	background-color: #eee;
 	width: 80%;
-	font-size: 19px;
-	font-family:Arial, Helvetica, sans-serif;
+	font-size: 17px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
   }
   ul.breadcrumb li {
@@ -4553,8 +4749,8 @@ background-color: #000;
 	text-align: center;
 	padding: 1% 1%;
 	text-decoration: none;
-	font-family:Arial, Helvetica, sans-serif;
-	font-size:17px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size:15px;
 	font-weight:bold;
 	margin-right: 0.3%;
   }
@@ -4615,8 +4811,8 @@ background-color: #000;
 	text-align: center;
 	padding: 1% 1%;
 	text-decoration: none;
-	font-family:Arial, Helvetica, sans-serif;
-	font-size:17px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size:15px;
 	font-weight:bold;
 	margin-right: 0.3%;
   }
@@ -4664,34 +4860,37 @@ background-color: #000;
  
 
 .card img{
-	border-top-left-radius:15px;
-	border-top-right-radius:15px;
+	border-top-left-radius:0px;
+	border-top-right-radius:0px;
 	width: 100%;
-	height: 150px;
+	height: 200px;
 }
 .card img:hover{
-	border: 10px solid  #fff;
+	border: 2px solid  #fff;
 }
 .card {
-	
 	border-top-left-radius:0%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	width: 200px;
-
-	margin-top: 20px;
-	margin-bottom: 10px;
-	margin-right: 10px;
+	width: 320px;
+	height:auto;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
 	text-align: center;
-	font-family: arial;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	display: inline-block;
+	direction: rtl;
+	padding: 8px;
   }
 
   .card h1{
 	  font-size: 15px;
-	  font-family: Arial, Helvetica, sans-serif;
+	  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	  font-weight: bold;
 	  color: #002147;
 	  overflow: hidden;
+	  height: 60px;
 	  
   }
 
@@ -4709,9 +4908,9 @@ background-color: #000;
 	background-color: #008CBA;
 	text-align: center;
 	cursor: pointer;
-	width: 100%;
-	font-size: 19px;
-	font-family: Arial, Helvetica, sans-serif;
+	width: 50%;
+	font-size: 15px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	border-radius: 15px;
   }
@@ -4728,7 +4927,7 @@ background-color: #000;
 	margin-left:1%;
 	font-size:15px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	text-decoration:none;
 	 
 	border-radius:15px;
@@ -4751,7 +4950,7 @@ background-color: #000;
 	margin-left:1%;
 	font-size:15px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	text-decoration:none;
 	border-radius:15px;
 	border: white;
@@ -4777,8 +4976,8 @@ background-color: #000;
   text-align: center;
   cursor: pointer;
   width: 100%;
-  font-size: 19px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
   border-radius: 15px;
   text-decoration: none;
@@ -4857,27 +5056,43 @@ background-color: #000;
 	margin-bottom: 0px;
 	margin-right: 0px;
 	text-align: center;
-	font-family: arial;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	display: inline-block;
   }
 
   @media screen and (max-width:600px) { 
 	.shop {width: 100%;}
 }
-
+ 
 .descrip-shop{
 	height: 35px;
-	overflow: hidden;
-	
+	display:none;
 	}
+	.showingButton{
+		border: none;
+		outline: 0;
+		display: inline-block;
+		padding: 8px;
+		color: #fff;
+		background-color: #008CBA;
+		text-align: center;
+		cursor: pointer;
+		width: 50%;
+		font-size: 15px;
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		font-weight: bold;
+		border-radius: 15px;
+	  }
+	 
 
  
 
   .shop h1{
      margin-top: 0;
-	font-size: 17px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-size: 22px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
+	 
 	color: #002147;
 }
 
@@ -4885,18 +5100,19 @@ background-color: #000;
 .shop p{
    margin-top: 0;
    text-align: center;
-   font-size: 15px;
+   font-size: 17px;
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
    font-weight: bold;
    color: #111;
 }
-
+ 
 .shop h2{
   margin-top: 0;
-  font-size: 15px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 19px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
   color: #000;
+
 }
 
 .shop .check{
@@ -4911,7 +5127,7 @@ background-color: #000;
 	margin-left: 10px;
 	margin-top: 35px;
 	font-size: 15px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	color: #002147;
 	}
@@ -4922,7 +5138,7 @@ float: left;
 position: absolute;
 margin-left: 10px;
 
-font-family: Arial, Helvetica, sans-serif;
+font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 font-weight: bold;
 color: #002147;
 }
@@ -4932,12 +5148,12 @@ color: #002147;
 	float: left;
 	position: absolute;
 	margin-left: 10px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	color: #002147;
 	}
 
-
+  
 
 	.posts-shop-frame {
 	
@@ -4945,13 +5161,14 @@ color: #002147;
 		width: 60%;
 		margin-top: 0px;
 		margin-bottom: 0px;
-		margin-right: 10px;
+		margin-right: 0px;
 		text-align: center;
-		font-family: arial;
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		display: inline-block;
+		padding: 10px;
 	  }
 
- 
+	  @media screen and (max-width:600px) { .posts-shop-frame {width: 100%;} }
 
 	  /* Profiles Page */
 .shoplist {
@@ -4991,7 +5208,7 @@ color: #002147;
 .shoplistinfo1 h1{
 	font-size: 19px;
 	font-weight: bold;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	text-decoration: none;
 	color: #000;
  
@@ -4999,7 +5216,7 @@ color: #002147;
 .shoplistinfo1 h2{
 	font-size: 14px;
 	font-weight: bold;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	text-decoration: none;
 	color: #333333;
  
@@ -5041,7 +5258,7 @@ color: #002147;
 	margin-right:0.1rem;
 	font-size:15px;
 	font-weight:bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	text-decoration:none;
 	padding:6px;
 	border-radius:15px;
@@ -5051,8 +5268,8 @@ color: #002147;
 
 
 .toFollowUpBtnON {
-	font-size: 19px;
-	font-family:Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	text-underline-position: below;
     display: inline-block;
@@ -5071,8 +5288,8 @@ color: #002147;
 }
 
 .toFollowUpBtn {
-	font-size: 19px;
-	font-family:Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
     display: inline-block;
 	min-width: 49%;
@@ -5099,15 +5316,15 @@ color: #002147;
 	margin-bottom: 0px;
 	margin-right: 0px;
 	text-align: center;
-	font-family: arial;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	display: inline-block;
   }
 
 
 
   .toBackAccount {
-	font-size: 22px;
-	font-family:Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
     display: inline-block;
 	min-width: 100%;
@@ -5128,7 +5345,7 @@ color: #002147;
 
 .noPostsExist {
 	font-size: 15px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	text-align: center;
 	width: 45%;
@@ -5176,7 +5393,7 @@ color: #002147;
 	border-top: 2px solid #add8e6;
 	font-weight:bold;
 	font-size:22px;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	text-decoration: none;
 	border-radius: 15px 15px 0px 0px;
 	padding: 5px;
@@ -5200,7 +5417,7 @@ color: #002147;
 	margin-top:15px;
 	font-weight:bold;
 	font-size:19px;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	text-decoration: none;
 	border-radius: 0px;
 	padding: 0px;
@@ -5222,7 +5439,7 @@ color: #002147;
 	margin-top:15px;
 	font-weight:bold;
 	font-size:19px;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	text-decoration: none;
 	border-radius: 0px;
 	padding: 0px;
@@ -5240,14 +5457,14 @@ color: #002147;
 	border: 1px solid #fff;
 	font-weight:bold;
 	font-size:22px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	text-decoration: none;
 	border-radius: 0px;
 	padding: 20px;
 	height: 100%;
 	width: auto;
-	direction: ltr;
+	 
 	 
 }
 
@@ -5265,7 +5482,7 @@ color: #002147;
 	margin-bottom:0px;
 	font-weight:bold;
 	font-size:19px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-weight: bold;
 	text-decoration: none;
 	border-radius: 0px;
@@ -5317,7 +5534,7 @@ color: #002147;
 	border-radius: 15px;
 	box-shadow: 0 1px #999;
 	width: 20%;
-	padding: 10px;
+	padding: 0px;
 	border-right: 1px solid #add8e6;
    
   }
@@ -5360,8 +5577,7 @@ color: #002147;
 	transform: translateY(0px);
   }
 
-  
-.Formcomments{
+  .Formcomments{
 	border-top-left-radius:15px;
 	border-bottom-left-radius:15px;
 	border-left: 3px solid #1c75b1;
@@ -5369,7 +5585,7 @@ color: #002147;
 	border-top: 3px solid #1c75b1;
 	border-bottom: 3px solid #1c75b1;
 	background-color: #fff;
-	 width: 90%;
+	 min-width: 80%;
 	height: 40px;
      text-align:center;
 	direction:rtl;
@@ -5378,7 +5594,29 @@ color: #002147;
 	padding: 0px 0px;
    font-size: 17px; 
    font-weight: bold;
-   font-family: Arial, Helvetica, sans-serif;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color:#000;	
+	transition: width 0.4s ease-in-out;
+}
+
+.FormcommentsEnglish{
+	border-top-right-radius:15px;
+	border-bottom-right-radius:15px;
+	border-left: 3px solid #1c75b1;
+	border-right: 3px solid #1c75b1;
+	border-top: 3px solid #1c75b1;
+	border-bottom: 3px solid #1c75b1;
+	background-color: #fff;
+	 min-width: 80%;
+	height: 40px;
+     text-align:center;
+	direction:rtl;
+	float:left;
+	margin-bottom:0px;
+	padding: 0px 0px;
+   font-size: 17px; 
+   font-weight: bold;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color:#000;	
 	transition: width 0.4s ease-in-out;
 }
@@ -5392,7 +5630,7 @@ color: #002147;
 	border-top-right-radius:15px;
 	border-bottom-right-radius:15px;
 	color:#fff;
-	width:10%;
+	min-width:20%;
 	height: 40px;
 	text-align:center;
 	direction:rtl;
@@ -5409,6 +5647,31 @@ color: #002147;
 }
 
  
+.CommentbuttonENglish:hover{
+	background-color:#3ab11c;
+	color: #fff;
+}
+.CommentbuttonENglish{
+	background-color:#00a800;
+	border-top-left-radius:15px;
+	border-bottom-left-radius:15px;
+	color:#fff;
+	min-width:20%;
+	height: 40px;
+	text-align:center;
+	direction:rtl;
+	margin-bottom:0px;
+	padding: 0px 0px;
+    font-size: 19px;
+	font-weight:bold;
+	cursor:pointer;
+	float:left;
+	border-right: 2px solid #1c75b1;
+	border-top: 2px solid #1c75b1;
+	border-bottom: 2px solid #1c75b1;
+		
+}
+
  .forPic1{
 	 align-items: center;
 	 background-color: #111;
@@ -5443,7 +5706,7 @@ color: #002147;
 	padding: 0px 0px;
     font-size: 17px; 
     font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color:#000;	
 	transition: width 0.4s ease-in-out;
     }
@@ -5455,7 +5718,7 @@ color: #002147;
 	direction:ltr;
 	font-size: 30px; 
 	font-weight: bold;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color:#000;	
 	margin-top: 0px;  
    }
@@ -5544,7 +5807,7 @@ color: #002147;
 	direction:rtl;
 	font-size: 25px; 
 	font-weight: bold;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color:#000;	
 	border: 1px solid #000;
 	border-radius: 10px;
@@ -5556,7 +5819,7 @@ color: #002147;
 	direction:rtl;
 	font-size: 43px; 
 	font-weight: bold;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color:#FF5733;
 	border-radius: 10px;
 
@@ -5569,7 +5832,7 @@ color: #002147;
 	direction:rtl;
 	font-size: 17px; 
 	font-weight: bold;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color:#000;	
 	
 
@@ -5589,7 +5852,7 @@ color: #002147;
 	margin-right: 10px;
 	font-size: 15px; 
 	font-weight: bold;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color:#000;	
  
    }
@@ -5632,7 +5895,7 @@ color: #002147;
 	padding-bottom:0px;
    font-size: 17px; 
    font-weight: bold;
-   font-family: Arial, Helvetica, sans-serif;
+   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color:#000;	
 	transition: width 0.4s ease-in-out;
 }
@@ -5657,7 +5920,7 @@ color: #002147;
 	margin-left: 10px;
 	font-size: 17px; 
 	font-weight: bold;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color:#fff;	
 	background-color:#1f75fe;
 	padding: 20px;
@@ -5677,7 +5940,7 @@ display: block;
 	margin-right: 10px;
 	font-size: 17px; 
 	font-weight: bold;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color:#000;	
 	background-color:#fafafa;
 	padding: 20px;
@@ -5690,11 +5953,28 @@ display: block;
 	direction: ltr;
 	font-size: 15px;
 	font-weight: bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	float: left;
 }
 
-
+.showStyleSelected {	
+	width:auto;
+	height:auto; 
+	display: inline-block;
+	text-align:center;
+	cursor:pointer;
+	background-color:#00a800;
+	color:white;
+	margin-bottom:0px;
+	margin-left:1%;
+	font-size:20px;
+	font-weight:normal;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	text-decoration:none;
+	padding:10px;
+	border-radius:10px;
+	border: white;
+}
 
 .showStyle {	
 	width:auto;
@@ -5708,16 +5988,40 @@ display: block;
 	margin-left:1%;
 	font-size:20px;
 	font-weight:normal;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	text-decoration:none;
 	padding:10px;
 	border-radius:10px;
 	border: white;
-	
-
 }
 
 .showStyle:hover{	
 	background-color:#68686C;
 	}
 
+
+
+
+
+	/* width */
+::-webkit-scrollbar {
+	width: 20px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px grey; 
+	border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #000; 
+	border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #2fbbf4; 
+  }
+  

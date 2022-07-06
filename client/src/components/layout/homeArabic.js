@@ -14,6 +14,8 @@ import map from './map.png';
 
 import Navbar from './Navbar';
 import NavbarEnglish from './NavbarEnglish';
+import { Translation } from 'react-i18next';
+import i18next from 'i18next';
  
 
 const Exercise = props => (
@@ -876,7 +878,7 @@ allCategoryList(){
     return <button 
     value={this.state.searchByCategory_code}
     onClick={this.searchChangedByCategory_code}
-    value={allCategory.c_code} 
+    // value={allCategory.c_code} 
     className="categoryListButton">
     {allCategory.c_AR_name}
      </button>
@@ -893,7 +895,7 @@ carsCategoryList(){
     return <button 
     value={this.state.searchByCategory_code}
     onClick={this.searchChangedByCategory_code}
-    value={carsCategory.c_code} 
+    // value={carsCategory.c_code} 
     className="categoryListButton">
     {carsCategory.c_AR_name}
      </button>
@@ -912,7 +914,7 @@ propertiesCategoryList(){
     return <button 
     value={this.state.searchByCategory_code}
     onClick={this.searchChangedByCategory_code}
-    value={propertiesCategory.c_code} 
+    // value={propertiesCategory.c_code} 
     className="categoryListButton">{propertiesCategory.c_AR_name}
      </button>
    })
@@ -928,7 +930,7 @@ jobsCategoryList(){
     return <button 
     value={this.state.searchByCategory_code}
     onClick={this.searchChangedByCategory_code}
-    value={jobsCategory.c_code} 
+    // value={jobsCategory.c_code} 
     className="categoryListButton">{jobsCategory.c_AR_name}
      </button>
 
@@ -946,7 +948,7 @@ servicesCategoryList(){
     return <button 
     value={this.state.searchByCategory_code}
     onClick={this.searchChangedByCategory_code}
-    value={servicesCategory.c_code} 
+    // value={servicesCategory.c_code} 
     className="categoryListButton">{servicesCategory.c_AR_name}
      </button>
 
@@ -965,7 +967,7 @@ classifiedsCategoryList(){
     return <button 
     value={this.state.searchByCategory_code}
     onClick={this.searchChangedByCategory_code}
-    value={classifiedsCategory.c_code} 
+    // value={classifiedsCategory.c_code} 
     className="categoryListButton">{classifiedsCategory.c_AR_name}
      </button>
 
@@ -1066,17 +1068,18 @@ classifiedsCategoryList(){
 
 
   
-
- 
-  <Navbar />
-    
-
-
-  
- <div className="dash-title"> أسواق عالمية  </div>
+{i18next.language === 'ar'&&(<Navbar />)}
+{i18next.language === 'en'&&(<NavbarEnglish />)}
  
  
-    
+
+ <div className="dash-title"> أسواق عالمية    </div>
+
+ <center> <div className="details-title">  لانتشار أعمالك وتوسيع نطاق أهدافك   </div></center>
+
+ <center> <div className="details-title" style={{width:'80%'}}>  
+ بيع - شراء - عرض للإيجار- بحث عن إيجار - وظائف شاغرة -  بحث عن عمل - ‏عرض خدمات - أعمال - شراكة  ‏ 
+ </div></center>
 
     
 
@@ -1160,7 +1163,7 @@ classifiedsCategoryList(){
         
         
        
-                  
+                   
                   
 
                   { this.state.showCountries === true &&(
@@ -1168,7 +1171,7 @@ classifiedsCategoryList(){
                 
                  <button  className="map-point" style={{top:'55%',left:'50%'}} onClick={this.handleSelectCountriesToHide}> الشرق الأوسط <i className="fa fa-arrow-up" aria-hidden="true"></i> </button>
                
-          <button  className="map-point" style={{top:'55%',left:'50%'}} onClick={this.handleSelectCountriesToHide}> Middle East <i className="fa fa-arrow-up" aria-hidden="true"></i> </button>
+          <button  className="map-point" style={{top:'55%',left:'50%'}} onClick={this.handleSelectCountriesToHide}> الشرق الأوسط <i className="fa fa-arrow-up" aria-hidden="true"></i> </button>
 
                 
 
@@ -1296,7 +1299,7 @@ classifiedsCategoryList(){
                   </>
                     )}
 
-
+  
               
           
             {/* ////////////////////////////////////////////ُNorthAmarica///////////////////////////////////////////////////// */}
@@ -1336,21 +1339,131 @@ classifiedsCategoryList(){
 
 <center>
 
-<div className="dash-title"> يمكنك الإعلان عن كل شيء  </div>
- 
- <div className='vertical-menu-wrapper-home'>
- 
- <div className='vertical-menu-active-home'>  سيارات</div> 
- <div className='vertical-menu-active-home'>  عقارات</div> 
-  <div className='vertical-menu-active-home'>  وظائف </div>
- <div className='vertical-menu-active-home'>  خدمات </div>
- <div className='vertical-menu-active-home'>  منتجات </div>
-
-
-
+{/* 
+<div className="dash-title"> منصة واحدة ... إمكانات غير محدودة‏   </div>
+ <div className="details-title" style={{width:'80%'}}>    
+ نتطلع لأن نكون شريكًا عالميًا موثوقًا به لكل من يتطلع إلى النمو عبر الإنترنت.‏
   </div>
 
+ <br/> <br/> <br/>
+
+<div className="dash-title"> ابدأ بثقة   </div>
+<div className="details-title" style={{width:'80%'}}>    
+لا يجب أن يكون نشاطك التجاري عبر الإنترنت أمرًا معقدًا. في اعلانات فائز ، نقدم ‏أدوات وأفكار تجارة إلكترونية موثوقة ومبتكرة، وسوقًا عالميًا تابعًا، ودعمًا رائدًا في ‏الصناعة - وكل ما تحتاجه للبناء بثقة لتحقيق اهدافك وزيادة ارباحك
+ </div> */}
+
+
+ <br/> <br/> <br/>
+
+<div className="dash-title"> يمكنك الاعلان عن كل شيء والنشر لعملاء محتملين في جميع انحاء العالم ‏  </div>
+ <center> 
+ <div className='vertical-menu-wrapper-home'>
+ <button className='vertical-menu-active-home'>  سيارات</button> 
+ <button className='vertical-menu-active-home'>  عقارات</button> 
+  <button className='vertical-menu-active-home'>  وظائف </button>
+ <button className='vertical-menu-active-home'>  خدمات </button>
+ <button className='vertical-menu-active-home'>  سلع  </button>
+ <button className='vertical-menu-active-home'>  الكترونيات </button>
+ <button className='vertical-menu-active-home'>  حيوانات </button>
+ <button className='vertical-menu-active-home'>  اثاث </button>
+ <button className='vertical-menu-active-home'>  مستلزمات شخصية </button>
+ <button className='vertical-menu-active-home'>  اطعمة ومشروبات  </button>
+  </div>
+  </center>
+
+
+
+
+
+
+
+  <div className="dash-title"> نشارك الإعلانات على منصات التواصل الاجتماعية ‏  </div>
+ <center> 
+ <div className='vertical-menu-wrapper-home'>
+ <button className='vertical-menu-active-home'>  فيس بوك</button> 
+ <button className='vertical-menu-active-home'>  تويتر</button> 
+  <button className='vertical-menu-active-home'>  انستغرام </button>
+ <button className='vertical-menu-active-home'>  يوتيوب </button>
+ <button className='vertical-menu-active-home'>  لنكد ان </button>
+  </div>
+  </center>
+{/* <br/><br/><br/><br/>
+
+<div className="dash-title"> أدوات تجارة إلكترونية قوية </div>
+  <div className='vertical-menu-wrapper-home'>
+ 
+  <div className="details-title" style={{width:'80%'}}>
+     تعمل أدواتنا وخدماتنا على تقليل حاجز الدخول وتسهيل توسيع نطاق عملك عبر ‏الإنترنت.‏  </div>
+</div>
+<ul className='breadcrumb'>
+  <li > 	ادارة ونشر الاعلانات </li>
+  <li  > 	التسويق والترويج لهذة المنصة بالعمولة عن طريق روابط أعضاء شركاء ‏ومسوقين ‏ </li>
+  <li  > 	برنامج المميزات والعضويات </li>
+</ul>
+
+
+
+<br/><br/><br/><br/>
+
+
+<div className="dash-title"> سوق منتسبة واسعة النطاق </div>
+  <div className='vertical-menu-wrapper-home'>
+ 
+  <div className="details-title" style={{width:'80%'}}>
+  نقوم بتوصيل أكثر من 100000 بائع ومسوق للوصول إلى ملايين العملاء في جميع ‏أنحاء العالم.‏     
+     </div>
+</div>
+<ul className='breadcrumb'>
+  <li > 	سوق المنتجات الشفاف </li>
+   <li  > 	 أفضل العروض أداء </li>
+</ul>
+
+
+<br/><br/><br/><br/>
+
+
+
+
+<div className="dash-title"> دعم وتعليم رائد في صناعة الإعلانات </div>
+  <div className='vertical-menu-wrapper-home'>
+ 
+  <div className="details-title" style={{width:'80%'}}>
+  نحن ندعم نموك الشخصي والتجاري بكل ما نقوم به       </div>
+</div>
+<ul className='breadcrumb'>
+  <li> 	إدارة الحساب الشخصي </li>
+  <li>  أحداث صناعة الاعلانات الحصرية </li>
+</ul>
+
+
+
+<br/><br/><br/><br/>
+
+ 
+ 
+
+<div className="dash-title"> طريقك إلى النجاح عبر الإنترنت يبدأ من هنا   </div>
+  <div className='vertical-menu-wrapper-home'>
+ 
+  <div className="details-title" style={{width:'80%'}}>
+  سواء كنت تبحث عن بدء نشاطك التجاري أو توسيع نطاقه   ، يمكن أن يساعدك فريق ‏اعلانات فائز انضم إلى آلاف البائعين وأكثر من 100000 من الشركاء يحققون النجاح ‏على منصة اعلانات فائز
+  </div>
+</div>
+  */}
+
+
  </center>
+
+
+
+
+
+
+
+ 
+
+
+
 
 
 

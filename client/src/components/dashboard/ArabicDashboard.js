@@ -8,7 +8,7 @@ import DashboardActionsArabic from './DashboardActionsArabic';
 import Experience from './Experience';
 import Education from './Education';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
-import RequestForm from '../requests/RequestForm';  
+import RequestForm from '../requests/RequestForm';      
 import moment from 'moment';
 import Moment from 'react-moment';  
 // import 'moment/locale/ar';
@@ -19,12 +19,13 @@ const Dashboard = ({
   deleteAccount,
   loading,
  
-
+ 
   // auth: { user },
   // profile: { profile, loading }
 }) => {
 
 
+  moment.locale('ar');
   
   // const [oneShop,setOneShop]= useState([])
   const [userShop,setuserShop]= useState([])
@@ -32,6 +33,9 @@ const Dashboard = ({
   const [subscription,setSubscription]= useState([])
   const [user,setUser]= useState([])
   const [userPosts,setUserPosts]= useState([])
+  // const [userPostsInToday,setUserPostsInToday]= useState([])
+  
+ 
   const [userRef,setUserRef]= useState([])
   const [visible,setVisible]= useState(10)
   const [RefToPay,setRefToPay]= useState([])
@@ -115,7 +119,7 @@ const Dashboard = ({
     })
 
  
-
+ 
     axios.get('/api/posts/userposts')
     .then(res => {
       //console.log(res);
@@ -124,6 +128,16 @@ const Dashboard = ({
     .catch((err) => {
       console.log(err);
     })
+
+ 
+    // axios.get('/api/posts/userPostsInToday')
+    // .then(res => {
+    //   //console.log(res);
+    //   setUserPostsInToday(res.data)
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // })
 
 
     axios.get('/api/auth/ref')
@@ -216,7 +230,7 @@ const Dashboard = ({
     <Fragment>
 
  
-        <Navbar />
+        {/* <Navbar /> */}
      
  
      
@@ -233,7 +247,7 @@ const Dashboard = ({
  
  <center> 
 
-   <Link to='/ar/membership/prices' className="Dash-button-end-subscription">
+   <Link to='/membership/prices' className="Dash-button-end-subscription">
  البدء باختيار خطتك
 </Link>
 
@@ -320,17 +334,17 @@ const Dashboard = ({
 )}
     
    
-
-  
+ 
+   
  
 <center>  
 {userShop ?(
 <Fragment> 
-<a href='/ar/dashboard/shops/edit' > <button className="Dash-button-open">  إدارة المتجر   </button>  </a>
-<a href={`http://localhost:3000/ar/shops/${user.username}`} target="_blank" > <button className="Dash-button"> <i class="fa fa-external-link-square fa-0x" aria-hidden="true"></i> استعراض   </button>  </a>
+<Link to='/ar/dashboard/shops/edit' > <button className="Dash-button-open">  إدارة المتجر   </button>  </Link>
+<Link to={`/shops/${user.username}`} target="_blank" > <button className="Dash-button"> <i class="fa fa-external-link-square fa-0x" aria-hidden="true"></i> استعراض   </button>  </Link>
 </Fragment>
   ):(
-  <a href='/ar/dashboard/create-shop'> <button className="Dash-button">  فتح متجر  </button>  </a>
+  <Link to='/dashboard/create-shop'> <button className="Dash-button">  فتح متجر  </button>  </Link>
  )}
 
 
@@ -343,37 +357,42 @@ const Dashboard = ({
  
 
       <div className="info-nav">
-      <div className="DashBoxTitle" >احصائيات </div>
+      <div className="DashBoxTitle" >إحصاءات </div>
       <center>
       {/* <div className="Dash-button">  ({subscription.available_ads}): عدد الاعلانات المخصصة لهذا الاشتراك   <i class="fa fa-buysellads fa-2x" aria-hidden="true"></i>  </div> */}
-      <div className="Dash-button">  ({userPosts.length}):  إعلانات فعالة     <i class="fa fa-bullhorn fa-2x" aria-hidden="true"></i> </div>
+      <div className="Dash-button">  ({userPosts.length}):  إعلانات      <i class="fa fa-bullhorn fa-2x" aria-hidden="true"></i> </div>
       {/* <div className="Dash-button">  ({subscription.available_ads - userPosts.length }) :رصيد الاعلانات المتبقي لديك <i class="fa fa-buysellads fa-2x" aria-hidden="true"></i> </div> */}
       <div className="Dash-button">  ({userRef.length}): عدد عضوية الإحالة <i class="fa fa-users fa-2x" aria-hidden="true"></i> </div>
+      
+      {/* <div className="Dash-button">  ({userPostsInToday.length}): عدد الإعلانات المنشورة اليوم <i class="fa fa-calendar-check-o fa-2x" aria-hidden="true"></i> </div> */}
+
       </center>
 
        </div>
       </center>
 
 
-
+ 
 
    
   
- 
+{user.username ?(
+<DashboardActionsArabic />
+):(
+    <Spinner />
+)}
 
 
    
 
-  <DashboardActionsArabic />
  
  
       
  {/* //////////////////////////////////////start of affiliate /////////////////////////////////// */}
+ {user.username ?(
   
- <Fragment> 
-
-
-
+<Fragment>
+ 
       <center> 
       <div className="affiliate-nav">
       <div className="affiliateTitle" >التسويق بالعمولة  </div>
@@ -382,9 +401,12 @@ const Dashboard = ({
   <tr>
   
    <th>       <i class="fa fa-link fa-1x" aria-hidden="true"></i>   {'   '}
-       <a href={`http://localhost:3000/user/register/${user.username}`}>  
-      {`http://localhost:3000/user/register/${user.username}`}
-         </a>  {'   '}
+       {user.username ?(<>
+       <a href={`http://localhost:3000/user/createAccount/${user.username}`}> 
+      {`http://localhost:3000/user/createAccount/${user.username}`}
+         </a> </> ):(<>loading ...</> )}
+ 
+         {'   '}
        <i class="fa fa-link fa-1x" aria-hidden="true"></i> </th>
        <th> الرابط الخاص بك   </th>
   </tr>
@@ -623,7 +645,7 @@ const Dashboard = ({
       </div>   */}
 
 
-
+  
 
 {visible < RefToPay.length && (
     <center> 
@@ -638,6 +660,11 @@ const Dashboard = ({
         </center>
 
         </Fragment>
+ ):(
+<Spinner />
+ )}
+         
+      
     
   {/* //////////////////////////////////////End of affiliate /////////////////////////////////// */}
 

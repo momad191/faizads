@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 import { addSubscription } from '../../actions/auth';
 import { setAlert } from '../../actions/alert';
 import Alert from '../layout/Alert';
-
+ 
    
  
 import PropTypes from 'prop-types';
@@ -16,9 +16,10 @@ import { Input } from 'postcss';
 
 import Navbar from '../../components/layout/Navbar';
 import NavbarEnglish from '../../components/layout/NavbarEnglish';
+import { useTranslation } from 'react-i18next';
      
 const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
-
+  const [t, i18next] = useTranslation()
   const Lang = match.params.lang;
 
   const  freeDate= moment();
@@ -39,7 +40,9 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
   
   const shopname = '';
   const shopstatus='closed'; 
-  
+   
+ 
+  const membershiptype = "6272d33759fe759360638df2";
   const membership_class = 'free';
   const Payment_status ='no'; 
   const available_ads = 10;
@@ -62,7 +65,7 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
    
   const onSubmit = async e => {
     e.preventDefault();
-      addSubscription({ first_name,last_name, email,country_name,country_code, city, state, postal, latitude, longitude, IPv4, shopname, shopstatus, membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date });
+      addSubscription({ membershiptype,first_name,last_name, email,country_name,country_code, city, state, postal, latitude, longitude, IPv4, shopname, shopstatus, membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date });
       
   };
 
@@ -113,19 +116,14 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
 <center> 
       <form className="login-form" onSubmit={e => onSubmit(e)}>
 
-      <div class="login-title">  الإشترك في الخطة الخاصة  </div>
-      <center> <i  class="fa fa-cc-visa fa-5x" aria-hidden="true"></i>{'   '}
-      <i  class="fa fa-cc-mastercard fa-5x" aria-hidden="true"></i>
-      {'   '}
-      <i  class="fa fa-cc-paypal fa-5x" aria-hidden="true"></i> 
-       </center>
-  
+      <div class="login-title">  الإشترك في الخطة المجانية  </div>
 
+    
       <div className=''>    
-      <div className="login-title"> الخطة الخاصة  </div>
+      <div className="login-title">   </div>
 
 
-                <span>الاسم  </span>
+               
                 <input className="login-input"
                  type="text" 
                  placeholder=""
@@ -206,10 +204,10 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
 <div class="login-title">  Subscribe to a Free plan  </div>
  
 <div className=''>    
-<div className="login-title"> special plan  </div>
+<div className="login-title">    </div>
 
 
-          <span>Name  </span>
+          <span>   </span>
           <input className="login-input"
            type="text" 
            placeholder=""
@@ -288,7 +286,7 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
   return (
     <Fragment>
 
-{Lang === 'ar'?(
+{i18next.language === 'ar' ?(
         <Navbar />
       ):(
       <NavbarEnglish />
@@ -298,12 +296,12 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
      <div className="aqle3-main" >
       <div className="mainword2">
 
-      {Lang === 'ar'?(
+      { i18next.language === 'ar'?(
       <div className="mainForm">
       <center>
         <div className="side-columns">
          <ul className="price">
-         <li className="header">الخاصة </li>
+         <li className="header">المجانية </li>
          <li className="grey">اتصل بنا</li>
          <li className="boldy">{user.first_name}  {user.last_name} </li>
          <li className="boldy"> {user.email} </li>
@@ -322,7 +320,9 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
   <Fragment>
     <center>
     <div className="Dash-button-still-subscription">
-  <p class="login-title"> {subscription.membership_class}  الاشتراك الحالي  </p>
+  {/* <p class="login-title"> {subscription.membership_class}  الاشتراك الحالي  </p> */}
+  <p class="login-title">الاشتراك الحالي الخطة {subscription.membershiptype.m_t_AR_name}   </p>
+
    <p> 
      ينتهي اشتراكك في يوم <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment> 
 </p>
@@ -356,7 +356,7 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
    <li className="boldy"> {user.email} </li>
    <li className="boldy"> {user.country_name}</li>
   
-    
+     
   </ul>
   </div>
 </center>
@@ -373,11 +373,13 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
 
 
 
-{(moment(subscription.membership_renewal_expiry_date).isAfter(Date.now())) ?(
+{(moment(subscription.membership_renewal_expiry_date).isAfter(Date.now()))  ?(
 <Fragment>
 <center>
 <div className="Dash-button-still-subscription">
-<p class="login-title"> {subscription.membership_class}  Current Subscription  </p>
+{/* <p class="login-title"> {subscription.membership_class}  Current Subscription  </p> */}
+<p class="login-title"> Current Subscription: {subscription.membershiptype.m_t_EN_name} Plan   </p>
+
 <p> 
 Your subscription expires <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment> 
 </p>

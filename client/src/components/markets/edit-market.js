@@ -2,12 +2,16 @@ import React, { Component ,Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../layout/Navbar';
-
+import NavbarEnglish from '../layout/NavbarEnglish';
+import Spinner from '../layout/Spinner';
+import { Translation } from 'react-i18next';
+import i18next from 'i18next';
+ 
 export default class Editwebinars extends Component {
   constructor(props) {
     super(props);
-     
- 
+       
+  
     this.onChangem_AR_name = this.onChangem_AR_name.bind(this);
     this.onChangem_EN_name = this.onChangem_EN_name.bind(this);
     this.onChangem_code = this.onChangem_code.bind(this);
@@ -24,12 +28,25 @@ export default class Editwebinars extends Component {
       m_fontawesome_class:'',
       m_description:'',
       m_image:'',
-      loading:false
+      loading:false,
+      users:[]
       
     }
   }
   
   componentDidMount() {
+
+    axios.get('/api/auth')
+    .then(response => {
+      this.setState({
+          users: response.data,
+      })   
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
+
     axios.get('/api/markets/'+this.props.match.params.id)
       .then(response => {
         this.setState({
@@ -120,7 +137,7 @@ export default class Editwebinars extends Component {
     const files = e.target.files
     const data = new FormData()
     data.append('file', files[0])
-    data.append('upload_preset', 'magazine')
+    data.append('upload_preset', 'faizmarkets')
     this.setState({
         loading:true
       })
@@ -146,18 +163,21 @@ export default class Editwebinars extends Component {
     return (
 
         <div>
- 
+        <div>
 
-<div>
-           
+        {i18next.language === 'ar'&&(<Navbar />)}
+        {i18next.language === 'en'&&(<NavbarEnglish />)}
+                  
 
         <div className="aqle3-main">
         <div className="mainword2">
-          <Navbar />
+       
+        {this.state.users.validity === "super" || this.state.users.validity === "admin" ?(
+
         <div className="mainForm">
 
-        <div class="login-title"> تعديل السوق <i class="fa fa-edit"></i>  </div>
-        <Link to="/dashboard/markets" class="login-title" style={{textDecoration:'none',marginLeft:'10px'}}>  <i className="fa fa-arrow-left fa-1x"></i> رجوع </Link>
+        <div class="login-title"><i class="fa fa-edit"></i><Translation>{t => <>{t('editMarket')}</>}</Translation>   </div>
+        <center><Link to="/dashboard/markets" className="Action-button-plus-admin">  <i className="fa fa-arrow-left fa-1x"></i> <Translation>{t => <>{t('backButton')}</>}</Translation> </Link></center>
 
  
 
@@ -166,9 +186,11 @@ export default class Editwebinars extends Component {
 	    <form className="login-form" onSubmit={this.onSubmit}>
       <div className='FormCover'> 
 	 
+ 
+      <span> <Translation>{t => <>{t('market_ar_name')}</>}</Translation>  </span>
                 <input className="login-input"
                  type="text" 
-                 placeholder="الاسم باللغة العربية"
+                 placeholder=""
                  name="m_AR_name" 
                  value={this.state.m_AR_name} 
                  onChange={this.onChangem_AR_name}
@@ -176,6 +198,7 @@ export default class Editwebinars extends Component {
                  </input>
 
 
+ <span> <Translation>{t => <>{t('market_en_name')}</>}</Translation>  </span>
                  <input className="login-input"
                  type="text" 
                  placeholder="الاسم باللغة الانجليزية "
@@ -186,9 +209,10 @@ export default class Editwebinars extends Component {
                  </input>
 
 
+ <span> <Translation>{t => <>{t('market_code')}</>}</Translation>  </span>
                 <input className="login-input"
                  type="text" 
-                 placeholder="رمز السوق"
+                 placeholder=""
                  name="m_code" 
                  value={this.state.m_code} 
                  onChange={this.onChangem_code}
@@ -197,7 +221,7 @@ export default class Editwebinars extends Component {
 
 
 
-                 
+<Translation>{t => <>{t('fontawesome')}</>}</Translation>
                 <input className="login-input"
                  type="text" 
                  placeholder="fontawesome"
@@ -208,6 +232,7 @@ export default class Editwebinars extends Component {
 
 
 
+<span> <Translation>{t => <>{t('market_description')}</>}</Translation>  </span>
                 <textarea className="login-input"  
                  placeholder="الوصف"
                  name="m_description" 
@@ -247,7 +272,9 @@ export default class Editwebinars extends Component {
 
   	  
 	  <center>
-	 <button className="Formbutton"  type="submit" name="" >تعديل</button>
+	 <button className="Formbutton"  type="submit" name="" >
+   <Translation>{t => <>{t('save')}</>}</Translation>
+   </button>
  
 	 </center>
    </div>
@@ -260,6 +287,16 @@ export default class Editwebinars extends Component {
 
 
         </div>
+
+
+):(
+  <center> 
+  <Spinner />
+</center>
+          
+  )}
+
+
         </div>
         </div>
 

@@ -1,0 +1,244 @@
+{
+    "lang":"عربي",
+    "addButton":"Add",
+    "backButton":"Back", 
+    "desc_title":"Description",
+    "code_title":"Code",
+    "save":"Save",
+    "upload_picture":"Upload Picture",
+    "fontawesome":"fontawesome class",
+    "moreButton":"more",
+    "searchButton":"search",
+    "linkWasSentBefore":"This link has been used before",
+    "linkToSendAgain":"Click to send the link again", 
+    "SendAgin":"إعادة تعيين كلمة المرور",  
+
+
+
+
+ 
+ 
+    "country_management_title":"Countries Management",
+    "addCity":"Add a city",
+    "editCountry":"Edit country",
+    "addCountry":"Add country",
+
+
+    "country_code":"Code",
+    "country_en_name":" English Name",
+    "country_ar_name":" Arabic Name",
+    "country_description":"Description",
+    "city_code":"Code",
+    "city_list":"list ",
+
+
+
+
+    "market_management_title":" Markets Management",
+    "editMarket":"Edit Market",
+    "market_en_name":" English Name",
+    "market_ar_name":"Arabic Name",
+    "market_description":"Description",
+    "market_code":"Code",
+    "addMarket":"Add Market",
+
+
+
+    "categories_management_title":" Categories Management",
+    "categories_properties":"properties",
+    "categories_cars":"Cars",
+    "categories_Jobs":"Jobs",
+    "categories_Services":"Services",
+    "categories_Classifieds":"Classifieds",
+    "categories_Electronics":"Electronics",
+    "categories_Animals":"Animals",
+    "categories_Furniture":"Furniture",
+    "categories_Personalitems":"Personal Items",
+    "categories_Fooddrinks":"Food Drinks",
+
+
+
+    "editCategory":"Edit Category",
+    "category_en_name":" English Name",
+    "category_ar_name":"Arabic Name",
+    "category_description":"Description",
+    "category_code":"Code",
+    "addCategory":"Add Category",
+ 
+ 
+
+"x6":"/////////////////////////////////////////////ترجمة صفحات الإعلانات/////////////////////////////////////////////",
+"Countries_of_the_world":"Countries",
+"citiesButton":"Cities",
+"categoriesButton":"Categories",
+"marketsButton":"Markets",
+"for-saleButton":"For sale",
+"rentalButton":"For Rent",
+"ask-buyButton":"Wanted to buy",
+"ask-rentButton":"Wanted for rent",
+"vacanciesButton":"Vacancies",
+"seeking-workButton":"Seeking work",
+
+  
+"x7":"/////////////////////////////////////////////ادارة الأغراض/////////////////////////////////////////////",
+"purposes_management_title":"Purposes Management",
+"purpose_edit_title":"Edit Purpose",
+"purposes_AR_name":"Arabic Name",
+"purposes_EN_name":"English Name",
+"purposes_code":"Code",
+"purposes_description":"Description",
+
+
+"x8":"/////////////////////////////////////////////Users management /////////////////////////////////////////////",
+"users_management_title":"Users management",
+"user_search":"Search",
+"user_search_by_username":"Search by username",
+"user_search_by_email":"Search by Email",
+"user_name":"The Name",
+"user_email":"Email",
+"user_validity":"Validity",
+"user_validity_button":"Change Validity",
+ 
+
+
+"x9":"/////////////////////////////////////////////لوحة ادخال الإعلان /////////////////////////////////////////////",
+"Addpost_title":"Add a new ad",
+"Addpost_market_title":"? What market do you want to advertise in",
+"Addpost_market_Properties":"Properties",
+"Addpost_market_Cars":"Cars",
+"Addpost_market_Jobs":"Jobs",
+"Addpost_market_Services":"Services",
+"Addpost_market_Classifieds":"Classifieds",
+"Addpost_market_Electronics":"Electronics",
+"Addpost_market_Animals":"Pets",
+"Addpost_market_Furniture":"Furniture",
+"Addpost_market_Personalitems":"Personal Items",
+"Addpost_market_Fooddrinks":"Food and Drinks",
+"Addpost_purpose_title":"?What is the purpose of the advertisement",
+"Addpost_purpose_car_for_sale":"Show car for sale",
+"Addpost_purpose_car_rental":"Show car for rent",
+"Addpost_purpose_car_ask-buy":"I am looking for a car to buy",
+"Addpost_purpose_car_ask-rent":"I'm looking for a car to rent",
+"Addpost_purpose_Properties_for_sale":"Properties for sale",
+"Addpost_purpose_Properties_rental":"Properties for rent",
+"Addpost_purpose_Properties_ask-buy":"I am looking for a Properties to buy",
+"Addpost_purpose_Properties_ask-rent":"I am looking for a Properties to rent",
+"Addpost_purpose_Classifieds_for_sale":"Classifieds for sale",
+"Addpost_purpose_Classifieds_rental":"Classifieds for rent",
+"Addpost_purpose_Classifieds_ask-buy":"I am looking for a Classifieds to buy",
+"Addpost_purpose_Classifieds_ask-rent":"I am looking for a Classifieds to rent",
+"Addpost_purpose_Electronics_for_sale":"Electronics for sale",
+"Addpost_purpose_Electronics_rental":"Electronics for rent",
+"Addpost_purpose_Electronics_ask-buy":"I am looking for a Electronics to buy",
+"Addpost_purpose_Electronics_ask-rent":"I am looking for a Electronics to rent",
+"Addpost_purpose_Animals_for_sale":"Show Pets for sale",
+"Addpost_purpose_Animals_ask-buy":"I'm looking for a similar one to buy",
+"Addpost_purpose_Furniture_for_sale":"furniture for sale",
+"Addpost_purpose_Furniture_ask-buy":"I'm looking for a similar one to buy",
+"Addpost_purpose_PersonalItems_for_sale":"for sale",
+"Addpost_purpose_PersonalItems_ask-buy":"I'm looking for a similar one to buy",
+"Addpost_purpose_FoodDrinks_for_sale":"for sale",
+"Addpost_purpose_FoodDrinks_ask-buy": "I'm looking for a similar one to buy",
+"chose":"Choose the category",
+"Addpost_car_type":"Choose a car category",
+"Addpost_property_type":"Choose property category",
+"Addpost_job_type":"Choose a job category",
+"Addpost_service_type":"Choose a service category",
+"Addpost_classified_type":"Choose a classified category",
+"Addpost_electronic_type":"Choose a electronic category",
+"Addpost_animal_type":"Choose a animal category",
+"Addpost_furniture_type":"Choose a furniture category",
+"Addpost_personalItems_type":"Choose a personal item category",
+"Addpost_foodDrink_type":"Choose a food and drink category",
+"Addpost_country_type":"Choose the country",
+"Addpost_city_type":"Choose the city",
+"Addpost_country_Europe":"Europe",
+"Addpost_country_Asia":"Asia",
+"Addpost_country_Africa":"Africa",
+"Addpost_country_Australia":"Australia",
+"Addpost_country_NorthAmarica":"North Amarica",
+"Addpost_country_SouthAmerica":"South America",
+"Addpost_country_MiddleEast":"Middle East",
+"Addpost_next_step":"Next step",
+"Addpost_add_details":"Details ",
+"Addpost_add_title":"Title",
+"Addpost_add_title_placeholder":"Put a suitable title for your ad (120 characters)",
+"Addpost_add_description":"Description",
+"Addpost_add_description_placeholder":" description (400 characters)",
+"Addpost_price":"price",
+"Addpost_period":"Advertising period in days",
+"Addpost_10_days":"10 days",
+"Addpost_20_days":"20 days",
+"Addpost_30_days":"30 days",
+"Addpost_60_days":"60 days",
+"Addpost_90_days":"90 days",
+"Addpost_120_days":"120 days",
+"Addpost_365_days":"365 days",
+"Addpost_Expiry_date":"Expiry date",
+"Addpost_add_title_english":"English Title",
+"Addpost_add_description_english":"English Title Description",
+"Addpost_add_title_english_placeholder":"English title (120 characters)",
+"Addpost_add_description_english_placeholder":"Description of the advertisement in English (250 characters)",
+"Addpost_add_pictures_title":"Add photos",
+"Addpost_add_main_pictures":"main display image",
+"Addpost_add_other_picture":"Add another image",
+"Addpost_continue":"Continue",
+"Addpost_Publish":"Publish",
+"Addpost_msg_warning_no_shop":"Set up your shop to be able to enter ads",
+"Addpost_msg_warning_no_plan":"Start by choosing your plan",
+
+ 
+  
+"x10":"/////////////////////////////////////////////صفحة الإعلان الواحد /////////////////////////////////////////////",
+
+"postItems_mobile":"Mobile",
+"postItems_tel":"Telephone",
+"postItems_whatsapp":"Whatsapp",
+"postItems_msg":"Message",
+"postItems_website":"Website",
+"postItems_report":"Report",
+ 
+
+"postItems_your_comment":"your comment",
+"postItems_your_thanks":"Thank you",
+
+"postItems_send_your_comment":"Send",
+"postItems_notsure_your_comment":"Not sure",
+
+
+"postItems_comment_form_writeComment":"Write a comment  ",
+"postItems_comment_form_sendComment":"Send",
+
+  
+
+
+"x11":"/////////////////////////////////////////////صفحة البحث عن اعلاناتك  /////////////////////////////////////////////",
+"searchPost_title":"What are you looking for?",
+"searchPost_your_adds":"Your ads",
+"searchPost_search_in_cars":"Search in cars",
+"searchPost_search_in_properties":"Search in properties",
+"searchPost_search_in_jobs":"Search in jobs",
+"searchPost_search_in_services":"Search in services",
+"searchPost_search_in_classifieds":"Search in classifieds",
+"searchPost_search_in_electronics":"Search in electronics",
+"searchPost_search_in_animals":"Search in animals",
+"searchPost_search_in_furniture":"Search in furniture",
+"searchPost_search_in_personalItems":"Search in personal items",
+"searchPost_search_in_foodDrinks":"Search in food and drinks",
+ 
+
+
+
+"x12":"/////////////////////////////////////////////صفحة المتجر الواحد لليوزر  /////////////////////////////////////////////",
+"shops_edit":"Edit",
+"shops_visitors":"visitors",
+"shops_Followers":"Followers",
+"shops_following":"following",
+"shops_rating":"rating",
+"shops_open":"open shop"
+
+
+}
+
+ 
+ 

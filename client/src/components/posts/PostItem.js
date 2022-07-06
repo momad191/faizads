@@ -16,6 +16,9 @@ import greenFace from './greenFace.png';
 import redFace from './redFace.png';
 import yallowFace from './yallowFace.png';
 import Navbar from '../../components/layout/Navbar';
+import NavbarEnglish from '../layout/NavbarEnglish';
+import { useTranslation } from 'react-i18next';
+import Spinner from '../layout/Spinner';
 
 import ReportForm from '../reports/ReportForm';
 
@@ -228,7 +231,7 @@ const PostItem = ({
       
     
      
-       
+     const [t, i18next] = useTranslation()
 
      //////////////////////////////////////////////images control///////////////////////////////////////////////////
      const [selectpic0, setselectpic0] = useState('displayI');
@@ -724,12 +727,13 @@ const PostItem = ({
 
   return (
 
-  <>
+  <Fragment>
  
-     <Navbar />
+      {i18next.language === 'ar'&&(<Navbar />)}
+      {i18next.language === 'en'&&(<NavbarEnglish />)}
     
     
-
+ 
        <div className="aqle3-main">
        <div className="mainword2">
        <center> 
@@ -795,21 +799,32 @@ const PostItem = ({
       <button className="pic-slider-smal"> متجر المعلن <i class="fa fa-bullhorn fa-1x" aria-hidden="true"></i></button>
       </Link>
        )}
-       <button className="pic-slider-smal"> {market.m_AR_name}  <i class="fa fa-th-large fa-1x" aria-hidden="true"></i> </button>
-       <button className="pic-slider-smal"> {category.c_AR_name}  <i class="fa fa-list fa-1x" aria-hidden="true"></i>  </button>
-       <button className="pic-slider-smal"> {country.country_AR_name} / {city.city_AR_name} <i class="fa fa-map-marker fa-1x" aria-hidden="true"></i>   </button>
+       <button className="pic-slider-smal"> 
+       {i18next.language === 'ar' && market.m_AR_name}
+       {i18next.language === 'en' && market.m_EN_name}{' '}
+       <i class="fa fa-th-large fa-1x" aria-hidden="true"></i> </button>
+       <button className="pic-slider-smal">
+       {i18next.language === 'ar' && category.c_AR_name} 
+       {i18next.language === 'en' && category.c_EN_name} {' '}  
+       <i class="fa fa-list fa-1x" aria-hidden="true"></i>  </button>
+       <button className="pic-slider-smal"> 
+       {i18next.language === 'ar' && country.country_AR_name} {i18next.language === 'en' && country.country_EN_name}
+       
+        / {i18next.language === 'ar' && city.city_AR_name}     {i18next.language === 'en' && city.city_EN_name}
+
+        <i class="fa fa-map-marker fa-1x" aria-hidden="true"></i>   </button>
         </div>
         <div className="post-Main_paragraph"> {Main_paragraph} </div>
        </div>
  
 
        <div style={{display:'flex',border:'1px solid #add8e6'}}> 
-       <button className="post-contact-button" onClick={optionContact1}> <i class="fa fa-mobile" aria-hidden="true"></i> <span> الجوال</span>  </button>
-       <button className="post-contact-button" onClick={optionContact2}> <i class="fa fa-phone" aria-hidden="true"></i> <span> الهاتف</span>  </button>
-       <button className="post-contact-button" onClick={optionContact3}> <i class="fa fa-whatsapp" aria-hidden="true"></i> <span> تواصل</span> </button>
-       <button className="post-contact-button" onClick={optionContact4}> <i class="fa fa-envelope" aria-hidden="true"></i> <span> مراسلة</span>  </button>
-       <button className="post-contact-button" onClick={optionContact5}> <i class="fa fa-globe" aria-hidden="true"></i> <span> الموقع</span>  </button>
-       <button className="post-report-button"  onClick={optionContact6}> <i class="fa fa-flag" aria-hidden="true"></i> <span> ابلاغ</span>  </button>
+       <button className="post-contact-button" onClick={optionContact1}> <i class="fa fa-mobile" aria-hidden="true"></i> <span> {t('postItems_mobile')} </span>  </button>
+       <button className="post-contact-button" onClick={optionContact2}> <i class="fa fa-phone" aria-hidden="true"></i> <span> {t('postItems_tel')}</span>  </button>
+       <button className="post-contact-button" onClick={optionContact3}> <i class="fa fa-whatsapp" aria-hidden="true"></i> <span> {t('postItems_whatsapp')} </span> </button>
+       <button className="post-contact-button" onClick={optionContact4}> <i class="fa fa-envelope" aria-hidden="true"></i> <span> {t('postItems_msg')} </span>  </button>
+       <button className="post-contact-button" onClick={optionContact5}> <i class="fa fa-globe" aria-hidden="true"></i> <span> {t('postItems_website')} </span>  </button>
+       <button className="post-report-button"  onClick={optionContact6}> <i class="fa fa-flag" aria-hidden="true"></i> <span> {t('postItems_report')} </span>  </button>
        </div>
 
        <div className={optionContactphone1}> 
@@ -932,8 +947,8 @@ const PostItem = ({
 
  {get5s.length > 0 &&(
       <Fragment>
-           <p className="details-title"> تعليقك
-           {'  '} <img  src={greenFace} style={{width:'50px',height:'40px'}}/> شكرا لك </p>
+           <p className="details-title"> {t('postItems_your_comment')}
+           {'  '} <img  src={greenFace} style={{width:'50px',height:'50px'}}/>  {t('postItems_your_thanks')}   </p>
           
       </Fragment>
 )} 
@@ -943,8 +958,8 @@ const PostItem = ({
 
 { get4s.length > 0 &&(
       <Fragment>
-           <p className="details-title"> تعليقك
-        {'  '}  <img  src={yallowFace} style={{width:'20px',height:'20px'}}/> شكرا لك   </p>
+           <p className="details-title"> {t('postItems_your_comment')}
+        {'  '}  <img  src={yallowFace} style={{width:'50px',height:'50px'}}/> {t('postItems_your_thanks')}    </p>
           
       </Fragment>
 )} 
@@ -955,8 +970,8 @@ const PostItem = ({
 
 { get3s.length > 0 &&(
       <Fragment>
-           <p className="details-title"> تعليقك
-           {'  '} <img  src={redFace} style={{width:'40px',height:'30px'}}/> شكرا لك  </p>
+           <p className="details-title"> {t('postItems_your_comment')}
+           {'  '} <img  src={redFace} style={{width:'50px',height:'50px'}}/> {t('postItems_your_thanks')}    </p>
           
       </Fragment>
 )} 
@@ -1079,8 +1094,8 @@ const PostItem = ({
               /> 
            
              <div className={myoption55}>
-             <button   type="submit" onClick={() => addFiveStars(_id)} className='Action-button-open' style={{width:'100%'}}>ارسل رأيك</button>
-             <button   type="reset"  onClick={option6} className='Action-button-open' style={{width:'100%'}}>&times; لست متأكد </button>
+             <button   type="submit" onClick={() => addFiveStars(_id)} className='Action-button-open' style={{width:'100%'}}> {t('postItems_send_your_comment')} </button>
+             <button   type="reset"  onClick={option6} className='Action-button-open' style={{width:'100%'}}>&times; {t('postItems_notsure_your_comment')} </button>
 
              </div>
 
@@ -1105,8 +1120,8 @@ const PostItem = ({
               />
                
               <div className={myoption44}>
-             <button   type="submit" onClick={() => addFourStars(_id)} className='Action-button-open' style={{width:'100%'}}>ارسل رأيك</button>
-             <button   type="reset"  onClick={option6} className='Action-button-open' style={{width:'100%'}}>&times; لست متأكد</button>
+             <button   type="submit" onClick={() => addFourStars(_id)} className='Action-button-open' style={{width:'100%'}}> {t('postItems_send_your_comment')} </button>
+             <button   type="reset"  onClick={option6} className='Action-button-open' style={{width:'100%'}}>&times; {t('postItems_notsure_your_comment')} </button>
 
              </div>
 
@@ -1130,8 +1145,8 @@ const PostItem = ({
               /> 
               
               <div className={myoption33}>
-             <button   type="submit" onClick={() => addThreeStars(_id)} className='Action-button-open' style={{width:'100%'}}>ارسل رأيك</button>
-             <button   type="reset"  onClick={option6} className='Action-button-open' style={{width:'100%'}}>&times; لست متأكد</button>
+             <button   type="submit" onClick={() => addThreeStars(_id)} className='Action-button-open' style={{width:'100%'}}> {t('postItems_send_your_comment')} </button>
+             <button   type="reset"  onClick={option6} className='Action-button-open' style={{width:'100%'}}>&times;  {t('postItems_notsure_your_comment')} </button>
              </div>
               </div>
 
@@ -1187,11 +1202,11 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
   <Fragment>
        <>
 
-
+ 
 
 
  {title1 && (
-      <h1  className="details-title" style={{fontSize:'24px',textAlign:'center',fontWeight:'bold',color:'#000',direction:''}} > 
+      <h1  className="details-title"> 
        {title1} </h1>
       )}
 
@@ -1203,12 +1218,12 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic1 && (
       <img  className="detail-picture" alt={title1}
       src={pic1} 
-      alt={title1}
+     
       style={{width:'100%',height:'',marginBottom:'10px'}}/>
        )}
       </div>
 
-
+ 
 
 
  
@@ -1267,7 +1282,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic2 && (
       <img  className="detail-picture" alt={title1}
       src={pic2} 
-      alt={title2}
+   
       style={{width:'100%',height:'',marginBottom:'10px'}}/>
        )}
       </div>
@@ -1310,7 +1325,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic3 && (
       <img  className="detail-picture" alt={title3}
       src={pic3} 
-      alt={title3}
+    
       style={{width:'100%',height:'',marginBottom:'15px'}}/>
        )}
       </div>
@@ -1352,7 +1367,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic4 && (
       <img  className="detail-picture" alt={title4}
       src={pic4} 
-      alt={title4}
+   
       style={{width:'100%',height:'',marginBottom:'15px'}}/>
        )}
       </div>
@@ -1395,7 +1410,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic5 && (
       <img  className="detail-picture" alt={title5}
       src={pic5} 
-      alt={title5}
+    
       style={{width:'100%',height:'',marginBottom:'15px'}}/>
        )}
       </div>
@@ -1438,7 +1453,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic6 && (
       <img  className="detail-picture" alt={title6}
       src={pic6} 
-      alt={title6}
+   
       style={{width:'100%',height:'',marginBottom:'15px'}}/>
        )}
       </div>
@@ -1480,7 +1495,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic7 && (
       <img  className="detail-picture" alt={title7}
       src={pic7} 
-      alt={title7}
+    
       style={{width:'100%',height:'',marginBottom:'15px'}}/>
        )}
       </div>
@@ -1524,7 +1539,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic8 && (
       <img  className="detail-picture" alt={title8}
       src={pic8} 
-      alt={title8}
+     
       style={{width:'100%',height:'',marginBottom:'15px'}}/>
        )}
       </div>
@@ -1566,7 +1581,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic9 && (
       <img  className="detail-picture" alt={title9}
       src={pic9} 
-      alt={title9}
+      
       style={{width:'100%',height:'',marginBottom:'15px'}}/>
        )}
       </div>
@@ -1609,7 +1624,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic10 && (
       <img  className="detail-picture" alt={title10}
       src={pic10} 
-      alt={title10}
+    
       style={{width:'100%',height:'',marginBottom:'15px'}}/>
        )}
       </div>
@@ -1651,7 +1666,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic11 && (
       <img  className="detail-picture" alt={title11}
       src={pic11} 
-      alt={title11}
+      
       style={{width:'100%',height:'',marginBottom:'15px'}}/>
        )}
       </div>
@@ -1695,7 +1710,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic12 && (
       <img  className="detail-picture" alt={title12}
       src={pic12} 
-      alt={title12}
+  
       style={{width:'100%',height:'',marginBottom:'15px'}}/>
        )}
       </div>
@@ -1738,7 +1753,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic13 && (
       <img  className="detail-picture" alt={title13}
       src={pic13} 
-      alt={title13}
+   
       style={{width:'100%',height:'',marginBottom:'15px'}}/>
        )}
       </div>
@@ -1780,7 +1795,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic14 && (
       <img  className="detail-picture" alt={title14}
       src={pic14} 
-      alt={title14}
+     
       style={{width:'100%',height:'',marginBottom:'15px'}}/>
        )}
       </div>
@@ -1824,7 +1839,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic15 && (
       <img  className="detail-picture" alt={title15}
       src={pic15} 
-      alt={title15}
+    
       style={{width:'100%',height:'',marginBottom:'15px'}}/>
        )}
       </div>
@@ -1869,7 +1884,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic16 && (
       <img  className="detail-picture" alt={title16}
       src={pic16} 
-      alt={title16}
+    
       style={{width:'100%',height:'',marginBottom:'16px'}}/>
        )}
       </div>
@@ -1912,7 +1927,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic17 && (
       <img  className="detail-picture" alt={title17}
       src={pic17} 
-      alt={title17}
+    
       style={{width:'100%',height:'',marginBottom:'17px'}}/>
        )}
       </div>
@@ -1956,7 +1971,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic18 && (
       <img  className="detail-picture" alt={title18}
       src={pic18} 
-      alt={title18}
+    
       style={{width:'100%',height:'',marginBottom:'18px'}}/>
        )}
       </div>
@@ -2001,7 +2016,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic19 && (
       <img  className="detail-picture" alt={title19}
       src={pic19} 
-      alt={title19}
+      
       style={{width:'100%',height:'',marginBottom:'19px'}}/>
        )}
       </div>
@@ -2045,7 +2060,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic20 && (
       <img  className="detail-picture" alt={title20}
       src={pic20} 
-      alt={title20}
+    
       style={{width:'100%',height:'',marginBottom:'20px'}}/>
        )}
       </div>
@@ -2091,7 +2106,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic21 && (
       <img  className="detail-picture" alt={title21}
       src={pic21} 
-      alt={title21}
+    
       style={{width:'100%',height:'',marginBottom:'21px'}}/>
        )}
       </div>
@@ -2135,7 +2150,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic22 && (
       <img  className="detail-picture" alt={title22}
       src={pic22} 
-      alt={title22}
+     
       style={{width:'100%',height:'',marginBottom:'22px'}}/>
        )}
       </div>
@@ -2180,7 +2195,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic23 && (
       <img  className="detail-picture" alt={title23}
       src={pic23} 
-      alt={title23}
+      
       style={{width:'100%',height:'',marginBottom:'23px'}}/>
        )}
       </div>
@@ -2225,7 +2240,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic24 && (
       <img  className="detail-picture" alt={title24}
       src={pic24} 
-      alt={title24}
+   
       style={{width:'100%',height:'',marginBottom:'24px'}}/>
        )}
       </div>
@@ -2269,7 +2284,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic25 && (
       <img  className="detail-picture" alt={title25}
       src={pic25} 
-      alt={title25}
+   
       style={{width:'100%',height:'',marginBottom:'25px'}}/>
        )}
       </div>
@@ -2312,7 +2327,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic26 && (
       <img  className="detail-picture" alt={title26}
       src={pic26} 
-      alt={title26}
+  
       style={{width:'100%',height:'',marginBottom:'26px'}}/>
        )}
       </div>
@@ -2359,7 +2374,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic27 && (
       <img  className="detail-picture" alt={title27}
       src={pic27} 
-      alt={title27}
+     
       style={{width:'100%',height:'',marginBottom:'27px'}}/>
        )}
       </div>
@@ -2406,7 +2421,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic28 && (
       <img  className="detail-picture" alt={title28}
       src={pic28} 
-      alt={title28}
+       
       style={{width:'100%',height:'',marginBottom:'28px'}}/>
        )}
       </div>
@@ -2453,7 +2468,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic29 && (
       <img  className="detail-picture" alt={title29}
       src={pic29} 
-      alt={title29}
+    
       style={{width:'100%',height:'',marginBottom:'29px'}}/>
        )}
       </div>
@@ -2501,7 +2516,7 @@ More Details <i class="fa fa-arrow-down fa-1x"></i>
      {pic30 && (
       <img  className="detail-picture" alt={title30}
       src={pic30} 
-      alt={title30}
+     
       style={{width:'100%',height:'',marginBottom:'30px'}}/>
        )}
       </div>
@@ -2545,7 +2560,7 @@ Less Details  <i class="fa fa-arrow-up fa-1x"></i>
     </center> 
     </div>
     </div>
-  </>
+  </Fragment>
 
 
 

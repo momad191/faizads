@@ -12,8 +12,11 @@ import yallowFace from './yallowFace.png';
 import map from './map.png';
  
 
+
 import Navbar from './Navbar';
 import NavbarEnglish from './NavbarEnglish';
+import { Translation } from 'react-i18next';
+import i18next from 'i18next';
  
 
 const Exercise = props => (
@@ -866,7 +869,7 @@ allCategoryList(){
     return <button 
     value={this.state.searchByCategory_code}
     onClick={this.searchChangedByCategory_code}
-    value={allCategory.c_code} 
+    // value={allCategory.c_code} 
     className="categoryListButton">
     {allCategory.c_AR_name}
      </button>
@@ -883,7 +886,7 @@ carsCategoryList(){
     return <button 
     value={this.state.searchByCategory_code}
     onClick={this.searchChangedByCategory_code}
-    value={carsCategory.c_code} 
+    // value={carsCategory.c_code} 
     className="categoryListButton">
     {carsCategory.c_AR_name}
      </button>
@@ -902,7 +905,7 @@ propertiesCategoryList(){
     return <button 
     value={this.state.searchByCategory_code}
     onClick={this.searchChangedByCategory_code}
-    value={propertiesCategory.c_code} 
+    // value={propertiesCategory.c_code} 
     className="categoryListButton">{propertiesCategory.c_AR_name}
      </button>
    })
@@ -918,7 +921,7 @@ jobsCategoryList(){
     return <button 
     value={this.state.searchByCategory_code}
     onClick={this.searchChangedByCategory_code}
-    value={jobsCategory.c_code} 
+    // value={jobsCategory.c_code} 
     className="categoryListButton">{jobsCategory.c_AR_name}
      </button>
 
@@ -936,7 +939,7 @@ servicesCategoryList(){
     return <button 
     value={this.state.searchByCategory_code}
     onClick={this.searchChangedByCategory_code}
-    value={servicesCategory.c_code} 
+    // value={servicesCategory.c_code} 
     className="categoryListButton">{servicesCategory.c_AR_name}
      </button>
 
@@ -955,7 +958,7 @@ classifiedsCategoryList(){
     return <button 
     value={this.state.searchByCategory_code}
     onClick={this.searchChangedByCategory_code}
-    value={classifiedsCategory.c_code} 
+    // value={classifiedsCategory.c_code} 
     className="categoryListButton">{classifiedsCategory.c_AR_name}
      </button>
 
@@ -1057,16 +1060,26 @@ classifiedsCategoryList(){
 
   
 
- 
-  <NavbarEnglish />
-    
+  {i18next.language === 'ar'&&(
+ <Navbar />
+)}
 
 
+{i18next.language === 'en'&&(
+ <NavbarEnglish />
+)}
     
  
-      <div className="dash-title"> International Markets  </div>
+
+      
  
+      <div className="dash-title"> Global Markets  </div>
  
+ <center> <div className="details-title">  To spread your business and expand your goals   </div></center>
+
+<center> <div className="details-title" style={{width:'80%'}}>  
+Sell - buy - offer for rent - search for rent - vacancies - search for work - services - business - partnership
+</div></center>
     
 
     
@@ -1323,24 +1336,42 @@ classifiedsCategoryList(){
  
 {/* {this.exerciseList()} */}
 
-
-<center>
-
-<div className="dash-title"> يمكنك الإعلان عن كل شيء  </div>
  
- <div className='vertical-menu-wrapper-home'>
  
- <div className='vertical-menu-active-home'>  سيارات</div> 
- <div className='vertical-menu-active-home'>  عقارات</div> 
-  <div className='vertical-menu-active-home'>  وظائف </div>
- <div className='vertical-menu-active-home'>  خدمات </div>
- <div className='vertical-menu-active-home'>  منتجات </div>
 
+<div className="dash-title"> You can advertise everything and post to potential clients all over the world </div>
+ <center> 
+ <div className='vertical-menu-wrapper-home-ENglish'>
+ <button className='vertical-menu-active-home'>  Cars</button> 
+ <button className='vertical-menu-active-home'>  Real Estate</button> 
+  <button className='vertical-menu-active-home'>  Jobs </button>
+ <button className='vertical-menu-active-home'>  Services </button>
+ <button className='vertical-menu-active-home'>  Products  </button>
 
-
+ <button className='vertical-menu-active-home'>  Electronics </button>
+ <button className='vertical-menu-active-home'>  Animals </button>
+ <button className='vertical-menu-active-home'>  Furniture </button>
+ <button className='vertical-menu-active-home'>  Personal Items </button>
+ <button className='vertical-menu-active-home'>  Food And Drinks  </button>
   </div>
+  </center>
 
- </center>
+
+ 
+
+  <div className="dash-title"> We share ads on social media platforms  </div>
+ <center> 
+ <div className='vertical-menu-wrapper-home-English'>
+ <button className='vertical-menu-active-home'>Facebook</button> 
+ <button className='vertical-menu-active-home'>Twitter</button> 
+  <button className='vertical-menu-active-home'>Instagram</button>
+ <button className='vertical-menu-active-home'>YouTube</button>
+ <button className='vertical-menu-active-home'>LinkedIn</button>
+  </div>
+  </center>
+
+
+
 
 
 

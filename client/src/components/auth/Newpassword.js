@@ -1,9 +1,15 @@
 import React, { Fragment, Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 //import DatePicker from 'react-datepicker';
 //import "react-datepicker/dist/react-datepicker.css";
 
+import Navbar from '../../components/layout/Navbar';
+import NavbarEnglish from '../../components/layout/NavbarEnglish';
+import { Translation } from 'react-i18next';
+import i18next from 'i18next';
+ 
 export default class Editwebinars extends Component {
   constructor(props) {
     super(props);
@@ -21,47 +27,43 @@ export default class Editwebinars extends Component {
     this.state = {
 
        // L_Img: '',
-        email:'',
+        r_email:'',
+        r_status:'',
         password: '',
+        email:'',
         resetToken:''
     }
   }
  
   componentDidMount() {
-    axios.get('/api/users/'+this.props.match.params.id)
+    axios.get('/api/auth/resetinfo/'+this.props.match.params.id)
       .then(response => {
         this.setState({
-
-         // password: response.data.password, 
-          email: response.data.email,
-          resetToken:response.data.resetToken,
-          expireToken:response.data.expireToken
-          
+          r_email: response.data.r_email,
+          r_status: response.data.r_status,
         })   
       })
       .catch(function (error) {
         console.log(error);
       })
 
-    axios.get('/api/auth/'+this.props.match.params.id)
-      .then(response => {
-        if (response.data.length > 0) {
-          this.setState({
-            users: response.data.map(user => user.username),
-          })
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+    // axios.get('/api/auth/'+this.props.match.params.id)
+    //   .then(response => {
+    //     if (response.data.length > 0) {
+    //       this.setState({
+    //         users: response.data.map(user => user.username),
+    //       })
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
 
   }
 
-   
-
   onChangeemail(e) {
     this.setState({
-      email: e.target.value
+      email: this.state.r_email
     })
   }
 
@@ -94,17 +96,12 @@ export default class Editwebinars extends Component {
 
     const user = {
      // L_Img: this.state.L_Img,
-      
-     
       email: this.state.email,
       password: this.state.password,
-      resetToken: this.state.resetToken
-
-       
-
+      // resetToken: this.state.resetToken
     }
  
-    console.log(user);
+    // console.log(user);
  
     axios.post('/api/auth/new-password/'+this.props.match.params.id, user)
     .then(res => console.log(res.data));
@@ -117,74 +114,93 @@ export default class Editwebinars extends Component {
 
 
       <Fragment>
-       
-    
-       
-      <section id="login-reg" >
-              
-              <div class="row">
-                 
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                     <div class="form-box">
-                         <div class="form-top" style={{backgroundColor:'#363636'}}>
-                             <div class="form-top-left">
-                                  
-                             </div>
-                             <div class="form-top-right">
-                             كلمة المرور الجديدة <i class="fa fa-key"></i>
-                             </div>
-                         </div> 
+      {i18next.language === 'ar'&&(<Navbar />)}
+      {i18next.language === 'en'&&(<NavbarEnglish />)}
+ 
 
-          <div class="form-bottom"  style={{backgroundColor:'#58ACFA'}}>
-        <form role="form" action="" class="login-form"  encType="multipart/form-data" onSubmit={this.onSubmit}>
+       <div className="aqle3-main" >
+      <div className="mainword2">
 
+      {this.state.r_status === 'closed'&&(
+       <Fragment> 
+        <center> 
+       <h1 className="login-text"> 
+       <Translation>{t => <>{t('linkWasSentBefore')}</>}</Translation>
+        </h1>
+
+       <h1 className="login-text">   </h1>
+       <Translation>{t => <>{t('linkToSendAgain')}</>}</Translation>
+        
+        <a className="loginSmalltitle" href="/user/forgot-password">
+        <Translation>{t => <>{t('SendAgain')}</>}</Translation>
+           </a> 
+        </center> 
+
+       </Fragment>
+ 
+     )}
+
+{this.state.r_status === 'open'&&(
+    <Fragment> 
+      <div className="mainForm">
+     <center> 
+      <div className='FormCover' style={{width:'50%'}}> 
+
+      <div className="login-title">  {this.state.r_email}       إعادة تعيين كلمة المرور  </div>  
 
  
-                            <div class="input-group form-group">
 
-                               <input type="text" class="form-control" placeholder=" البريد الالكتروني" aria-describedby="basic-addon1" autocomplete="off"
-                                name='name'
+        <form role="form"    encType="multipart/form-data" onSubmit={this.onSubmit}>
+ 
+                            <div >
+                            <span className="login-text">  البريد الالكتروني    </span>
+                               <input type="text"  className="login-input"    autocomplete="off"
+                                name='email'
                                 value={this.state.email}
                                 onChange={this.onChangeemail}
-                                style={{color:'#000',fontWeight:'bold',float:'right',direction:'rtl'}}
+                                style={{width:'100%'}} 
                                 required
                              />
-                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+                       
                            </div>
 
 
                            
-                           <div class="input-group form-group">
-                          <input type="password" class="form-control" placeholder=" كلمة المرور " aria-describedby="basic-addon1" autocomplete="off"
-                          name='name'
+                           <div  style={{width:'100%'}} >
+                           <span className="login-text">   كلمة المرور    </span>
+                          <input type="password"  className="login-input"    autocomplete="off"
+                          name='password'
                           value={this.state.password}
                           onChange={this.onChangepassword}
-                          style={{color:'#000',fontWeight:'bold',float:'right',direction:'rtl'}}
+                          style={{width:'100%'}} 
                           required
                           />
-                          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+                          
                           </div>
     
   
 
 
-      <div className="form-group">
+      <div className="">
       {/* <label className="form-label">reset Token</label> */}
-      <input  className="form-contact" placeholder="" type="hidden" value={this.state.resetToken} onChange={this.onChangeresetToken} required/>
+      {/* <input  className="form-contact" placeholder="" type="hidden" value={this.state.resetToken} onChange={this.onChangeresetToken} required/> */}
       </div>
  
  
-      <button style={{backgroundColor:'#363636'}} type="submit" class="momadbtn">أرسل</button>
+      <button className="Formbutton" type="submit"  >أرسل</button>
 
 
  
      </form>
      </div>
-     </div>
-     </div>
-     </div>
-     </section>
-     
+     </center>
+
+    </div>
+
+</Fragment>
+)}
+    </div>
+    </div>  
      </Fragment>
 
 

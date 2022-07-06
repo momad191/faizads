@@ -4,15 +4,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import { deleteComment } from '../../actions/post';
+import { useTranslation } from 'react-i18next';
+
   
 const CommentItem = ({
+  
   postId,
   comment: { _id, text,username, first_name,last_name, avatar, user, date },
   auth,
   deleteComment
-}) => (
+}) =>{
+
+  const [t, i18next] = useTranslation()
+
+return(
   <center>  
-    <div className='main-about'>  
+   
   <div className='main-list'>
     <div>
       <Link to={`/shops/${username}`}>
@@ -32,7 +39,7 @@ const CommentItem = ({
     
       <p className='comments-title-name'>
      
-       التاريخ <Moment format='YYYY/MM/DD'>{date}</Moment>
+       Date: <Moment format='YYYY/MM/DD'>{date}</Moment>
        
      
 
@@ -51,9 +58,10 @@ const CommentItem = ({
       )}
 
   </div>
-  </div> 
+  
   </center>
 );
+}
 
 CommentItem.propTypes = {
   postId: PropTypes.string.isRequired,

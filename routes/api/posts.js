@@ -12,6 +12,7 @@ const Country = require('../../models/Country');
 const City = require('../../models/City');
 const Market = require('../../models/Market');
 const Shop = require('../../models/Shop');
+const Purpose = require('../../models/Purpose');
 
  
  
@@ -57,13 +58,15 @@ router.post(
       const market = await Market.findOne({m_code:req.body.market_code});
       const category = await Category.findOne({c_code:req.body.category_code});
        const city = await City.findOne({city_code:req.body.city_code});
-       const country = await Country.findOne({country_code:req.body.country_code});
+       const country = await Country.findOne({country_code_upper_case:user.country_code});
+       const purpose = await Purpose.findOne({p_code:req.body.purpose_code});
+         
 
       const newPost = new Post({
         title: req.body.title,
         title_English: req.body.title_English,
         activation: req.body.activation,
-        purpose: req.body.purpose,
+        purpose_code: req.body.purpose_code,
         price: req.body.price,
         currency: req.body.currency,
         premium:req.body.premium,
@@ -77,7 +80,7 @@ router.post(
         market_code: req.body.market_code,
         market_name: req.body.market_name,
   
-        country_code: req.body.country_code,
+        country_code: country.country_code,
         city_code: req.body.city_code,
  
         mobile:  req.body.mobile,
@@ -118,7 +121,8 @@ router.post(
         market:market._id,
          country:country._id,
          city:city._id,
-       
+         purpose:purpose._id
+         
           
       });
   
@@ -144,12 +148,39 @@ router.get('/activationComplete', auth, async (req, res) => {
     {path:'category', select: 'c_AR_name c_EN_name c_code'},
     {path:'city', select: 'city_AR_name city_EN_name city_code'},
     {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
 
    ];
     // const posts = await Post.find().sort({ date:-1 });
     // const posts = await Post.and([{ user: req.user.id }])
 
     const posts = await  Post.find({activation:'yes',user:req.user.id}).sort({ date:-1 }).populate(populateQuery);
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+}); 
+
+ //activationCompleteAdmin
+ router.get('/activationCompleteAdmin', auth, async (req, res) => {
+  try {
+
+    var populateQuery =
+    [
+    {path:'shop', select: 'shop_name shop_logo_img shop_description username'},
+    {path:'user', select: 'first_name last_name username'},
+    {path:'market', select: 'm_AR_name m_EN_name m_code'},
+    {path:'category', select: 'c_AR_name c_EN_name c_code'},
+    {path:'city', select: 'city_AR_name city_EN_name city_code'},
+    {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
+
+   ];
+    // const posts = await Post.find().sort({ date:-1 });
+    // const posts = await Post.and([{ user: req.user.id }])
+
+    const posts = await  Post.find({activation:'yes'}).sort({ date:-1 }).populate(populateQuery);
     res.json(posts);
   } catch (err) {
     console.error(err.message);
@@ -171,11 +202,39 @@ router.get('/activationComplete', auth, async (req, res) => {
     {path:'category', select: 'c_AR_name c_EN_name c_code'},
     {path:'city', select: 'city_AR_name city_EN_name city_code'},
     {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
    ];
     // const posts = await Post.find().sort({ date:-1 });
     // const posts = await Post.and([{ user: req.user.id }])
 
     const posts = await  Post.find({activation:'no',user:req.user.id}).sort({ date:-1 }).populate(populateQuery);
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+
+ //activationNoAdmin
+ router.get('/activationNoAdmin', auth, async (req, res) => {
+  try {
+
+    var populateQuery =
+    [
+    {path:'shop', select: 'shop_name shop_logo_img shop_description username'},
+    {path:'user', select: 'first_name last_name username'},
+    {path:'market', select: 'm_AR_name m_EN_name m_code'},
+    {path:'category', select: 'c_AR_name c_EN_name c_code'},
+    {path:'city', select: 'city_AR_name city_EN_name city_code'},
+    {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
+   ];
+    // const posts = await Post.find().sort({ date:-1 });
+    // const posts = await Post.and([{ user: req.user.id }])
+
+    const posts = await  Post.find({activation:'no'}).sort({ date:-1 }).populate(populateQuery);
     res.json(posts);
   } catch (err) {
     console.error(err.message);
@@ -197,6 +256,7 @@ router.get('/activationComplete', auth, async (req, res) => {
     {path:'category', select: 'c_AR_name c_EN_name c_code'},
     {path:'city', select: 'city_AR_name city_EN_name city_code'},
     {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
 
    ];
 
@@ -208,7 +268,33 @@ router.get('/activationComplete', auth, async (req, res) => {
   }
 });
 
+ 
+ 
 
+
+ //premium
+ router.get('/premiumCompleteAdmin', auth, async (req, res) => {
+  try {
+    
+    var populateQuery =
+    [
+    {path:'shop', select: 'shop_name shop_logo_img shop_description username'},
+    {path:'user', select: 'first_name last_name username'},
+    {path:'market', select: 'm_AR_name m_EN_name m_code'},
+    {path:'category', select: 'c_AR_name c_EN_name c_code'},
+    {path:'city', select: 'city_AR_name city_EN_name city_code'},
+    {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
+
+   ];
+
+    const posts = await  Post.find({premium:'yes', user:req.user.id}).sort({ date:-1 }).populate(populateQuery);
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 
 router.get('/get5sumUser', auth, async (req, res) => {
@@ -318,10 +404,11 @@ router.get('/homePage/:country_code', async (req, res) => {
     {path:'category', select: 'c_AR_name c_EN_name c_code'},
     {path:'city', select: 'city_AR_name city_EN_name city_code'},
     {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
 
    ];
-
-    const posts = await Post.find({country_code:req.params.country_code,activation:'yes'}).sort({ premium:-1,date:-1 }).populate(populateQuery);
+ 
+    const posts = await Post.find({country_code:req.params.country_code,activation:'yes'}).sort({ premium:-1,date:-1 }).populate(populateQuery).gt('expired', Date());
     res.json(posts);
   } catch (err) {
     console.error(err.message);
@@ -341,11 +428,12 @@ router.get('/homePage/:country_code/:city_code', async (req, res) => {
     {path:'category', select: 'c_AR_name c_EN_name c_code'},
     {path:'city', select: 'city_AR_name city_EN_name city_code'},
     {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
 
    ];
 
 
-    const posts = await Post.find({country_code:req.params.country_code,city_code:req.params.city_code,activation:'yes'}).sort({ premium:-1,date:-1 }).populate(populateQuery);
+    const posts = await Post.find({country_code:req.params.country_code,city_code:req.params.city_code,activation:'yes'}).sort({ premium:-1,date:-1 }).populate(populateQuery).gt('expired', Date());
     res.json(posts);
   } catch (err) {
     console.error(err.message);
@@ -366,11 +454,12 @@ router.get('/homePage/:country_code/:city_code/:market_code', async (req, res) =
     {path:'category', select: 'c_AR_name c_EN_name c_code'},
     {path:'city', select: 'city_AR_name city_EN_name city_code'},
     {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
 
    ];
 
 
-    const posts = await Post.find({country_code:req.params.country_code,city_code:req.params.city_code,market_code:req.params.market_code,activation:'yes'}).sort({ premium:-1,date:-1 }).populate(populateQuery);;
+    const posts = await Post.find({country_code:req.params.country_code,city_code:req.params.city_code,market_code:req.params.market_code,activation:'yes'}).sort({ premium:-1,date:-1 }).populate(populateQuery).gt('expired', Date());
     res.json(posts);
   } catch (err) {
     console.error(err.message);
@@ -385,7 +474,7 @@ router.get('/homePage/:country_code/:city_code/:market_code', async (req, res) =
 
 
 
-router.get('/homePage/:country_code/:city_code/:market_code/:purpose', async (req, res) => {
+router.get('/homePage/:country_code/:city_code/:market_code/:purpose_code', async (req, res) => {
   try {
 
 
@@ -397,12 +486,13 @@ router.get('/homePage/:country_code/:city_code/:market_code/:purpose', async (re
     {path:'category', select: 'c_AR_name c_EN_name c_code'},
     {path:'city', select: 'city_AR_name city_EN_name city_code'},
     {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
 
    ];
 
 
 
-    const posts = await Post.find({country_code:req.params.country_code,city_code:req.params.city_code,market_code:req.params.market_code,purpose:req.params.purpose,activation:'yes'}).sort({ premium:-1,date:-1 }).populate(populateQuery);
+    const posts = await Post.find({country_code:req.params.country_code,city_code:req.params.city_code,market_code:req.params.market_code,purpose_code:req.params.purpose_code,activation:'yes'}).sort({ premium:-1,date:-1 }).populate(populateQuery).gt('expired', Date());
     res.json(posts);
   } catch (err) {
     console.error(err.message);
@@ -413,7 +503,7 @@ router.get('/homePage/:country_code/:city_code/:market_code/:purpose', async (re
 
 
 
-router.get('/homePage/:country_code/:city_code/:market_code/:purpose/:category_code', async (req, res) => {
+router.get('/homePage/:country_code/:city_code/:market_code/:purpose_code/:category_code', async (req, res) => {
   try {
 
     var populateQuery =
@@ -424,13 +514,14 @@ router.get('/homePage/:country_code/:city_code/:market_code/:purpose/:category_c
     {path:'category', select: 'c_AR_name c_EN_name c_code'},
     {path:'city', select: 'city_AR_name city_EN_name city_code'},
     {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
 
    ];
 
 
 
 
-    const posts = await Post.find({country_code:req.params.country_code,city_code:req.params.city_code,market_code:req.params.market_code,purpose:req.params.purpose,category_code:req.params.category_code,activation:'yes'}).sort({ premium:-1,date:-1 }).populate(populateQuery);
+    const posts = await Post.find({country_code:req.params.country_code,city_code:req.params.city_code,market_code:req.params.market_code,purpose_code:req.params.purpose_code,category_code:req.params.category_code,activation:'yes'}).sort({ premium:-1,date:-1 }).populate(populateQuery).gt('expired', Date());
     res.json(posts);
   } catch (err) {
     console.error(err.message);
@@ -452,6 +543,7 @@ router.get('/', async (req, res) => {
      {path:'category', select: 'c_AR_name c_EN_name c_code'},
      {path:'city', select: 'city_AR_name city_EN_name city_code'},
      {path:'country', select: 'country_AR_name country_EN_name country_code'},
+     {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
     ];
 
     const posts = await Post.find().sort({ premium:-1,date:-1 })
@@ -480,10 +572,45 @@ router.get('/userposts', auth, async (req, res) => {
     {path:'category', select: 'c_AR_name c_EN_name c_code'},
     {path:'city', select: 'city_AR_name city_EN_name city_code'},
     {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
    ];
 
     const posts = await Post.find({user:req.user.id}).sort({ premium:-1,date:-1 })
     .populate(populateQuery);
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+
+
+
+// @route    GET api/posts/userPostsInToday
+// @desc     Get all userPostsInToday
+// @access   Private
+router.get('/userPostsInToday', auth, async (req, res) => {
+  try { 
+    var populateQuery =
+    [
+    {path:'shop', select: 'shop_name shop_logo_img shop_description username'},
+    {path:'user', select: 'first_name last_name username'},
+    {path:'market', select: 'm_AR_name m_EN_name m_code'},
+    {path:'category', select: 'c_AR_name c_EN_name c_code'},
+    {path:'city', select: 'city_AR_name city_EN_name city_code'},
+    {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
+   ]; 
+  var d = new Date();
+ 
+ 
+  
+    const posts = await Post.find()
+    .sort({ premium:-1,date:-1 })
+    .populate(populateQuery);
+
     res.json(posts);
   } catch (err) {
     console.error(err.message);
@@ -642,6 +769,7 @@ router.get('/:id', async (req, res) => {
     {path:'category', select: 'c_AR_name c_EN_name c_code'},
     {path:'city', select: 'city_AR_name city_EN_name city_code'},
     {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
     // {path:'comments', select: 'user'},
  
    ];
@@ -898,7 +1026,7 @@ router.post('/update/:id', async (req, res) => {
 router.post('/activatePost/:id', async (req, res) => {
   try {
     const pp = await Post.findById(req.params.id)
-    pp._id = req.body._id;
+    // pp._id = req.body._id;
     pp.activation = req.body.activation;
     await pp.save();
   } catch (err) {
@@ -1101,7 +1229,17 @@ router.put('/one_stars/:id', auth, async (req, res) => {
 
 router.get('/postsofshop/:username', async (req, res) => {
   try {
-    const posts = await Post.find({username:req.params.username}).sort({ date:-1 });
+    var populateQuery =
+    [
+    {path:'shop', select: 'shop_name shop_logo_img shop_description username'},
+    {path:'user', select: 'first_name last_name username'},
+    {path:'market', select: 'm_AR_name m_EN_name m_code'},
+    {path:'category', select: 'c_AR_name c_EN_name c_code'},
+    {path:'city', select: 'city_AR_name city_EN_name city_code'},
+    {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
+   ];
+    const posts = await Post.find({username:req.params.username}).sort({ premium:-1,date:-1 }).populate(populateQuery);
     res.json(posts);
   } catch (err) {
     console.error(err.message);
@@ -1112,7 +1250,19 @@ router.get('/postsofshop/:username', async (req, res) => {
 ////////////////////////////////////المنشورات التي تظهر في متجر المستخدم////////////////////////////////////////
 router.get('/postsofshop/:username/:market_code', async (req, res) => {
   try {
-    const posts = await Post.find({username:req.params.username,market_code:req.params.market_code}).sort({ date:-1 });
+
+    var populateQuery =
+    [
+    {path:'shop', select: 'shop_name shop_logo_img shop_description username'},
+    {path:'user', select: 'first_name last_name username'},
+    {path:'market', select: 'm_AR_name m_EN_name m_code'},
+    {path:'category', select: 'c_AR_name c_EN_name c_code'},
+    {path:'city', select: 'city_AR_name city_EN_name city_code'},
+    {path:'country', select: 'country_AR_name country_EN_name country_code'},
+    {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
+   ];
+
+    const posts = await Post.find({username:req.params.username,market_code:req.params.market_code}).sort({ premium:-1,date:-1 }).populate(populateQuery);
     res.json(posts);
   } catch (err) {
     console.error(err.message);

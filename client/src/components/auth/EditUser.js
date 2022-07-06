@@ -5,8 +5,12 @@ import Moment from 'react-moment';
 
 import Navbar from '../layout/Navbar';
 import NavbarEnglish from '../layout/NavbarEnglish';
+import Spinner from '../layout/Spinner';
+import { Translation } from 'react-i18next';
+import i18next from 'i18next';
 //import 'moment/locale/ar'; 
 
+ 
 export default class EditUser extends Component {
  
 
@@ -60,12 +64,27 @@ export default class EditUser extends Component {
       membership_renewal_date:'',
       membership_renewal_expiry_date: '',
     
-      loading:false
+      loading:false,
+      users:[]
       
     }
   }
   
   componentDidMount() {
+
+
+    axios.get('/api/auth')
+    .then(response => {
+      this.setState({
+          users: response.data,
+      })   
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
+
+
     axios.get('/api/auth/oneuser/'+this.props.match.params.id,)
       .then(response => { 
         this.setState({
@@ -229,39 +248,33 @@ export default class EditUser extends Component {
       validity: this.state.validity 
     }
      
+    
+    axios.post('/api/auth/updateProfileByAdim/'+para, user);
+    window.location = '/dashboard/users'
    
-    axios.post('/api/auth/updateProfile/'+para, user);
-
-     this.state.Lang === 'ar' ?(
-      window.location = '/ar/dashboard/users'
-      ):(
-      window.location ='/en/dashboard/users'
-      )
     }
 
     
-
-
  
-
-
-
   render(loading) {
     return (
       <Fragment>
-           {this.state.Lang === 'ar' ?(
-      <Navbar />
-      ):(
-     <NavbarEnglish />
-      )}
+      
    
  
         <div className="aqle3-main">
         <div className="mainword2">
 
+        {i18next.language === 'ar'&&(<Navbar />)}
+        {i18next.language === 'en'&&(<NavbarEnglish />)}
+
+  
+        {this.state.users.validity === "super" ?(
+
+
            
   <div className="mainForm">
-  {this.state.Lang === 'ar' ?(
+  {i18next.language === 'ar'&& (
 
   
 <Fragment>
@@ -269,7 +282,7 @@ export default class EditUser extends Component {
   
         <center> 
 
-        <div class="login-title"> تحديث المستخدم </div>
+        <div class="login-title"> تحديث المستخدم  </div>
 	 
 	    <form className="login-form" onSubmit={this.onSubmit}>
       <div className='FormCover'>  
@@ -383,7 +396,7 @@ export default class EditUser extends Component {
     <option value="CR">Costa Rica</option>
     <option value="CI">Cote D'Ivoire</option>
     <option value="HR">Croatia</option>
-    <option value="CU">Cuba</option>
+    <option value="CU">Cuba</option> 
     <option value="CW">Curacao</option>
     <option value="CY">Cyprus</option>
     <option value="CZ">Czech Republic</option>
@@ -716,7 +729,7 @@ export default class EditUser extends Component {
   </Fragment>
   )}
 
-
+ 
 
 
    </div>
@@ -725,7 +738,9 @@ export default class EditUser extends Component {
 
 </Fragment>
 
-):(
+)}
+
+{i18next.language === 'en'&&(
 
   ///////////////////////ENGLISH/////////////////////
   
@@ -1129,7 +1144,7 @@ export default class EditUser extends Component {
 
 
 
-
+ 
       <select
       className="login-input"
       name="validity" 
@@ -1207,6 +1222,13 @@ export default class EditUser extends Component {
 
 
         </div>
+
+):( 
+  <center> 
+  <Spinner />
+</center>
+          
+  )}
         </div>
         </div>
 

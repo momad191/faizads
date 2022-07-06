@@ -7,6 +7,14 @@ import FollowUpForm from '../followups/FollowUpForm2';
 import { deleteFollowup } from '../../actions/followup';
 
 
+const formatter = new Intl.NumberFormat('en',{
+  
+  style:'decimal',
+  // signDisplay:'always',
+  useGrouping:true,
+  notation:'compact'
+
+});
 
 const Following = ({match,loading,
 }) => {
@@ -160,7 +168,7 @@ const Following = ({match,loading,
  .map(shop => ( 
  
 
-  <Link  to={`/shops/${shop.following_shop.username}`} className="shoplist bg-light" key={shop.following_shop._id}>
+  <Link  to={`/shops/${shop.following_user.username}`} className="shoplist bg-light" key={shop.following_shop._id}>
  
   <img
     className="round-img"
@@ -168,8 +176,8 @@ const Following = ({match,loading,
     alt=""
   />
   <div className='shoplistinfo1'>
-  <Link to={`/shops/${shop.following_shop.username}`}> <h1> {shop.following_shop.shop_name} </h1> </Link>
-    <h2> @{shop.following_shop.username}</h2>
+  <Link to={`/shops/${shop.following_user.username}`}> <h1> {shop.following_shop.shop_name} </h1> </Link>
+    <h2> @{shop.following_user.username}</h2>
   </div>
 
 
@@ -185,7 +193,7 @@ const Following = ({match,loading,
   {userShop ?(
      <Fragment>
 
-   {user.username === shop.following_shop.username ?(
+   {user.username === shop.following_user.username ?(
      <Fragment>
     <a href="/ar/dashboard/shops/edit"> 
     <button className="Action-button-followup"> 
@@ -195,9 +203,9 @@ const Following = ({match,loading,
     </Fragment>
    ):(
     <Fragment>
-    <Link to={`/ar/shops/${shop.following_shop.username}`}> 
+    <Link to={`/ar/shops/${shop.following_user.username}`}> 
     <button className="Action-button-followup"> 
-    زيارة المتجر 
+    زيارة المتجر | ({formatter.format(shop.following_shop.clicks.length)})
     </button>
      </Link>
      </Fragment>
@@ -206,7 +214,7 @@ const Following = ({match,loading,
 
   </Fragment>
    ):(
-    <a href='/ar/dashboard/create-shop'> <button className="Action-button-plus">  فتح متجر  </button>  </a>
+    <a href={`/ar/shops/${shop.following_user.username}`}> <button className="Action-button-plus">  زيارة المتجر | ({formatter.format(shop.following_shop.clicks.length)})  </button>  </a>
 
     )}
 

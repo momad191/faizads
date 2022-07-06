@@ -6,6 +6,14 @@ import Spinner from '../layout/Spinner';
 import FollowUpForm from '../followups/FollowUpForm2';
 import { deleteFollowup } from '../../actions/followup';
 
+const formatter = new Intl.NumberFormat('en',{
+  
+  style:'decimal',
+  // signDisplay:'always',
+  useGrouping:true,
+  notation:'compact'
+
+});
 
 
 const Followers = ({match,loading,
@@ -91,7 +99,7 @@ const Followers = ({match,loading,
           console.log(err);
         })
 
-
+ 
 
         axios.get('/api/shops/shopinfo/'+match.params.username)
         .then(res => {
@@ -153,75 +161,74 @@ const Followers = ({match,loading,
 <center> 
 <div >
 
-
-
 {currentResults
   
- .map(Followup => ( 
+  .map(Followup => ( 
+  
  
-
-  <Link to={`/shops/${Followup.follower_shop.username}`} className="shoplist bg-light" key={Followup.follower_shop._id}>
-  <img
-    className="round-img"
-    src={Followup.follower_shop.shop_logo_img}
-    alt=""
-  />
-  <div className='shoplistinfo1'>
-  <Link to={`/shops/${Followup.follower_shop.username}`}> <h1> {Followup.follower_shop.shop_name} </h1> </Link>
-    <h2> @{Followup.follower_shop.username}</h2>
-  </div>
-
-
-  <div className='shoplistinfo3'>
-  {Followup.follower_shop.shop_description}
-  </div>
-
-
-
-  {/* //////////////////////////////////////المتابعة////////////////////////////////// */}
-  <div className='shoplistinfo2'>
-
-  {userShop ?(
-     <Fragment>
+   <Link to={`/shops/${Followup.follower_user.username}`} className="shoplist bg-light" key={Followup.follower_shop._id}>
+   <img
+     className="round-img"
+     src={Followup.follower_shop.shop_logo_img}
+     alt=""
+   />
+   <div className='shoplistinfo1'>
+   <Link to={`/shops/${Followup.follower_user.username}`}> <h1> {Followup.follower_shop.shop_name} </h1> </Link>
+     <h2> @{Followup.follower_user.username}</h2>
+   </div>
  
-
-   {user.username === Followup.follower_shop.username ?(
-     <Fragment>
-    <a href="/ar/dashboard/shops/edit"> 
-    <button className="Action-button-followup"> 
-    تعديل 
-    </button>
-    </a>
-    </Fragment>
-   ):(
-    <Fragment>
-    <Link to={`/ar/shops/${Followup.follower_shop.username}`}> 
-    <button className="Action-button-followup"> 
-    زيارة المتجر 
-    </button>
-     </Link>
+ 
+   <div className='shoplistinfo3'>
+   {Followup.follower_shop.shop_description}
+   </div>
+ 
+ 
+ 
+   {/* //////////////////////////////////////المتابعة////////////////////////////////// */}
+   <div className='shoplistinfo2'>
+ 
+   {userShop ?(
+      <Fragment>
+  
+ 
+    {user.username === Followup.follower_user.username ?(
+      <Fragment>
+     <a href="/ar/dashboard/shops/edit"> 
+     <button className="Action-button-followup"> 
+     تعديل 
+     </button>
+     </a>
      </Fragment>
-   )}
-
-
-  </Fragment>
-   ):(
-    <a href='/ar/dashboard/create-shop'> <button className="Action-button-followup">  فتح متجر  </button>  </a>
-
+    ):(
+     <Fragment>
+     <Link to={`/ar/shops/${Followup.follower_user.username}`}> 
+     <button className="Action-button-followup"> 
+     زيارة المتجر | ({formatter.format(Followup.follower_shop.clicks.length)})
+     
+     </button>
+      </Link>
+      </Fragment>
     )}
-
-    
-  </div>
-
-{/* ///////////////////////////////////////نهاية المتابعة//////////////////////////////////////// */}
-
-
-
  
-</Link> 
  
- ))} 
-
+   </Fragment>
+    ):(
+     <a href={`/ar/shops/${Followup.follower_user.username}`}> <button className="Action-button-followup">  زيارة المتجر | ({formatter.format(Followup.follower_shop.clicks.length)})  </button>  </a>
+ 
+     )}
+ 
+     
+   </div>
+ 
+ {/* ///////////////////////////////////////نهاية المتابعة//////////////////////////////////////// */}
+ 
+ 
+ 
+  
+ </Link> 
+  
+  ))} 
+ 
 
 
 {visible < UserFollowers.length && (
@@ -232,7 +239,7 @@ const Followers = ({match,loading,
 
  )}
  
- 
+  
 
  </div>
  </center>

@@ -6,8 +6,13 @@ import { Fragment } from 'react';
 import { deletePost } from '../../actions/post';
 import ConfirmButton from "./ConfirmButton";
  
-
- 
+  
+import Navbar from '../../components/layout/Navbar';
+import NavbarEnglish from '../../components/layout/NavbarEnglish';
+import Spinner from '../../components/layout/Spinner';
+import { Translation } from 'react-i18next';
+import i18next from 'i18next';
+  
 import greenFace from './greenFace.png';
 import redFace from './redFace.png';
 import yallowFace from './yallowFace.png';
@@ -22,6 +27,7 @@ const Exercise = props => (
 
        
 <center>
+
     <div className="main-list" key={props.exercise._id}>
 
       
@@ -62,7 +68,7 @@ const Exercise = props => (
 
  
           
-      <p className="list-details"> <span className="redColor">المستخدم :</span>{props.exercise.name} | <span className="redColor">التصنيف :</span>{props.exercise.category_code} | <span className="redColor">السوق :</span>{props.exercise.market_code} | <span className="redColor">تفاصيل الإعلان :</span>{props.exercise.Main_paragraph} </p>
+      <p className="list-details"> <span className="redColor">المستخدم :</span>{props.exercise.user.username} | <span className="redColor">التصنيف :</span>{props.exercise.category.c_AR_name} | <span className="redColor">السوق :</span>{props.exercise.market.m_AR_name} | <span className="redColor">تفاصيل الإعلان :</span>{props.exercise.Main_paragraph} </p>
 
      
   
@@ -110,24 +116,21 @@ const Exercise = props => (
  
 
 
- {!props.auth.loading && props.exercise.user === props.auth._id && (
-<Fragment> 
+ 
 
-<Link to={`/editPost/${props.exercise._id}`}  style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+<Link to={`/ar/dashboard/posts/editPost/${props.exercise._id}`}  style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
 
-<Link to={`/editPostActivate/${props.exercise._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+{/* <Link to={`/ar/dashboard/posts/editPostActivate/${props.exercise._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link>  */}
 
  
             <ConfirmButton
             dialog={[" ", "هل أنت متأكد ؟", "مرة أخرى للحذف"]}
-            action={() => deletePost(props.exercise._id)}
+            action={() =>props.deleteExercise(props.exercise._id)}
               />
 
 
 
-
-  </Fragment>
-)}
+ 
  
       </p>
 
@@ -156,13 +159,19 @@ export default class ExercisesList extends Component {
     this.handleSelectJobs = this.handleSelectJobs.bind(this)
     this.handleSelectServices = this.handleSelectServices.bind(this)
     this.handleSelectClassifieds = this.handleSelectClassifieds.bind(this)
-   
+ 
  
 
     this.deleteExercise = this.deleteExercise.bind(this)
     this.loadMore = this.loadMore.bind(this);
 
     this.state = {
+      electronicsCategory:[],
+      animalsCategory:[],
+      furnitureCategory:[],
+      personalItemsCategory:[],
+      foodDrinksCategory:[],
+
       classifiedsCategory:[],
       servicesCategory:[],
       jobsCategory:[],
@@ -182,13 +191,20 @@ export default class ExercisesList extends Component {
       visible:0,
       likes:'',
       id:'',
+
       showCars:false,
       showProperties:false,
       showJobs:false,
       showServices:false,
       showClassifieds:false,
-
-      
+     
+      showElectronics:false,
+      showAnimals:false,
+      showFurniture:false,
+      showPersonalItems:false,
+      showFoodDrinks:false,
+ 
+        
 
        
      
@@ -256,6 +272,11 @@ handleSelectCars = event => {
     showJobs:false,
     showServices:false,
     showClassifieds:false,
+    showElectronics:false,
+    showAnimals:false,
+    showFurniture:false,
+    showPersonalItems:false,
+    showFoodDrinks:false,
     searchByMarket:'cars'});
 };
 
@@ -267,6 +288,11 @@ handleSelectProperties = event => {
     showJobs:false,
     showServices:false,
     showClassifieds:false,
+    showElectronics:false,
+    showAnimals:false,
+    showFurniture:false,
+    showPersonalItems:false,
+    showFoodDrinks:false,
   searchByMarket:'properties'});
 };
 
@@ -279,6 +305,11 @@ handleSelectJobs = event => {
     showProperties:false,
     showServices:false,
     showClassifieds:false,
+    showElectronics:false,
+    showAnimals:false,
+    showFurniture:false,
+    showPersonalItems:false,
+    showFoodDrinks:false,
     searchByMarket:'jobs'});
 };
 
@@ -290,6 +321,11 @@ handleSelectServices = event => {
     showProperties:false,
     showJobs:false,
     showClassifieds:false,
+    showElectronics:false,
+    showAnimals:false,
+    showFurniture:false,
+    showPersonalItems:false,
+    showFoodDrinks:false,
     searchByMarket:'services'});
 };
 
@@ -300,7 +336,91 @@ handleSelectClassifieds = event => {
     showProperties:false,
     showJobs:false,
     showServices:false,
+    showElectronics:false,
+    showAnimals:false,
+    showFurniture:false,
+    showPersonalItems:false,
+    showFoodDrinks:false,
     searchByMarket:'classifieds'});
+};
+
+
+
+handleSelectElectronics = event => {
+  this.setState({
+    showElectronics:true,
+    showClassifieds:false,
+    showCars:false,
+    showProperties:false,
+    showJobs:false,
+    showServices:false,
+    showAnimals:false,
+    showFurniture:false,
+    showPersonalItems:false,
+    showFoodDrinks:false,
+    searchByMarket:'electronics'});
+};
+
+handleSelectAnimals = event => {
+  this.setState({
+    showAnimals:true,
+    showClassifieds:false,
+    showCars:false,
+    showProperties:false,
+    showJobs:false,
+    showServices:false,
+    showElectronics:false,
+    showFurniture:false,
+    showPersonalItems:false,
+    showFoodDrinks:false,
+    searchByMarket:'animals'});
+};
+
+handleSelectFurniture = event => {
+  this.setState({
+    showFurniture:true,
+    showClassifieds:false,
+    showCars:false,
+    showProperties:false,
+    showJobs:false,
+    showServices:false,
+    showElectronics:false,
+    showAnimals:false,
+    showPersonalItems:false,
+    showFoodDrinks:false,
+    searchByMarket:'furniture'});
+};
+ 
+handleSelectPersonalItems = event => {
+  this.setState({
+    showPersonalItems:true,
+    showClassifieds:false,
+    showCars:false,
+    showProperties:false,
+    showJobs:false,
+    showServices:false,
+    showElectronics:false,
+    showAnimals:false,
+    showFurniture:false,
+    showFoodDrinks:false,
+    searchByMarket:'personal-items'});
+};
+ 
+
+
+handleSelectFoodDrinks = event => {
+  this.setState({
+    showFoodDrinks:true,
+    showClassifieds:false,
+    showCars:false,
+    showProperties:false,
+    showJobs:false,
+    showServices:false,
+    showElectronics:false,
+    showAnimals:false,
+    showFurniture:false,
+    showPersonalItems:false,
+    searchByMarket:'food-drinks'});
 };
 
 
@@ -311,12 +431,10 @@ handleSelectClassifieds = event => {
 
 
 
-
-
-
+ 
 
   componentDidMount() {
-    axios.get('/api/posts/')
+    axios.get('/api/posts/userposts')
       .then(response => {
         this.setState({ exercises: response.data })
 
@@ -380,7 +498,7 @@ handleSelectClassifieds = event => {
         console.log(error);
       }) 
 
-    
+     
 
 
       axios.get('/api/categories/classifieds')
@@ -392,6 +510,60 @@ handleSelectClassifieds = event => {
         console.log(error);
       }) 
 
+
+      axios.get('/api/categories/electronics')
+      .then(response => {
+        this.setState({ electronicsCategory: response.data })
+
+      })
+      .catch((error) => {
+        console.log(error);
+      }) 
+
+
+
+      axios.get('/api/categories/animals')
+      .then(response => {
+        this.setState({ animalsCategory: response.data })
+
+      })
+      .catch((error) => {
+        console.log(error);
+      }) 
+
+
+
+      axios.get('/api/categories/furniture')
+      .then(response => {
+        this.setState({ furnitureCategory: response.data })
+
+      })
+      .catch((error) => {
+        console.log(error);
+      }) 
+
+
+
+      axios.get('/api/categories/personal-items')
+      .then(response => {
+        this.setState({ personalItemsCategory: response.data })
+
+      })
+      .catch((error) => {
+        console.log(error);
+      }) 
+
+ 
+
+
+      axios.get('/api/categories/food-drinks')
+      .then(response => {
+        this.setState({ foodDrinksCategory: response.data })
+      })
+      .catch((error) => {
+        console.log(error);
+      }) 
+  
 
       axios.get('/api/countries')
       .then(response => {
@@ -443,7 +615,14 @@ removeLike(id) {
 carsCategoryList(){
   return  this.state.carsCategory
   .map(carsCategory => {
-    return <option value={carsCategory.c_code}> {carsCategory.c_AR_name}  </option>
+    if(i18next.language=== 'ar'){
+      return <option value={carsCategory.c_code}> {carsCategory.c_AR_name}  </option>
+
+    }
+    if(i18next.language=== 'en'){
+      return <option value={carsCategory.c_code}> {carsCategory.c_EN_name}  </option>
+    }
+
    })
 }
 
@@ -451,7 +630,13 @@ carsCategoryList(){
 propertiesCategoryList(){
   return  this.state.propertiesCategory
   .map(propertiesCategory => {
-    return <option value={propertiesCategory.c_code}> {propertiesCategory.c_AR_name}  </option>
+    if(i18next.language === 'ar'){
+      return <option value={propertiesCategory.c_code}> {propertiesCategory.c_AR_name}  </option>
+    
+    }
+    if(i18next.language === 'en'){
+      return <option value={propertiesCategory.c_code}> {propertiesCategory.c_EN_name}  </option>
+    }
    })
 }
 
@@ -460,7 +645,14 @@ propertiesCategoryList(){
 jobsCategoryList(){
   return  this.state.jobsCategory
   .map(jobsCategory => {
-    return <option value={jobsCategory.c_code}> {jobsCategory.c_AR_name}  </option>
+    if(i18next.language === 'ar'){
+      return <option value={jobsCategory.c_code}> {jobsCategory.c_AR_name}  </option>
+
+    }
+    if(i18next.language === 'en'){
+      return <option value={jobsCategory.c_code}> {jobsCategory.c_EN_name}  </option>
+       
+       }
    })
 }
 
@@ -470,7 +662,12 @@ jobsCategoryList(){
 servicesCategoryList(){
   return  this.state.servicesCategory
   .map(servicesCategory => {
-    return <option value={servicesCategory.c_code}> {servicesCategory.c_AR_name}  </option>
+    if(i18next.language === 'ar'){
+      return <option value={servicesCategory.c_code}> {servicesCategory.c_AR_name}  </option>
+    }
+    if(i18next.language === 'en'){
+      return <option value={servicesCategory.c_code}> {servicesCategory.c_EN_name}  </option>
+       }
    })
 }
 
@@ -479,7 +676,80 @@ servicesCategoryList(){
 classifiedsCategoryList(){
   return  this.state.classifiedsCategory
   .map(classifiedsCategory => {
-    return <option value={classifiedsCategory.c_code}> {classifiedsCategory.c_AR_name}  </option>
+    if(i18next.language === 'ar'){
+      return <option value={classifiedsCategory.c_code}> {classifiedsCategory.c_AR_name}  </option>
+    }
+    if(i18next.language === 'en'){
+      return <option value={classifiedsCategory.c_code}> {classifiedsCategory.c_EN_name}  </option>
+      }
+   })
+}
+
+
+electronicsCategoryList(){
+  return  this.state.electronicsCategory
+  .map(electronicsCategory => {
+    if(i18next.language === 'ar'){
+      return <option value={electronicsCategory.c_code}> {electronicsCategory.c_AR_name}  </option>
+    }
+    if(i18next.language === 'en'){
+      return <option value={electronicsCategory.c_code}> {electronicsCategory.c_EN_name}  </option>
+    }
+   })
+}
+
+
+
+AnimalsCategoryList(){
+  return  this.state.animalsCategory
+  .map(animalsCategory => {
+    if(i18next.language === 'ar'){
+      return <option value={animalsCategory.c_code}> {animalsCategory.c_AR_name}  </option>
+    }
+    if(i18next.language === 'en'){
+      return <option value={animalsCategory.c_code}> {animalsCategory.c_EN_name}  </option>
+    }
+   })
+}
+
+
+
+FurnitureCategoryList(){
+  return  this.state.furnitureCategory
+  .map(furnitureCategory => {
+    if(i18next.language === 'ar'){
+      return <option value={furnitureCategory.c_code}> {furnitureCategory.c_AR_name}  </option>
+    }
+    if(i18next.language === 'en'){
+      return <option value={furnitureCategory.c_code}> {furnitureCategory.c_EN_name}  </option>
+    }
+   })
+}
+
+
+PersonalItemsCategoryList(){
+  return  this.state.personalItemsCategory
+  .map(personalItemsCategory => {
+    if(i18next.language === 'ar'){
+    return <option value={personalItemsCategory.c_code}> {personalItemsCategory.c_AR_name}  </option>
+    }
+    if(i18next.language === 'en'){
+      return <option value={personalItemsCategory.c_code}> {personalItemsCategory.c_EN_name}  </option>
+      }
+   })
+}
+
+
+
+FoodDrinksCategoryList(){
+  return  this.state.foodDrinksCategory
+  .map(foodDrinksCategory => {
+    if(i18next.language === 'ar'){
+      return <option value={foodDrinksCategory.c_code}> {foodDrinksCategory.c_AR_name}  </option>
+    }
+    if(i18next.language === 'en'){
+      return <option value={foodDrinksCategory.c_code}> {foodDrinksCategory.c_EN_name}  </option>
+    }
    })
 }
 
@@ -487,7 +757,12 @@ classifiedsCategoryList(){
 countriesList(){
   return  this.state.countries
   .map(country => {
-    return <option value={country.country_code}> {country.country_AR_name}  </option>
+    if(i18next.language === 'ar'){
+      return <option value={country.country_code}> {country.country_AR_name}  </option>
+    }
+    if(i18next.language === 'en'){
+      return <option value={country.country_code}> {country.country_EN_name}  </option>
+    }
    })
 }
  
@@ -513,7 +788,7 @@ countriesList(){
 
 
     .filter(post=>{
-      return post.purpose.toLowerCase().indexOf(this.state.searchByPurpose.toLowerCase())>=0
+      return post.purpose_code.toLowerCase().indexOf(this.state.searchByPurpose.toLowerCase())>=0
 
     })
 
@@ -526,7 +801,7 @@ countriesList(){
 
 
     .filter(post=>{
-      return post.country.toLowerCase().indexOf(this.state.searchByCountry.toLowerCase())>=0
+      return post.country_code.toLowerCase().indexOf(this.state.searchByCountry.toLowerCase())>=0
 
     })
 
@@ -570,27 +845,43 @@ countriesList(){
 
 
   render() {
-   
-  
     
+    
+  
     return (
       <div>
-        
+         
+        {i18next.language === 'ar'&&(<Navbar />)}
+        {i18next.language === 'en'&&(<NavbarEnglish />)}
+            
   
       <div className="aqle3-main">
       <div className="mainword2">
       <div className="mainForm">
+        
+      
 
-      <div className="dash-title">عن ماذا تبحث؟ </div>
+      <div className="dash-title"> <Translation>{t => <>{t('searchPost_title')}</>}</Translation> </div>
+      <Link to="/ar/dashboard/posts" className="loadMorebtn">  <i className="fa fa-arrow-circle-left fa-1x"></i> 
+      <Translation>{t => <>{t('searchPost_your_adds')}</>}</Translation>
+      </Link>
+
       <center>
       {/* <Link to="/Addpost" className="Action-button-plus">  <i className="fa fa-plus fa-1x"></i> اضف إعلان جديد </Link>
       <Link to="/AddPremiumPost" className="Action-button-plus">  <i className="fa fa-star fa-1x"></i> اضف اعلان مميز </Link> */}
  
-      <button className="Action-button-plus" onClick={this.handleSelectCars}> <i class="fa fa-car" aria-hidden="true"></i> سيارات </button>
-      <button className="Action-button-plus" onClick={this.handleSelectProperties}> <i class="fa fa-home" aria-hidden="true"></i>  عقارات </button>
-      <button className="Action-button-plus" onClick={this.handleSelectJobs}> <i class="fa fa-briefcase" aria-hidden="true"></i>  وظائف </button>
-      <button className="Action-button-plus" onClick={this.handleSelectServices}> <i class="fa fa-handshake-o" aria-hidden="true"></i> خدمات </button>
-      <button className="Action-button-plus" onClick={this.handleSelectClassifieds}> <i class="fa fa-opencart" aria-hidden="true"></i> منتجات </button>
+      <button className="Action-button-add-ads" onClick={this.handleSelectCars}> <i class="fa fa-car" aria-hidden="true"></i> <Translation>{t => <>{t('categories_cars')}</>}</Translation> </button>
+      <button className="Action-button-add-ads" onClick={this.handleSelectProperties}> <i class="fa fa-home" aria-hidden="true"></i>  <Translation>{t => <>{t('categories_properties')}</>}</Translation> </button>
+      <button className="Action-button-add-ads" onClick={this.handleSelectJobs}> <i class="fa fa-briefcase" aria-hidden="true"></i>  <Translation>{t => <>{t('categories_Jobs')}</>}</Translation>  </button>
+      <button className="Action-button-add-ads" onClick={this.handleSelectServices}> <i class="fa fa-handshake-o" aria-hidden="true"></i> <Translation>{t => <>{t('categories_Services')}</>}</Translation> </button>
+      <button className="Action-button-add-ads" onClick={this.handleSelectClassifieds}> <i class="fa fa-opencart" aria-hidden="true"></i> <Translation>{t => <>{t('categories_Classifieds')}</>}</Translation> </button>
+
+      <button className="Action-button-add-ads" onClick={this.handleSelectElectronics}> <i class="fa fa-opencart" aria-hidden="true"></i> <Translation>{t => <>{t('categories_Electronics')}</>}</Translation> </button>
+      <button className="Action-button-add-ads" onClick={this.handleSelectAnimals}> <i class="fa fa-opencart" aria-hidden="true"></i> <Translation>{t => <>{t('categories_Animals')}</>}</Translation> </button>
+      <button className="Action-button-add-ads" onClick={this.handleSelectFurniture}> <i class="fa fa-opencart" aria-hidden="true"></i> <Translation>{t => <>{t('categories_Furniture')}</>}</Translation> </button>
+      <button className="Action-button-add-ads" onClick={this.handleSelectPersonalItems}> <i class="fa fa-opencart" aria-hidden="true"></i> <Translation>{t => <>{t('categories_Personalitems')}</>}</Translation> </button>
+      <button className="Action-button-add-ads" onClick={this.handleSelectFoodDrinks}> <i class="fa fa-opencart" aria-hidden="true"></i> <Translation>{t => <>{t('categories_Fooddrinks')}</>}</Translation> </button>
+
 
 
 </center>
@@ -601,12 +892,15 @@ countriesList(){
  { this.state.showCars===true&&(
    <Fragment>
 
-
+ 
      <center>  
-     <input style={{width:'40%'}}  className="ForminputSearch" type='text' placeholder="البحث في السيارات " onChange={this.searchChanged} value={this.state.search}/>
+      <div className='about-title'><Translation>{t => <>{t('searchPost_search_in_cars')}</>}</Translation></div>
+     <input style={{width:'40%'}}  className="ForminputSearch" type='text'  onChange={this.searchChanged} value={this.state.search}/>
     
      <span><button className='loadMorebtnSearch'
-             onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> ابحث </button></span>
+             onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> 
+             <Translation>{t => <>{t('searchButton')}</>}</Translation>
+              </button></span>
 
      </center>  
 
@@ -618,11 +912,29 @@ countriesList(){
                    onChange={this.searchChangedByPurpose}
                   
                   > 
+                  {i18next.language === 'ar' &&(
+                    <Fragment>
                   <option value=''> اختر الغرض  </option>
                   <option required value='rental'> سيارات للإيجار  </option>
                   <option required value='for-sale'> سيارات للبيع   </option>
                   <option required value='ask-buy'> مطلوب سيارات للشراء    </option>
                   <option required value='ask-rent'> مطلوب سيارات للإيجار   </option>
+                    </Fragment>
+                  )}
+
+
+                 {i18next.language === 'en' &&(
+                    <Fragment>
+                  <option value=''> Choose the purpose  </option>
+                  <option required value='rental'> Cars for rent  </option>
+                  <option required value='for-sale'> cars for sale   </option>
+                  <option required value='ask-buy'> Wanted cars to buy    </option>
+                  <option required value='ask-rent'> Wanted cars for rent   </option>
+                    </Fragment>
+                  )}
+                  
+
+
                   </select> 
 
 
@@ -634,8 +946,8 @@ countriesList(){
                   value={this.state.searchByCategory_code}
                   onChange={this.searchChangedByCategory_code}
                   > 
-                  <option value=''> تصنيف السيارات  </option>
-                  {this.carsCategoryList()} 
+                  {this.carsCategoryList()}
+                   
   
                   </select>
 
@@ -646,8 +958,9 @@ countriesList(){
                   value={this.state.searchByCountry}
                   onChange={this.searchChangedByCountry}
                   > 
-                  <option value=''> اختر الدولة  </option>
                   {this.countriesList()}
+                 
+
                   </select>
 
 
@@ -673,9 +986,12 @@ countriesList(){
 
 
      <center>  
-     <input style={{width:'40%'}}  className="ForminputSearch" type='text' placeholder="البحث في العقارات " onChange={this.searchChanged} value={this.state.search}/>
+     <div className='about-title'><Translation>{t => <>{t('searchPost_search_in_properties')}</>}</Translation></div>
+     <input style={{width:'40%'}}  className="ForminputSearch" type='text'  onChange={this.searchChanged} value={this.state.search}/>
      <span><button className='loadMorebtnSearch'
-      onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> ابحث </button></span>
+      onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> 
+       <Translation>{t => <>{t('searchButton')}</>}</Translation>
+       </button></span>
      </center>  
  
                   <select className="topadtitleinput" 
@@ -684,11 +1000,27 @@ countriesList(){
                    onChange={this.searchChangedByPurpose}
                   
                   > 
+                  {i18next.language === 'ar' && (
+                  <Fragment>
                   <option value=''> اختر الغرض  </option>
-                  <option required value='rental'> سيارات للإيجار  </option>
-                  <option required value='for-sale'> سيارات للبيع   </option>
-                  <option required value='ask-buy'> مطلوب سيارات للشراء    </option>
-                  <option required value='ask-rent'> مطلوب سيارات للإيجار   </option>
+                  <option required value='rental'> عقارات للإيجار  </option>
+                  <option required value='for-sale'> عقارات للبيع   </option>
+                  <option required value='ask-buy'> مطلوب عقارات للشراء    </option>
+                  <option required value='ask-rent'> مطلوب عقارات للإيجار   </option>                  
+                  </Fragment>
+                  )}
+
+
+                {i18next.language === 'en' && (
+                  <Fragment>
+                  <option value=''> Choose the purpose  </option>
+                  <option required value='rental'> Properties for rent  </option>
+                  <option required value='for-sale'> Properties for for sale   </option>
+                  <option required value='ask-buy'> Wanted properties  to buy    </option>
+                  <option required value='ask-rent'> Wanted properties  for rent   </option>                  
+                  </Fragment>
+                  )}
+                  
                   </select> 
 
 
@@ -700,10 +1032,8 @@ countriesList(){
                   value={this.state.searchByCategory_code}
                   onChange={this.searchChangedByCategory_code}
                   > 
-                  <option value=''> تصنيف العقارات  </option>
-                  {this.propertiesCategoryList()} 
-  
-                  </select>
+                 {this.propertiesCategoryList()} 
+                 </select>
 
 
 
@@ -712,7 +1042,6 @@ countriesList(){
                   value={this.state.searchByCountry}
                   onChange={this.searchChangedByCountry}
                   > 
-                  <option value='#'> اختر الدولة  </option>
                   {this.countriesList()}
                   </select>
 
@@ -736,9 +1065,12 @@ countriesList(){
 
 
      <center>  
-     <input style={{width:'40%'}}  className="ForminputSearch" type='text' placeholder="البحث في الوظائف " onChange={this.searchChanged} value={this.state.search}/>
+     <div className='about-title'><Translation>{t => <>{t('searchPost_search_in_jobs')}</>}</Translation></div>
+     <input style={{width:'40%'}}  className="ForminputSearch" type='text'  onChange={this.searchChanged} value={this.state.search}/>
      <span><button className='loadMorebtnSearch'
-      onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> ابحث </button></span>
+      onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> 
+       <Translation>{t => <>{t('searchButton')}</>}</Translation>
+       </button></span>
      </center>  
      
        
@@ -749,9 +1081,21 @@ countriesList(){
                    onChange={this.searchChangedByPurpose}
                   
                   > 
+                  {i18next.language === 'ar' &&(
+                  <Fragment>
                   <option value=''> كل الأغراض  </option>
                   <option required value='vacancies'> الاعلان عن وظيفة شاغرة  </option>
                   <option required value='seeking-work'> يبحث عن وظيفة   </option>
+                  </Fragment>
+                  )}
+                  {i18next.language === 'en' &&(
+                  <Fragment>
+                  <option value=''> all purposes  </option>
+                  <option required value='vacancies'> Announcing a vacancy  </option>
+                  <option required value='seeking-work'> Looking for a job   </option>
+                  </Fragment>
+                  )}
+
                   </select> 
 
 
@@ -763,7 +1107,6 @@ countriesList(){
                   value={this.state.searchByCategory_code}
                   onChange={this.searchChangedByCategory_code}
                   > 
-                  <option value=''> كل الوظائف  </option>
                   {this.jobsCategoryList()} 
   
                   </select>
@@ -775,7 +1118,6 @@ countriesList(){
                   value={this.state.searchByCountry}
                   onChange={this.searchChangedByCountry}
                   > 
-                  <option value='#'> اختر الدولة  </option>
                   {this.countriesList()}
                   </select>
 
@@ -801,9 +1143,12 @@ countriesList(){
    <Fragment>
 
       <center>  
-     <input style={{width:'40%'}}  className="ForminputSearch" type='text' placeholder="البحث في الخدمات  " onChange={this.searchChanged} value={this.state.search}/>
+    <div className='about-title'><Translation>{t => <>{t('searchPost_search_in_services')}</>}</Translation></div>
+     <input style={{width:'40%'}}  className="ForminputSearch" type='text'  onChange={this.searchChanged} value={this.state.search}/>
      <span><button className='loadMorebtnSearch'
-      onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> ابحث </button></span>
+      onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> 
+       <Translation>{t => <>{t('searchButton')}</>}</Translation>
+       </button></span>
      </center> 
  
                   {/* <select className="topadtitleinput" 
@@ -826,9 +1171,7 @@ countriesList(){
                   value={this.state.searchByCategory_code}
                   onChange={this.searchChangedByCategory_code}
                   > 
-                  <option value=''> كل الخدمات  </option>
                   {this.servicesCategoryList()} 
-  
                   </select>
 
 
@@ -838,7 +1181,6 @@ countriesList(){
                   value={this.state.searchByCountry}
                   onChange={this.searchChangedByCountry}
                   > 
-                  <option value='#'> اختر الدولة  </option>
                   {this.countriesList()}
                   </select>
 
@@ -863,9 +1205,12 @@ countriesList(){
 
 
     <center>  
-     <input style={{width:'40%'}}  className="ForminputSearch" type='text' placeholder="البحث في المنتجات" onChange={this.searchChanged} value={this.state.search}/>
+    <div className='about-title'><Translation>{t => <>{t('searchPost_search_in_classifieds')}</>}</Translation></div>
+     <input style={{width:'40%'}}  className="ForminputSearch" type='text'  onChange={this.searchChanged} value={this.state.search}/>
      <span><button className='loadMorebtnSearch'
-      onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> ابحث </button></span>
+      onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> 
+       <Translation>{t => <>{t('searchButton')}</>}</Translation>
+       </button></span>
      </center> 
      
  
@@ -889,9 +1234,7 @@ countriesList(){
                   value={this.state.searchByCategory_code}
                   onChange={this.searchChangedByCategory_code}
                   > 
-                  <option value=''> كل المنتجات  </option>
                   {this.classifiedsCategoryList()} 
-  
                   </select>
 
 
@@ -900,9 +1243,7 @@ countriesList(){
                    style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
                   value={this.state.searchByCountry}
                   onChange={this.searchChangedByCountry}
-                  > 
-                  <option value='#'> اختر الدولة  </option>
-             
+                  >              
                   {this.countriesList()}
                   </select>
 
@@ -918,10 +1259,304 @@ countriesList(){
 
 
 
+{/************************* أظهار الاجهزة الالكترونية ***************************/}
+<center>        
+ { this.state.showElectronics===true&&(
+   <Fragment>
+    <center>
+    <div className='about-title'><Translation>{t => <>{t('searchPost_search_in_electronics')}</>}</Translation></div>  
+     <input style={{width:'40%'}}  className="ForminputSearch" type='text'  onChange={this.searchChanged} value={this.state.search}/>
+     <span><button className='loadMorebtnSearch'
+      onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> 
+       <Translation>{t => <>{t('searchButton')}</>}</Translation>
+       </button></span>
+     </center> 
+      
  
+                  {/* <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                   value={this.state.searchByPurpose}
+                   onChange={this.searchChangedByPurpose}
+                  
+                  > 
+                  <option value=''> كل الأغراض  </option>
+                  <option required value='rental'> خدمات شراء  </option>
+                  <option required value='for-sale'> خدمات بيع   </option>
+                  </select>  */}
+
+
+ 
+ 
+                  <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                 
+                  value={this.state.searchByCategory_code}
+                  onChange={this.searchChangedByCategory_code}
+                  > 
+                  {this.electronicsCategoryList()} 
+  
+                  </select>
+
+
+
+                  <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                  value={this.state.searchByCountry}
+                  onChange={this.searchChangedByCountry}
+                  >              
+                  {this.countriesList()}
+                  </select>
+
+
     
+
+</Fragment>
+)}
+</center>   
+{/* /نهاية الالكترونيات//////////////////////////////////////////////////////////////// */}
+
+
+
+
+{/************************* بداية الحيوانات ***************************/}
+<center>        
+ { this.state.showAnimals===true&&(
+   <Fragment>
+    <center>  
+    <div className='about-title'><Translation>{t => <>{t('searchPost_search_in_animals')}</>}</Translation></div>  
+     <input style={{width:'40%'}}  className="ForminputSearch" type='text'  onChange={this.searchChanged} value={this.state.search}/>
+     <span><button className='loadMorebtnSearch'
+      onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> 
+       <Translation>{t => <>{t('searchButton')}</>}</Translation>
+       </button></span>
+     </center> 
+      
+ 
+                  {/* <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                   value={this.state.searchByPurpose}
+                   onChange={this.searchChangedByPurpose}
+                  
+                  > 
+                  <option value=''> كل الأغراض  </option>
+                  <option required value='rental'> خدمات شراء  </option>
+                  <option required value='for-sale'> خدمات بيع   </option>
+                  </select>  */}
+
+
+ 
+ 
+                  <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                 
+                  value={this.state.searchByCategory_code}
+                  onChange={this.searchChangedByCategory_code}
+                  > 
+                  {this.AnimalsCategoryList()} 
+  
+                  </select>
+
+
+
+                  <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                  value={this.state.searchByCountry}
+                  onChange={this.searchChangedByCountry}
+                  >              
+                  {this.countriesList()}
+                  </select>
+
+
+    
+
+</Fragment>
+)}
+</center>  
+{/* /نهاية الحيوانات//////////////////////////////////////////////////////////////// */}
+
+ {/************************* بداية اثاث ***************************/}
+<center>        
+ { this.state.showFurniture===true&&(
+   <Fragment>
+    <center>  
+    <div className='about-title'><Translation>{t => <>{t('searchPost_search_in_furniture')}</>}</Translation></div>  
+     <input style={{width:'40%'}}  className="ForminputSearch" type='text' onChange={this.searchChanged} value={this.state.search}/>
+     <span><button className='loadMorebtnSearch'
+      onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> 
+       <Translation>{t => <>{t('searchButton')}</>}</Translation>
+       </button></span>
+     </center> 
+      
+ 
+                  {/* <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                   value={this.state.searchByPurpose}
+                   onChange={this.searchChangedByPurpose}
+                  
+                  > 
+                  <option value=''> كل الأغراض  </option>
+                  <option required value='rental'> خدمات شراء  </option>
+                  <option required value='for-sale'> خدمات بيع   </option>
+                  </select>  */}
+
+
+ 
+ 
+                  <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                 
+                  value={this.state.searchByCategory_code}
+                  onChange={this.searchChangedByCategory_code}
+                  > 
+                  {this.FurnitureCategoryList()} 
+                  </select>
+
+
+
+                  <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                  value={this.state.searchByCountry}
+                  onChange={this.searchChangedByCountry}
+                  >              
+                  {this.countriesList()}
+                  </select>
+
+
+    
+
+</Fragment>
+)}
+</center>   
+{/* نهاية الاثاث////////////////////////////////////////////////////////////////////////   */}
   
      
+
+
+{/************************* بداية المستلزمات الشخصية ***************************/}
+<center>        
+ { this.state.showPersonalItems===true&&(
+   <Fragment>
+    <center> 
+    <div className='about-title'><Translation>{t => <>{t('searchPost_search_in_personalItems')}</>}</Translation></div>   
+     <input style={{width:'40%'}}  className="ForminputSearch" type='text'  onChange={this.searchChanged} value={this.state.search}/>
+     <span><button className='loadMorebtnSearch'
+      onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> 
+       <Translation>{t => <>{t('searchButton')}</>}</Translation>
+       </button></span>
+     </center> 
+      
+ 
+                  {/* <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                   value={this.state.searchByPurpose}
+                   onChange={this.searchChangedByPurpose}
+                  
+                  > 
+                  <option value=''> كل الأغراض  </option>
+                  <option required value='rental'> خدمات شراء  </option>
+                  <option required value='for-sale'> خدمات بيع   </option>
+                  </select>  */}
+
+
+ 
+ 
+                  <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                 
+                  value={this.state.searchByCategory_code}
+                  onChange={this.searchChangedByCategory_code}
+                  > 
+                  {this.PersonalItemsCategoryList()} 
+  
+                  </select>
+
+                  
+
+                  <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                  value={this.state.searchByCountry}
+                  onChange={this.searchChangedByCountry}
+                  >              
+                  {this.countriesList()}
+                  </select>
+
+
+    
+
+</Fragment>
+)}
+</center>   
+{/* نهاية المستلزمات الشخصية ///////////////////////////////////////////////////////// */}
+
+
+
+
+{/************************* بداية الاطعمة والمشروبات ***************************/}
+<center>        
+ { this.state.showFoodDrinks===true&&(
+   <Fragment>
+    <center>
+    <div className='about-title'><Translation>{t => <>{t('searchPost_search_in_foodDrinks')}</>}</Translation></div>     
+     <input style={{width:'40%'}}  className="ForminputSearch" type='text'  onChange={this.searchChanged} value={this.state.search}/>
+     <span><button className='loadMorebtnSearch'
+      onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> 
+       <Translation>{t => <>{t('searchButton')}</>}</Translation>
+       </button></span>
+     </center> 
+      
+ 
+                  {/* <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                   value={this.state.searchByPurpose}
+                   onChange={this.searchChangedByPurpose}
+                  
+                  > 
+                  <option value=''> كل الأغراض  </option>
+                  <option required value='rental'> خدمات شراء  </option>
+                  <option required value='for-sale'> خدمات بيع   </option>
+                  </select>  */}
+
+
+ 
+ 
+                  <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                 
+                  value={this.state.searchByCategory_code}
+                  onChange={this.searchChangedByCategory_code}
+                  > 
+                  {this.FoodDrinksCategoryList()} 
+                  </select>
+
+                  
+
+                  <select className="topadtitleinput" 
+                   style={{width:'20%',marginLeft:'0%',textAlign:'center'}}
+                  value={this.state.searchByCountry}
+                  onChange={this.searchChangedByCountry}
+                  >              
+                  {this.countriesList()}
+                  </select>
+
+
+    
+
+</Fragment>
+)}
+</center>  
+
+
+
+
+
+
+
+
+
+
+
+
+
 
      {(this.state.search === "") || (this.state.visible < this.state.exercises.length) ?
         (
@@ -929,7 +1564,9 @@ countriesList(){
             <center>
             <h1 className="dash-title">...</h1>
             <button className='loadMorebtn'
-             onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> ابحث </button>
+             onClick={this.loadMore}> <i class="fa fa-search fa-1x"></i> 
+              <Translation>{t => <>{t('searchButton')}</>}</Translation>
+              </button>
             </center>
          </Fragment>
 
@@ -937,7 +1574,7 @@ countriesList(){
 
           this.exerciseList()
 
-          
+           
         ) }
 
 

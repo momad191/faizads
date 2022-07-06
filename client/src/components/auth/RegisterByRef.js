@@ -10,7 +10,7 @@ import { Input } from 'postcss';
    
 const Register = ({ register, isAuthenticated,match}) => {
 
-
+ 
   const [alert,setAlert]= useState('')
   const [user,setUserName]= useState([])
   

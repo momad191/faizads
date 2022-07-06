@@ -10,7 +10,7 @@ const auth = require('../../middleware/auth');
 // User model
 const User = require('../../models/User');
 const ProfitRequest = require('../../models/ProfitRequest');
- 
+  
  
 // @route    POST api/profitrequests
 // @desc     POST profitrequest
@@ -43,11 +43,70 @@ router.post(
     }
   );
 
+  
+
+  // @route    GET api/profitrequests عدد كل الطلبات الارباح 
+// @desc     GET profitrequest لكل المستخدمين بالنظام  
+// @access   private
+router.get('/all', auth, async (req, res) => {
+  try { 
+    var populateQuery =
+    [
+    {path:'user', select:'first_name last_name username email'},
+   ];
+    // const username = await User.findById(req.user.id).select('-password');
+    const profitrequests = await ProfitRequest.find().populate(populateQuery);
+    res.json(profitrequests);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 
 
-// @route    GET api/profitrequests عدد كل الطلبات الارباح المكتملة
-// @desc     GET profitrequest
+
+  // @route    GET api/profitrequests  عدد كل طلبات الارباح  الغير مكتملة
+// @desc     GET profitrequest لكل المستخدمين بالنظام  
+// @access   private
+router.get('/allcheckin', auth, async (req, res) => {
+  try { 
+    var populateQuery =
+    [
+    {path:'user', select:'first_name last_name username email'},
+   ];
+    // const username = await User.findById(req.user.id).select('-password');
+    const profitrequests = await ProfitRequest.find({status:'check-in'}).populate(populateQuery);
+    res.json(profitrequests);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+
+ // @route    GET api/profitrequests  عدد كل طلبات الارباح  الغير مكتملة
+// @desc     GET profitrequest لكل المستخدمين بالنظام  
+// @access   private
+router.get('/allcomplete', auth, async (req, res) => {
+  try { 
+    var populateQuery =
+    [
+    {path:'user', select:'first_name last_name username email'},
+   ];
+    // const username = await User.findById(req.user.id).select('-password');
+    const profitrequests = await ProfitRequest.find({status:'complete'}).populate(populateQuery);
+    res.json(profitrequests);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+// @route    GET api/profitrequests عدد كل الطلبات الارباح 
+// @desc     GET profitrequest لمستخدم واحد فقط 
 // @access   private
 router.get('/allrequests', auth, async (req, res) => {
   try {
@@ -123,6 +182,22 @@ router.get('/lastrequest', auth, async (req, res) => {
   }
 });
 
+
+
+
+
+//**************************edit profitrequest********************************************** */
+router.post('/editprofitrequest/:id', async (req, res) => {
+  try {
+    const pp = await ProfitRequest.findById(req.params.id);
+    pp.status = req.body.status;  
+    await pp.save();
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+//************************************************************************ */
 
 
 module.exports = router;

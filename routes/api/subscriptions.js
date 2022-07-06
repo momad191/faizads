@@ -7,9 +7,12 @@ const config = require('config');
 const { check, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
 const auth = require('../../middleware/auth');
+
 // User model
 const User = require('../../models/User');
 const Subscription = require('../../models/Subscription');
+const MembershipType = require('../../models/MembershipType');
+ 
  
 const paypal = require('paypal-rest-sdk');
 
@@ -32,12 +35,14 @@ router.post(
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
-      } 
-         
+      }  
+             
       try {
         const user = await User.findById(req.user.id).select('-password');
+        // const membershiptype = await MembershipType.findOne({m_t_code:req.body.membership_class});
+
         const newSubscription = new Subscription({
-      
+            membershiptype: req.body.membershiptype,
             shopname: req.body.shopname,
             shopstatus: req.body.shopstatus,
             membership_class: req.body.membership_class,
@@ -62,7 +67,10 @@ router.post(
             first_name: user.first_name,
             last_name: user.last_name,
             avatar: user.avatar,
-            user: req.user.id
+            user: req.user.id,
+           
+
+           
         });
         const subscription = await newSubscription.save();
         res.json(subscription);
@@ -81,8 +89,15 @@ router.post(
 // @access   private
 router.get('/allsubscriptions', auth, async (req, res) => {
   try {
+
+    var populateQuery =
+    [
+    {path:'user', select: 'first_name last_name username'},
+    {path:'membershiptype', select: 'm_t_AR_name m_t_EN_name m_t_code m_t_description'},
+   ];
+
     // const username = await User.findById(req.user.id).select('-password');
-    const subscriptions = await Subscription.find({user:req.user.id});
+    const subscriptions = await Subscription.find({user:req.user.id}).populate(populateQuery);
     res.json(subscriptions);
   } catch (err) {
     console.error(err.message);
@@ -97,8 +112,15 @@ router.get('/allsubscriptions', auth, async (req, res) => {
 // @access   private
   router.get('/complete', auth, async (req, res) => {
     try {
+
+   var populateQuery =
+    [
+    {path:'user', select: 'first_name last_name username'},
+    {path:'membershiptype', select: 'm_t_AR_name m_t_EN_name m_t_code m_t_description'},
+   ];
+
       // const username = await User.findById(req.user.id).select('-password');
-      const subscriptions = await Subscription.find({user:req.user.id,Payment_status:'ok'});
+      const subscriptions = await Subscription.find({user:req.user.id,Payment_status:'ok'}).populate(populateQuery);;
       res.json(subscriptions);
     } catch (err) {
       console.error(err.message);
@@ -112,8 +134,14 @@ router.get('/allsubscriptions', auth, async (req, res) => {
 // @access   private
 router.get('/checkin', auth, async (req, res) => {
   try {
+
+    var populateQuery =
+    [
+    {path:'user', select: 'first_name last_name username'},
+    {path:'membershiptype', select: 'm_t_AR_name m_t_EN_name m_t_code m_t_description'},
+   ];
     // const username = await User.findById(req.user.id).select('-password');
-    const profitrequests = await Subscription.find({user:req.user.id,Payment_status:'ok'});
+    const profitrequests = await Subscription.find({user:req.user.id,Payment_status:'ok'}).populate(populateQuery);;
     res.json(profitrequests);
   } catch (err) {
     console.error(err.message);
@@ -128,14 +156,16 @@ router.get('/checkin', auth, async (req, res) => {
 router.get('/lastsubscription', auth, async (req, res) => {
   try {
       
-     // const username = await User.findById(req.user.id).select('-password');
-    const lastsubscription = await Subscription.findOne({user:req.user.id}).sort({registration_date:-1})
-    .populate({
-      path: 'user',
-      select:
-      'first_name last_name  username'
-    });
-    ;
+    const user = await User.findById(req.user.id).select('-password');
+
+    
+    var populateQuery =
+    [
+    {path:'user', select: 'first_name last_name username'},
+    {path:'membershiptype', select: 'm_t_AR_name m_t_EN_name m_t_code m_t_description'},
+   ];
+    const lastsubscription = await Subscription.findOne({user:user._id}).sort({registration_date:-1}).populate(populateQuery);
+    
   
     if(lastsubscription === null ){
       res.json({
@@ -167,8 +197,15 @@ router.get('/lastsubscription', auth, async (req, res) => {
 
 router.get('/refToPayaffiliate', auth, async (req, res) => {
   try {
+
+    var populateQuery =
+    [
+    {path:'user', select: 'first_name last_name username'},
+    {path:'membershiptype', select: 'm_t_AR_name m_t_EN_name m_t_code m_t_description'},
+   ];
+
     const username = await User.findById(req.user.id).select('-password');
-    const user = await Subscription.find({ref:username.username,Payment_status:'ok'});
+    const user = await Subscription.find({ref:username.username,Payment_status:'ok'}).populate(populateQuery);;
     res.json(user);
   } catch (err) {
     console.error(err.message);

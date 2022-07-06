@@ -5,11 +5,13 @@ import { editValidity } from '../../actions/auth';
 import { setAlert } from '../../actions/alert';
 import Alert from '../layout/Alert';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
      
 const ValidiryForm = ({editValidity,userId}) => {
+  const [t, i18next] = useTranslation()
 
   const [ShowButton,setShowButton]= useState('showButton11')
-  
+   
  
   // const validity = 'normal';
   
@@ -76,7 +78,7 @@ const ValidiryForm = ({editValidity,userId}) => {
               <Alert />
 
               <div className={ShowButton}> 
-             <button className="Formbutton"   type="submit" name="" >تغيير الصلاحية</button>
+             <button className="Formbutton"   type="submit" name="" >{t('user_validity_button')}</button>
              </div>
  
              </center>

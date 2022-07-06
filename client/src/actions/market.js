@@ -6,7 +6,7 @@ import {
     DELETE_MARKET,
     ADD_MARKET,
     GET_MARKET,
-     
+      
   } from './types';
  
 

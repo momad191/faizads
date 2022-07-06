@@ -1,7 +1,7 @@
 
-const express = require('express');
-const router = express.Router();
-const gravatar = require('gravatar');
+const express = require('express'); 
+const router = express.Router(); 
+const gravatar = require('gravatar'); 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
@@ -12,12 +12,21 @@ const auth = require('../../middleware/auth');
 const User = require('../../models/User');
 const Shop = require('../../models/Shop');
  
+const nodemailer = require('nodemailer');
+var transport = nodemailer.createTransport({
+  host: "localhost",
+  port: 1025,
+  auth: {
+    user: "project.2",
+    pass: "secret.2"
+  }
+});
    
    
 // @route    POST api/users
 // @desc     Register user
 // @access   Public
-router.post(
+router.post( 
   '/',
   [
     check('first_name', 'Name is required')
@@ -49,7 +58,7 @@ router.post(
         if (usernameCheck) {
           return res
             .status(400)
-            .json({ errors: [{ msg: 'اسم المستخدم الذي اخترته موجود مسبقا ... جرب آخر' }] });
+            .json({ errors: [{ msg: 'The username you chose already exists...try another' }] });
         }
 
 
@@ -59,7 +68,7 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'البريد الالكتروني الذي اخترته موجود مسبقا ... جرب اخر' }] });
+          .json({ errors: [{ msg: 'The email you chose already exists...try another' }] });
       }
 
       //Get User Gravatar
@@ -101,8 +110,9 @@ router.post(
       const salt = await bcrypt.genSalt(10);
 
       user.password = await bcrypt.hash(password, salt);
-
+  
       user.save();
+      res.json(user);
 
       const payload = {
         user: {
@@ -122,10 +132,20 @@ router.post(
         }
       );
 
-
+ 
   
+    //   transport.sendMail({
+    //     to:user.email,
+    //     from:"noreply@faizads.com",
+    //     subject:" شكرا لتسجيلك بموقع إعلانات فائز",
+    //     html:`
+    //     <p>اضغط على الرابط التالي لتنشيط حسابك   </p>
+    //     <h5>اضغط هنا <a href="http://localhost:3000/user/activate/${user.email}">الرابط</a> لتغيير كلمة المرور</h5>
+    //     <p>Thank you </p>
+    //     ` 
+    // })
 
-  
+   
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');
@@ -233,6 +253,8 @@ router.post(
           res.json({ token });
         }
       );
+
+      
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');

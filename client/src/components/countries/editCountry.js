@@ -1,5 +1,11 @@
 import React, { Component ,Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from '../layout/Navbar';
+import NavbarEnglish from '../layout/NavbarEnglish';
+import Spinner from '../layout/Spinner';
+import { Translation } from 'react-i18next';
+import i18next from 'i18next';
 
 export default class EditCountry extends Component {
   constructor(props) {
@@ -9,6 +15,7 @@ export default class EditCountry extends Component {
     this.onChangecountry_AR_name = this.onChangecountry_AR_name.bind(this);
     this.onChangecountry_EN_name = this.onChangecountry_EN_name.bind(this);
     this.onChangecountry_code = this.onChangecountry_code.bind(this);
+    this.onChangecountry_code_upper_case = this.onChangecountry_code_upper_case.bind(this);
     this.onChangecountry_description = this.onChangecountry_description.bind(this);
     this.onChangecountry_image = this.onChangecountry_image.bind(this);
 
@@ -18,20 +25,36 @@ export default class EditCountry extends Component {
       country_AR_name: '',
       country_EN_name: '',
       country_code: '',
+      country_code_upper_case:'',
       country_description:'',
       country_image:'',
-      loading:false
+      loading:false,
+      users:[]
       
     }
   }
   
   componentDidMount() {
+
+    axios.get('/api/auth')
+    .then(response => {
+      this.setState({
+          users: response.data,
+      })   
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
+
+
     axios.get('/api/countries/'+this.props.match.params.id)
       .then(response => {
         this.setState({
             country_AR_name: response.data.country_AR_name,
             country_EN_name: response.data.country_EN_name,
             country_code: response.data.country_code,
+            country_code_upper_case: response.data.country_code_upper_case,
             country_description: response.data.country_description,
             country_image: response.data.country_image
           
@@ -66,7 +89,15 @@ export default class EditCountry extends Component {
         country_code: e.target.value
     })
   }
+
+  onChangecountry_code_upper_case(e) {
+    this.setState({
+      country_code_upper_case: e.target.value
+    })
+  }
  
+
+  
   
   
   onChangecountry_description(e) {
@@ -90,6 +121,7 @@ export default class EditCountry extends Component {
         country_AR_name: this.state.country_AR_name,
         country_EN_name: this.state.country_EN_name,
         country_code: this.state.country_code,
+        country_code_upper_case: this.state.country_code_upper_case,
         country_description: this.state.country_description,
         country_image: this.state.country_image
     }
@@ -97,7 +129,7 @@ export default class EditCountry extends Component {
  
     axios.post('/api/countries/update/'+ this.props.match.params.id, contact)
     .then(res => console.log(res.data));
-     window.location = '/editCountry/'+ this.props.match.params.id;
+     window.location = '/dashboard/editCountry/'+ this.props.match.params.id;
     }
 
 
@@ -106,7 +138,7 @@ export default class EditCountry extends Component {
     const files = e.target.files
     const data = new FormData()
     data.append('file', files[0])
-    data.append('upload_preset', 'magazine')
+    data.append('upload_preset', 'faizcountries')
     this.setState({
         loading:true
       })
@@ -135,25 +167,46 @@ export default class EditCountry extends Component {
     return (
 
         <div>
- 
+        <div>
+        {i18next.language === 'ar'&&(
+          <Navbar />
+          )}
 
-<div>
+
+          {i18next.language === 'en'&&(
+          <NavbarEnglish />
+          )}
            
 
         <div className="aqle3-main">
         <div className="mainword2">
+ 
+        {this.state.users.validity === "super" || this.state.users.validity === "admin" ?(
+
         <div className="mainForm">
 
-        <div class="login-title"> <i class="fa fa-edit"></i> تعديل الدولة </div>
+        <div className="dash-title"> <i class="fa fa-edit"></i> 
+        <Translation>{t => <>{t('editCountry')}</>}</Translation>
+         </div>
+
+
+         <center> 
+    
+        <Link to="/ar/dashboard/countries" className="Action-button-plus-admin">  <i className="fa fa-arrow-left fa-1x"></i>  
+        <Translation>{t => <>{t('backButton')}</>}</Translation>
+         </Link>
+        </center>
  
 
         <center> 
-	 
+	   
 	    <form className="login-form" onSubmit={this.onSubmit}>
-	 
-                <input className="FormCover"
+      <div className='FormCover'>  
+
+<span> <Translation>{t => <>{t('country_ar_name')}</>}</Translation>  </span>
+                <input className="login-input"
                  type="text" 
-                 placeholder="اسم الدولة باللغة العربية"
+                 placeholder=""
                  name="country_AR_name" 
                  value={this.state.country_AR_name} 
                  onChange={this.onChangecountry_AR_name}
@@ -161,9 +214,11 @@ export default class EditCountry extends Component {
                  </input>
 
 
-                 <input className="FormCover"
+
+<span> <Translation>{t => <>{t('country_en_name')}</>}</Translation>  </span>
+                 <input className="login-input"
                  type="text" 
-                 placeholder="اسم الدولة باللغة الانجليزية "
+                 placeholder=" "
                  name="m_EN_name" 
                  value={this.state.country_EN_name} 
                  onChange={this.onChangecountry_EN_name}
@@ -171,7 +226,8 @@ export default class EditCountry extends Component {
                  </input>
 
 
-                <input className="FormCover"
+<span> <Translation>{t => <>{t('country_code')}</>}</Translation>  </span>
+                <input className="login-input"
                  type="text" 
                  placeholder="رمز الدولة"
                  name="country_code" 
@@ -179,10 +235,21 @@ export default class EditCountry extends Component {
                  onChange={this.onChangecountry_code}
                  />
 
+<span> <Translation>{t => <>{t('country_code_upper_case')}</>}</Translation>  </span>
+                <input className="login-input"
+                 type="text" 
+                 placeholder=""
+                 name="country_code_upper_case" 
+                 value={this.state.country_code_upper_case} 
+                 onChange={this.onChangecountry_code_upper_case}
+                 />
 
 
-                <textarea className="FormCover"  
-                 placeholder="الوصف"
+
+
+<span> <Translation>{t => <>{t('country_description')}</>}</Translation>  </span>
+                <textarea className="login-input"  
+                 placeholder=""
                  name="country_description" 
                  value={this.state.country_description} 
                  onChange={this.onChangecountry_description}
@@ -192,7 +259,7 @@ export default class EditCountry extends Component {
 
 
                         <input 
-                          className="FormCover"
+                          className="login-input"
                           placeholder="Upload an image"
                           type="file"
                           name="file"
@@ -217,12 +284,15 @@ export default class EditCountry extends Component {
 
 
   
-
+ 
   	  
 	  <center>
-	 <button className="Formbutton"  type="submit" name="" >تعديل</button>
+	 <button className="Formbutton"  type="submit" name="" >
+   <span> <Translation>{t => <>{t('save')}</>}</Translation>  </span>
+   </button>
  
 	 </center>
+   </div>
 	 </form>
      </center>
 
@@ -232,6 +302,14 @@ export default class EditCountry extends Component {
 
 
         </div>
+
+          ):(
+            <center> 
+            <Spinner />
+          </center>
+                    
+            )}
+
         </div>
         </div>
 

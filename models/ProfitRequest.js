@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ProfitRequestSchema = new mongoose.Schema({
-    amount: { 
+    amount: {  
         type: Number,
         required: true
       }, 
@@ -10,10 +10,10 @@ const ProfitRequestSchema = new mongoose.Schema({
       },
       avatar: {
         type: String
-      },
+      }, 
       user: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'user'
       },
       date: {
         type: Date,

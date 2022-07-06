@@ -17,7 +17,7 @@ import emptypic1 from './emptypic1.jpg';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Input } from 'postcss';
-
+ 
 
 const noneDisplayI = 'noneDisplayI';
 const displayI = 'displayI';
@@ -26,10 +26,10 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
 
   const [gostart,setgostart]= useState(displayI)
 
-  const [shopInfo,setShopInfo]= useState([])
+  // const [shopInfo,setShopInfo]= useState([])
   const [userShop,setuserShop]= useState([])
   const [user, setUser] = useState([])
-
+ 
  
 	const [markets11,setMarkets11]= useState([])
 
@@ -112,8 +112,6 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
       e.preventDefault();
       if (shop_name === '') { 
         setAlert('اسم المتجر ضروري ');
-      }else if(shop_type === '') { 
-        setAlert('نوع المتجر ضروري اختر السوق  المستهدفة ');
       }
       else if(shop_img === '') { 
         setAlert('لم تعيين صورة غلاف للمتجر');
@@ -145,13 +143,13 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
 
 
 
-    axios.get('/api/shops/allshops')
-    .then(res => {
-      setShopInfo(res.data)
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    // axios.get('/api/shops/allshops')
+    // .then(res => {
+    //   setShopInfo(res.data)
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // })
 
  
     axios.get('/api/shops/usershop')
@@ -224,7 +222,7 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
 	const files = e.target.files
 	const data = new FormData()
 	data.append('file', files[0])
-	data.append('upload_preset', 'magazine')
+	data.append('upload_preset', 'faizshops')
 	setLoadingShopImg(true)
 	const res = await fetch(
 	  'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -247,7 +245,7 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
     const files = e.target.files
     const data = new FormData()
     data.append('file', files[0])
-    data.append('upload_preset', 'magazine')
+    data.append('upload_preset', 'faizshops')
     setLoadingLogo(true)
     const res = await fetch(
       'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -263,19 +261,22 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
     }
 
 
-   
+     
 
     // if (userShop) {
     //   return <Redirect to='/ar/dashboard/shops/edit' />;
+    // }else{
+    //   return <Redirect to='/ar/dashboard/create-shop' />;
     // }
  
+   
  
-  return (
+  const CreateShop1 = (
 
     
     <Fragment>
   
-        <Navbar />
+        
 
  
       
@@ -294,17 +295,12 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
    
    
 	  <center> 
-      {/* <div className={gostart}> 
-    <form className="" onSubmit={e => onSubmit2(e)}>
-    <div className="login-title"> هل تريد ان تقوم باعداد متجرك الان؟    </div>
-    <button className="Formbutton" type='submit' style={{marginRight:'1%'}}> لاحقا </button>
-    <button className="Formbutton"  onClick={gocreate}> نعم </button>
-      </form>
+ 
      
-      </div> */}
-        <div className="new-ad-title"> قم باعداد متجرك </div>
+        
+   <div className="new-ad-title"> قم باعداد متجرك </div>
 
-      <form className="" onSubmit={e => onSubmit(e)}>
+    <form className="" onSubmit={e => onSubmit(e)}>
 	  <div className='shop'> 
      
       <div className="">
@@ -390,11 +386,12 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
  
 <center> 
 <div className="login-form" > 
- 
+  
 	  <span className="login-text">  اسم المتجر    </span>
 		<input
 		 className="login-input"
 		  type='text'
+      maxLength='60'
 		  placeholder='مثال : متجر الشروق '
 		  name='shop_name'
 		  value={shop_name}
@@ -403,7 +400,7 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
 
 
 
-				<div className=''>
+				{/* <div className=''>
                 <span className='login-text'>نوع المتجر  </span>
                 <select 
 				className="login-input"
@@ -417,13 +414,13 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
                   <option required value={catego.m_code}> {catego.m_AR_name} </option>
                     ))}
                   </select>
-                  </div>
+                  </div> */}
 
 
-
-<span className="login-text">  وصف    </span>
-		<textarea
-		 className="login-input"
+ 
+<span className="login-text">  وصف (150 حرف)    </span>
+		<textarea 
+		 className="login-input-textarea"
 		  type='text'
 		  placeholder='مثال: متجر لبيع الأزهار والنباتات وأدوات الزراعة '
 		  name='shop_description'
@@ -433,11 +430,11 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
 		/>
 
  
-<span className="login-text">  يوتيوب     </span>
+<span className="login-text">  رابط قناة اليوتويب     </span>
 		<input
 		 className="login-input"
 		  type='text'
-		  placeholder='رابط قناة اليوتويب الخاص بالمتجر'
+		  placeholder='https://www.youtube.com/c/your_channel_url'
 		  name='youtube'
 		  value={youtube}
 		  onChange={e => onChange(e)}
@@ -446,11 +443,11 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
 
 
 
-<span className="login-text">  Twitter     </span>
+<span className="login-text">  حساب تويتر الخاص بمتجرك     </span>
 		<input
 		 className="login-input"
 		  type='text'
-		  placeholder='حساب تويتر الخاص بمتجرك'
+		  placeholder='https://twitter.com/your_acccount_name'
 		  name='twitter'
 		  value={twitter}
 		  onChange={e => onChange(e)}
@@ -458,24 +455,24 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
 
 
 
-<span className="login-text">  Facebook     </span>
+<span className="login-text">  صفحة أو مجموعة الفيس بوك الخاصة بمتجرك     </span>
 		<input
 		 className="login-input"
 		  type='text'
-		  placeholder='صفحة أو مجموعة الفيس بوك الخاصة بمتجرك'
+		  placeholder='https://www.facebook.com/your_acccount_name'
 		  name='facebook'
 		  value={facebook}
 		  onChange={e => onChange(e)}
 		/>
 
+ 
 
 
-
-<span className="login-text">  Linkedin     </span>
+<span className="login-text">  حساب لنكد إن     </span>
 		<input
 		 className="login-input"
 		  type='text'
-		  placeholder='حسابك في لينكد ان'
+		  placeholder='https://www.linkedin.com/in/your_acccount_name/'
 		  name='linkedin'
 		  value={linkedin}
 		  onChange={e => onChange(e)}
@@ -483,11 +480,11 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
 
 
 
-<span className="login-text">  Instagram     </span>
+<span className="login-text">  حسابك في الإنستغرام     </span>
 		<input
 		 className="login-input"
 		  type='text'
-		  placeholder='حسابك في الانستغرام'
+		  placeholder='https://www.instagram.com/your_acccount_name/'
 		  name='instagram'
 		  value={instagram}
 		  onChange={e => onChange(e)}
@@ -495,11 +492,11 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
 
 
 
-<span className="login-text">  Email     </span>
+<span className="login-text">  البريد الإلكتروني     </span>
 		<input
 		 className="login-input"
 		  type='text'
-		  placeholder='shop_email'
+		  placeholder='example@example.com'
 		  name='shop_email'
 		  value={shop_email}
 		  onChange={e => onChange(e)}
@@ -507,11 +504,11 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
 
 
 
-<span className="login-text">  Website     </span>
+<span className="login-text">  الموقع الإلكتروني     </span>
 		<input
 		 className="login-input"
 		  type='text'
-		  placeholder='shop_website'
+		  placeholder='www.example.com'
 		  name='shop_website'
 		  value={shop_website}
 		  onChange={e => onChange(e)}
@@ -519,11 +516,11 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
 
 
 
-<span className="login-text">  Whatsapp </span>
+<span className="login-text">  الواتساب </span>
 		<input
 		 className="login-input"
 		  type='number'
-		  placeholder='shop_whatsaap'
+		  placeholder='+4415XXXXXXXX'
 		  name='shop_whatsaap'
 		  value={shop_whatsaap}
 		  onChange={e => onChange(e)}
@@ -531,23 +528,23 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
 
 
 
-<span className="login-text">  Mobile     </span>
+<span className="login-text">  الهاتف الجوال     </span>
 		<input
 		 className="login-input"
 		  type='number'
-		  placeholder='mobile'
+		  placeholder='+4415XXXXXXXX'
 		  name='shop_mobile'
 		  value={shop_mobile}
 		  onChange={e => onChange(e)}
 		/>
 
- 
+  
 
-<span className="login-text">  Phone1     </span>
+<span className="login-text">  تلفون 1 (اختياري)     </span>
 		<input
 		 className="login-input"
 		  type='number'
-		  placeholder='phone1'
+		  placeholder='+4415XXXXXXXX'
 		  name='shop_phone1'
 		  value={shop_phone1}
 		  onChange={e => onChange(e)}
@@ -555,11 +552,11 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
 
 
 
-<span className="login-text">  Phone2     </span>
+<span className="login-text">  تلفون 2 (اختياري)     </span>
 		<input
 		 className="login-input"
 		  type='number'
-		  placeholder='phone2'
+		  placeholder='+4415XXXXXXXX'
 		  name='shop_phone2'
 		  value={shop_phone2}
 		  onChange={e => onChange(e)}
@@ -567,18 +564,18 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
 
 
 
-<span className="login-text">  Phone3     </span>
+<span className="login-text">  تلفون 3 (اختياري)     </span>
 		<input
 		 className="login-input"
 		  type='number'
-		  placeholder='phone3'
+		  placeholder='+4415XXXXXXXX'
 		  name='shop_phone3'
 		  value={shop_phone3}
 		  onChange={e => onChange(e)}
 		/>
 
-	 <Alert />
-	 <button className="Formbutton" type='submit'> حفظ </button>
+<center>   <div className="alert-info" >  <Alert /> </div> </center>  
+	 <button className="Formbutton" type='submit'> انشيء </button>
    </div>
    </center>
 
@@ -594,6 +591,21 @@ const CreateShopArabic = ({ setAlert ,createShop , isAuthenticated }) => {
       </div>
     </Fragment>
   );
+
+const EditShop1 =(
+  <Fragment>
+ 
+  <div className="new-ad-title"> لديك متجر بالفعل يمكنك تحديثه  </div>
+ <center> <Link className='Action-button-status' to='/ar/dashboard/shops/edit'>تحديث متجرك</Link> </center>
+  </Fragment>
+)
+
+   
+
+return(
+  userShop ? EditShop1: CreateShop1
+)
+
 };
 
 CreateShopArabic.propTypes = {

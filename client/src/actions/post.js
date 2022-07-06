@@ -14,7 +14,8 @@ import {
   UPDATE_FOURSTARS,
   UPDATE_THREESTARS,
   UPDATE_TWOSTARS,
-  UPDATE_ONESTARS
+  UPDATE_ONESTARS,
+  UPDATE_POST, 
 } from './types';
 
  
@@ -326,4 +327,36 @@ export const addOneStars = id => async dispatch => {
 
  
 
+
+ 
+// edit validity
+// Register User
+export const editActivation = (postId,formData) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }; 
+
+  try {
+    const res = await axios.post(
+      `/api/posts/activatePost/${postId}`,  
+      formData,
+      config
+    );
+
+    dispatch({
+      type: UPDATE_POST,
+      payload: res.data
+    });
+
+    // dispatch(setAlert('Comment Added', 'success'));
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+  
 

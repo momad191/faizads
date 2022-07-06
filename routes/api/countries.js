@@ -29,6 +29,7 @@ router.post(
             country_AR_name: req.body.country_AR_name,
             country_EN_name: req.body.country_EN_name,
             country_code: req.body.country_code,
+            country_code_upper_case:req.body.country_code_upper_case,
             country_description: req.body.country_description,
             country_image: req.body.country_image,
             name: user.name,
@@ -74,6 +75,7 @@ router.post(
           user: req.user.id,
           countryid:req.body.countryid,
           country_code:req.body.country_code,
+          country_code_upper_case:req.body.country_code_upper_case,
       });
       const city = await newCity.save();
       res.json(city);
@@ -100,6 +102,8 @@ router.get('/',async (req, res) => {
       res.status(500).send('Server Error');
     }
   });
+
+
 
  
   router.get('/middle-east',async (req, res) => {
@@ -199,6 +203,18 @@ router.get('/cities/:id',async (req, res) => {
 
 
 
+router.get('/toeditcity/:id',async (req, res) => {
+  try {
+    const city = await City.findById(req.params.id);
+    res.json(city);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+
 router.get('/homeCities/:id',async (req, res) => {
   try {
     const cities = await City.find({country_code:req.params.id}).sort({});
@@ -211,7 +227,7 @@ router.get('/homeCities/:id',async (req, res) => {
 
 
 
-    // @route    GET api/countries/cities
+ // @route    GET api/countries/cities
 // @desc     Get one city by country_code
 // @access   public
 router.get('/cities/country_code/:id',async (req, res) => {
@@ -404,6 +420,7 @@ router.route('/update/:id').post((req, res) => {
       pp.country_AR_name= req.body.country_AR_name,
       pp.country_EN_name= req.body.country_EN_name,
       pp.country_code= req.body.country_code,
+      pp.country_code_upper_case = req.body.country_code_upper_case,  
       pp.country_image = req.body.country_image;
       pp.country_description = req.body.country_description;    
       pp.save()
@@ -422,7 +439,10 @@ router.route('/cities/update/:id').post((req, res) => {
       pp.city_EN_name= req.body.city_EN_name,
       pp.city_code= req.body.city_code,
       pp.city_image = req.body.city_image;
-      pp.city_description = req.body.city_description;    
+      pp.city_description = req.body.city_description;
+      pp.country_code= req.body.country_code,
+      pp.country_code_upper_case = req.body.country_code_upper_case,  
+    
       pp.save()
         .then(() => res.json('city updated'))
         .catch(err => res.status(400).json('Error: ' + err));
@@ -432,4 +452,18 @@ router.route('/cities/update/:id').post((req, res) => {
  
 
 
+//all cities for the country of the user use this to appear in add post 
+// to display cities of the user's country only
+router.get('/usercities',async (req, res) => {
+  try {
+ 
+    const user = await User.findById(req.user.id).select('-password');
+    const cities = await City.find({country_code_upper_case:user.country_code});
+    res.json(cities);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});  
+ 
 module.exports = router;

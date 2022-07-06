@@ -9,7 +9,7 @@ const EditProfile = ({
   createProfile,
   getCurrentProfile,
   history
-}) => {
+}) => { 
   const [formData, setFormData] = useState({
     company: '',
     website: '',

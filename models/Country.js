@@ -18,7 +18,12 @@ const countrySchema = new Schema({
     type: String,
     required: true
   },
-    
+
+  country_code_upper_case: {
+    type: String,
+    required: true
+  },
+     
   country_description: {
     type: String,
     required: true

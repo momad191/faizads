@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 import ff from './ttt.jpg';
-
+import { useTranslation } from 'react-i18next';
  
 import axios from 'axios';
 
- 
+   
 
 const mySidenav0 = 'sidenavnone';
 const sidenav = 'sidenav';
@@ -16,6 +16,8 @@ const sidenav = 'sidenav';
 
  
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+
+  const [t, i18next] = useTranslation()
 
   const [mySidenav, setmySidenav] = useState(mySidenav0)
 
@@ -60,7 +62,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
  
         <ul className="topnavEN">
         <div className="logoContentEN">
-        <Link to='/en'>
+        <Link to='/'>
         <img className="logo" src={ff}/>
         </Link>
         </div>
@@ -83,68 +85,75 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <img src={ss} width="60px" height="40px"/>
         </Link>
         </li> */}
-   <div className="listdown">
-  <li><a><i class="fa fa-language fa-3x" ></i>
-      </a></li>
-  <div class="listdown-content">
-  
-    
-     <Link to="/ar/dashboard/main">عربي</Link>   
-     <Link to="/en/dashboard/main">English</Link>   
-   
-  </div>
-  
-  </div> 
-
       <li className="">
-        <Link to='/en/shops'>
-         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-         {' '} shops
-        
-        </Link>
-      </li>
-      <li className="">
-        <Link to='/en/dashboard/MyProfile'>
+        <Link to='/dashboard/MyProfile'>
         <i class="fa fa-user" aria-hidden="true"></i> 
-        {' '}   Profile</Link>
+        {' '}Profile</Link>
       </li>
       {/* <li className="">
-        <Link to='/en/dashboard/chats'>
+        <Link to='/dashboard/chats'>
          <i class="fa fa-envelope" aria-hidden="true"></i>  
          {' '} Inbox
          
           </Link>
       </li> */}
-      <li className="">
-        <Link to='/en/dashboard/posts'>Publications</Link>
+ 
+
+<li className="">
+        <Link to='/dashboard/posts'>
+        <i class="fa fa-plus" aria-hidden="true"></i>{' '}
+          <span className='hide-sm'>Add Your Ads</span>
+        </Link>
       </li>
+
+
       <li className="">
-        <Link to='/en/dashboard/main'>
-        <i class="fa fa-home" aria-hidden="true"></i> {' '}
-          <span className='hide-sm'>  Dashboard</span>
+        <Link to='/dashboard/main'>
+        <i class="fa fa-cog" aria-hidden="true"></i>{' '}
+          <span className='hide-sm'>Dashboard</span>
         </Link>
       </li>
       <li className="">
-      <Link to='/en/membership/prices'>
-
+      <Link to='/membership/prices'>
         <i className="fa fa-rocket fa-1x"></i> {' '}
           <span className='hide-sm'>Membership </span>
         </Link>
 
       </li>
+
+      <li className="">
+        <Link to='/shops'>
+         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+         {' '} Shops
+        </Link>
+      </li>
+ 
+
+      <li className="">
+     {i18next.language === 'ar' && <Link  onClick={()=>{i18next.changeLanguage('en')}}> 
+          <span className='hide-sm'>{t('lang')} </span>
+          {' '}<i className="fa fa-globe fa-1x"></i> 
+        </Link>}
+
+        {i18next.language === 'en' && <Link  onClick={()=>{i18next.changeLanguage('ar')}}> 
+          <span className='hide-sm'>{t('lang')} </span>
+          {' '}<i className="fa fa-globe fa-1x"></i> 
+        </Link>}
+
+      </li>
       
       <li className=" ">
-        <a className="LogoutColor" onClick={logout} href='/en'>
+        <Link className="LogoutColor" onClick={logout} to='/'>
           <i className='fas fa-sign-out-alt' />{' '}
           <span className=''><i class="fa fa-power-off" aria-hidden="true"></i></span>
-        </a>
+        </Link>
       </li> 
 
       <li>
       <button className="buttonNavEN" onClick={openMenu}>  &#9776;   </button>
       </li>
  
-
+ 
  
 
     </ul>
@@ -155,7 +164,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <ul className="topnavEN">
 
         <div className="logoContentEN">
-        <Link to='/en'>
+        <Link to='/'>
         <img className="logo" src={ff}/>
         </Link>
         </div>
@@ -187,20 +196,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
 
 
-<div className="listdown">
-  <li><a><i class="fa fa-language fa-3x" ></i>
-      </a></li>
-  <div class="listdown-content">
-   <Link to="/ar">عربي</Link> 
-  <Link to="/en">English</Link>
-
-  </div>
-  
-  </div> 
+ 
       
  
     <li className="">
-        <Link to='/en/user/register'>
+        <Link to='/user/createAccount'>
         <i class="fa fa-user-plus fa-1x" ></i> {' '}
           <span className='hide-sm'>  Create Account </span>
           </Link>
@@ -208,24 +208,45 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
 
       <li className="">
-        <Link to='/en/user/login'> 
+        <Link to='/user/login'> 
         <i class="fa fa-sign-in" aria-hidden="true"></i> {' '}
         
         <span className='hide-sm'>Login </span>
         </Link>
       </li>
-
  
+  
       <li className="">
-        <Link to='/en/membership/prices'>
+        <Link to='/membership/prices'>
 
         <i className="fa fa-rocket fa-1x"></i> {' '}
           <span className='hide-sm'>Memberships </span>
         </Link>
 
+
+ 
+        <Link to='/shops'>
+         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+         {' '} Shops
+        
+        </Link>
+  
       </li>
 
+   
 
+      <li className="">
+     {i18next.language === 'ar' && <Link  onClick={()=>{i18next.changeLanguage('en')}}> 
+          <span className='hide-sm'>{t('lang')} </span>
+          {' '}<i className="fa fa-globe fa-1x"></i> 
+        </Link>}
+
+        {i18next.language === 'en' && <Link  onClick={()=>{i18next.changeLanguage('ar')}}> 
+          <span className='hide-sm'>{t('lang')} </span>
+          {' '}<i className="fa fa-globe fa-1x"></i> 
+        </Link>}
+
+      </li>
  
 
  

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Moment from 'react-moment';
+import moment from 'moment';
+import 'moment/locale/ar';
 import { Fragment } from 'react';
 import { deletePost } from '../../actions/post';
 import ConfirmButton from "./ConfirmButton";
@@ -14,7 +16,11 @@ import yallowFace from './yallowFace.png';
 import addLike from '../../actions/post';
 import addClick from '../../actions/post';
 
+
 import Navbar from '../../components/layout/Navbar';
+import NavbarEnglish from '../../components/layout/NavbarEnglish';
+import { Translation } from 'react-i18next';
+import i18next from 'i18next';
 import Spinner from '../../components/layout/Spinner';
 
 const formatter = new Intl.NumberFormat('en',{
@@ -26,7 +32,6 @@ const formatter = new Intl.NumberFormat('en',{
 
 });
 
- 
 const Exercise = props => (
  
   <Fragment>  
@@ -34,64 +39,100 @@ const Exercise = props => (
     <center> 
      
   <div className="" key={props.exercise._id}>
-  <Link onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`}  > 
-   
-      
-  </Link>
-   
+  
+    
   <div>
       {props.exercise.image ? (
-        <Link onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`}  > <img className='image-in-list-home' src={props.exercise.image}  /></Link>
+        <Fragment>
+        <Link onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`}  > <img className='image-in-list-home' src={props.exercise.image}  /></Link>
+        </Fragment>
         ):(
-    
-            <Link onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`}  > <img className='image-in-list-home' src={noimg}  /></Link>
-            )}
-       </div>
+          <Fragment>
+             <Link onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`}  > <img className='image-in-list-home' src={noimg}  /></Link>
+             </Fragment>
+          )}
   
   
   
   
-   
+        </div>
   
-   
    
     
   
        <center>
         {props.exercise.premium === 'no' &&(
           <div className='title-in-list-home'>
-          <Link onClick={() => props.addClick(props.exercise._id)} className='title-in-list-home'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} >    
+          <Link onClick={() => props.addClick(props.exercise._id)} className='title-in-list-home'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`} >    
            {props.exercise.title}  
            </Link>
           </div>
         )}
   
    
+  
+   
           {props.exercise.premium === 'yes' &&(
           <div className='title-in-list-premium-home'>
-          <Link  onClick={() => props.addClick(props.exercise._id)} className='title-in-list-premium-home'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} >    
+          <Link  onClick={() => props.addClick(props.exercise._id)} className='title-in-list-premium-home'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`} >    
+          <button className="button-in-list-home-premium"> <i className="fa fa-star fa-1x"></i> </button>
            {props.exercise.title}  
            </Link>
           </div>
         )} 
   </center>
   
-  {props.exercise.premium === 'yes' &&(
   
-  <Link onClick={() => props.addClick(props.exercise._id)} to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status-premium">   مميز    <i className="fa fa-star fa-1x"></i></button> </Link>
+  {/* {props.exercise.premium === 'yes' &&(
   
-  )} 
-  <Link  onClick={() => props.addClick(props.exercise._id)} to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} target="_blank" style={{textDecoration:'none',width:'100%'}} >   <button className="Action-button-status">   {props.exercise.market.m_AR_name}  <i className="fa fa-list fa-1x"></i></button> </Link>
+  <Link onClick={() => props.addClick(props.exercise._id)} to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status-premium">   مميز    <i className="fa fa-star fa-1x"></i> </button> </Link>
+  
+  )}  */}
   
   
-  <button className="Action-button-status"> 
+  {/* <Link  onClick={() => props.addClick(props.exercise._id)} to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`} target="_blank" style={{textDecoration:'none',width:'100%'}} >   <button className="Action-button-status">   {props.exercise.market.m_AR_name}  <i className="fa fa-list fa-1x"></i></button> </Link> */}
+  
+  
+  <button className="button-in-list-home-small"> 
   {formatter.format(props.exercise.clicks.length) }  <i class="fa fa-eye" aria-hidden="true"></i>  
   </button>
   
   
-  <button className="Action-button-status"> 
-   {props.exercise.city.city_AR_name} <i class="fa fa-map-marker" aria-hidden="true"></i> 
+  
+  <button className="button-in-list-home-small"> 
+  
+   {i18next.language === 'ar' && props.exercise.city.city_AR_name}
+   {i18next.language === 'en' && props.exercise.city.city_EN_name}
+  
+  <i class="fa fa-map-marker" aria-hidden="true"></i> 
   </button>
+  
+  
+  <button className="button-in-list-home-small">
+    {formatter.format(props.exercise.comments.length) } {' '}<i class="fa fa-comments" aria-hidden="true"></i>   
+    </button>
+  
+   
+  
+     <Link onClick={() => props.shopClick(props.exercise.shop._id)} to={`/shops/${props.exercise.shop.username}`} target="_blank"> 
+    <button className="button-in-list-home-big">
+    {props.exercise.shop.username} <i class="fa fa-home" aria-hidden="true"></i> 
+    </button>
+    </Link> 
+  
+  
+  <button className="button-in-list-home-small">
+  
+    {moment(props.exercise.date).startOf('minut').fromNow()}  {' '}   <i class="fa fa-clock-o" aria-hidden="true"></i>  
+    </button>
+  
+    <button className="button-in-list-home-small">
+    {i18next.language==='ar'&& <>ينتهي</>} {' '} 
+    {i18next.language==='en'&& <>Expire </>}{' '} 
+     {moment(props.exercise.expired).endOf('day').fromNow()}  {' '}  <i class="fa fa-hourglass-end" aria-hidden="true"></i>   
+    </button>
+   
+   
   
   
   
@@ -144,131 +185,146 @@ const Exercise = props => (
   
   ) 
   
-
-
-
+   
+  
   ////////////////////////////////////////الشكل العرضي //////////////////////////////////////
-
-const Exercise2 = props => (
- 
-  <Fragment>  
-  <div style={{width:'80%'}} class="main-list">
-
    
-        {props.exercise.premium === 'no' &&(
-          <div className='title-in-list'>
-          <Link onClick={() => props.addClick(props.exercise._id)} className='title-in-list'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} >    
-           {props.exercise.title}  
-           </Link>
-          </div>
-        )}
+  const Exercise2 = props => (
+   
+    <Fragment>  
+    <div style={{width:'80%'}} className="main-list">
   
    
-          {props.exercise.premium === 'yes' &&(
-          <div className='title-in-list-premium'>
-          <Link  onClick={() => props.addClick(props.exercise._id)} className='title-in-list-premium'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} >    
-           {props.exercise.title}  
-           </Link>
-          </div>
-        )} 
-  
-  
- 
-   
+          {props.exercise.premium === 'no' &&(
+            <div className='title-in-list'>
+            <Link onClick={() => props.addClick(props.exercise._id)} className='title-in-list'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`} >    
+             {props.exercise.title}   
+             </Link>
+            </div>
+          )}
     
-    <div className='section-list'> 
-  <div className="" key={props.exercise._id}>
-  <Link onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`}  > 
-  </Link>
-   
-  <div>
-      {props.exercise.image ? (
-        <Link  onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`}  > <img className='image-in-list' src={props.exercise.image}  /></Link>
-        ):(
-    
-            <Link  onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`}  > <img className='image-in-list' src={noimg}  /></Link>
-            )}
-       </div>
-  
-  
-  </div>
-  {/* //////////////////section list end ///////// */}
-  
-  
-  <div className="list-details" style={{marginTop:'20px'}}>
-
-  يعد ” برنامج جودة الحياة ” أحد برامج تحقيق رؤية المملكة 2030 بمبادراته ومشروعاته النوعية، لدعم التحول في المجال الثقافي بالمملكة، التي يسعى إلى تحقيقها بهدفين هما: المحافظة على تراث المملكة الإسلامي والعربي والوطني والتعريف به، وتنمية مساهمة المملكة في الفنون والثقافة، حيث تقوم على تنفيذها وزارة الثقافة وهيئاتها التابعة، والجهات الداعمة .
-
-
-  {props.exercise.Main_paragraph} </div>
-
-{/* ////////////////////end of list////////////////////////////////////// */}
-
-    </div>
-
      
+            {props.exercise.premium === 'yes' &&(
+            <div className='title-in-list-premium'>
+            <Link  onClick={() => props.addClick(props.exercise._id)} className='title-in-list-premium'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`} >    
+            اعلان مميز  <i className="fa fa-star fa-1x"></i> {' '} / {props.exercise.title}       
+             </Link>
+            </div>
+          )} 
     
-
-
-
-
     
-
-  <div className='section-list'> 
-  {props.exercise.premium === 'yes' &&(
-  
-  <Link onClick={() => props.addClick(props.exercise._id)} to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status-premium" style={{width:'100px'}}> <i className="fa fa-star fa-1x"></i>   مميز     </button> </Link>
-  
-  )} 
-  <Link  onClick={() => props.addClick(props.exercise._id)} to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status" style={{width:'auto'}}>  <i className="fa fa-list fa-1x"></i>  {props.exercise.market.m_AR_name}  </button> </Link>
-  
-  
-  <Link> 
-  <button className="Action-button-status" style={{width:'100px',marginBottom:'10px'}}> 
-  <i class="fa fa-map-marker" aria-hidden="true"></i>  {props.exercise.city.city_AR_name}  
-   </button>
-  </Link>
-
-
-  
-
-
-
-
-  <Link > 
-  <button className="Action-button-status" style={{width:'100px',marginBottom:'10px'}}>
-  <i class="fa fa-eye" aria-hidden="true"></i>  {formatter.format(props.exercise.clicks.length) }  
-  </button>
-  </Link>
-
-
-  <Link to={`/ar/shops/${props.exercise.shop.username}`} > 
-  <button className="Action-button-status" style={{width:'auto',marginBottom:'10px'}}>
-  <i class="fa fa-home" aria-hidden="true"></i>  {props.exercise.shop.shop_name}  
-  </button>
-  </Link>
-  
-  </div>
-
+   
+     
+      
+      <div className='section-list'> 
+    <div className="" key={props.exercise._id}>
+    <Link onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`}  > 
+    </Link>
+     
+    <div>
+        {props.exercise.image ? (
+          <Link  onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`}  > <img className='image-in-list' src={props.exercise.image}  /></Link>
+          ):(
+      
+              <Link  onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`}  > <img className='image-in-list' src={noimg}  /></Link>
+              )}
+         </div>
     
-
-
- 
-
-
-
-
-
-
+    
     </div>
-      </Fragment>
+    {/* //////////////////section list end ///////// */}
+    
+    
+    <div className="list-details" style={{marginTop:'20px'}}>
   
-  ) 
+    {props.exercise.Main_paragraph} </div>
   
-
-
-
-
+  {/* ////////////////////end of list////////////////////////////////////// */}
+  
+      </div>
+  
+        
+  <center> 
+    <div className='section-list'> 
+  
+  
+    <Link onClick={() => props.shopClick(props.exercise.shop._id)} to={`/shops/${props.exercise.shop.username}`} target="_blank"> 
+    <button className="button-in-list-home-small">
+    <i class="fa fa-home fa-1x" aria-hidden="true"></i>   
+    </button>
+    </Link> 
+  
+  
+    <Link  onClick={() => props.addClick(props.exercise._id)} to={`/main/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}`} target="_blank" style={{textDecoration:'none'}} >   <button className="button-in-list-home-small" >  
+     {i18next.language === 'ar' &&  props.exercise.market.m_AR_name} 
+     {i18next.language === 'en' &&  props.exercise.market.m_EN_name} 
+     {' '}
+     <i className="fa fa-list fa-1x"></i>
+      </button> </Link>
+    
+    
+   
+  
+  
+   
+    <button className="button-in-list-home-small">
+   
+    {moment(props.exercise.date).startOf('minut').fromNow()}{' '} 
+    <i class="fa fa-clock-o" aria-hidden="true"></i> 
+    </button>
+  
+  
+  
+    <button className="button-in-list-home-small" >
+    {i18next.language==='ar'&& <>ينتهي</>} {' '} 
+    {i18next.language==='en'&& <>Expire </>}{' '} 
+    {moment(props.exercise.expired).endOf('day').fromNow()} {' '}  
+    <i class="fa fa-hourglass-end" aria-hidden="true"></i>  
+    </button>
+    
+  
+  
+    <button className="button-in-list-home-small" >
+     
+    {formatter.format(props.exercise.comments.length) } {' '} 
+    <i class="fa fa-comments" aria-hidden="true"></i>
+    </button>
+  
+  
+    <Link> 
+    <button className="button-in-list-home-small" > 
+     {i18next.language === 'ar' && props.exercise.city.city_AR_name}  
+     {i18next.language === 'en' && props.exercise.city.city_EN_name} 
+     <i class="fa fa-map-marker" aria-hidden="true"></i> 
+     </button>
+    </Link>
+  
+  
+    <Link > 
+    <button className="button-in-list-home-small" >
+    <i class="fa fa-eye" aria-hidden="true"></i>  {formatter.format(props.exercise.clicks.length) }  
+    </button>
+    </Link>
+  
+    </div>
+    </center>
+      
+  
+  
+   
+  
+   
+  
+  
+  
+  
+      </div>
+        </Fragment>
+    
+    ) 
+    
+  
+  
 
 
 ////////////////////////////////////////العرض العرضي //////////////////////////////////////
@@ -302,6 +358,10 @@ export default class ExercisesList extends Component {
 
     this.showLarg = this.showLarg.bind(this);
     this.showList = this.showList.bind(this);
+
+    this.showmenulist = this.showmenulist.bind(this);
+
+    this.showmenulist2 = this.showmenulist2.bind(this);
 
 
     this.state = {
@@ -339,9 +399,14 @@ export default class ExercisesList extends Component {
       showCountries:false,
       showCities:false,
 
+      menulist:true,
+      menulist2:false,
+
   
-      larg:'noneDisplayI',
-      list:'displayI'
+      larg:'displayI',
+      list:'noneDisplayI',
+      showStyleLarge:'showStyleSelected',
+      showStyleList:'showStyle'
       
     };
 
@@ -706,9 +771,18 @@ handleSelectClassifieds = event => {
    .then(response => {
     console.log(response.data)
   });
-
   
 };
+
+
+   // shop click
+   shopClick(id) {
+
+    axios.put('/api/shops/click/'+id)
+    .then(response => {
+     console.log(response.data)
+   });
+  };
 
 
 
@@ -755,8 +829,16 @@ oneCountryName(){
   return  this.state.oneCountryInfo
   .map(country => {
       // return <option value={country.country_code}> {country.country_AR_name}  </option>
-      let ccode= country.country_AR_name
-      return  ccode; 
+      if(i18next.language === 'ar'){
+        let ccode= country.country_AR_name
+        return  ccode; 
+      }
+
+      if(i18next.language === 'en'){
+        let ccode= country.country_EN_name
+        return  ccode; 
+      }
+
    })
 }
 
@@ -774,8 +856,16 @@ oneCityName(){
   return  this.state.oneCity
   .map(city => {
       // return <option value={country.country_code}> {country.country_AR_name}  </option>
-      let cityName= city.city_AR_name
-      return  cityName; 
+      if(i18next.language === 'ar'){
+        let cityName= city.city_AR_name
+        return  cityName; 
+      }
+
+      if(i18next.language === 'en'){
+        let cityName= city.city_EN_name
+        return  cityName; 
+      }
+
    })
 }
 
@@ -783,21 +873,35 @@ cityList(){
   return  this.state.cities
   .map(city => {
     //   return <option value={city.city_code}> {city.city_AR_name}  </option>
+if(i18next.language === 'ar'){
+  return <Link 
+  to={`${this.oneCountrycode()}/${city.city_code}/`} 
+  className="categoryListButton">
+  {city.city_AR_name} <img src={city.city_image} width='30px' height='20px' />
+   </Link>
 
-      return <Link 
-      to={`${this.oneCountrycode()}/${city.city_code}/`} 
-      className="categoryListButton">
-      {city.city_AR_name} <img src={city.city_image} width='30px' height='20px' />
-       </Link>
+}
+
+
+if(i18next.language === 'en'){
+  return <Link 
+  to={`${this.oneCountrycode()}/${city.city_code}/`} 
+  className="categoryListButton">
+  {city.city_EN_name} <img src={city.city_image} width='30px' height='20px' />
+   </Link>
+
+}
+
    })
 
 }
 
- 
+  
 
 allMarketsList(){
   return  this.state.markets
   .map(market => {
+    if(i18next.language === 'ar'){
       return <> 
       <Link 
       to={`/main/${this.props.match.params.id}/${this.props.match.params.city}/${market.m_code}`} 
@@ -805,6 +909,18 @@ allMarketsList(){
       {market.m_AR_name} <img src={market.m_image}  />
        </Link>
        </>
+    }
+
+    if(i18next.language === 'en'){
+      return <> 
+      <Link 
+      to={`/main/${this.props.match.params.id}/${this.props.match.params.city}/${market.m_code}`} 
+      className="categoryListButton">
+      {market.m_EN_name} <img src={market.m_image}  />
+       </Link>
+       </>
+    }
+
    })
 
 }
@@ -832,7 +948,7 @@ allMarketsList(){
 
 
     .filter(post=>{
-      return post.purpose.toLowerCase().indexOf(this.state.searchByPurpose.toLowerCase())>=0
+      return post.purpose_code.toLowerCase().indexOf(this.state.searchByPurpose.toLowerCase())>=0
 
     })
 
@@ -858,7 +974,7 @@ allMarketsList(){
  
 
     .map(currentexercise => {
-      return <Exercise exercise={currentexercise} auth={this.state.auth} deleteExercise={this.deleteExercise} addClick={this.addClick}  removeLike={this.removeLike} key={currentexercise._id}/>;
+      return <Exercise exercise={currentexercise} auth={this.state.auth} deleteExercise={this.deleteExercise} addClick={this.addClick} shopClick={this.shopClick}  removeLike={this.removeLike} key={currentexercise._id}/>;
     })
   }
 
@@ -907,7 +1023,7 @@ allMarketsList(){
   
   
       .filter(post=>{
-        return post.purpose.toLowerCase().indexOf(this.state.searchByPurpose.toLowerCase())>=0
+        return post.purpose_code.toLowerCase().indexOf(this.state.searchByPurpose.toLowerCase())>=0
   
       })
   
@@ -952,7 +1068,10 @@ allMarketsList(){
   showLarg() {
     this.setState({
       larg:'displayI',
-      list:'noneDisplayI'
+      list:'noneDisplayI',
+      showStyleLarge:'showStyleSelected',
+      showStyleList:'showStyle'
+
     })
   }
   
@@ -960,20 +1079,38 @@ allMarketsList(){
     this.setState({
       list:'displayI',
       larg:'noneDisplayI',
+      showStyleLarge:'showStyle',
+      showStyleList:'showStyleSelected'
     })
   }
 
+  showmenulist(){
+    this.setState({
+      menulist:false,
+      menulist2:true,
+    })
+  }
+  showmenulist2(){
+    this.setState({
+      menulist2:false,
+      menulist:true,
+    })
+  }
 
+ 
 
   render() {
-   
-  
+    {i18next.language === 'ar' && moment.locale('ar'); }
+    {i18next.language === 'en' && moment.locale('en'); }
+    {i18next.language === 'fr' && moment.locale('fr'); }
+      
+     return (
     
-    return (
-  
-<div className="aqle3-main">
-<div className="mainword2">
-<Navbar />
+       <div className="aqle3-main">
+       <div className="mainword2">
+       
+       {i18next.language === 'ar'&&(<Navbar />)}
+       {i18next.language === 'en'&&(<NavbarEnglish />)}
 
  
 
@@ -982,9 +1119,23 @@ allMarketsList(){
 <Fragment> 
  <div id="mySidenav"   className='sideNavHome'>
  <center> 
- <button className="categoryListButtonTop" onClick={this.handleSelectAll}> الكل  <i class="fa fa-list" aria-hidden="true"></i></button>
- </center>
-{this.allMarketsList()} 
+ { this.state.menulist===true&&(
+ <button className="categoryListButtonTop" onClick={this.showmenulist}>  
+  <Translation>{t => <>{t('marketsButton')}</>}</Translation>{' '}
+   <i class="fa fa-arrow-circle-o-up fa-2x" aria-hidden="true"></i></button>
+ )}
+  
+ { this.state.menulist2===true&&(
+ <button className="categoryListButtonTop" onClick={this.showmenulist2}>  
+ <Translation>{t => <>{t('marketsButton')}</>}</Translation>{' '}
+  <i class="fa fa-arrow-circle-o-down fa-2x" aria-hidden="true"></i></button>
+ )}
+  </center>
+  { this.state.menulist===true&&(
+this.allMarketsList()
+ 
+)}
+ 
 </div>
 </Fragment>
   </div>
@@ -999,15 +1150,15 @@ allMarketsList(){
       <div className="dash-title">  </div>
       <center> 
       <ul class="breadcrumb">
-      <li><Link to="/">دول العالم</Link></li>
+      <li><Link to="/"><Translation>{t => <>{t('Countries_of_the_world')}</>}</Translation></Link></li>
       <li><Link to={`/main/${this.props.match.params.id}`} > {this.oneCountryName()}</Link></li>
       <li>{this.oneCityName()}</li>
     </ul>
- 
+  
 
   <div style={{width:'100%'}}> 
- <button  onClick={this.showLarg} className='showStyle'> <i class="fa fa-th-large fa-1x" aria-hidden="true"></i> </button>
- <button  onClick={this.showList} className='showStyle'> <i class="fa fa-th-list fa-1x" aria-hidden="true"></i> </button>
+  <button  onClick={this.showLarg} className={this.state.showStyleLarge}> <i class="fa fa-th-large fa-1x" aria-hidden="true"></i> </button>
+ <button  onClick={this.showList} className={this.state.showStyleList}> <i class="fa fa-th-list fa-1x" aria-hidden="true"></i> </button>
  </div>
  
     {this.state.larg === 'displayI'&&(
@@ -1042,7 +1193,9 @@ allMarketsList(){
       {this.state.visible < this.state.exercises.length && (
         <center>  
         <button className='loadMorebtn'
-         onClick={this.loadMore}> <i class="fa fa-arrow-down fa-0x"></i> المزيد </button>
+         onClick={this.loadMore}> <i class="fa fa-arrow-down fa-0x"></i> 
+         <Translation>{t => <>{t('moreButton')}</>}</Translation>
+          </button>
           </center>
       )}  
 

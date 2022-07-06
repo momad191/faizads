@@ -9,6 +9,7 @@ const FollowupSchema = new mongoose.Schema({
       },
       
       following_shop: {
+        // type: String,
         type: Schema.Types.ObjectId,
         ref: 'shop'
       },
@@ -18,11 +19,14 @@ const FollowupSchema = new mongoose.Schema({
         ref: 'shop'
       },
       follower_user: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'user'
         
       }, 
       following_user: {
-        type: String
+        // type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'user'
       },
       date: {
         type: Date,

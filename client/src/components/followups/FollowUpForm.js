@@ -5,9 +5,9 @@ import { addFollowup } from '../../actions/followup';
 import { setAlert } from '../../actions/alert';
 import Alert from '../layout/Alert';
 import axios from 'axios';
-     
+      
 const FollowUpForm = ({setAlert,addFollowup,following_user,following_shop}) => {
-
+ 
       const [ShowButton,setShowButton]= useState('showButton11')
 
       const onSubmit = async e => {

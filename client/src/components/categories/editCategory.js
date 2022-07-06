@@ -1,11 +1,16 @@
 import React, { Component ,Fragment } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
+import axios from 'axios';
+import Navbar from '../layout/Navbar';
+import NavbarEnglish from '../layout/NavbarEnglish';
+import Spinner from '../layout/Spinner';
+import { Translation } from 'react-i18next';
+import i18next from 'i18next';
  
 //import DatePicker from 'react-datepicker';
 //import "react-datepicker/dist/react-datepicker.css";
-
+ 
 export default class EditCategory extends Component {
   constructor(props) {
     super(props);
@@ -30,13 +35,27 @@ export default class EditCategory extends Component {
         image:'',
         loading:false,
         newmarkets:[],
-        newmarkets_id:[]
+        newmarkets_id:[],
+        users:[]
         
       
     }
   }
-  
+   
   componentDidMount() {
+
+
+    axios.get('/api/auth')
+    .then(response => {
+      this.setState({
+          users: response.data,
+      })   
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
+
     axios.get('/api/categories/'+this.props.match.params.id)
       .then(response => {
         this.setState({
@@ -155,10 +174,10 @@ export default class EditCategory extends Component {
     const files = e.target.files
     const data = new FormData()
     data.append('file', files[0])
-    data.append('upload_preset', 'magazine')
+    data.append('upload_preset', 'faizcategories')
     this.setState({
         loading:true
-      })
+      }) 
     const res = await fetch(
       'https://api.cloudinary.com/v1_1/momad191/image/upload',
       {
@@ -206,25 +225,33 @@ export default class EditCategory extends Component {
 
         <div className="aqle3-main">
         <div className="mainword2">
+        {i18next.language === 'ar'&&(<Navbar />)}
+        {i18next.language === 'en'&&(<NavbarEnglish />)}
+         
+        {this.state.users.validity === "super" || this.state.users.validity === "admin" ?(
+
         <div className="mainForm">
 
-        <div class="login-title"> <i class="fa fa-edit"></i> تعديل التصنيف </div>
+        <div class="login-title"> <i class="fa fa-edit"></i> <Translation>{t => <>{t('editCategory')}</>}</Translation> </div>
+        <center> 
+        <Link to="/dashboard/categories" className="Action-button-plus-admin">  <i className="fa fa-arrow-left fa-1x"></i> <Translation>{t => <>{t('backButton')}</>}</Translation>  </Link>
+        </center>
  
 
         <center> 
 	 
 	    <form className="login-form" onSubmit={this.onSubmit}>
-
+      <div className='FormCover'>  
 
                  <div className=''>
-                  <span>السوق  بال اي دي</span>
-                  <select className="FormCover" 
-                   style={{width:'100%',marginLeft:'3%'}}
+                  <span><Translation>{t => <>{t('market_code')}</>}</Translation></span>
+                  <select className="login-input" 
+                 
                   name="market_id" 
                   value={this.state.market_id} 
                   onChange={this.onChangemarket_id}
                   > 
-                  <option value='nothing chosen'> اختر السوق الذي تود ان تضيف له تصنيف </option>
+                  <option value='nothing chosen'> choose </option>
                   { this.newmarket_id() }       
                   </select>
                   </div>
@@ -233,20 +260,20 @@ export default class EditCategory extends Component {
 
 	 
                   <div className=''>
-                  <span> بالكود السوق </span>
-                  <select className="FormCover" 
-                   style={{width:'100%',marginLeft:'3%'}}
+                  <span> <Translation>{t => <>{t('market_code')}</>}</Translation> </span>
+                  <select className="login-input" 
+                
                   name='market_code'
                   value={this.state.market_code} 
                   onChange={this.onChangemarket_code}
                   > 
-                  <option value='nothing chosen'> اختر السوق الذي تود ان تضيف له تصنيف </option>
+                  <option value='nothing chosen'> choose </option>
                   { this.newmarkets() }       
                   </select>
                   </div>
 
 
-                 <input className="FormCover"
+                 <input className="login-input"
                  type="hidden" 
                  placeholder=""
                  name="market_id" 
@@ -256,9 +283,9 @@ export default class EditCategory extends Component {
                  </input>
 
   
-
-                <span>اسم التصنيف العربي </span>
-                <input className="FormCover"
+ 
+                <span> <Translation>{t => <>{t('category_ar_name')}</>}</Translation> </span>
+                <input className="login-input"
                  type="text" 
                  placeholder=""
                  name="c_AR_name" 
@@ -269,8 +296,8 @@ export default class EditCategory extends Component {
 
 
 
-                 <span>اسم التصنيف الانجليزي </span>
-                <input className="FormCover"
+                 <span><Translation>{t => <>{t('category_en_name')}</>}</Translation>  </span>
+                <input className="login-input"
                  type="text" 
                  placeholder=""
                  name="c_EN_name" 
@@ -283,8 +310,8 @@ export default class EditCategory extends Component {
 
 
 
-                <span>رمز التصنيف  </span>
-                <input className="FormCover"
+                <span><Translation>{t => <>{t('category_code')}</>}</Translation>  </span>
+                <input className="login-input"
                  type="text" 
                  placeholder=""
                  name="c_code" 
@@ -296,8 +323,8 @@ export default class EditCategory extends Component {
  
 
 
-                 <span>الوصف </span>
-                <textarea className="FormCover"  
+                 <span><Translation>{t => <>{t('category_description')}</>}</Translation>  </span>
+                <textarea className="login-input"  
                  placeholder=""
                  name="c_description" 
                  value={this.state.c_description} 
@@ -306,9 +333,9 @@ export default class EditCategory extends Component {
                  />
 
 
-                        <span>رقع الصورة  </span>
+                        <span><Translation>{t => <>{t('upload_picture')}</>}</Translation>  </span>
                         <input 
-                          className="FormCover"
+                          className="login-input"
                           placeholder=""
                           type="file"
                           name="file"
@@ -336,18 +363,28 @@ export default class EditCategory extends Component {
 
   	  
 	  <center>
-	 <button className="Formbutton"  type="submit" name="" > تعديل</button>
+	 <button className="Formbutton"  type="submit" name="" > <Translation>{t => <>{t('save')}</>}</Translation></button>
  
 	 </center>
+   </div>
 	 </form>
      </center>
 
 
  
 
-
+ 
 
         </div>
+
+      ):(
+        <center> 
+        <Spinner />
+      </center>
+                
+        )}
+
+
         </div>
         </div>
 

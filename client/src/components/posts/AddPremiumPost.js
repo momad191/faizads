@@ -1771,7 +1771,7 @@ const optionSubBackImages = async e => {
                     maxlength="400"
                     minlength="100"
                     autocomplete="off"
-                    />
+                    /> 
 
 
                  <div  className="topadtitleinput" onClick={optionSubBackEnglishDetails} > هل تريد نشر الإعلان باللغة الإنجليزية ؟ </div>

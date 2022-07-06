@@ -12,7 +12,11 @@ const citySchema = new Schema({
   }, 
   country_code: {
     type: String,
-    
+    required: true
+  }, 
+  country_code_upper_case: { 
+    type: String,
+    required: true
   }, 
   city_AR_name: {
     type: String,

@@ -29,7 +29,7 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
   addFiveStars, addFourStars, addThreeStars, addTwoStars,addOneStars,
 }) => {
  
-  
+   
   
   // const [getfivestarsuser,setgetfivestarsuser]= useState([])
 
@@ -263,33 +263,31 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
       ) : (
         <div>
         
-        <Navbar />
+        {/* <Navbar /> */}
 
-          
-   
         <div className="aqle3-main">
         <div className="mainword2">
         <div className="mainForm">
  
-
+ 
       <center>
         <div className="dash-title"> إعلاناتك </div>
         {/* <Link to="/dashboard/posts/AddPremiumPost" className="Action-button-plus">  <i className="fa fa-star fa-1x"></i> أضف إعلان مميز </Link> */}
-        <Link to="/ar/dashboard/posts/Addpost" className="Action-button-add-ads">  <i className="fa fa-plus fa-1x"></i> أضف إعلان </Link>
-        <Link to="/ar/dashboard/posts/searchPost" className="Action-button-add-ads">  <i className="fa fa-search fa-1x"></i> بحثك </Link>
+        <Link to="/dashboard/posts/Addpost" className="Action-button-add-ads">  <i className="fa fa-plus fa-1x"></i> أضف إعلانك </Link>
+        <Link to="/dashboard/posts/searchPost" className="Action-button-add-ads">  <i className="fa fa-search fa-1x"></i> بحثك </Link>
         </center>
 
 
       <center>
       <div className='statistics'> 
-      <center> <div className="button-statistics" onClick={optionoptionAll1}> كل الإعلانات: <span>{ getPosts.length} </span> </div></center>
+      <center> <div className="button-statistics" onClick={optionoptionAll1}> كل الإعلانات: <span>{ getPosts.length} </span> <i class="fa fa-filter" aria-hidden="true"></i> </div></center>
       </div>
       </center>
 
       <center>
       <div className='statistics'> 
-      <center> <div className="button-statistics1" onClick={optionActive1}>   <i className="fa fa-check fa-1x"></i>  تم التفعيل  :{activationComplete.length}  </div></center>
-      <center> <div className="button-statistics2" onClick={optionActiveWait1}>  <i className="fa fa-circle-o-notch fa-1x"></i>  في انتظار التفعيل   :{activationNo.length}  </div></center>
+      <center> <div className="button-statistics1" onClick={optionActive1}>   <i className="fa fa-check fa-1x"></i>  تم التفعيل  :{activationComplete.length}   <i class="fa fa-filter" aria-hidden="true"></i> </div></center>
+      <center> <div className="button-statistics2" onClick={optionActiveWait1}>  <i className="fa fa-circle-o-notch fa-1x"></i>  في انتظار التفعيل   :{activationNo.length}   <i class="fa fa-filter" aria-hidden="true"></i> </div></center>
       {/* <center> <div className="button-statistics3" onClick={optionPremium1}>   <i className="fa fa-star fa-1x"></i>   عدد الاعلانات المميزة  :{premiumComplete.length}  </div></center> */}
 
       </div>
@@ -328,11 +326,11 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
 <center>
     <div className="main-list" key={post._id}>
 
-   
+    
 
       {post.premium === 'no' &&(
         <div className='title-in-list'>
-        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -341,7 +339,7 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
 
         {post.premium === 'yes' &&(
         <div className='title-in-list-premium'>
-        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -351,10 +349,10 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
   <div className='section-list'>
     <div>
     {post.image ? (
-      <Link   to={`/posts/${post._id}#/${post.body}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={post.image}  /></Link>
+      <Link   to={`/posts/${post._id}#/${post.purpose_code}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={post.image}  /></Link>
       ):(
   
-        <Link   to={`/posts/${post._id}#/${post.body}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={noimg}  /></Link>
+        <Link   to={`/posts/${post._id}#/${post.purpose_code}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={noimg}  /></Link>
       )}
 </div>
 
@@ -403,9 +401,9 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
   
  {/* {!auth.loading && post.user === auth.user._id && ( */}
 <Fragment> 
-<Link to={`/ar/dashboard/posts/editPost/${post._id}`}  style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+<Link to={`/dashboard/posts/editPost/${post._id}`}  style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
 
-<Link to={`/ar/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+{/* <Link to={`/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link>  */}
 
 <Link   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  {post.clicks.length} <i className="fa fa-eye fa-1x"></i></button>   </Link> 
 
@@ -524,7 +522,7 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
   
       {post.premium === 'no' &&(
         <div className='title-in-list'>
-        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -533,7 +531,7 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
 
         {post.premium === 'yes' &&(
         <div className='title-in-list-premium'>
-        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -608,7 +606,7 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
    {/* {!auth.loading && post.user === auth.user._id && ( */}
   <Fragment> 
   
-  <Link to={`/ar/dashboard/posts/editPost/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+  <Link to={`/dashboard/posts/editPost/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
   
 
    
@@ -681,7 +679,7 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
   
       {post.premium === 'no' &&(
         <div className='title-in-list'>
-        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -690,7 +688,7 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
 
         {post.premium === 'yes' &&(
         <div className='title-in-list-premium'>
-        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -700,10 +698,10 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
     <div className='section-list'>
       <div>
       {post.image ? (
-        <a target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={post.image}  /></a>
+        <a target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={post.image}  /></a>
         ):(
     
-          <a target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={noimg}  /></a>
+          <a target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={noimg}  /></a>
         )}
   </div>
   
@@ -761,11 +759,11 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
    {/* {!auth.loading && post.user === auth.user._id && ( */}
   <Fragment> 
   
-  <Link to={`/ar/dashboard/posts/editPost/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+  <Link to={`/dashboard/posts/editPost/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
   
-   <Link to={`/ar/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+   {/* <Link to={`/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link>  */}
 
-   
+    
               <ConfirmButton
               dialog={[" ", "هل أنت متأكد ؟", "مرة أخرى للحذف"]}
               action={() => deletePost(post._id)}
@@ -835,7 +833,7 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
   
       {post.premium === 'no' &&(
         <div className='title-in-list'>
-        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -844,7 +842,7 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
 
         {post.premium === 'yes' &&(
         <div className='title-in-list-premium'>
-        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -853,10 +851,10 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
     <div className='section-list'>
       <div>
       {post.image ? (
-        <a target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={post.image}  /></a>
+        <a target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={post.image}  /></a>
         ):(
     
-          <a target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={noimg}  /></a>
+          <a target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={noimg}  /></a>
         )}
   </div>
   
@@ -907,9 +905,9 @@ const PostsArabic = ({loading ,match, addLike,auth,five_stars,
    {/* {!auth.loading && post.user === auth.user._id && ( */}
   <Fragment> 
   
-  <Link to={`/ar/dashboard/posts/editPost/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+  <Link to={`/dashboard/posts/editPost/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
 
-  <Link to={`/ar/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+  {/* <Link to={`/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link>  */}
 
    
               <ConfirmButton

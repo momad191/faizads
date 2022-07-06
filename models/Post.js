@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-  
+   
 const PostSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
@@ -26,7 +26,12 @@ const PostSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'country'
   },  
-              
+ 
+  purpose: {
+    type: Schema.Types.ObjectId,
+    ref: 'purpose'
+  }, 
+               
   username: { 
     type: String
   },
@@ -47,9 +52,7 @@ const PostSchema = new Schema({
    
   }, 
 
-  purpose: {
-    type: String
-  }, 
+
  
   price: {
     type: Number
@@ -77,7 +80,11 @@ const PostSchema = new Schema({
   country_code : {
     type: String
   },
-  city_code : {
+  city_code : { 
+    type: String
+  }, 
+  
+  purpose_code : {
     type: String
   },
 

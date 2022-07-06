@@ -1,6 +1,8 @@
 import React, { Component ,Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../../components/layout/Navbar';
+import Spinner from '../layout/Spinner';
 
 export default class EditPost extends Component {
   constructor(props) {
@@ -10,7 +12,7 @@ export default class EditPost extends Component {
     this.onChangetitle = this.onChangetitle.bind(this);
 
 
-    
+     
 
     
 
@@ -18,12 +20,27 @@ export default class EditPost extends Component {
     this.state = {
       _id: '',
       Main_paragraph:'',
-      title:''
+      title:'',
+      users:[]
       
     }
   }
       
   componentDidMount() {
+
+
+    axios.get('/api/auth')
+    .then(response => {
+      this.setState({
+          users: response.data,
+      })   
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
+
+
     axios.get('/api/posts/'+this.props.match.params.id)
       .then(response => {
         this.setState({
@@ -98,22 +115,23 @@ export default class EditPost extends Component {
   render() {
    
     return (
-      <>
-      <Navbar />
-     
+      <Fragment>
        
         <div className="aqle3-main">
         <div className="mainword2">
+        <Navbar />
+        {this.state.users.validity === "super" || this.state.users.validity === "admin" ?(
+
+
         <div className="mainForm" >
-        
-               
-         
-         
+          
               
              <center>
                 <form className="login-form" onSubmit={this.onSubmit} >
 
                 <div class="login-title"> <i class="fa fa-edit"></i> تعديل الإعلان </div>
+                <Link to="/ar/dashboard/AdminPosts" className="Action-button-plus-admin">  <i className="fa fa-arrow-left fa-1x"></i> رجوع </Link>
+
                 <div className='FormCover'>
         
 
@@ -145,14 +163,14 @@ export default class EditPost extends Component {
                 <textarea 
                 className="Forminput"
                
-                rows='10'
-                maxlength="66"
+                rows='20'
+                maxlength="400"
                  name="Main_paragraph" 
                  value={this.state.Main_paragraph} 
                  onChange={this.onChangeMain_paragraph}
                  />
 
-
+ 
 
 
 
@@ -174,10 +192,18 @@ export default class EditPost extends Component {
                 </form>  
                 </center>
                
-          </div>  
+          </div> 
+          
+          ):(
+            <center> 
+            <Spinner />
+          </center>
+                    
+            )}
+
           </div> 
           </div> 
-          </>
+          </Fragment>
 
     )
   }

@@ -1,22 +1,28 @@
 import React from 'react'
-
 import HomeArabic from './homeArabic';
 import HomeEnglish from './homeEnglish';
+import { useTranslation } from 'react-i18next';
 
-const home = ({match}) => {
+
+const Home = ({match}) => {
+  const [t, i18next] = useTranslation()
   const Lang = match.params.lang;
-  return (
+  return (  
     <div>
       
-      {Lang === 'ar'?(
-<HomeArabic />
-      ):(
-<HomeEnglish />
+{i18next.language === 'ar'&&(
+      <HomeArabic />
+     )}
 
-      )}
+{i18next.language === 'en'&&(
+     <HomeEnglish />
+     )}
+ 
+ 
+   
 
     </div>
   )
 }
   
-export default home
+export default Home

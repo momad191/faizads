@@ -27,8 +27,8 @@ export const addCountry = formData => async dispatch => {
         payload: res.data
       });
     
-      dispatch(setAlert('COUNTRY Created', 'success'));
-      window.location = '/countries';
+      dispatch(setAlert('Country Created', 'success'));
+      window.location = '/dashboard/countries';
     } catch (err) {
       dispatch({
         type: COUNTRY_ERROR,

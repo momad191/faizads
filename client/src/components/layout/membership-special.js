@@ -16,9 +16,10 @@ import { Input } from 'postcss';
 
 import Navbar from '../../components/layout/Navbar';
 import NavbarEnglish from '../../components/layout/NavbarEnglish';
+import { useTranslation } from 'react-i18next';
      
 const Special = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
-
+  const [t, i18next] = useTranslation()
   const Lang = match.params.lang;
 
   const  freeDate= moment();
@@ -112,7 +113,7 @@ const Special = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
   return (
     <Fragment>
 
-{Lang === 'ar'?(
+{i18next.language === 'ar'?(
         <Navbar />
       ):(
       <NavbarEnglish />
@@ -122,7 +123,7 @@ const Special = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
      <div className="aqle3-main" >
       <div className="mainword2">
 
-      {Lang === 'ar'?(
+      {i18next.language === 'ar'?(
       <div className="mainForm">
       <center>
         <div className="side-columns">

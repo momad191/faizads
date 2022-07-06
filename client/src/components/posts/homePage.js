@@ -727,7 +727,7 @@ classifiedsCategoryList(){
 
 
     .filter(post=>{
-      return post.purpose.toLowerCase().indexOf(this.state.searchByPurpose.toLowerCase())>=0
+      return post.purpose_code.toLowerCase().indexOf(this.state.searchByPurpose.toLowerCase())>=0
 
     })
 

@@ -2,21 +2,29 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Moment from 'react-moment';
+import moment from 'moment';
+import 'moment/locale/ar';
+ 
+
 import { Fragment } from 'react';
 import { deletePost } from '../../actions/post';
-import ConfirmButton from "./ConfirmButton";
  
+import ConfirmButton from "./ConfirmButton";
+  
 import noimg from './noimg.jpg';
 import greenFace from './greenFace.png';
 import redFace from './redFace.png';
 import yallowFace from './yallowFace.png';
- 
+  
 import addLike from '../../actions/post';
 import addClick from '../../actions/post';
 
 import Navbar from '../../components/layout/Navbar';
+import NavbarEnglish from '../../components/layout/NavbarEnglish';
+import { Translation } from 'react-i18next';
+import i18next from 'i18next';
 import Spinner from '../../components/layout/Spinner';
-
+ 
 const formatter = new Intl.NumberFormat('en',{
  
   style:'decimal',
@@ -25,7 +33,7 @@ const formatter = new Intl.NumberFormat('en',{
   notation:'compact'
 
 });
- 
+   
 const Exercise = props => (
  
 <Fragment>  
@@ -33,64 +41,100 @@ const Exercise = props => (
   <center> 
    
 <div className="" key={props.exercise._id}>
-<Link onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`}  > 
- 
-   
-</Link>
- 
+
+  
 <div>
     {props.exercise.image ? (
-      <Link onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`}  > <img className='image-in-list-home' src={props.exercise.image}  /></Link>
+      <Fragment>
+      <Link onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`}  > <img className='image-in-list-home' src={props.exercise.image}  /></Link>
+      </Fragment>
       ):(
-  
-          <Link onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`}  > <img className='image-in-list-home' src={noimg}  /></Link>
-          )}
-     </div>
+        <Fragment>
+           <Link onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`}  > <img className='image-in-list-home' src={noimg}  /></Link>
+           </Fragment>
+        )}
 
 
 
 
- 
+      </div>
 
- 
  
   
 
      <center>
       {props.exercise.premium === 'no' &&(
         <div className='title-in-list-home'>
-        <Link onClick={() => props.addClick(props.exercise._id)} className='title-in-list-home'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} >    
+        <Link onClick={() => props.addClick(props.exercise._id)} className='title-in-list-home'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`} >    
          {props.exercise.title}  
          </Link>
         </div>
       )}
 
  
+
+ 
         {props.exercise.premium === 'yes' &&(
         <div className='title-in-list-premium-home'>
-        <Link  onClick={() => props.addClick(props.exercise._id)} className='title-in-list-premium-home'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} >    
+        <Link  onClick={() => props.addClick(props.exercise._id)} className='title-in-list-premium-home'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`} >    
+        <button className="button-in-list-home-premium"> <i className="fa fa-star fa-1x"></i> </button>
          {props.exercise.title}  
          </Link>
         </div>
       )} 
 </center>
 
-{props.exercise.premium === 'yes' &&(
 
-<Link onClick={() => props.addClick(props.exercise._id)} to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status-premium">   مميز    <i className="fa fa-star fa-1x"></i></button> </Link>
+{/* {props.exercise.premium === 'yes' &&(
 
-)} 
-<Link  onClick={() => props.addClick(props.exercise._id)} to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} target="_blank" style={{textDecoration:'none',width:'100%'}} >   <button className="Action-button-status">   {props.exercise.market.m_AR_name}  <i className="fa fa-list fa-1x"></i></button> </Link>
+<Link onClick={() => props.addClick(props.exercise._id)} to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status-premium">   مميز    <i className="fa fa-star fa-1x"></i> </button> </Link>
+
+)}  */}
 
 
-<button className="Action-button-status"> 
+{/* <Link  onClick={() => props.addClick(props.exercise._id)} to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`} target="_blank" style={{textDecoration:'none',width:'100%'}} >   <button className="Action-button-status">   {props.exercise.market.m_AR_name}  <i className="fa fa-list fa-1x"></i></button> </Link> */}
+
+
+<button className="button-in-list-home-small"> 
 {formatter.format(props.exercise.clicks.length) }  <i class="fa fa-eye" aria-hidden="true"></i>  
 </button>
 
 
-<button className="Action-button-status"> 
- {props.exercise.city.city_AR_name} <i class="fa fa-map-marker" aria-hidden="true"></i> 
+
+<button className="button-in-list-home-small"> 
+
+ {i18next.language === 'ar' && props.exercise.city.city_AR_name}
+ {i18next.language === 'en' && props.exercise.city.city_EN_name}
+
+<i class="fa fa-map-marker" aria-hidden="true"></i> 
 </button>
+
+
+<button className="button-in-list-home-small">
+  {formatter.format(props.exercise.comments.length) } {' '}<i class="fa fa-comments" aria-hidden="true"></i>   
+  </button>
+
+
+
+   <Link onClick={() => props.shopClick(props.exercise.shop._id)} to={`/shops/${props.exercise.shop.username}`} target="_blank"> 
+  <button className="button-in-list-home-big">
+  {props.exercise.shop.username} <i class="fa fa-home" aria-hidden="true"></i> 
+  </button>
+  </Link> 
+
+
+<button className="button-in-list-home-small">
+
+  {moment(props.exercise.date).startOf('minut').fromNow()}  {' '}   <i class="fa fa-clock-o" aria-hidden="true"></i>  
+  </button>
+
+  <button className="button-in-list-home-small">
+  {i18next.language==='ar'&& <>ينتهي</>} {' '} 
+  {i18next.language==='en'&& <>Expire </>}{' '} 
+   {moment(props.exercise.expired).endOf('day').fromNow()}  {' '}  <i class="fa fa-hourglass-end" aria-hidden="true"></i>   
+  </button>
+ 
+ 
 
 
 
@@ -143,18 +187,20 @@ const Exercise = props => (
 
 ) 
 
-////////////////////////////////////////الشكل العرضي //////////////////////////////////////
+ 
 
+////////////////////////////////////////الشكل العرضي //////////////////////////////////////
+ 
 const Exercise2 = props => (
  
   <Fragment>  
-  <div style={{width:'80%'}} class="main-list">
+  <div style={{width:'80%'}} className="main-list">
 
-   
+ 
         {props.exercise.premium === 'no' &&(
           <div className='title-in-list'>
-          <Link onClick={() => props.addClick(props.exercise._id)} className='title-in-list'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} >    
-           {props.exercise.title}  
+          <Link onClick={() => props.addClick(props.exercise._id)} className='title-in-list'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`} >    
+           {props.exercise.title}   
            </Link>
           </div>
         )}
@@ -162,8 +208,8 @@ const Exercise2 = props => (
    
           {props.exercise.premium === 'yes' &&(
           <div className='title-in-list-premium'>
-          <Link  onClick={() => props.addClick(props.exercise._id)} className='title-in-list-premium'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} >    
-           {props.exercise.title}  
+          <Link  onClick={() => props.addClick(props.exercise._id)} className='title-in-list-premium'  target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`} >    
+          اعلان مميز  <i className="fa fa-star fa-1x"></i> {' '} / {props.exercise.title}       
            </Link>
           </div>
         )} 
@@ -174,15 +220,15 @@ const Exercise2 = props => (
     
     <div className='section-list'> 
   <div className="" key={props.exercise._id}>
-  <Link onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`}  > 
+  <Link onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`}  > 
   </Link>
    
   <div>
       {props.exercise.image ? (
-        <Link  onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`}  > <img className='image-in-list' src={props.exercise.image}  /></Link>
+        <Link  onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`}  > <img className='image-in-list' src={props.exercise.image}  /></Link>
         ):(
     
-            <Link  onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`}  > <img className='image-in-list' src={noimg}  /></Link>
+            <Link  onClick={() => props.addClick(props.exercise._id)} target="_blank" to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose_code}/posts/${props.exercise._id}`}  > <img className='image-in-list' src={noimg}  /></Link>
             )}
        </div>
   
@@ -193,59 +239,77 @@ const Exercise2 = props => (
   
   <div className="list-details" style={{marginTop:'20px'}}>
 
-  يعد ” برنامج جودة الحياة ” أحد برامج تحقيق رؤية المملكة 2030 بمبادراته ومشروعاته النوعية، لدعم التحول في المجال الثقافي بالمملكة، التي يسعى إلى تحقيقها بهدفين هما: المحافظة على تراث المملكة الإسلامي والعربي والوطني والتعريف به، وتنمية مساهمة المملكة في الفنون والثقافة، حيث تقوم على تنفيذها وزارة الثقافة وهيئاتها التابعة، والجهات الداعمة .
-
-
   {props.exercise.Main_paragraph} </div>
 
 {/* ////////////////////end of list////////////////////////////////////// */}
 
     </div>
 
-     
-    
-
-
-
-
-    
-
+      
+<center> 
   <div className='section-list'> 
-  {props.exercise.premium === 'yes' &&(
+
+
+  <Link onClick={() => props.shopClick(props.exercise.shop._id)} to={`/shops/${props.exercise.shop.username}`} target="_blank"> 
+  <button className="button-in-list-home-small">
+  <i class="fa fa-home fa-1x" aria-hidden="true"></i>   
+  </button>
+  </Link> 
+
+
+  <Link  onClick={() => props.addClick(props.exercise._id)} to={`/main/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}`} target="_blank" style={{textDecoration:'none'}} >   <button className="button-in-list-home-small" >  
+   {i18next.language === 'ar' &&  props.exercise.market.m_AR_name} 
+   {i18next.language === 'en' &&  props.exercise.market.m_EN_name} 
+   {' '}
+   <i className="fa fa-list fa-1x"></i>
+    </button> </Link>
   
-  <Link onClick={() => props.addClick(props.exercise._id)} to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status-premium" style={{width:'100px'}}> <i className="fa fa-star fa-1x"></i>   مميز     </button> </Link>
   
-  )} 
-  <Link  onClick={() => props.addClick(props.exercise._id)} to={`/${props.exercise.country_code}/${props.exercise.city_code}/${props.exercise.market_code}/${props.exercise.purpose}/posts/${props.exercise._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status" style={{width:'auto'}}>  <i className="fa fa-list fa-1x"></i>  {props.exercise.market.m_AR_name}  </button> </Link>
+ 
+
+
+ 
+  <button className="button-in-list-home-small">
+ 
+  {moment(props.exercise.date).startOf('minut').fromNow()}{' '} 
+  <i class="fa fa-clock-o" aria-hidden="true"></i> 
+  </button>
+
+
+
+  <button className="button-in-list-home-small" >
+  {i18next.language==='ar'&& <>ينتهي</>} {' '} 
+  {i18next.language==='en'&& <>Expire </>}{' '} 
+  {moment(props.exercise.expired).endOf('day').fromNow()} {' '}  
+  <i class="fa fa-hourglass-end" aria-hidden="true"></i>  
+  </button>
   
-  
+
+
+  <button className="button-in-list-home-small" >
+   
+  {formatter.format(props.exercise.comments.length) } {' '} 
+  <i class="fa fa-comments" aria-hidden="true"></i>
+  </button>
+
+
   <Link> 
-  <button className="Action-button-status" style={{width:'100px',marginBottom:'10px'}}> 
-  <i class="fa fa-map-marker" aria-hidden="true"></i>  {props.exercise.city.city_AR_name}  
+  <button className="button-in-list-home-small" > 
+   {i18next.language === 'ar' && props.exercise.city.city_AR_name}  
+   {i18next.language === 'en' && props.exercise.city.city_EN_name} 
+   <i class="fa fa-map-marker" aria-hidden="true"></i> 
    </button>
   </Link>
 
 
-  
-
-
-
-
   <Link > 
-  <button className="Action-button-status" style={{width:'100px',marginBottom:'10px'}}>
+  <button className="button-in-list-home-small" >
   <i class="fa fa-eye" aria-hidden="true"></i>  {formatter.format(props.exercise.clicks.length) }  
   </button>
   </Link>
 
-
-  <Link to={`/ar/shops/${props.exercise.shop.username}`} > 
-  <button className="Action-button-status" style={{width:'auto',marginBottom:'10px'}}>
-  <i class="fa fa-home" aria-hidden="true"></i>  {props.exercise.shop.shop_name}  
-  </button>
-  </Link>
-  
   </div>
-
+  </center>
     
 
 
@@ -271,6 +335,7 @@ const Exercise2 = props => (
 
 
 export default class ExercisesList extends Component {
+  
   constructor(props) {
     super(props);
     
@@ -297,6 +362,10 @@ export default class ExercisesList extends Component {
 
     this.showLarg = this.showLarg.bind(this);
     this.showList = this.showList.bind(this);
+
+    this.showmenulist = this.showmenulist.bind(this);
+
+    this.showmenulist2 = this.showmenulist2.bind(this);
 
 
     this.state = {
@@ -334,9 +403,14 @@ export default class ExercisesList extends Component {
       showCountries:false,
       showCities:false,
 
-      larg:'noneDisplayI',
-      list:'displayI'
-
+      menulist:true,
+      menulist2:false,
+      
+      larg:'displayI',
+      list:'noneDisplayI',
+      showStyleLarge:'showStyleSelected',
+      showStyleList:'showStyle'
+      
   
       
     };
@@ -542,9 +616,9 @@ handleSelectClassifieds = event => {
 
 
 
-
  
-
+ 
+  
  
  
   componentDidMount() {
@@ -727,6 +801,16 @@ handleSelectClassifieds = event => {
 };
 
 
+ // shop click
+ shopClick(id) {
+
+  axios.put('/api/shops/click/'+id)
+  .then(response => {
+   console.log(response.data)
+ });
+};
+
+
 
 // Remove like
 removeLike(id) {
@@ -765,8 +849,16 @@ oneCountryName(){
   return  this.state.oneCountryInfo
   .map(country => {
       // return <option value={country.country_code}> {country.country_AR_name}  </option>
-      let ccode= country.country_AR_name
-      return  ccode; 
+      if(i18next.language === 'ar'){
+        let ccode= country.country_AR_name
+        return  ccode; 
+      }
+      if(i18next.language === 'en'){
+        let ccode= country.country_EN_name
+        return  ccode; 
+      }
+      
+      
    })
 }
 
@@ -785,12 +877,24 @@ cityList(){
   return  this.state.cities
   .map(city => {
     //   return <option value={city.city_code}> {city.city_AR_name}  </option>
+    if(i18next.language === 'ar'){
       return <Link 
       to={`${this.oneCountrycode()}/${city.city_code}`} 
     //   value={city.city_code}
       className="categoryListButton">
       {city.city_AR_name} 
        </Link>
+    }
+
+    if(i18next.language === 'en'){
+      return <Link 
+      to={`${this.oneCountrycode()}/${city.city_code}`} 
+    //   value={city.city_code}
+      className="categoryListButton">
+      {city.city_EN_name} 
+       </Link>
+    }
+     
    })
 }
 
@@ -844,7 +948,7 @@ cityLink(){
 
 
     .filter(post=>{
-      return post.purpose.toLowerCase().indexOf(this.state.searchByPurpose.toLowerCase())>=0
+      return post.purpose_code.toLowerCase().indexOf(this.state.searchByPurpose.toLowerCase())>=0
 
     })
 
@@ -870,7 +974,7 @@ cityLink(){
  
 
     .map(currentexercise => {
-      return <Exercise exercise={currentexercise} auth={this.state.auth} deleteExercise={this.deleteExercise} addClick={this.addClick}  removeLike={this.removeLike} key={currentexercise._id}/>;
+      return <Exercise exercise={currentexercise} auth={this.state.auth} deleteExercise={this.deleteExercise} addClick={this.addClick} shopClick={this.shopClick}  removeLike={this.removeLike} key={currentexercise._id}/>;
     })
   }
 
@@ -896,7 +1000,7 @@ cityLink(){
 
 
     .filter(post=>{
-      return post.purpose.toLowerCase().indexOf(this.state.searchByPurpose.toLowerCase())>=0
+      return post.purpose_code.toLowerCase().indexOf(this.state.searchByPurpose.toLowerCase())>=0
 
     })
 
@@ -922,7 +1026,7 @@ cityLink(){
  
 
     .map(currentexercise => {
-      return <Exercise2 exercise={currentexercise} auth={this.state.auth} deleteExercise={this.deleteExercise} addClick={this.addClick}  removeLike={this.removeLike} key={currentexercise._id}/>;
+      return <Exercise2 exercise={currentexercise} auth={this.state.auth} deleteExercise={this.deleteExercise} addClick={this.addClick} shopClick={this.shopClick} removeLike={this.removeLike} key={currentexercise._id}/>;
     })
   }
 
@@ -946,7 +1050,10 @@ cityLink(){
   showLarg() {
     this.setState({
       larg:'displayI',
-      list:'noneDisplayI'
+      list:'noneDisplayI',
+      showStyleLarge:'showStyleSelected',
+      showStyleList:'showStyle'
+
     })
   }
   
@@ -954,30 +1061,63 @@ cityLink(){
     this.setState({
       list:'displayI',
       larg:'noneDisplayI',
+      showStyleLarge:'showStyle',
+      showStyleList:'showStyleSelected'
     })
   }
 
 
 
+  showmenulist(){
+    this.setState({
+      menulist:false,
+      menulist2:true,
+    })
+  }
+  showmenulist2(){
+    this.setState({
+      menulist2:false,
+      menulist:true,
+    })
+  }
+ 
   render() {
-   
-    
-    
+   {i18next.language === 'ar' && moment.locale('ar'); }
+   {i18next.language === 'en' && moment.locale('en'); }
+   {i18next.language === 'fr' && moment.locale('fr'); }
+     
     return (
   
       <div className="aqle3-main">
       <div className="mainword2">
       
-      <Navbar />
+      {i18next.language === 'ar'&&(<Navbar />)}
+      {i18next.language === 'en'&&(<NavbarEnglish />)}
+
 <div className="mainword-section-right">
 
 
  {/* ////////////////////////////////////////القائمةللكل ////////////////////////////////////// */}
 { this.state.showAll===true&&(
 <Fragment>  
- <div id="mySidenav"  className='sideNavHome'>
- <button className="categoryListButtonTop">  مناطق    <i class="fa fa-list" aria-hidden="true"></i></button>
-{this.cityList()} 
+ <div id="mySidenav"  className='sideNavHome' >
+ { this.state.menulist===true&&(
+ <button className="categoryListButtonTop" onClick={this.showmenulist}>  
+ <Translation>{t => <>{t('citiesButton')}</>}</Translation>
+ <i class="fa fa-arrow-circle-o-up fa-2x" aria-hidden="true"></i></button>
+ )}
+ 
+
+ { this.state.menulist2===true&&(
+ <button className="categoryListButtonTop" onClick={this.showmenulist2}>  
+  <Translation>{t => <>{t('citiesButton')}</>}</Translation>
+  <i class="fa fa-arrow-circle-o-down fa-2x" aria-hidden="true"></i></button>
+ )}
+ 
+ { this.state.menulist===true&&(
+this.cityList()
+)}
+ 
 </div>
 </Fragment>
   )}
@@ -997,52 +1137,50 @@ cityLink(){
 
       <div className="dash-title">  </div>
       <center> 
-        
+         
  <ul class="breadcrumb">
-  <li><Link to="/">دول العالم</Link></li>
-  <li>{this.oneCountryName()}</li>
-</ul>
+ 
+  <li><Link to="/"> <Translation>{t => <>{t('Countries_of_the_world')}</>}</Translation> </Link></li>
+  <li>{ this.oneCountryName()}</li></ul>
  
 <div style={{width:'100%'}}> 
 <div style={{width:'100%'}}> 
-<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/cars/for-sale`}  className='selectedMarket'> <i class="fa fa-car" aria-hidden="true"></i> سيارات </Link>
+<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/cars/for-sale`}  className='selectedMarket'> <i class="fa fa-car" aria-hidden="true"></i> <Translation>{t => <>{t('categories_cars')}</>}</Translation> </Link>
 
-<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/properties/for-sale`}  className='selectedMarket'> <i class="fa fa-home" aria-hidden="true"></i> عقارات </Link>
+<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/properties/for-sale`}  className='selectedMarket'> <i class="fa fa-home" aria-hidden="true"></i> <Translation>{t => <>{t('categories_properties')}</>}</Translation> </Link>
 
-<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/jobs/for-sale`}  className='selectedMarket'> <i class="fa fa-briefcase" aria-hidden="true"></i> وظائف </Link>
+<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/jobs/vacancies`}  className='selectedMarket'> <i class="fa fa-briefcase" aria-hidden="true"></i> <Translation>{t => <>{t('categories_Jobs')}</>}</Translation>  </Link>
  
 
-<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/services/for-sale`}  className='selectedMarket'> <i class="fa fa-handshake-o" aria-hidden="true"></i> خدمات </Link>
+<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/services/for-sale`}  className='selectedMarket'> <i class="fa fa-handshake-o" aria-hidden="true"></i> <Translation>{t => <>{t('categories_Services')}</>}</Translation> </Link>
 
 
-<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/classifieds/for-sale`}  className='selectedMarket'> <i class="fa fa-opencart" aria-hidden="true"></i> سلع  </Link>
+<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/classifieds/for-sale`}  className='selectedMarket'> <i class="fa fa-opencart" aria-hidden="true"></i> <Translation>{t => <>{t('categories_Classifieds')}</>}</Translation>  </Link>
  
 </div>
 <div style={{width:'100%'}}> 
-<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/electronics/for-sale`}  className='selectedMarket'>  إلكترونيات </Link>
+<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/electronics/for-sale`}  className='selectedMarket'>  <Translation>{t => <>{t('categories_Electronics')}</>}</Translation> </Link>
 
 
-<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/animals/for-sale`}  className='selectedMarket'>  حيوانات  </Link>
+<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/animals/for-sale`}  className='selectedMarket'>  <Translation>{t => <>{t('categories_Animals')}</>}</Translation>  </Link>
 
 
-<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/furniture/for-sale`}  className='selectedMarket'>  اثاث  </Link>
+<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/furniture/for-sale`}  className='selectedMarket'>  <Translation>{t => <>{t('categories_Furniture')}</>}</Translation>   </Link>
 
 
-<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/personal-items/for-sale`}  className='selectedMarket'>  مستلزمات شخصية  </Link>
+<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/personal-items/for-sale`}  className='selectedMarket'>  <Translation>{t => <>{t('categories_Personalitems')}</>}</Translation>   </Link>
 
-
-
-<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/food-drinks/for-sale`}  className='selectedMarket'>  أطعمة ومشروبات  </Link>
+<Link  to={`/main/${this.props.match.params.id}/${this.state.cityLink.city_code}/food-drinks/for-sale`}  className='selectedMarket'>  <Translation>{t => <>{t('categories_Fooddrinks')}</>}</Translation>  </Link>
 </div>
 </div>
-   
+     
 <div style={{width:'100%'}}> 
- <button  onClick={this.showLarg} className='showStyle'> <i class="fa fa-th-large fa-1x" aria-hidden="true"></i> </button>
- <button  onClick={this.showList} className='showStyle'> <i class="fa fa-th-list fa-1x" aria-hidden="true"></i> </button>
+ <button  onClick={this.showLarg} className={this.state.showStyleLarge}> <i class="fa fa-th-large fa-1x" aria-hidden="true"></i> </button>
+ <button  onClick={this.showList} className={this.state.showStyleList}> <i class="fa fa-th-list fa-1x" aria-hidden="true"></i> </button>
  </div>
 
- 
-  
+   
+   
       {/* <input className="ForminputSearch" type='text' placeholder="البحث " onChange={this.searchChanged} value={this.state.search}/>
       
             <span>
@@ -1099,7 +1237,9 @@ cityLink(){
          {this.state.visible < this.state.exercises.length && (
         <center>  
         <button className='loadMorebtn'
-         onClick={this.loadMore}> <i class="fa fa-arrow-down fa-0x"></i> المزيد </button>
+         onClick={this.loadMore}> <i class="fa fa-arrow-down fa-0x"></i> 
+         <Translation>{t => <>{t('moreButton')}</>}</Translation>
+          </button>
           </center>
       )}  
 

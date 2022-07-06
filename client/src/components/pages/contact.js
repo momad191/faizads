@@ -1,63 +1,81 @@
 import React, { Fragment } from 'react';
 
-const contact = () => {
+import Navbar from '../../components/layout/Navbar';
+import NavbarEnglish from '../../components/layout/NavbarEnglish';
+
+const contact = ({match}) => { 
+
+  const Lang = match.params.lang;
+
   return (
     <Fragment>
+      
+      {Lang === 'ar'?(
+      <Navbar />
+      ):(
+      <NavbarEnglish />
+      )}
 
+ <center>
+ <div className='login-form'> 
+ <div className='FormCover'>  
      
-     <h1 class="middle text-primary"><i class="fas fa-star"></i> Contact Us</h1>
+     <h1 className="middle-text-primary"> تواصل معنا <i class="fa fa-envelope-square"></i>  </h1>
 
 
 
-<form class="form" action="create-profile.html">
-
-<div class="form-group">
-<span>Name</span>
-<input type="text"  class="form-contact"  name="name" required />
-</div>
-<div class="form-group">
-<span>Email</span>
-<input type="email"   name="email" />
-<small class="form-text"
->your Email to send messages </small
->
-</div>
-
-<div class="form-group">
-<span>Select contact channel*</span>
-<select type="select"   name="channel" required > 
-<option>Select contact channel</option>
-<option>General inquiries</option>
-<option>become SRF partner</option>
-<option>Relation Team</option>
-<option>Tech Geeks</option>
-<option>Mentoring</option>
+<form class="form" action="">
 
 
-</select>
-</div>
-
-<div class="form-group">
-<span>Subject</span>
-<input type="text"   name="name" required />
-</div>
-
-
-<div class="form-group">
-<span>massage</span>
-<textarea    name="name" placeholder="massage here" required >
-
-</textarea>
-
-</div>
+<div className=''>
+          <span className="login-text">    الاسم </span>
+          <input
+           className="login-input"
+            type='text'
+            name='name'
+            value=''
+            // onChange={e => onChange(e)}
+            required
+          />
+          </div>
 
 
 
+      <div className=''>
+          <span className="login-text"> البريد الإلكتروني </span>
+          <input
+           className="login-input"
+            type='email'
+            name='email'
+            value=''
+            // onChange={e => onChange(e)}
+            required
+          />
+          </div>
 
-<input type="submit" class="btn btn-primary" value="Send" />
+ 
+
+
+          <div className=''>
+          <span className="login-text"> رسالتك </span>
+          <textarea
+           className="login-input-textarea"
+          
+            name='name'
+            value=''
+            // onChange={e => onChange(e)}
+            required
+          />
+          </div>
+
+
+
+          <button  className="Formbutton"  type='submit' value='Login'>ارسل</button>
 </form>
 
-   
+   </div>
+   </div>
+   </center>
     </Fragment>
   );
 };

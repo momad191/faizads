@@ -1,10 +1,16 @@
 import React, { Component ,Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import Navbar from '../layout/Navbar';
+import NavbarEnglish from '../layout/NavbarEnglish';
+import Spinner from '../layout/Spinner';
+import { Translation } from 'react-i18next';
+import i18next from 'i18next';
+ 
 export default class EditCountry extends Component {
   constructor(props) {
     super(props);
-     
+      
  
     this.onChangecity_AR_name = this.onChangecity_AR_name.bind(this);
     this.onChangecity_EN_name = this.onChangecity_EN_name.bind(this);
@@ -17,8 +23,10 @@ export default class EditCountry extends Component {
     this.state = {
       countryid:'',
       country_AR_name:'',
+      country_EN_name:'',
       country_image:'',
       country_code:'',
+      country_code_upper_case:'',
 
       city_AR_name: '',
       city_EN_name: '',
@@ -27,12 +35,23 @@ export default class EditCountry extends Component {
       city_image:'',
       loading:false,
 
-      citiesList:[]
+      citiesList:[],
+      users:[]
       
-    }
+    } 
   }
   
   componentDidMount() {
+
+    axios.get('/api/auth')
+    .then(response => {
+      this.setState({
+          users: response.data,
+      })   
+    })
+    .catch((err) => {
+      console.log(err);
+    })
 
 
     axios.get('/api/countries/'+this.props.match.params.id)
@@ -40,8 +59,10 @@ export default class EditCountry extends Component {
         this.setState({
             countryid: response.data._id,
             country_AR_name: response.data.country_AR_name,
+            country_EN_name: response.data.country_EN_name,
             country_image:response.data.country_image,
             country_code: response.data.country_code,
+            country_code_upper_case:response.data.country_code_upper_case
         })   
       })
       .catch(function (error) {
@@ -109,6 +130,8 @@ export default class EditCountry extends Component {
     const contact = {
         countryid: this.state.countryid,
         country_code:this.state.country_code,
+        country_code_upper_case:this.state.country_code_upper_case,
+
         city_AR_name: this.state.city_AR_name,
         city_EN_name: this.state.city_EN_name,
         city_code: this.state.city_code,
@@ -119,7 +142,7 @@ export default class EditCountry extends Component {
  
     axios.post('/api/countries/cities/', contact)
     .then(res => console.log(res.data));
-     window.location = '/addCity/'+ this.props.match.params.id;
+     window.location = '/dashboard/addCity/'+ this.props.match.params.id;
     }
  
 
@@ -128,7 +151,7 @@ export default class EditCountry extends Component {
     const files = e.target.files
     const data = new FormData()
     data.append('file', files[0])
-    data.append('upload_preset', 'magazine')
+    data.append('upload_preset', 'faizcountries')
     this.setState({
         loading:true
       })
@@ -141,7 +164,7 @@ export default class EditCountry extends Component {
     )
     const file = await res.json()
 
-     
+      
     this.setState({
         city_image: file.secure_url,
         loading:false
@@ -159,49 +182,96 @@ export default class EditCountry extends Component {
     return  this.state.citiesList
     .map(city => {
       // return <option value={classifiedsCategory.c_code}> {classifiedsCategory.c_AR_name}  </option>
-   
-   
-      return <h1> || {city.city_AR_name} || </h1>
-  
-  
+     if(i18next.language === 'ar'){
+      return <Fragment> 
+      <h1> || {city.city_AR_name} || </h1> 
+      <Link to={`/dashboard/editCity/${city._id}`}>  تعديل </Link>
+      </Fragment>
+
+     }
+
+     if(i18next.language === 'en'){
+      return <Fragment> 
+      <h1> || {city.city_EN_name} || </h1> 
+      <Link to={`/dashboard/editCity/${city._id}`}>  تعديل </Link>
+      </Fragment>
+
+     }
+
     })
   }
+
+  
 
   render(loading) {
     return (
 
         <div>
- 
+        <div>
 
-<div>
-           
+{i18next.language === 'ar'&&(
+ <Navbar />
+)}
+
+
+{i18next.language === 'en'&&(
+ <NavbarEnglish />
+)}
+
+        
  
         <div className="aqle3-main">
         <div className="mainword2">
+
+        {this.state.users.validity === "super" || this.state.users.validity === "admin" ?(
         <div className="mainForm">
-
-        
-        <div class="login-title">   
+ 
+       {i18next.language === 'ar'&&(
+        <div className="dash-title">          
+       (   <img src={this.state.country_image}  style={{ width: '60px', height:'40px',marginRight:'10px'}} /> {this.state.country_AR_name}  )
        
-        ( {this.state.country_AR_name}   <img src={this.state.country_image}  style={{ width: '60px', height:'40px',marginRight:'10px'}} /> )
         </div>
-        <div class="city-title"> <i class="fa fa-plus"></i>   إضافة المدن  </div>
-        <center> 
+        )}
+
+
+       {i18next.language === 'en'&&(
+        <div className="dash-title">          
+       (    <img src={this.state.country_image}  style={{ width: '60px', height:'40px',marginRight:'10px'}} /> {this.state.country_EN_name} )
+       
+        </div>
+        )}
+
+
+    <center> 
+    <Link to="/dashboard/countries" className="Action-button-plus-admin">  <i className="fa fa-arrow-left fa-1x"></i>  
+    <Translation>{t => <>{t('backButton')}</>}</Translation>
+     </Link>
+    </center>
+
+
+  <div class="city-title"> <i class="fa fa-plus"></i>  <Translation>{t => <>{t('addCity')}</>}</Translation> </div>
 
 
 
 
 
+
+ <center> 
+
+
+
+ 
+ 
 	 
 	        <form  onSubmit={this.onSubmit}>
 
           <div className="city-form-cover">
               <div className="city-form">
 
-                <span> رمز الدولة </span>
+                <span className="cityForminput"> <Translation>{t => <>{t('country_code')}</>}</Translation>  </span>
                 <input className="cityForminput"
                  type="text" 
-                 placeholder="الدولة"
+                 placeholder="country"
                  name="country_code" 
                  value={this.state.country_code} 
                  autocomplete="off"
@@ -209,11 +279,21 @@ export default class EditCountry extends Component {
                  >    
                  </input>
 
-
-                 <span>  ادخل اسم المدينة </span>
+                 <span className="cityForminput"> <Translation>{t => <>{t('country_code_upper_case')}</>}</Translation>  </span>
                 <input className="cityForminput"
                  type="text" 
-                 placeholder="اسم المدينة باللغة العربية"
+                 name="country_code_upper_case" 
+                 value={this.state.country_code_upper_case} 
+                 autocomplete="off"
+                 >    
+                 </input>
+
+                 
+
+                 <span className="cityForminput">   <Translation>{t => <>{t('country_ar_name')}</>}</Translation>  </span>
+                <input className="cityForminput"
+                 type="text" 
+                 placeholder=""
                  name="city_AR_name" 
                  value={this.state.city_AR_name} 
                  onChange={this.onChangecity_AR_name}
@@ -224,10 +304,10 @@ export default class EditCountry extends Component {
 
 
               <div className="city-form">
-                 <span> ادخل اسم المدينة بالانجليزي </span>
+                 <span className="cityForminput">  <Translation>{t => <>{t('country_en_name')}</>}</Translation>  </span>
                  <input className="cityForminput"
                  type="text" 
-                 placeholder="اسم المدينة باللغة الانجليزية "
+                 placeholder=""
                  name="m_EN_name" 
                  value={this.state.city_EN_name} 
                  onChange={this.onChangecity_EN_name}
@@ -236,10 +316,10 @@ export default class EditCountry extends Component {
                  </input>
 
 
-                 <span> رمز المدينة </span>
+                 <span className="cityForminput">  <Translation>{t => <>{t('city_code')}</>}</Translation>  </span>
                 <input className="cityForminput"
                  type="text" 
-                 placeholder="رمز المدينة"
+                 placeholder=""
                  name="city_code" 
                  value={this.state.city_code} 
                  onChange={this.onChangecity_code}
@@ -250,9 +330,9 @@ export default class EditCountry extends Component {
 
 
               <div className="city-form">
-              <span> وصف مختصر او ملاحظة </span>
+              <span className="cityForminput">  <Translation>{t => <>{t('country_description')}</>}</Translation> </span>
                 <input className="cityForminput"  
-                 placeholder="الوصف"
+                 placeholder=""
                  name="city_description" 
                  value={this.state.city_description} 
                  onChange={this.onChangecity_description}     
@@ -292,24 +372,36 @@ export default class EditCountry extends Component {
 
   	  
 	  <center>
-	 <button className="CountryFormbutton"  type="submit" name="" >اضافة المدينة</button>
+	 <button className="CountryFormbutton"  type="submit" name="" >
+   <Translation>{t => <>{t('addButton')}</>}</Translation>
+   </button>
+ 
+   
  
 	 </center>
 	 </form>
      </center>
-
+ 
 
 
          <center>
          
-          <h1 className="about-title"> قائمة المدن المضافة   </h1>
-          {this.citiesList()}
-     
+          <div className="about-title">  <Translation>{t => <>{t('city_list')}</>}</Translation>   </div>
+           {this.citiesList()}
+         
          </center>
 
         </div>
+        ):(
+          <center> 
+          <Spinner />
+         </center>
+                  
+          )}
         </div>
         </div>
+
+
 
 
         </div>

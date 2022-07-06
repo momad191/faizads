@@ -9,14 +9,22 @@ import Alert from '../layout/Alert';
 import axios from 'axios';
 import Navbar from '../layout/Navbar';
 import NavbarEnglish from '../layout/NavbarEnglish';
+import { useTranslation } from 'react-i18next';
 import emptypic from './emptypic.jpg';
 import moment from 'moment';
 import Moment from 'react-moment';
 const noneDisplayI = 'noneDisplayI';
 const displayI = 'displayI';
+
+
    
 const Addpost = ({ addPost ,setAlert ,waiting}) => {
- 
+
+  
+
+
+
+  const [t, i18next] = useTranslation()
   const [finish,setFinish]= useState('displayI')
   
 
@@ -25,7 +33,11 @@ const Addpost = ({ addPost ,setAlert ,waiting}) => {
   const [alertWarning,setAlertWarning]= useState('')
   const [alertSuccess,setAlertSuccess]= useState('')
 
+  const [alertWarningEnglish,setAlertWarningEnglish]= useState('')
+  const [alertSuccessEnglish,setAlertSuccessEnglish]= useState('')
+
   const [user,setUser]= useState([])
+  const country_code = user.country_code;
   const [userPosts,setUserPosts]= useState([])
   
   //For coutries group
@@ -203,6 +215,9 @@ const [subscription,setSubscription]= useState([])
   
      
   useEffect(()=>{
+
+
+   
 
   axios.get('/api/shops/usershop')
     .then(res => {
@@ -1942,7 +1957,7 @@ const optionSubBackImages = async e => {
       const [formData, setFormData] = useState({
         title:'',
         title_English:'',
-        purpose:'',
+        purpose_code:'',
         price:'',
         currency:'',
         writer:'',
@@ -1955,7 +1970,7 @@ const optionSubBackImages = async e => {
         market_code:'',
         market_name:'',
 
-        country_code:'',
+      //  country_code:'',
         city_code:'',
 
         mobile:'',
@@ -1975,13 +1990,13 @@ const optionSubBackImages = async e => {
         
 
   
-  
+   
                
             });
             const {
                   title,
                   title_English,
-                  purpose,
+                  purpose_code,
                   price,
                   currency,
                   writer,
@@ -1995,7 +2010,7 @@ const optionSubBackImages = async e => {
                   market_code,
                   market_name,
 
-                  country_code,
+                //  country_code,
                   city_code,
                   //SubName,
                   //Subid,
@@ -2207,29 +2222,37 @@ const optionSubBackImages = async e => {
                 e.preventDefault();
 
                 if (title === '') {
+
+                  
                   setAlertWarning('الرجاء كتابة عنوان لإعلانك');
+                  setAlertWarningEnglish('Please write a title for your ad');
                   
                   
-                } else if(purpose === '' ){
+                } else if(purpose_code === '' ){
                   setAlertWarning('الرجاء تحديد الغرض من الإعلان');
+                  setAlertWarningEnglish('Please specify the purpose of the advertisement');
                
                 }
                 else if(category_code === '' ){
                   setAlertWarning('الرجاء اختيار التصنيف');
+                  setAlertWarningEnglish('Please select a category');
                
                 }
                 
                 else if(Main_paragraph === '' ){
                   setAlertWarning('الرجاء كتابة تفاصيل الإعلان');
+                  setAlertWarningEnglish('Please write the details of the advertisement');
                
                 }
                 else if(country_code === ''  ){
                   setAlertWarning('الرجاء اختيار الدولة');
+                  setAlertWarningEnglish('Please select a country');
                
              
               }
               else if(city_code === ''  ){
                 setAlertWarning('الرجاء اختيار المدينة');
+                setAlertWarningEnglish('Please select a city');
              
               }
                 else {
@@ -2238,7 +2261,7 @@ const optionSubBackImages = async e => {
              
                  title,
                  title_English,
-                 purpose,
+                 purpose_code,
                  price,
                  currency,
                   writer,
@@ -2281,6 +2304,7 @@ const optionSubBackImages = async e => {
             });
 
             setAlertSuccess('تم حفظ الإعلان')
+            setAlertSuccessEnglish('Ad saved')
             setFinish(noneDisplayI)
 
           }
@@ -2292,7 +2316,7 @@ const optionSubBackImages = async e => {
             const files = e.target.files
             const data = new FormData()
             data.append('file', files[0])
-            data.append('upload_preset', 'magazine')
+            data.append('upload_preset', 'faizads')
             setLoading(true)
             const res = await fetch(
               'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -2315,7 +2339,7 @@ const optionSubBackImages = async e => {
             const files = e.target.files
             const data = new FormData()
             data.append('file', files[0])
-            data.append('upload_preset', 'magazine')
+            data.append('upload_preset', 'faizads')
             setLoading(true)
             const res = await fetch(
               'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -2338,7 +2362,7 @@ const optionSubBackImages = async e => {
                       const files = e.target.files
                       const data = new FormData()
                       data.append('file', files[0])
-                      data.append('upload_preset', 'magazine')
+                      data.append('upload_preset', 'faizads')
                       setLoading(true)
                       const res = await fetch(
                         'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -2363,7 +2387,7 @@ const optionSubBackImages = async e => {
                                           const files = e.target.files
                                           const data = new FormData()
                                           data.append('file', files[0])
-                                          data.append('upload_preset', 'magazine')
+                                          data.append('upload_preset', 'faizads')
                                           setLoading(true)
                                           const res = await fetch(
                                             'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -2381,14 +2405,14 @@ const optionSubBackImages = async e => {
 
 
 
-
+ 
                    // upload pic4 function 
 
                     const uploadPic4 = async e => {
                       const files = e.target.files
                       const data = new FormData()
                       data.append('file', files[0])
-                      data.append('upload_preset', 'magazine')
+                      data.append('upload_preset', 'faizads')
                       setLoading(true)
                       const res = await fetch(
                         'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -2415,7 +2439,7 @@ const optionSubBackImages = async e => {
                                           const files = e.target.files
                                           const data = new FormData()
                                           data.append('file', files[0])
-                                          data.append('upload_preset', 'magazine')
+                                          data.append('upload_preset', 'faizads')
                                           setLoading(true)
                                           const res = await fetch(
                                             'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -2441,7 +2465,7 @@ const optionSubBackImages = async e => {
                       const files = e.target.files
                       const data = new FormData()
                       data.append('file', files[0])
-                      data.append('upload_preset', 'magazine')
+                      data.append('upload_preset', 'faizads')
                       setLoading(true)
                       const res = await fetch(
                         'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -2467,7 +2491,7 @@ const optionSubBackImages = async e => {
                                           const files = e.target.files
                                           const data = new FormData()
                                           data.append('file', files[0])
-                                          data.append('upload_preset', 'magazine')
+                                          data.append('upload_preset', 'faizads')
                                           setLoading(true)
                                           const res = await fetch(
                                             'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -2492,7 +2516,7 @@ const optionSubBackImages = async e => {
                       const files = e.target.files
                       const data = new FormData()
                       data.append('file', files[0])
-                      data.append('upload_preset', 'magazine')
+                      data.append('upload_preset', 'faizads')
                       setLoading(true)
                       const res = await fetch(
                         'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -2519,7 +2543,7 @@ const optionSubBackImages = async e => {
                                           const files = e.target.files
                                           const data = new FormData()
                                           data.append('file', files[0])
-                                          data.append('upload_preset', 'magazine')
+                                          data.append('upload_preset', 'faizads')
                                           setLoading(true)
                                           const res = await fetch(
                                             'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -2545,7 +2569,7 @@ const optionSubBackImages = async e => {
                       const files = e.target.files
                       const data = new FormData()
                       data.append('file', files[0])
-                      data.append('upload_preset', 'magazine')
+                      data.append('upload_preset', 'faizads')
                       setLoading(true)
                       const res = await fetch(
                         'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -2562,8 +2586,8 @@ const optionSubBackImages = async e => {
   
                     const subscriptionEnd = (
                       <Fragment>
-                           <Link to='/ar/membership/prices' className="Dash-button-end-subscription">
-                            البدء باختيار خطتك
+                           <Link to='/membership/prices' className="Dash-button-end-subscription">
+                            {t('Addpost_msg_warning_no_plan')}
                           </Link>
                       </Fragment>
                     );
@@ -2579,11 +2603,14 @@ const optionSubBackImages = async e => {
         <Alert />
        
        
-        
-    
-       
+         
+     
+     
         <form className="login-form" onSubmit={e => onSubmit(e)}>
-        <div className="new-ad-title"> أضف إعلان جديد </div>
+        
+      
+        
+        <div className="new-ad-title"> {t('Addpost_title')} </div>
         {/* left Side */}
       <div className='FormCover'>
 
@@ -2591,7 +2618,7 @@ const optionSubBackImages = async e => {
 
   
   <div className={optionFirst} onClick={optionFirst1}>
-  <div  className="topadtitleinput">  ماهي السوق التي تريد ان تعلن فيها؟   <i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
+  <div  className="topadtitleinput">  {t('Addpost_market_title')}   <i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
  </div>
                {/* {markets.map(market=>(
                   <label className="container11" for='market1'>  
@@ -2606,7 +2633,7 @@ const optionSubBackImages = async e => {
   <div className={optionCars}>
   <center> 
   <label className="container11" for='market1'>  
-  <div  className="radioinput"> سوق السيارات <i class="fa fa-car fa-2x" aria-hidden="true"></i>
+  <div  className="radioinput"> {t('Addpost_market_Cars')} <i class="fa fa-car fa-2x" aria-hidden="true"></i>
   <input className="radioinput"  type="radio" id="market1" name='market_code'  value='cars'  onChange={e => onChange(e)} 
   onClick={optionCars1} />
   <span class="checkmark"></span>
@@ -2619,7 +2646,7 @@ const optionSubBackImages = async e => {
   <div className={optionProperties}>
   <center> 
   <label className="container11" for='market2'>  
-  <div  className="radioinput"> سوق العقارات  <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+  <div  className="radioinput"> {t('Addpost_market_Properties')}  <i class="fa fa-home fa-2x" aria-hidden="true"></i>
   <input className="radioinput"  type="radio" id="market2" name='market_code'  value='properties'  onChange={e => onChange(e)} 
   onClick={optionProperties1}
   />
@@ -2634,7 +2661,7 @@ const optionSubBackImages = async e => {
   <div className={optionJobs}>
   <center> 
   <label className="container11" for='market3'>  
-  <div  className="radioinput"> سوق الوظائف  <i class="fa fa-briefcase fa-2x" aria-hidden="true"></i>
+  <div  className="radioinput"> {t('Addpost_market_Jobs')}  <i class="fa fa-briefcase fa-2x" aria-hidden="true"></i>
   <input className="radioinput"  type="radio" id="market3" name='market_code'  value='jobs'  onChange={e => onChange(e)} 
    onClick={optionJobs1}
   />
@@ -2650,7 +2677,7 @@ const optionSubBackImages = async e => {
   <div className={optionServices}>
   <center> 
   <label className="container11" for='market4'>  
-  <div  className="radioinput"> سوق الخدمات  <i class="fa fa-handshake-o fa-2x" aria-hidden="true"></i>
+  <div  className="radioinput"> {t('Addpost_market_Services')}  <i class="fa fa-handshake-o fa-2x" aria-hidden="true"></i>
   <input className="radioinput"  type="radio" id="market4" name='market_code'  value='services'  onChange={e => onChange(e)} 
    onClick={optionServices1}
   />
@@ -2665,7 +2692,7 @@ const optionSubBackImages = async e => {
   <div className={optionClassifieds}>
   <center> 
   <label className="container11" for='market5'>  
-  <div  className="radioinput"> سلع ومنتجات  <i class="fa fa-opencart fa-2x" aria-hidden="true"></i>
+  <div  className="radioinput"> {t('Addpost_market_Classifieds')}  <i class="fa fa-opencart fa-2x" aria-hidden="true"></i>
   <input className="radioinput"  type="radio" id="market5" name='market_code'  value='classifieds'  onChange={e => onChange(e)} 
    onClick={optionClassifieds1}
   />
@@ -2682,7 +2709,7 @@ const optionSubBackImages = async e => {
   <div className={optionElectronics}>
   <center> 
   <label className="container11" for='market6'>  
-  <div  className="radioinput"> اجهزة الكترونية  <i class="fa fa-television fa-2x" aria-hidden="true"></i> <i class="fa fa-mobile" aria-hidden="true"></i>
+  <div  className="radioinput"> {t('Addpost_market_Electronics')}   <i class="fa fa-television fa-2x" aria-hidden="true"></i> <i class="fa fa-mobile" aria-hidden="true"></i>
   <input className="radioinput"  type="radio" id="market6" name='market_code'  value='electronics'  onChange={e => onChange(e)} 
    onClick={optionElectronics1}
   />
@@ -2699,7 +2726,7 @@ const optionSubBackImages = async e => {
   <div className={optionAnimals}>
   <center> 
   <label className="container11" for='market7'>  
-  <div  className="radioinput"> حيوان وطيور ومواشي  
+  <div  className="radioinput"> {t('Addpost_market_Animals')}   
   <input className="radioinput"  type="radio" id="market7" name='market_code'  value='animals'  onChange={e => onChange(e)} 
    onClick={optionAnimals1}
   />
@@ -2715,7 +2742,7 @@ const optionSubBackImages = async e => {
   <div className={optionFurniture}>
   <center> 
   <label className="container11" for='market8'>  
-  <div  className="radioinput"> اثاث   
+  <div  className="radioinput"> {t('Addpost_market_Furniture')}    
   <input className="radioinput"  type="radio" id="market8" name='market_code'  value='furniture'  onChange={e => onChange(e)} 
    onClick={optionFurniture1}
   />
@@ -2731,7 +2758,7 @@ const optionSubBackImages = async e => {
   <div className={optionPersonalitems}>
   <center> 
   <label className="container11" for='market9'>  
-  <div  className="radioinput"> مستلزمات شخصية   
+  <div  className="radioinput"> {t('Addpost_market_Personalitems')}    
   <input className="radioinput"  type="radio" id="market9" name='market_code'  value='personal-items'  onChange={e => onChange(e)} 
    onClick={optionPersonalitems1}
   />
@@ -2747,7 +2774,7 @@ const optionSubBackImages = async e => {
   <div className={optionFooddrinks}>
   <center> 
   <label className="container11" for='market10'>  
-  <div  className="radioinput"> اطعمة ومشروبات   
+  <div  className="radioinput"> {t('Addpost_market_Fooddrinks')}   
   <input className="radioinput"  type="radio" id="market10" name='market_code'  value='food-drinks'  onChange={e => onChange(e)} 
    onClick={optionFooddrinks1}
   />
@@ -2789,23 +2816,22 @@ const optionSubBackImages = async e => {
 
                  <select className="topadtitleinput" 
                    style={{width:'100%',marginLeft:'0%',textAlign:'center'}}
-                  name="purpose" 
-                  value={purpose} 
+                  name="purpose_code" 
+                  value={purpose_code} 
                   onChange={e => onChange(e)}
                   onClick={optionSubCars1}
                   > 
-                  <option className="optiontitleinput" value='nothing chosen'> ما الغرض من الإعلان؟ </option>
+                  <option className="optiontitleinput" value='nothing chosen'>{t('Addpost_purpose_title')}</option>
                 
-                  <option className="optiontitleinput" required value='for-sale'> عرض سيارة للبيع  </option>
-                  <option className="optiontitleinput" required value='rental'> عرض سيارة للإيجار  </option>
-
-                  <option className="optiontitleinput" required value='ask-buy'> أبحث عن سيارة للشراء  </option>
-                  <option className="optiontitleinput" required value='ask-rent'> أبحث عن سيارة للإيجار  </option>
+                  <option className="optiontitleinput" required value='for-sale'>  {t('Addpost_purpose_car_for_sale')}  </option>
+                  <option className="optiontitleinput" required value='rental'> {t('Addpost_purpose_car_rental')}  </option>
+                  <option className="optiontitleinput" required value='ask-buy'> {t('Addpost_purpose_car_ask-buy')}  </option>
+                  <option className="optiontitleinput" required value='ask-rent'> {t('Addpost_purpose_car_ask-rent')}  </option>
                    
 
                   </select>
 
-                  <div  className="topadtitleinput" onClick={optionSubBackCar}>  ماهو نوع السيارة؟    <i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>   
+                  <div  className="topadtitleinput" onClick={optionSubBackCar}>  {t('Addpost_car_type')}    <i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>   
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%',textAlign:'center'}}
                   name="category_code" 
@@ -2813,9 +2839,16 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionSubCars1}
                   > 
-                  <option className="optiontitleinput" value='nothing chosen'> اختر التصنيف </option>
+                  <option className="optiontitleinput" value='nothing chosen'> {t('chose')} </option>
                   {cars.map(car=>(
-                  <option  className="optiontitleinput" required value={car.c_code}> {car.c_AR_name}  </option>
+          
+                    <option  className="optiontitleinput" required value={car.c_code}> 
+                    {i18next.language === 'ar' && car.c_AR_name} 
+                    {i18next.language === 'en' && car.c_EN_name} 
+                    </option>
+                    
+                 
+
                     ))}
 
                   </select>
@@ -2828,19 +2861,19 @@ const optionSubBackImages = async e => {
                   <div className={optionSubProperties}>
                   <select className="topadtitleinput" 
                    style={{width:'100%',marginLeft:'0%',textAlign:'center'}}
-                  name="purpose" 
-                  value={purpose} 
+                  name="purpose_code" 
+                  value={purpose_code} 
                   onChange={e => onChange(e)}
                   onClick={optionSubProperties1}
                   > 
-                  <option className="optiontitleinput" value='nothing chosen'> ما الغرض من الإعلان؟ </option>
-                  <option className="optiontitleinput" required value='rental'> عرض عقار للإيجار  </option>
-                  <option className="optiontitleinput" required value='for-sale'> عرض عقار للبيع  </option>
-                  <option className="optiontitleinput" required value='ask-buy'> أبحث عن عقار للشراء  </option>
-                  <option className="optiontitleinput" required value='ask-rent'> أبحث عن عقار للإيجار  </option>
+                  <option className="optiontitleinput" value='nothing chosen'> {t('Addpost_purpose_title')} </option>
+                  <option className="optiontitleinput" required value='rental'>  {t('Addpost_purpose_Properties_rental')}  </option>
+                  <option className="optiontitleinput" required value='for-sale'>  {t('Addpost_purpose_Properties_for_sale')}  </option>
+                  <option className="optiontitleinput" required value='ask-buy'> {t('Addpost_purpose_Properties_ask-buy')}  </option>
+                  <option className="optiontitleinput" required value='ask-rent'> {t('Addpost_purpose_Properties_ask-rent')}   </option>
                   </select>
 
-                  <div  className="topadtitleinput" onClick={optionSubBackProperties}>  ما نوع العقار ؟   <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </div>
+                  <div  className="topadtitleinput" onClick={optionSubBackProperties}>   {t('Addpost_property_type')}    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </div>
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="category_code" 
@@ -2848,9 +2881,12 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionSubProperties1}
                   > 
-                  <option className="optiontitleinput" value='nothing chosen'> اختر التصنيف  </option>
+                  <option className="optiontitleinput" value='nothing chosen'> {t('chose')}  </option>
                   {properties.map(property=>(
-                  <option className="optiontitleinput" required value={property.c_code}> {property.c_AR_name} </option>
+                  <option className="optiontitleinput" required value={property.c_code}> 
+                  {i18next.language ==='ar' && property.c_AR_name} 
+                  {i18next.language ==='en' && property.c_EN_name} 
+                  </option>
                     ))}
                   </select>
                   </div>
@@ -2861,12 +2897,12 @@ const optionSubBackImages = async e => {
 
                   <select className="topadtitleinput" 
                    style={{width:'100%',marginLeft:'0%',textAlign:'center'}}
-                  name="purpose" 
-                  value={purpose} 
+                  name="purpose_code" 
+                  value={purpose_code} 
                   onChange={e => onChange(e)}
                   onClick={optionSubJobs1}
                   > 
-                  <option  className="optiontitleinput" value='nothing chosen'> ما الغرض من الإعلان؟ </option>
+                  <option  className="optiontitleinput" value='nothing chosen'>{t('Addpost_purpose_title')}</option>
                 
                   <option  className="optiontitleinput" required value='vacancies'> الاعلان عن وظيفة شاغرة  </option>
                   <option  className="optiontitleinput" required value='seeking-work'> الاعلان للبحث عن وظيفة   </option>
@@ -2875,7 +2911,7 @@ const optionSubBackImages = async e => {
 
 
 
-                  <div  className="topadtitleinput" onClick={optionSubBackJobs}>  ما نوع الوظيفة ؟   <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </div>
+                  <div  className="topadtitleinput" onClick={optionSubBackJobs}>    {t('Addpost_job_type')}    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </div>
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="category_code" 
@@ -2883,16 +2919,19 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionSubJobs1}
                   > 
-                  <option className="optiontitleinput" value='nothing chosen'>اختر التصنيف </option>
+                  <option className="optiontitleinput" value='nothing chosen'>{t('chose')} </option>
                   {jobs.map(job=>(
-                  <option className="optiontitleinput"  required value={job.c_code}> {job.c_AR_name} </option>
+                  <option className="optiontitleinput"  required value={job.c_code}> 
+                  {i18next.language ==='ar' && job.c_AR_name} 
+                  {i18next.language ==='en' && job.c_EN_name} 
+                  </option>
                     ))}
                   </select>
                   </div>
 
 
                   <div className={optionSubServices}>
-                  <div  className="topadtitleinput" onClick={optionSubBackServices}>  ما نوع الخدمة؟  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </div>
+                  <div  className="topadtitleinput" onClick={optionSubBackServices}>  {t('Addpost_service_type')}   <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </div>
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="category_code" 
@@ -2900,9 +2939,13 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionSubServices1}
                   > 
-                  <option className="optiontitleinput"  value='nothing chosen'>اختر التصنيف </option>
+                  <option className="optiontitleinput"  value='nothing chosen'>{t('chose')} </option>
                   {services.map(service=>(
-                  <option className="optiontitleinput"  required value={service.c_code}> {service.c_AR_name} </option>
+                  <option className="optiontitleinput"  required value={service.c_code}>
+                  {i18next.language === 'ar' && service.c_AR_name} 
+                  {i18next.language === 'en' && service.c_EN_name} 
+
+                  </option>
                     ))}
                   </select>
                   </div>
@@ -2917,20 +2960,20 @@ const optionSubBackImages = async e => {
 
                   <select className="topadtitleinput" 
                    style={{width:'100%',marginLeft:'0%',textAlign:'center'}}
-                  name="purpose" 
-                  value={purpose} 
+                  name="purpose_code" 
+                  value={purpose_code} 
                   onChange={e => onChange(e)}
                   onClick={optionSubClassifieds1}
                   > 
-                  <option className="optiontitleinput" value='nothing chosen'> ما الغرض من الإعلان؟ </option>
-                  <option className="optiontitleinput" required value='rental'> عرض السلعة للإيجار  </option>
-                  <option className="optiontitleinput" required value='for-sale'> عرض السلعة للبيع  </option>
-                  <option className="optiontitleinput" required value='ask-buy'> أبحث عن مماثل للشراء  </option>
-                  <option className="optiontitleinput" required value='ask-rent'> أبحث عن مماثل للإيجار  </option>
+                  <option className="optiontitleinput" value='nothing chosen'> {t('Addpost_purpose_title')} </option>
+                  <option className="optiontitleinput" required value='rental'> {t('Addpost_purpose_Classifieds_rental')}  </option>
+                  <option className="optiontitleinput" required value='for-sale'> {t('Addpost_purpose_Classifieds_for_sale')}  </option>
+                  <option className="optiontitleinput" required value='ask-buy'> {t('Addpost_purpose_Classifieds_ask-buy')}   </option>
+                  <option className="optiontitleinput" required value='ask-rent'> {t('Addpost_purpose_Classifieds_ask-rent')}   </option>
                   </select>
 
 
-                  <div  className="topadtitleinput" onClick={optionSubBackClassifieds}>  اختر تصنيف السلعة أو المنتج؟    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  </div>
+                  <div  className="topadtitleinput" onClick={optionSubBackClassifieds}>  {t('Addpost_classified_type')}    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  </div>
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="category_code" 
@@ -2938,9 +2981,12 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionSubClassifieds1}
                   > 
-                  <option  className="optiontitleinput" value='nothing chosen'>اختر التصنيف </option>
+                  <option  className="optiontitleinput" value='nothing chosen'>{t('chose')} </option>
                   {classifieds.map(classify=>(
-                  <option  className="optiontitleinput" required value={classify.c_code}> {classify.c_AR_name} </option>
+                  <option  className="optiontitleinput" required value={classify.c_code}>
+                  {i18next.language === 'ar' && classify.c_AR_name} 
+                  {i18next.language === 'en' && classify.c_EN_name} 
+                     </option>
                     ))}
                   </select>
                   </div>
@@ -2955,19 +3001,19 @@ const optionSubBackImages = async e => {
 
                   <select className="topadtitleinput" 
                    style={{width:'100%',marginLeft:'0%',textAlign:'center'}}
-                  name="purpose" 
-                  value={purpose} 
+                  name="purpose_code" 
+                  value={purpose_code} 
                   onChange={e => onChange(e)}
                   onClick={optionSubElectronics1}
                   > 
-                  <option className="optiontitleinput" value='nothing chosen'> ما الغرض من الإعلان؟ </option>
-                  <option className="optiontitleinput" required value='rental'> عرض إلكترونيات للإيجار  </option>
-                  <option className="optiontitleinput" required value='for-sale'> عرض إلكترونيات للبيع  </option>
-                  <option className="optiontitleinput" required value='ask-buy'> أبحث عن مماثل للشراء  </option>
-                  <option className="optiontitleinput" required value='ask-rent'> أبحث عن مماثل للإيجار  </option>
+                  <option className="optiontitleinput" value='nothing chosen'>{t('Addpost_purpose_title')} </option>
+                  <option className="optiontitleinput" required value='rental'> {t('Addpost_purpose_Electronics_rental')}   </option>
+                  <option className="optiontitleinput" required value='for-sale'> {t('Addpost_purpose_Electronics_for_sale')} </option>
+                  <option className="optiontitleinput" required value='ask-buy'> {t('Addpost_purpose_Electronics_ask-buy')}  </option>
+                  <option className="optiontitleinput" required value='ask-rent'> {t('Addpost_purpose_Electronics_ask-rent')}  </option>
                   </select>
 
-                  <div  className="topadtitleinput" onClick={optionSubBackElectronics}>  اختر تصنيف الالكترونيات    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  </div>
+                  <div  className="topadtitleinput" onClick={optionSubBackElectronics}>   {t('Addpost_electronic_type')}     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  </div>
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="category_code" 
@@ -2975,9 +3021,12 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionSubElectronics1}
                   > 
-                  <option  className="optiontitleinput" value='nothing chosen'>اختر التصنيف </option>
+                  <option  className="optiontitleinput" value='nothing chosen'>{t('chose')} </option>
                   {electronics.map(electronic=>(
-                  <option  className="optiontitleinput" required value={electronic.c_code}> {electronic.c_AR_name} </option>
+                  <option  className="optiontitleinput" required value={electronic.c_code}>
+                     {i18next.language === 'ar' && electronic.c_AR_name} 
+                     {i18next.language === 'en' && electronic.c_EN_name} 
+                     </option>
                     ))}
                   </select>
                   </div>
@@ -2990,17 +3039,17 @@ const optionSubBackImages = async e => {
 
                   <select className="topadtitleinput" 
                    style={{width:'100%',marginLeft:'0%',textAlign:'center'}}
-                  name="purpose" 
-                  value={purpose} 
+                  name="purpose_code" 
+                  value={purpose_code} 
                   onChange={e => onChange(e)}
                   onClick={optionSubAnimals1}
                   > 
-                  <option className="optiontitleinput" value='nothing chosen'> ما الغرض من الإعلان؟ </option>
-                  <option className="optiontitleinput" required value='for-sale'> عرض حيوانات للبيع  </option>
-                  <option className="optiontitleinput" required value='ask-buy'> أبحث عن مماثل للشراء  </option>
+                  <option className="optiontitleinput" value='nothing chosen'>{t('Addpost_purpose_title')}</option>
+                  <option className="optiontitleinput" required value='for-sale'> {t('Addpost_purpose_Animals_for_sale')}  </option>
+                  <option className="optiontitleinput" required value='ask-buy'> {t('Addpost_purpose_Animals_ask-buy')}  </option>
                   </select>
 
-                  <div  className="topadtitleinput" onClick={optionSubBackAnimals}>  اختر تصنيف الحيوانات    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  </div>
+                  <div  className="topadtitleinput" onClick={optionSubBackAnimals}>   {t('Addpost_animal_type')}    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  </div>
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="category_code" 
@@ -3008,9 +3057,12 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionSubAnimals1}
                   > 
-                  <option  className="optiontitleinput" value='nothing chosen'>اختر التصنيف </option>
+                  <option  className="optiontitleinput" value='nothing chosen'>{t('chose')} </option>
                   {animals.map(animal=>(
-                  <option  className="optiontitleinput" required value={animal.c_code}> {animal.c_AR_name} </option>
+                  <option  className="optiontitleinput" required value={animal.c_code}> 
+                  {i18next.language === 'ar' && animal.c_AR_name} 
+                  {i18next.language === 'en' && animal.c_EN_name}
+                  </option>
                     ))}
                   </select>
                   </div>
@@ -3023,17 +3075,17 @@ const optionSubBackImages = async e => {
 
                   <select className="topadtitleinput" 
                    style={{width:'100%',marginLeft:'0%',textAlign:'center'}}
-                  name="purpose" 
-                  value={purpose} 
+                  name="purpose_code" 
+                  value={purpose_code} 
                   onChange={e => onChange(e)}
                   onClick={optionSubFurniture1}
                   > 
-                  <option className="optiontitleinput" value='nothing chosen'> ما الغرض من الإعلان؟ </option>
-                  <option className="optiontitleinput" required value='for-sale'> عرض اثاث للبيع  </option>
-                  <option className="optiontitleinput" required value='ask-buy'> أبحث عن اثاث مماثل للشراء  </option>
+                  <option className="optiontitleinput" value='nothing chosen'>{t('Addpost_purpose_title')}</option>
+                  <option className="optiontitleinput" required value='for-sale'> {t('Addpost_purpose_Furniture_for_sale')}  </option>
+                  <option className="optiontitleinput" required value='ask-buy'> {t('Addpost_purpose_Furniture_ask-buy')}   </option>
                   </select>
 
-                  <div  className="topadtitleinput" onClick={optionSubBackFurniture}>  اختر تصنيف الاثاث    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  </div>
+                  <div  className="topadtitleinput" onClick={optionSubBackFurniture}> {t('Addpost_furniture_type')} <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  </div>
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="category_code" 
@@ -3041,9 +3093,12 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionSubFurniture1}
                   > 
-                  <option  className="optiontitleinput" value='nothing chosen'>اختر التصنيف </option>
+                  <option  className="optiontitleinput" value='nothing chosen'>{t('chose')} </option>
                   {furniture.map(furniture=>(
-                  <option  className="optiontitleinput" required value={furniture.c_code}> {furniture.c_AR_name} </option>
+                  <option  className="optiontitleinput" required value={furniture.c_code}> 
+                  {i18next.language === 'ar' && furniture.c_AR_name} 
+                  {i18next.language === 'en' && furniture.c_EN_name} 
+                  </option>
                     ))}
                   </select>
                   </div>
@@ -3056,18 +3111,18 @@ const optionSubBackImages = async e => {
 
                   <select className="topadtitleinput" 
                    style={{width:'100%',marginLeft:'0%',textAlign:'center'}}
-                  name="purpose" 
-                  value={purpose} 
+                  name="purpose_code" 
+                  value={purpose_code} 
                   onChange={e => onChange(e)}
                   onClick={optionSubPersonalitems1}
                   > 
-                  <option className="optiontitleinput" value='nothing chosen'> ما الغرض من الإعلان؟ </option>
-                  <option className="optiontitleinput" required value='for-sale'> عرض  للبيع  </option>
-                  <option className="optiontitleinput" required value='ask-buy'> أبحث عن  مماثل للشراء  </option>
+                  <option className="optiontitleinput" value='nothing chosen'>{t('Addpost_purpose_title')}</option>
+                  <option className="optiontitleinput" required value='for-sale'> {t('Addpost_purpose_PersonalItems_for_sale')}  </option>
+                  <option className="optiontitleinput" required value='ask-buy'> {t('Addpost_purpose_PersonalItems_ask-buy')}   </option>
                   </select>
 
 
-                  <div  className="topadtitleinput" onClick={optionSubBackPersonalitems}>  اختر تصنيف المستلزمات الشخصية    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  </div>
+                  <div  className="topadtitleinput" onClick={optionSubBackPersonalitems}>  {t('Addpost_personalItems_type')}    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  </div>
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="category_code" 
@@ -3075,9 +3130,12 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionSubPersonalitems1}
                   > 
-                  <option  className="optiontitleinput" value='nothing chosen'>اختر التصنيف </option>
+                  <option  className="optiontitleinput" value='nothing chosen'>{t('chose')} </option>
                   {personalitems.map(personalitem=>(
-                  <option  className="optiontitleinput" required value={personalitem.c_code}> {personalitem.c_AR_name} </option>
+                  <option  className="optiontitleinput" required value={personalitem.c_code}>
+                   {i18next.language === 'ar' && personalitem.c_AR_name}
+                   {i18next.language === 'en' && personalitem.c_EN_name}
+                   </option>
                     ))}
                   </select>
                   </div>
@@ -3089,17 +3147,17 @@ const optionSubBackImages = async e => {
 
                   <select className="topadtitleinput" 
                    style={{width:'100%',marginLeft:'0%',textAlign:'center'}}
-                  name="purpose" 
-                  value={purpose} 
+                  name="purpose_code" 
+                  value={purpose_code} 
                   onChange={e => onChange(e)}
                   onClick={optionSubFooddrinks1}
                   > 
-                  <option className="optiontitleinput" value='nothing chosen'> ما الغرض من الإعلان؟ </option>
-                  <option className="optiontitleinput" required value='for-sale'> عرض  للبيع  </option>
-                  <option className="optiontitleinput" required value='ask-buy'> أبحث عن  مماثل للشراء  </option>
+                  <option className="optiontitleinput" value='nothing chosen'>{t('Addpost_purpose_title')}</option>
+                  <option className="optiontitleinput" required value='for-sale'> {t('Addpost_purpose_FoodDrinks_for_sale')}  </option>
+                  <option className="optiontitleinput" required value='ask-buy'> {t('Addpost_purpose_FoodDrinks_ask-buy')}  </option>
                   </select>
 
-                  <div  className="topadtitleinput" onClick={optionSubBackFooddrinks}>  اختر تصنيف الاطعمة والمشروبات    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  </div>
+                  <div  className="topadtitleinput" onClick={optionSubBackFooddrinks}>  {t('Addpost_foodDrink_type')}    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  </div>
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="category_code" 
@@ -3107,9 +3165,12 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionSubFooddrinks1}
                   > 
-                  <option  className="optiontitleinput" value='nothing chosen'>اختر التصنيف </option>
+                  <option  className="optiontitleinput" value='nothing chosen'>{t('chose')} </option>
                   {fooddrinks.map(fooddrink=>(
-                  <option  className="optiontitleinput" required value={fooddrink.c_code}> {fooddrink.c_AR_name} </option>
+                  <option  className="optiontitleinput" required value={fooddrink.c_code}> 
+                  {i18next.language === 'ar' && fooddrink.c_AR_name} 
+                  {i18next.language === 'en' && fooddrink.c_EN_name} 
+                  </option>
                     ))}
                   </select>
                   </div>
@@ -3126,21 +3187,25 @@ const optionSubBackImages = async e => {
   <div className={optionCountry}>
 
    
-
-        <center> 
-        <div  className="topadtitleinput" onClick={optionSubBackCountry}>  اختر دولة النشر    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </div>
-  
  
-  {/* <div className={EuropeSelection}> <div className='radioinputCountry' onClick={EuropeOption}> أوروبا</div> </div> */}
-  <div className={AsiaSelection}> <div className='radioinputCountry' onClick={AsiaOption}> اسيا</div></div>
-  {/* <div className={AfricaSelection}> <div className='radioinputCountry' onClick={AfricaOption}> أفريقيا</div></div>
-  <div className={AustraliaSelection}> <div className='radioinputCountry' onClick={AustraliaOption}> استراليا</div></div>
-  <div className={NorthAmaricaSelection}> <div className='radioinputCountry' onClick={NorthAmaricaOption}> أمريكا الشمالية</div></div>
-  <div className={SouthAmericaSelection}> <div className='radioinputCountry' onClick={SouthAmericaOption}> أمريكا الجنوبية</div></div>
-  <div className={MiddleEastSelection}> <div className='radioinputCountry' onClick={MiddleEastOption}> الشرق الأوسط</div></div> */}
+        <center> 
+        <div  className="topadtitleinput" onClick={optionSubBackCountry}> your ad will be published in {user.country_code}   <i class="fa fa-globe" aria-hidden="true"> </i> </div>
+        
+        <center> <div  className="Formbutton" onClick={optionDetailsNext}> <i class="fa fa-arrow-down" aria-hidden="true"></i> {t('Addpost_next_step')}  </div> </center>
+
+
+  
+
+  {/* <div className={EuropeSelection}> <div className='radioinputCountry' onClick={EuropeOption}> {t('Addpost_country_Europe')} </div> </div>
+  <div className={AsiaSelection}> <div className='radioinputCountry' onClick={AsiaOption}> {t('Addpost_country_Asia')}</div></div>
+   <div className={AfricaSelection}> <div className='radioinputCountry' onClick={AfricaOption}> {t('Addpost_country_Africa')}</div></div>
+  <div className={AustraliaSelection}> <div className='radioinputCountry' onClick={AustraliaOption}> {t('Addpost_country_Australia')}</div></div>
+  <div className={NorthAmaricaSelection}> <div className='radioinputCountry' onClick={NorthAmaricaOption}> {t('Addpost_country_NorthAmarica')}</div></div>
+  <div className={SouthAmericaSelection}> <div className='radioinputCountry' onClick={SouthAmericaOption}> {t('Addpost_country_SouthAmerica')}</div></div>
+  <div className={MiddleEastSelection}> <div className='radioinputCountry' onClick={MiddleEastOption}> {t('Addpost_country_MiddleEast')}</div></div>  */}
 
                   <div className={MiddleEast}> 
-                  <h1>الشرق الأوسط</h1>
+                  <h1>{t('Addpost_country_MiddleEast')}</h1>
                  <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="country_code" 
@@ -3148,9 +3213,12 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionCountry1}
                   >  
-                  <option className="optiontitleinput" value='nothing chosen'>اختر الدولة </option>
+                  <option className="optiontitleinput" value='nothing chosen'>{t('Addpost_country_type')} </option>
                   {MiddleEastGroup.map(country=>(
-                  <option className="optiontitleinput" required value={country.country_code}> {country.country_AR_name} </option>
+                  <option className="optiontitleinput" required value={country.country_code}> 
+                  {i18next.language === 'ar' && country.country_AR_name} 
+                  {i18next.language === 'en' && country.country_EN_name} 
+                  </option>
                     ))}
                   </select>
                   </div>
@@ -3158,7 +3226,7 @@ const optionSubBackImages = async e => {
 
 
                   <div className={SouthAmerica}> 
-                  <h1>أمريكا الجنوبية</h1>
+                  <h1> {t('Addpost_country_SouthAmerica')} </h1>
                  <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="country_code" 
@@ -3166,9 +3234,12 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionCountry1}
                   >  
-                  <option className="optiontitleinput" value='nothing chosen'>اختر الدولة </option>
+                  <option className="optiontitleinput" value='nothing chosen'>{t('Addpost_country_type')} </option>
                   {SouthAmericaGroup.map(country=>(
-                  <option className="optiontitleinput" required value={country.country_code}> {country.country_AR_name} </option>
+                                      <option className="optiontitleinput" required value={country.country_code}> 
+                                      {i18next.language === 'ar' && country.country_AR_name} 
+                                      {i18next.language === 'en' && country.country_EN_name} 
+                                      </option>
                     ))}
                   </select>
                   </div>
@@ -3176,7 +3247,7 @@ const optionSubBackImages = async e => {
 
 
                   <div className={NorthAmarica}> 
-                  <h1>أمريكا الشمالية</h1>
+                  <h1> {t('Addpost_country_NorthAmarica')} </h1>
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="country_code" 
@@ -3184,9 +3255,12 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionCountry1}
                   >  
-                  <option className="optiontitleinput" value='nothing chosen'>اختر الدولة </option>
+                  <option className="optiontitleinput" value='nothing chosen'>{t('Addpost_country_type')} </option>
                   {NorthAmaricaGroup.map(country=>(
-                  <option className="optiontitleinput" required value={country.country_code}> {country.country_AR_name} </option>
+                                      <option className="optiontitleinput" required value={country.country_code}> 
+                                      {i18next.language === 'ar' && country.country_AR_name} 
+                                      {i18next.language === 'en' && country.country_EN_name} 
+                                      </option>
                     ))}
                   </select>
                   </div>
@@ -3195,7 +3269,7 @@ const optionSubBackImages = async e => {
 
 
                   <div className={Africa}> 
-                  <h1>افريقيا</h1>
+                  <h1> {t('Addpost_country_Africa')} </h1>
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="country_code" 
@@ -3203,9 +3277,12 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionCountry1}
                   >  
-                  <option className="optiontitleinput" value='nothing chosen'>اختر الدولة </option>
+                  <option className="optiontitleinput" value='nothing chosen'>{t('Addpost_country_type')} </option>
                   {AfricaGroup.map(country=>(
-                  <option className="optiontitleinput" required value={country.country_code}> {country.country_AR_name} </option>
+                                      <option className="optiontitleinput" required value={country.country_code}> 
+                                      {i18next.language === 'ar' && country.country_AR_name} 
+                                      {i18next.language === 'en' && country.country_EN_name} 
+                                      </option>
                     ))}
                   </select>
                   </div>
@@ -3214,7 +3291,7 @@ const optionSubBackImages = async e => {
 
 
                   <div className={Europe}> 
-                  <h1>اوروبا</h1>
+                  <h1> {t('Addpost_country_Europe')}  </h1>
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="country_code" 
@@ -3222,9 +3299,12 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionCountry1}
                   >  
-                  <option className="optiontitleinput" value='nothing chosen'>اختر الدولة </option>
+                  <option className="optiontitleinput" value='nothing chosen'> {t('Addpost_country_type')} </option>
                   {EuropeGroup.map(country=>(
-                  <option className="optiontitleinput" required value={country.country_code}> {country.country_AR_name} </option>
+                                      <option className="optiontitleinput" required value={country.country_code}> 
+                                      {i18next.language === 'ar' && country.country_AR_name} 
+                                      {i18next.language === 'en' && country.country_EN_name} 
+                                      </option>
                     ))}
                   </select>
                   </div>
@@ -3234,7 +3314,7 @@ const optionSubBackImages = async e => {
 
 
                   <div className={Asia}> 
-                  <h1>اسيا</h1>
+                  <h1> {t('Addpost_country_Asia')} </h1>
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="country_code" 
@@ -3242,9 +3322,12 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionCountry1}
                   >  
-                  <option className="optiontitleinput" value='nothing chosen'>اختر الدولة </option>
+                  <option className="optiontitleinput" value='nothing chosen'> {t('Addpost_country_type')} </option>
                   {AsiaGroup.map(country=>(
-                  <option className="optiontitleinput" required value={country.country_code}> {country.country_AR_name} </option>
+                                      <option className="optiontitleinput" required value={country.country_code}> 
+                                      {i18next.language === 'ar' && country.country_AR_name} 
+                                      {i18next.language === 'en' && country.country_EN_name} 
+                                      </option>
                     ))}
                   </select>
                   </div>
@@ -3253,7 +3336,7 @@ const optionSubBackImages = async e => {
 
 
                   <div className={Australia}> 
-                  <h1>استراليا</h1>
+                  <h1> {t('Addpost_country_Australia')} </h1>
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="country_code" 
@@ -3261,17 +3344,20 @@ const optionSubBackImages = async e => {
                   onChange={e => onChange(e)}
                   onClick={optionCountry1}
                   >  
-                  <option className="optiontitleinput" value='nothing chosen'>اختر الدولة </option>
+                  <option className="optiontitleinput" value='nothing chosen'> {t('Addpost_country_type')} </option>
                   {AustraliaGroup.map(country=>(
-                  <option className="optiontitleinput" required value={country.country_code}> {country.country_AR_name} </option>
-                    ))}
+                                      <option className="optiontitleinput" required value={country.country_code}> 
+                                      {i18next.language === 'ar' && country.country_AR_name} 
+                                      {i18next.language === 'en' && country.country_EN_name} 
+                                      </option>
+                     ))}
                   </select>
                   </div>
 
   
 
 
-<div className={optionCity}> 
+<div> 
                   <select className="Forminput" 
                    style={{width:'100%',marginLeft:'0%', textAlign:'center'}}
                   name="city_code" 
@@ -3280,118 +3366,164 @@ const optionSubBackImages = async e => {
                   onClick={optionCity1}
                  
                   >  
-                  <option className="optiontitleinput" value='nothing chosen'>اختر المدينة </option>
+                  <option className="optiontitleinput" value='nothing chosen'> {t('Addpost_city_type')} </option>
  
 
-                  {country_code === 'sa' &&(
+                  {user.country_code === 'SA' &&(
                    citySA.map(city=>(
-                    <option  className="optiontitleinput" required value={city.city_code}> {city.city_AR_name} </option>
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
                       ))
                   )}
 
 
-                  {country_code === 'eg' &&(
+                  {user.country_code === 'EG' &&(
                    cityEG.map(city=>(
-                    <option className="optiontitleinput" required value={city.city_code}> {city.city_AR_name} </option>
-                      ))
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
+                       ))
                   )}
 
 
-                 {country_code === 'tn' &&(
+                 {user.country_code === 'TN' &&(
                    cityTN.map(city=>(
-                    <option className="optiontitleinput"   required value={city.city_code}> {city.city_AR_name} </option>
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
                       ))
                   )}
 
 
-                 {country_code === 'ae' &&(
+                 {user.country_code === 'AE' &&(
                    cityAE.map(city=>(
-                    <option  className="optiontitleinput" required value={city.city_code}> {city.city_AR_name} </option>
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
                       ))
                   )}
 
 
-               {country_code === 'jo' &&(
+               {user.country_code === 'JO' &&(
                    cityJO.map(city=>(
-                    <option className="optiontitleinput"  required value={city.city_code}> {city.city_AR_name} </option>
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
                       ))
                   )}
 
 
 
                   
-                 {country_code === 'sd' &&(
+                 {user.country_code === 'SD' &&(
                    citySD.map(city=>(
-                    <option className="optiontitleinput" required value={city.city_code}> {city.city_AR_name} </option>
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
                       ))
                   )}
 
 
 
-                {country_code === 'bh' &&(
+                {user.country_code === 'BH' &&(
                    cityBH.map(city=>(
-                    <option  className="optiontitleinput" required value={city.city_code}> {city.city_AR_name} </option>
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
                       ))
                   )}
+ 
 
 
-
-                {country_code === 'dz' &&(
+                {user.country_code === 'DZ' &&(
                    cityDZ.map(city=>(
-                    <option  className="optiontitleinput" required value={city.city_code}> {city.city_AR_name} </option>
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
                       ))
                   )}
 
 
-                {country_code === 'iq' &&(
+                {user.country_code === 'IQ' &&(
                    cityIQ.map(city=>(
-                    <option  className="optiontitleinput" required value={city.city_code}> {city.city_AR_name} </option>
-                      ))
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
+
+                    ))
                   )}
 
 
-                {country_code === 'kw' &&(
+                {user.country_code === 'KW' &&(
                    cityKW.map(city=>(
-                    <option  className="optiontitleinput" required value={city.city_code}> {city.city_AR_name} </option>
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
                       ))
                   )}
 
 
 
-                  {country_code === 'ma' &&(
+                  {user.country_code === 'MA' &&(
                    cityMA.map(city=>(
-                    <option  className="optiontitleinput" required value={city.city_code}> {city.city_AR_name} </option>
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
                       ))
                   )}
 
 
 
-                  {country_code === 'ye' &&(
+                  {user.country_code === 'YE' &&(
                    cityYE.map(city=>(
-                    <option  className="optiontitleinput" required value={city.city_code}> {city.city_AR_name} </option>
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
                       ))
                    )}
 
 
 
-                 {country_code === 'om' &&(
+                 {user.country_code === 'OM' &&(
                    cityOM.map(city=>(
-                    <option  className="optiontitleinput" required value={city.city_code}> {city.city_AR_name} </option>
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
                       ))
                    )}
 
 
 
-                {country_code === 'qa' &&(
+                {user.country_code === 'QA' &&(
                    cityQA.map(city=>(
-                    <option  className="optiontitleinput" required value={city.city_code}> {city.city_AR_name} </option>
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
                       ))
                    )}
 
 
-              {country_code === 'lb' &&(
+              {user.country_code === 'LB' &&(
                    cityLB.map(city=>(
-                    <option  className="optiontitleinput" required value={city.city_code}> {city.city_AR_name} </option>
+                    <option  className="optiontitleinput" required value={city.city_code}> 
+                    {i18next.language === 'ar'&& city.city_AR_name}
+                    {i18next.language === 'en'&& city.city_EN_name}
+                     </option>
                       ))
                    )}
 
@@ -3545,7 +3677,7 @@ const optionSubBackImages = async e => {
                  </div>
   */}
 
-  <center> <div  className="Formbutton" onClick={optionDetailsNext}> <i class="fa fa-arrow-down" aria-hidden="true"></i> الخطوة التالية  </div> </center>
+  <center> <div  className="Formbutton" onClick={optionDetailsNext}> <i class="fa fa-arrow-down" aria-hidden="true"></i> {t('Addpost_next_step')}  </div> </center>
 
 
   </div>
@@ -3554,12 +3686,12 @@ const optionSubBackImages = async e => {
 
 
                   <div className={optionDetails}>
-                  <div  className="topadtitleinput" onClick={optionSubBackDetails} >  تفاصيل الإعلان  </div>
+                  <div  className="topadtitleinput" onClick={optionSubBackDetails} >  {t('Addpost_add_details')}  </div>
 
-                  <span className='field-Text'>  عنوان الإعلان   </span>
+                  <span className='field-Text'>  {t('Addpost_add_title')}   </span>
                     <input className="Forminput"
                     style={{height:''}}
-                    placeholder="ضع عنوان مناسب لإعلانك (120 حرف)"
+                    placeholder={t('Addpost_add_title_placeholder')}
                     type="text" 
                     autocomplete="off"
                     name='title'
@@ -3570,16 +3702,16 @@ const optionSubBackImages = async e => {
                     />
 
 
-                  <span className='field-Text'> وصف الإعلان </span>
+                  <span className='field-Text'> {t('Addpost_add_description')} </span>
                    <textarea className="Forminput"
                     style={{height:'120px',direction:'rtl',textAlign:'center'}}
-                    placeholder="وصف الإعلان  (400 حرف)"
+                    placeholder={t('Addpost_add_description_placeholder')}
                     type="text" 
                     autocomplete="off"
                     name='Main_paragraph'
                     value={Main_paragraph}
                     onChange={e => onChange(e)}
-                    maxlength="400"
+                    maxlength="400" 
                     minlength="100"
                  
                     />
@@ -3587,7 +3719,7 @@ const optionSubBackImages = async e => {
  
 {/* <span className='field-Text'> السعر </span> */}
                     <input className="Priceinput"
-                    placeholder="السعر"
+                    placeholder={t('Addpost_price')}
                     type="number" 
                     autocomplete="off"
                     name='price'
@@ -3605,8 +3737,9 @@ const optionSubBackImages = async e => {
                   value={currency}
                   onChange={e => onChange(e)}
                   >  
+                  {i18next.language === 'ar' &&(
+                  <Fragment> 
                   <option className="optiontitleinput" value='nothing chosen'>اختر العملة </option>
-                  
                   <option className="optiontitleinput" value='SAR'> ريال سعودي  </option>
                   <option className="optiontitleinput" value='AED'> درهم إماراتي  </option>
                   <option className="optiontitleinput" value='OMR'>  ريال عماني </option>
@@ -3651,10 +3784,180 @@ const optionSubBackImages = async e => {
                   <option className="optiontitleinput" value='NOK'>  الكرونا النرويجية </option>
                   <option className="optiontitleinput" value='ZAR'>  الراند الجنوب أفريقي </option>
                   <option className="optiontitleinput" value='TRY'>  الليرة التركية </option>
-    
+                  </Fragment>
+                  )}
 
+{i18next.language === 'en' &&(
 
+  <Fragment>
+        <option value="USD" selected="selected" label="US dollar">USD</option>
+    <option value="EUR" label="Euro">EUR</option>
+    <option value="JPY" label="Japanese yen">JPY</option>
+    <option value="GBP" label="Pound sterling">GBP</option>
+    <option disabled>──────────</option>
+    <option value="AED" label="United Arab Emirates dirham">AED</option>
+    <option value="AFN" label="Afghan afghani">AFN</option>
+    <option value="ALL" label="Albanian lek">ALL</option>
+    <option value="AMD" label="Armenian dram">AMD</option>
+    <option value="ANG" label="Netherlands Antillean guilder">ANG</option>
+    <option value="AOA" label="Angolan kwanza">AOA</option>
+    <option value="ARS" label="Argentine peso">ARS</option>
+    <option value="AUD" label="Australian dollar">AUD</option>
+    <option value="AWG" label="Aruban florin">AWG</option>
+    <option value="AZN" label="Azerbaijani manat">AZN</option>
+    <option value="BAM" label="Bosnia and Herzegovina convertible mark">BAM</option>
+    <option value="BBD" label="Barbadian dollar">BBD</option>
+    <option value="BDT" label="Bangladeshi taka">BDT</option>
+    <option value="BGN" label="Bulgarian lev">BGN</option>
+    <option value="BHD" label="Bahraini dinar">BHD</option>
+    <option value="BIF" label="Burundian franc">BIF</option>
+    <option value="BMD" label="Bermudian dollar">BMD</option>
+    <option value="BND" label="Brunei dollar">BND</option>
+    <option value="BOB" label="Bolivian boliviano">BOB</option>
+    <option value="BRL" label="Brazilian real">BRL</option>
+    <option value="BSD" label="Bahamian dollar">BSD</option>
+    <option value="BTN" label="Bhutanese ngultrum">BTN</option>
+    <option value="BWP" label="Botswana pula">BWP</option>
+    <option value="BYN" label="Belarusian ruble">BYN</option>
+    <option value="BZD" label="Belize dollar">BZD</option>
+    <option value="CAD" label="Canadian dollar">CAD</option>
+    <option value="CDF" label="Congolese franc">CDF</option>
+    <option value="CHF" label="Swiss franc">CHF</option>
+    <option value="CLP" label="Chilean peso">CLP</option>
+    <option value="CNY" label="Chinese yuan">CNY</option>
+    <option value="COP" label="Colombian peso">COP</option>
+    <option value="CRC" label="Costa Rican colón">CRC</option>
+    <option value="CUC" label="Cuban convertible peso">CUC</option>
+    <option value="CUP" label="Cuban peso">CUP</option>
+    <option value="CVE" label="Cape Verdean escudo">CVE</option>
+    <option value="CZK" label="Czech koruna">CZK</option>
+    <option value="DJF" label="Djiboutian franc">DJF</option>
+    <option value="DKK" label="Danish krone">DKK</option>
+    <option value="DOP" label="Dominican peso">DOP</option>
+    <option value="DZD" label="Algerian dinar">DZD</option>
+    <option value="EGP" label="Egyptian pound">EGP</option>
+    <option value="ERN" label="Eritrean nakfa">ERN</option>
+    <option value="ETB" label="Ethiopian birr">ETB</option>
+    <option value="EUR" label="EURO">EUR</option>
+    <option value="FJD" label="Fijian dollar">FJD</option>
+    <option value="FKP" label="Falkland Islands pound">FKP</option>
+    <option value="GBP" label="British pound">GBP</option>
+    <option value="GEL" label="Georgian lari">GEL</option>
+    <option value="GGP" label="Guernsey pound">GGP</option>
+    <option value="GHS" label="Ghanaian cedi">GHS</option>
+    <option value="GIP" label="Gibraltar pound">GIP</option>
+    <option value="GMD" label="Gambian dalasi">GMD</option>
+    <option value="GNF" label="Guinean franc">GNF</option>
+    <option value="GTQ" label="Guatemalan quetzal">GTQ</option>
+    <option value="GYD" label="Guyanese dollar">GYD</option>
+    <option value="HKD" label="Hong Kong dollar">HKD</option>
+    <option value="HNL" label="Honduran lempira">HNL</option>
+    <option value="HRK" label="Croatian kuna">HRK</option>
+    <option value="HTG" label="Haitian gourde">HTG</option>
+    <option value="HUF" label="Hungarian forint">HUF</option>
+    <option value="IDR" label="Indonesian rupiah">IDR</option>
+    <option value="ILS" label="Israeli new shekel">ILS</option>
+    <option value="IMP" label="Manx pound">IMP</option>
+    <option value="INR" label="Indian rupee">INR</option>
+    <option value="IQD" label="Iraqi dinar">IQD</option>
+    <option value="IRR" label="Iranian rial">IRR</option>
+    <option value="ISK" label="Icelandic króna">ISK</option>
+    <option value="JEP" label="Jersey pound">JEP</option>
+    <option value="JMD" label="Jamaican dollar">JMD</option>
+    <option value="JOD" label="Jordanian dinar">JOD</option>
+    <option value="JPY" label="Japanese yen">JPY</option>
+    <option value="KES" label="Kenyan shilling">KES</option>
+    <option value="KGS" label="Kyrgyzstani som">KGS</option>
+    <option value="KHR" label="Cambodian riel">KHR</option>
+    <option value="KID" label="Kiribati dollar">KID</option>
+    <option value="KMF" label="Comorian franc">KMF</option>
+    <option value="KPW" label="North Korean won">KPW</option>
+    <option value="KRW" label="South Korean won">KRW</option>
+    <option value="KWD" label="Kuwaiti dinar">KWD</option>
+    <option value="KYD" label="Cayman Islands dollar">KYD</option>
+    <option value="KZT" label="Kazakhstani tenge">KZT</option>
+    <option value="LAK" label="Lao kip">LAK</option>
+    <option value="LBP" label="Lebanese pound">LBP</option>
+    <option value="LKR" label="Sri Lankan rupee">LKR</option>
+    <option value="LRD" label="Liberian dollar">LRD</option>
+    <option value="LSL" label="Lesotho loti">LSL</option>
+    <option value="LYD" label="Libyan dinar">LYD</option>
+    <option value="MAD" label="Moroccan dirham">MAD</option>
+    <option value="MDL" label="Moldovan leu">MDL</option>
+    <option value="MGA" label="Malagasy ariary">MGA</option>
+    <option value="MKD" label="Macedonian denar">MKD</option>
+    <option value="MMK" label="Burmese kyat">MMK</option>
+    <option value="MNT" label="Mongolian tögrög">MNT</option>
+    <option value="MOP" label="Macanese pataca">MOP</option>
+    <option value="MRU" label="Mauritanian ouguiya">MRU</option>
+    <option value="MUR" label="Mauritian rupee">MUR</option>
+    <option value="MVR" label="Maldivian rufiyaa">MVR</option>
+    <option value="MWK" label="Malawian kwacha">MWK</option>
+    <option value="MXN" label="Mexican peso">MXN</option>
+    <option value="MYR" label="Malaysian ringgit">MYR</option>
+    <option value="MZN" label="Mozambican metical">MZN</option>
+    <option value="NAD" label="Namibian dollar">NAD</option>
+    <option value="NGN" label="Nigerian naira">NGN</option>
+    <option value="NIO" label="Nicaraguan córdoba">NIO</option>
+    <option value="NOK" label="Norwegian krone">NOK</option>
+    <option value="NPR" label="Nepalese rupee">NPR</option>
+    <option value="NZD" label="New Zealand dollar">NZD</option>
+    <option value="OMR" label="Omani rial">OMR</option>
+    <option value="PAB" label="Panamanian balboa">PAB</option>
+    <option value="PEN" label="Peruvian sol">PEN</option>
+    <option value="PGK" label="Papua New Guinean kina">PGK</option>
+    <option value="PHP" label="Philippine peso">PHP</option>
+    <option value="PKR" label="Pakistani rupee">PKR</option>
+    <option value="PLN" label="Polish złoty">PLN</option>
+    <option value="PRB" label="Transnistrian ruble">PRB</option>
+    <option value="PYG" label="Paraguayan guaraní">PYG</option>
+    <option value="QAR" label="Qatari riyal">QAR</option>
+    <option value="RON" label="Romanian leu">RON</option>
+    <option value="RSD" label="Serbian dinar">RSD</option>
+    <option value="RUB" label="Russian ruble">RUB</option>
+    <option value="RWF" label="Rwandan franc">RWF</option>
+    <option value="SAR" label="Saudi riyal">SAR</option>
+    <option value="SEK" label="Swedish krona">SEK</option>
+    <option value="SGD" label="Singapore dollar">SGD</option>
+    <option value="SHP" label="Saint Helena pound">SHP</option>
+    <option value="SLL" label="Sierra Leonean leone">SLL</option>
+    <option value="SLS" label="Somaliland shilling">SLS</option>
+    <option value="SOS" label="Somali shilling">SOS</option>
+    <option value="SRD" label="Surinamese dollar">SRD</option>
+    <option value="SDP" label="Sudanese pound">SSP</option>
+    <option value="SSP" label="South Sudanese pound">SSP</option>
+    <option value="STN" label="São Tomé and Príncipe dobra">STN</option>
+    <option value="SYP" label="Syrian pound">SYP</option>
+    <option value="SZL" label="Swazi lilangeni">SZL</option>
+    <option value="THB" label="Thai baht">THB</option>
+    <option value="TJS" label="Tajikistani somoni">TJS</option>
+    <option value="TMT" label="Turkmenistan manat">TMT</option>
+    <option value="TND" label="Tunisian dinar">TND</option>
+    <option value="TOP" label="Tongan paʻanga">TOP</option>
+    <option value="TRY" label="Turkish lira">TRY</option>
+    <option value="TTD" label="Trinidad and Tobago dollar">TTD</option>
+    <option value="TVD" label="Tuvaluan dollar">TVD</option>
+    <option value="TWD" label="New Taiwan dollar">TWD</option>
+    <option value="TZS" label="Tanzanian shilling">TZS</option>
+    <option value="UAH" label="Ukrainian hryvnia">UAH</option>
+    <option value="UGX" label="Ugandan shilling">UGX</option>
+    <option value="USD" label="United States dollar">USD</option>
+    <option value="UYU" label="Uruguayan peso">UYU</option>
+    <option value="UZS" label="Uzbekistani soʻm">UZS</option>
+    <option value="VES" label="Venezuelan bolívar soberano">VES</option>
+    <option value="VND" label="Vietnamese đồng">VND</option>
+    <option value="VUV" label="Vanuatu vatu">VUV</option>
+    <option value="WST" label="Samoan tālā">WST</option>
+    <option value="XAF" label="Central African CFA franc">XAF</option>
+    <option value="XCD" label="Eastern Caribbean dollar">XCD</option>
+    <option value="XOF" label="West African CFA franc">XOF</option>
+    <option value="XPF" label="CFP franc">XPF</option>
+    <option value="ZAR" label="South African rand">ZAR</option>
+    <option value="ZMW" label="Zambian kwacha">ZMW</option>
+    <option value="ZWB" label="Zimbabwean bonds">ZWB</option>
 
+  </Fragment>
+)}
 
 
 
@@ -3670,19 +3973,19 @@ const optionSubBackImages = async e => {
 
   
 
-                  <p> مدة الإعلان بعدد الأيام </p>
+                  <p> {t('Addpost_period')} </p>
 
                 <div className={DurationStyle10}
                  onClick={onChangeDuration10}
                  >
-                   10 أيام 
+                   {t('Addpost_10_days')} 
                  </div>
 
 
                  <div className={DurationStyle20}
                  onClick={onChangeDuration20}
                  >
-                   20 يوم 
+                    {t('Addpost_20_days')}  
                  </div>
 
 
@@ -3691,7 +3994,7 @@ const optionSubBackImages = async e => {
                  <div className={DurationStyle30}
                  onClick={onChangeDuration30}
                  >
-                   30 يوم 
+                    {t('Addpost_30_days')}  
                  </div>
                  </Fragment>
                  )}
@@ -3701,7 +4004,7 @@ const optionSubBackImages = async e => {
                  <div className={DurationStyle60}
                  onClick={onChangeDuration60}
                  >
-                   60 يوم 
+                   {t('Addpost_60_days')}  
                  </div>
                  </Fragment>
               )}
@@ -3712,7 +4015,7 @@ const optionSubBackImages = async e => {
                  <div className={DurationStyle90}
                  onClick={onChangeDuration90}
                  >
-                   90 يوم 
+                    {t('Addpost_90_days')}  
                  </div>
                  </Fragment>
               )}
@@ -3723,7 +4026,7 @@ const optionSubBackImages = async e => {
                  <div className={DurationStyle120}
                  onClick={onChangeDuration120}
                  >
-                   120 يوم 
+                    {t('Addpost_120_days')}  
                  </div>
                  </Fragment>
                 )}
@@ -3734,7 +4037,7 @@ const optionSubBackImages = async e => {
                  <div className={DurationStyle000}
                  onClick={onChangeDuration000}
                  >
-                   365 يوم  
+                    {t('Addpost_365_days')}   
                  </div>
                  </Fragment>
                 )}
@@ -3749,7 +4052,7 @@ const optionSubBackImages = async e => {
                  
  
 
-              <p> تاريخ الانتهاء </p>
+              <p> {t('Addpost_Expiry_date')} </p>
                 <input className="Forminput"
                  maxlength="66"
                  type="text" 
@@ -3765,17 +4068,17 @@ const optionSubBackImages = async e => {
                  {/* <div  className="topadtitleinput" onClick={optionSubBackEnglishDetails} > هل تريد نشر الإعلان باللغة الإنجليزية ؟ </div> */}
 
                  {/* <center> <div  className="Formbutton" onClick={optionEnglishDetailsNext}>  نعم  </div> </center> */}
-                 <center> <div  className="Formbutton" onClick={optionImagesNext}>  الخطوة التالية  </div> </center>
+                 <center> <div  className="Formbutton" onClick={optionImagesNext}>  {t('Addpost_next_step')}  </div> </center>
 
                  </div>
 
 
                     <div className={optionEnglishDetails}>
 
-                    <span className='field-text'> عنوان إنجليزي </span>
+                    <span className='field-text'> {t('Addpost_add_title_english')} </span>
                     <input className="Forminput"
                    
-                    placeholder="عنوان باللغة الإنجليزية (120حرف)"
+                    placeholder={t('Addpost_add_title_english_placeholder')}
                     type="text" 
                     autocomplete="off"
                     name='title_English'
@@ -3785,9 +4088,10 @@ const optionSubBackImages = async e => {
                    
                     />
 
-                    <span className='field-text'>  وصف الإعلان باللغة الإنجليزية  </span>
+                    <span className='field-text'>  {t('Addpost_add_description_english')}  </span>
                    <textarea className="Forminput"
                     style={{height:'120px',direction:'ltr',textAlign:'left'}}
+                    placeholder={t('Addpost_add_description_english_placeholder')}
                     type="text" 
                     autocomplete="off"
                     name='Main_English_paragraph'
@@ -3800,7 +4104,7 @@ const optionSubBackImages = async e => {
                     />
 
 
-              <center> <div  className="Formbutton" onClick={optionImagesNext}>  الخطوة التالية  </div> </center>
+              <center> <div  className="Formbutton" onClick={optionImagesNext}>  {t('Addpost_next_step')}  </div> </center>
 
 
                     </div>
@@ -3813,7 +4117,7 @@ const optionSubBackImages = async e => {
 
 
                       <div className={optionImages}>
-                      <div  className="topadtitleinput" onClick={optionSubBackImages } >   إضافة الفيديو والصور لإعلانك   </div>
+                      <div  className="topadtitleinput" onClick={optionSubBackImages } >   {t('Addpost_add_pictures_title')}   </div>
                    
 
                {/* <span> رابط الفيديو في اليوتيوب (للعضوية الذهبية) </span>
@@ -3826,7 +4130,7 @@ const optionSubBackImages = async e => {
                  value={video}
                  onChange={e => onChange(e)}
                  /> */}
-<div> صورة العرض الرئيسية </div>
+<div> {t('Addpost_add_main_pictures')} </div>
 
                        {/* add image */}
 
@@ -3882,7 +4186,7 @@ const optionSubBackImages = async e => {
 
 
                       {/* add pic1 */}
-                      <center> <div  className="Formbutton" onClick={optionShowStatus1}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  أضف صورة  </div> </center>
+                      <center> <div  className="Formbutton" onClick={optionShowStatus1}> <i class="fa fa-plus-circle" aria-hidden="true"></i> {t('Addpost_add_other_picture')}  </div> </center>
 
                        <div className={showStatus1}>
                        {/* <label  className="imageLabel" for="file1">
@@ -3923,7 +4227,7 @@ const optionSubBackImages = async e => {
                      )}
 
 
-<center> <div  className="Formbutton" onClick={optionShowStatus2}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  أضف صورة  </div> </center>
+<center> <div  className="Formbutton" onClick={optionShowStatus2}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  {t('Addpost_add_other_picture')}  </div> </center>
 
 
                   </div>
@@ -3972,7 +4276,7 @@ const optionSubBackImages = async e => {
                        </Fragment>
                      )}
 
-<center> <div  className="Formbutton" onClick={optionShowStatus3}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  أضف صورة  </div> </center>
+<center> <div  className="Formbutton" onClick={optionShowStatus3}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  {t('Addpost_add_other_picture')}   </div> </center>
 
 
   </div>
@@ -4020,7 +4324,7 @@ const optionSubBackImages = async e => {
                        </Fragment>
                      )}
 
-<center> <div  className="Formbutton" onClick={optionShowStatus4}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  أضف صورة  </div> </center>
+<center> <div  className="Formbutton" onClick={optionShowStatus4}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  {t('Addpost_add_other_picture')}   </div> </center>
  
 
                     </div>
@@ -4068,7 +4372,7 @@ const optionSubBackImages = async e => {
                        </Fragment>
                      )}
 
-<center> <div  className="Formbutton" onClick={optionShowStatus5}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  أضف صورة  </div> </center>
+<center> <div  className="Formbutton" onClick={optionShowStatus5}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  {t('Addpost_add_other_picture')}   </div> </center>
 
 
                     </div>
@@ -4117,7 +4421,7 @@ const optionSubBackImages = async e => {
                        </Fragment>
                      )}
 
-<center> <div  className="Formbutton" onClick={optionShowStatus6}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  أضف صورة  </div> </center>
+<center> <div  className="Formbutton" onClick={optionShowStatus6}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  {t('Addpost_add_other_picture')}   </div> </center>
 
 
                     </div>
@@ -4165,7 +4469,7 @@ const optionSubBackImages = async e => {
                        </Fragment>
                      )}
 
-<center> <div  className="Formbutton" onClick={optionShowStatus7}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  أضف صورة  </div> </center>
+<center> <div  className="Formbutton" onClick={optionShowStatus7}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  {t('Addpost_add_other_picture')}   </div> </center>
 
                   </div>
 
@@ -4213,7 +4517,7 @@ const optionSubBackImages = async e => {
                        </Fragment>
                      )}
 
-<center> <div  className="Formbutton" onClick={optionShowStatus8}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  أضف صورة  </div> </center>
+<center> <div  className="Formbutton" onClick={optionShowStatus8}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  {t('Addpost_add_other_picture')}   </div> </center>
 
                     </div>
 
@@ -4260,7 +4564,7 @@ const optionSubBackImages = async e => {
                        </Fragment>
                      )}
 
-<center> <div  className="Formbutton" onClick={optionShowStatus9}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  أضف صورة  </div> </center>
+<center> <div  className="Formbutton" onClick={optionShowStatus9}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  {t('Addpost_add_other_picture')}   </div> </center>
 
                     </div>
 
@@ -4313,7 +4617,7 @@ const optionSubBackImages = async e => {
                        </span>
                        </Fragment>
                      )}
-  <center> <div  className="Formbutton" onClick={optionShowStatus10}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  أضف صورة  </div> </center>
+  <center> <div  className="Formbutton" onClick={optionShowStatus10}> <i class="fa fa-plus-circle" aria-hidden="true"></i>  {t('Addpost_add_other_picture')}    </div> </center>
 
                     </div>
 
@@ -4371,8 +4675,16 @@ const optionSubBackImages = async e => {
 
 
 
-                  <center> <div  className="Formbutton" onClick={optionSubmit1}>   استمرار  </div> </center>
+                  <center> <div  className="Formbutton" onClick={optionSubmit1}>   {t('Addpost_continue')}  </div> </center>
+                  {i18next.language === 'ar' &&(
                   <span className='smallText'> نرجو منك مراجعة نص الإعلان والتأكد من معلومات التواصل قبل ‏النشر، لا يمكن تعديل الإعلان بعد نشره </span>
+                  )}
+
+                {i18next.language === 'en' &&(
+                  <span className='smallText'>  
+                  We kindly ask you to review the text of the advertisement and make sure of the contact information before publishing, the advertisement cannot be modified after it has been published
+                    </span>
+                  )}
 
                      </div>
 
@@ -4558,7 +4870,7 @@ const optionSubBackImages = async e => {
  
   <center> 
   <div className={finish}>  
-    <button  type="submit" className="Formbutton">نشر الإعلان  </button>
+    <button  type="submit" className="Formbutton"> {t('Addpost_Publish')}  </button>
     </div>
     </center>
   
@@ -4569,7 +4881,7 @@ const optionSubBackImages = async e => {
     {/* <Alert /> */}
 
 
-    {alertWarning !== '' &&(
+    {alertWarning !== '' && i18next.language === 'ar' &&(
       <div className={finish}>  
       <div className='alert-warning'> 
       {alertWarning}
@@ -4577,9 +4889,26 @@ const optionSubBackImages = async e => {
         </div>   
     )}
 
-{alertSuccess !== '' &&(
+
+{alertWarningEnglish !== '' && i18next.language === 'en' &&(
+      <div className={finish}>  
+      <div className='alert-warning'> 
+      {alertWarningEnglish}
+        </div>   
+        </div>   
+    )}
+
+
+{alertSuccess !== '' && i18next.language === 'ar' &&(
      <div className='alert-success'> 
      {alertSuccess}
+       </div>   
+    )}
+
+
+{alertSuccessEnglish !== '' && i18next.language === 'en' &&(
+     <div className='alert-success'> 
+     {alertSuccessEnglish}
        </div>   
     )}
 
@@ -4590,6 +4919,7 @@ const optionSubBackImages = async e => {
     </div>
 
           </form>
+           
           
           </center>
 
@@ -4609,7 +4939,8 @@ const optionSubBackImages = async e => {
       <Spinner />
     ) : (
       <Fragment>
-         <Navbar />
+      {i18next.language === 'ar'&&(<Navbar />)}
+      {i18next.language === 'en'&&(<NavbarEnglish />)}
       <center> 
         
   {userShop ?(
@@ -4619,7 +4950,7 @@ const optionSubBackImages = async e => {
  
  </Fragment>     
    ):(
-    <a href='/ar/dashboard/create-shop'> <button className="Dash-button">  قم بإعداد متجرك لتستطيع ادخال الاعلانات  </button>  </a>
+    <Link to='/dashboard/create-shop'> <button className="Dash-button">  {t('Addpost_msg_warning_no_shop')}  </button>  </Link>
    )}
         
         </center>

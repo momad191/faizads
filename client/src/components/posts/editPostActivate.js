@@ -1,6 +1,9 @@
 import React, { Component ,Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../../components/layout/Navbar';
+import Spinner from '../layout/Spinner';
+
 export default class EditPost extends Component {
   constructor(props) {
     super(props);
@@ -14,12 +17,26 @@ export default class EditPost extends Component {
     this.state = {
       _id: '',
       activation:'',
+      users:[]
 
       
     }
   }
     
   componentDidMount() {
+
+
+    axios.get('/api/auth')
+    .then(response => {
+      this.setState({
+          users: response.data,
+      })   
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
+
     axios.get('/api/posts/'+this.props.match.params.id)
       .then(response => {
         this.setState({
@@ -83,20 +100,24 @@ export default class EditPost extends Component {
     axios.post('/api/posts/activatePost/'+ currentUserId, pp)
    
 
-   window.location = '/ar/dashboard/posts/';
+   window.location = '/ar/dashboard/AdminPosts/';
   }
 
 
-
-
+ 
+ 
  
   render() {
    
     return (
       <> 
-      <Navbar />
+   
         <div className="aqle3-main">
         <div className="mainword2">
+
+        <Navbar />
+        {this.state.users.validity === "super" || this.state.users.validity === "admin" ?(
+
         <div className="mainForm" >
         
                
@@ -107,6 +128,8 @@ export default class EditPost extends Component {
                 <form className="login-form" onSubmit={this.onSubmit} >
 
                 <div class="login-title">   تفعيل الإعلان </div>
+                <Link to="/ar/dashboard/AdminPosts" className="Action-button-plus-admin">  <i className="fa fa-arrow-left fa-1x"></i> رجوع </Link>
+
                 <div className='FormCover'>
         
 
@@ -162,6 +185,14 @@ export default class EditPost extends Component {
                 </center>
                
           </div>  
+
+            ):( 
+              <center> 
+              <Spinner />
+            </center>
+                      
+              )}
+              
           </div> 
           </div> 
           </>

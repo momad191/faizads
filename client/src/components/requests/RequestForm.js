@@ -5,10 +5,14 @@ import { addProfitRequest } from '../../actions/profitrequest';
 import { setAlert } from '../../actions/alert';
 import Alert from '../layout/Alert';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
      
 const RequestForm = ({setAlert,addProfitRequest}) => {
 
+  const [t, i18next] = useTranslation()
   const [ShowButton,setShowButton]= useState('showButton11')
+
+  const [AlertEnglish,setAlertEnglish]= useState('')
   
    
   const [RefToPay,setRefToPay]= useState([])
@@ -39,6 +43,7 @@ const RequestForm = ({setAlert,addProfitRequest}) => {
         e.preventDefault();
         addProfitRequest({ amount});
          setAlert('تم تقديم الطلب');
+         setAlertEnglish('The request has been submitted');
         
       };
 
@@ -117,10 +122,28 @@ const RequestForm = ({setAlert,addProfitRequest}) => {
  
                  
               <center>
-              <Alert />
+                {i18next.language === 'ar' && (
+                  <Alert />
+                )}
+
+          {i18next.language === 'en' && (
+                 <h1>{AlertEnglish}</h1>
+                )}
+                 
+             
 
               <div className={ShowButton}> 
-             <button className="Formbutton" onClick={hideButton}   type="submit" name="" >سحب الارباح</button>
+             <button className="Formbutton" onClick={hideButton}   type="submit" name="" >
+              {i18next.language === 'ar'&& ( 
+                <>سحب الارباح</>
+              )}
+
+              {i18next.language === 'en'&& ( 
+                <>profit withdrawal</>
+              )}
+             
+
+             </button>
              </div>
 
              </center>

@@ -6,6 +6,10 @@ import Navbar from '../layout/Navbar';
 import NavbarEnglish from '../layout/NavbarEnglish';
 import emptypic from './emptypic.jpg';
 //import 'moment/locale/ar'; 
+
+
+import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
  
 export default class MyProfile extends Component {
  
@@ -35,7 +39,7 @@ export default class MyProfile extends Component {
  
 
     this.state = {
-      Lang :this.props.match.params.lang,
+      // Lang :this.props.match.params.lang,
       _id:'',
       shop_name: '',
       shop_type: '',
@@ -254,11 +258,8 @@ export default class MyProfile extends Component {
   render(loading) {
     return (
       <Fragment>
-           {this.state.Lang === 'ar' ?(
-      <Navbar />
-      ):(
-     <NavbarEnglish />
-      )}
+      {i18next.language === 'ar' && ( <Navbar />)}
+      {i18next.language === 'en' && (  <NavbarEnglish /> )}
    
  
         <div className="aqle3-main">
@@ -266,7 +267,7 @@ export default class MyProfile extends Component {
 
            
   <div className="mainForm">
-  {this.state.Lang === 'ar' ?(
+  {i18next.language === 'ar' &&(
 
   
 <Fragment>
@@ -371,10 +372,11 @@ export default class MyProfile extends Component {
 
  
 
- 
-                <span>اسم المتجر </span>
+   
+                <span>1اسم المتجر </span>
                 <input className="login-input"
                  type="text" 
+                 maxLength='40' 
                  placeholder=""
                  name="shop_name" 
                  value={this.state.shop_name} 
@@ -482,8 +484,10 @@ export default class MyProfile extends Component {
 
 </Fragment>
 
-):(
+)}
+ 
 
+{i18next.language === 'en' &&(
   ///////////////////////ENGLISH/////////////////////
   
   <Fragment>

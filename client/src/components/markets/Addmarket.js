@@ -1,4 +1,5 @@
-import React, { Fragment,useState } from 'react';
+import React, { Fragment, useEffect ,useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -6,9 +7,12 @@ import { addMarket } from '../../actions/market';
 import { setAlert } from '../../actions/alert';
 import Spinner from '../layout/Spinner';
 import Navbar from '../layout/Navbar';
- 
-const Addmarket = ({setAlert, addMarket}) => {
+import NavbarEnglish from '../layout/NavbarEnglish';
+import { useTranslation } from 'react-i18next';
 
+const Addmarket = ({setAlert, addMarket}) => {
+    const [t, i18next] = useTranslation()
+    const [user,setUser]= useState([])
     const [m_image, setImage] = useState('')
     const [loading, setLoading] = useState(false)
 
@@ -41,7 +45,7 @@ const Addmarket = ({setAlert, addMarket}) => {
         const files = e.target.files
         const data = new FormData()
         data.append('file', files[0])
-        data.append('upload_preset', 'magazine')
+        data.append('upload_preset', 'faizmarkets')
         setLoading(true)
         const res = await fetch(
           'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -49,7 +53,7 @@ const Addmarket = ({setAlert, addMarket}) => {
             method: 'POST',
             body: data
           }
-        )
+        ) 
         const file = await res.json()
     
         setImage(file.secure_url)
@@ -63,31 +67,42 @@ const Addmarket = ({setAlert, addMarket}) => {
         setImage('')
         }
 
+        useEffect(() => {
+
+          axios.get('/api/auth')
+          .then(res => {
+            setUser(res.data)
+          }) 
+          .catch((err) => {
+            console.log(err);
+          })
+
+        }, [user]);
     
-    return (
+const AddMarketValid = (
         <div>
- 
-
-<div>
-           
-
+        <div>
+          
         <div className="aqle3-main">
         <div className="mainword2">
-          <Navbar />
+        {i18next.language === 'ar'&&(<Navbar />)}
+        {i18next.language === 'en'&&(<NavbarEnglish />)}
         <div className="mainForm">
 
         
-        <div class="login-title"> <i class="fa fa-plus-circle"></i> اضافة سوق جديد </div>
-        <Link to="/dashboard/markets" class="login-title" style={{textDecoration:'none',marginLeft:'10px'}}>  <i className="fa fa-arrow-left fa-1x"></i> رجوع </Link>
-
-    
- 
+        <div class="login-title"> <i class="fa fa-plus-circle"></i> {t('addMarket')} </div>
+         <center>
+         <Link to="/dashboard/markets" className="Action-button-plus-admin">  <i className="fa fa-arrow-left fa-1x"></i> {t('backButton')} </Link>
+         </center>
+     
+  
 
         <center> 
 	 
 	    <form className="login-form" onSubmit={e => onSubmit(e)}>
       <div className='FormCover'>  
-                <span>اسم السوق باللغة العربية </span>
+
+                <span>{t('market_ar_name')} </span>
                 <input className="login-input"
                  type="text" 
                  placeholder=""
@@ -98,7 +113,7 @@ const Addmarket = ({setAlert, addMarket}) => {
 
 
 
-              <span>اسم السوق بالانجليزي </span>
+               <span>{t('market_en_name')} </span>
                 <input className="login-input"
                  type="text" 
                  placeholder=""
@@ -107,7 +122,9 @@ const Addmarket = ({setAlert, addMarket}) => {
                  onChange={e => onChange(e)}
                  />
 
-                <span>رمز مختصر للسوق </span>
+
+
+                <span>{t('market_code')} </span>
                 <input className="login-input"
                  type="text" 
                  placeholder=""
@@ -118,7 +135,7 @@ const Addmarket = ({setAlert, addMarket}) => {
 
 
  
-              <span>fontawesome class </span>
+            <span>{t('fontawesome')} </span>
                 <input className="login-input"
                  type="text" 
                  placeholder=""
@@ -128,7 +145,7 @@ const Addmarket = ({setAlert, addMarket}) => {
                  />
 
 
-                <span>الوصف </span>
+                <span>{t('market_description')} </span>
                 <textarea className="login-input"  
                  placeholder=""
                  name="m_description" 
@@ -138,7 +155,7 @@ const Addmarket = ({setAlert, addMarket}) => {
                  />
 
 
-                        <span>ارفع الصورة </span>
+                        <span>   {t('upload_picture')} </span>
                         <input 
                           className="login-input"
                           type="file"
@@ -172,7 +189,9 @@ const Addmarket = ({setAlert, addMarket}) => {
 
   	  
 	  <center>
-	 <button className="Formbutton"  type="submit" name="" >اضافة</button>
+	 <button className="Formbutton"  type="submit" name="" >
+   {t('save')}
+   </button>
  
 	 </center>
    </div>
@@ -194,6 +213,29 @@ const Addmarket = ({setAlert, addMarket}) => {
             
         </div>
     )
+
+
+    const notValidPage =(
+      <Fragment>
+          <div className="aqle3-main">
+            <div className="mainword2">
+            {i18next.language === 'ar'&&(<Navbar />)}
+            {i18next.language === 'en'&&(<NavbarEnglish />)}
+            <center> 
+           {/* <h1>Page Not Found</h1>
+           <h2>Sorry, this page does not exist</h2> */}
+           <Spinner />
+          </center>
+         </div>
+        </div>
+      </Fragment>
+    )
+
+    return(
+      user.validity === "super" || user.validity === "admin"  ?  AddMarketValid : notValidPage
+      );
+
+
 }
  
  

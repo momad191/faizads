@@ -4,26 +4,30 @@ import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CreateShopEnglish from '../../components/profile-forms/CreateShopEnglish';
 import CreateShopArabic from '../../components/profile-forms/CreateShopArabic';
-
-
+import { useTranslation } from 'react-i18next';
+import Navbar from '../../components/layout/Navbar';
+import NavbarEnglish from '../../components/layout/NavbarEnglish';
+ 
 const CreateShop = ({match,isAuthenticated}) => {
+
+  const [t, i18next] = useTranslation()
   const Lang = match.params.lang;
 
-
-
-  // if (isAuthenticated) {
-  //   return <Redirect to='/en/dashboard/main' />;
-  // }
+ 
+ 
+  
 
   return (
     <div>
-      {Lang === 'ar' ?(
-   <CreateShopArabic />
- 
-      ):(
-
-<CreateShopEnglish />
-
+      {i18next.language  === 'ar' &&(
+      <> 
+      <Navbar /> <CreateShopArabic />
+      </>
+      )}
+      {i18next.language  === 'en' &&(
+        <> 
+       <NavbarEnglish /><CreateShopEnglish />
+       </>
       )}
 
       

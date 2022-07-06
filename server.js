@@ -43,6 +43,13 @@ app.use('/api/followups', require('./routes/api/followups'));
 app.use('/api/ratings', require('./routes/api/ratings'));
 app.use('/api/reports', require('./routes/api/reports'));
 app.use('/api/messages', require('./routes/api/messages'));
+app.use('/api/purposes', require('./routes/api/purposes'));
+app.use('/api/membershiptypes', require('./routes/api/membershiptypes'));
+
+
+
+
+ 
 
 
    

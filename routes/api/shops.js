@@ -11,11 +11,19 @@ const auth = require('../../middleware/auth');
 const User = require('../../models/User');
 
 const Shop = require('../../models/Shop');
- 
+const Followup = require('../../models/Followup'); 
+  
 
 router.get('/usershop', auth, async (req, res) => {
   try {
-     const shops = await Shop.findOne({user:req.user.id});
+
+    // const user = await User.findById(req.user.id).select('-password');
+    var populateQuery =
+    [
+    {path:'user', select: 'first_name last_name username'},
+   ]; 
+
+     const shops = await Shop.findOne({user:req.user.id}).populate(populateQuery);
     res.json(shops);
   } catch (err) {
     console.error(err.message);
@@ -23,13 +31,18 @@ router.get('/usershop', auth, async (req, res) => {
   }
 }); 
 
-
-
+ 
+ 
 //shops/shopinfo
 //public to get info about the current shop
 router.get('/shopinfo/:username', async (req, res) => {
   try {
-     const shops = await Shop.findOne({username:req.params.username});
+    var populateQuery =
+    [
+    {path:'user', select: 'first_name last_name username'},
+   ];  
+   const user = await User.findOne({username:req.params.username})
+     const shops = await Shop.findOne({user:user._id}).populate(populateQuery);
     res.json(shops);
   } catch (err) {
     console.error(err.message);
@@ -41,9 +54,14 @@ router.get('/shopinfo/:username', async (req, res) => {
   // @route    GET api/Shops/:shop_url
 // @desc     Get   Shops/:shop_url
 // @access   public
-router.get('/:username', async (req, res) => {
+router.get('/:username', async (req, res) => { 
   try {
-    const shops = await Shop.find({username:req.params.username});
+    var populateQuery =
+    [
+    {path:'user', select: 'first_name last_name username _id'},
+   ]; 
+   const user = await User.findOne({username:req.params.username})
+    const shops = await Shop.find({user:user._id}).populate(populateQuery);
     res.json(shops);
   } catch (err) {
     console.error(err.message);
@@ -54,7 +72,13 @@ router.get('/:username', async (req, res) => {
 
 router.get('/image/:username', async (req, res) => {
   try {
-    const shops = await Shop.findOne({username:req.params.username});
+    var populateQuery =
+    [
+    {path:'user', select: 'first_name last_name username'},
+   ]; 
+   const user = await User.findOne({username:req.params.username})
+
+    const shops = await Shop.findOne({username:user.username}).populate(populateQuery);
     res.json(shops);
   } catch (err) {
     console.error(err.message);
@@ -68,7 +92,12 @@ router.get('/image/:username', async (req, res) => {
 // @access   public
 router.get('/', async (req, res) => {
   try {
-    const shops = await Shop.find();
+    var populateQuery =
+    [
+    {path:'user', select: 'first_name last_name username'},
+   ]; 
+
+    const shops = await Shop.find().populate(populateQuery);
     res.json(shops);
   } catch (err) {
     console.error(err.message);
@@ -78,7 +107,12 @@ router.get('/', async (req, res) => {
 
 router.get('/allshops', async (req, res) => {
   try {
-    const shops = await Shop.find({});
+    var populateQuery =
+    [
+    {path:'user', select: 'first_name last_name username'},
+   ]; 
+
+    const shops = await Shop.find({}).populate(populateQuery);
     res.json(shops);
   } catch (err) {
     console.error(err.message);
@@ -145,10 +179,10 @@ router.post(
 
 
 //******************************updateShop****************************************** */
-router.post('/updateShop/:id',auth, async (req, res) => {
+router.post('/updateShop/:shopId',auth, async (req, res) => {
   try {
       
-    const pp = await Shop.findById(req.params.id);
+    const pp = await Shop.findById(req.params.shopId);
  
     pp.shop_name = req.body.shop_name;
     pp.shop_type = req.body.shop_type;
@@ -177,7 +211,7 @@ router.post('/updateShop/:id',auth, async (req, res) => {
 });  
 
 
-
+  
 
  // @route    PUT api/shops/click/:id
 // @desc     Click a shop
@@ -185,7 +219,7 @@ router.post('/updateShop/:id',auth, async (req, res) => {
 router.put('/click/:id', async (req, res) => {
   try { 
     const shop = await Shop.findById(req.params.id);
-    shop.clicks.unshift({ shop: req.params.id });
+    shop.clicks.unshift({ shop:shop._id });
     await shop.save();
     res.json(shop.clicks); 
   } catch (err) {
@@ -195,6 +229,6 @@ router.put('/click/:id', async (req, res) => {
 }); 
      
 
- 
+  
 
 module.exports = router;

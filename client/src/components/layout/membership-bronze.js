@@ -18,9 +18,10 @@ import { Input } from 'postcss';
 
 import Navbar from '../../components/layout/Navbar';
 import NavbarEnglish from '../../components/layout/NavbarEnglish';
+import { useTranslation } from 'react-i18next';
      
 const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
-
+  const [t, i18next] = useTranslation()
   const Lang = match.params.lang;
 
   const  freeDate= moment();
@@ -41,18 +42,21 @@ const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
   
   const shopname = '';
   const shopstatus='closed'; 
- 
+  const membershiptype = "626a573da5f68d13860c075b";
   const membership_class = 'bronze';
   const Payment_status ='ok';
   const available_ads = 10;
   const membership_renewal_date = Date.now();
   const membership_renewal_expiry_date = freeDate;
  
-
+ 
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
-    email: ''
+    email: '',
+    
+ 
+   
   }); 
   
   const { first_name,last_name, email} = formData;
@@ -81,11 +85,11 @@ const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
               value: '11.00'
             }
           }] 
-        }); 
+        });  
       },
       onApprove: (data, actions) =>{
         return actions.order.capture().then((details)=> {
-          addSubscription({ first_name,last_name, email,country_name,country_code, city, state, postal, latitude, longitude, IPv4, shopname, shopstatus, membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date });
+          addSubscription({membershiptype,first_name,last_name, email,country_name,country_code, city, state, postal, latitude, longitude, IPv4, shopname, shopstatus, membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date });
           alert('thnaks for your subscription ' + details.payer.name.given_name);
         });
       }
@@ -134,17 +138,17 @@ const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
  
   return (
     <Fragment>
-   {Lang === 'ar'?(
+   { i18next.language === 'ar' ?(
         <Navbar />
       ):(
       <NavbarEnglish />
       )}
-
+ 
 
      <div className="aqle3-main" >
       <div className="mainword2">
 
-        {Lang === 'ar' ?(
+        { i18next.language === 'ar' ?(
           
   
          <div className="mainForm">
@@ -166,8 +170,10 @@ const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
       <form className="login-form" onSubmit={e => onSubmit(e)}>
 
       <div class="login-title">  الإشترك في الخطة البرونزية  </div>
+
+               
       
-    
+     
 
       <center>  <div style={{width:''}} id="paypal-button-container"></div></center> 
       
@@ -175,7 +181,9 @@ const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
   <Fragment>
     <center>
     <div className="Dash-button-still-subscription">
-  <p class="login-title"> {subscription.membership_class}  الاشتراك الحالي  </p>
+  {/* <p class="login-title"> {subscription.membership_class}  الاشتراك الحالي  </p> */}
+  <p class="login-title">الاشتراك الحالي الخطة {subscription.membershiptype.m_t_AR_name}   </p>
+
    <p> 
      ينتهي اشتراكك في يوم <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment> 
 </p>
@@ -238,7 +246,10 @@ const Bronze = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
     <Fragment>
       <center>
       <div className="Dash-button-still-subscription">
-    <p class="login-title"> Current Subscription: {subscription.membership_class}    </p>
+    {/* <p class="login-title"> Current Subscription: {subscription.membership_class}    </p> */}
+    <p class="login-title"> Current Subscription: {subscription.membershiptype.m_t_EN_name} Plan   </p>
+
+ 
      <p> 
      Your subscription expires <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment> 
   </p>

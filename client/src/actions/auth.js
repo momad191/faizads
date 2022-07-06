@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setAlert } from './alert';
+import { setAlert } from './alert'; 
 import { 
   SUBSCRIPTION_SUCCESS,
   SUBSCRIPTION_FAIL,
@@ -15,11 +15,8 @@ import {
   VISUALCODE_FAIL,
   PAY_SUCCESS,
   PAY_FAIL,
-
-
- 
-  
- 
+  ADD_REGISTER_SUCCESS,
+  ADD_REGISTER_FAIL
 } from './types';
  
 import setAuthToken from '../utils/setAuthToken';
@@ -56,23 +53,23 @@ const body = JSON.stringify({ first_name,last_name,username, email, password, va
   try {
     const res = await axios.post('/api/users', body, config);
  
- 
+   
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data
     });
 
-
-
+      
+ 
     dispatch(loadUser());
-    window.location= `/ar/dashboard/create-shop`
+    // window.location= `/dashboard/create-shop`
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'alert-danger')));
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
     }
- 
+  
     dispatch({
       type: REGISTER_FAIL
     });
@@ -121,14 +118,14 @@ export const logout = () => dispatch => {
 
 
 //  addSubscription
-export const addSubscription = ({ first_name,last_name,country_name,country_code,city,state,postal,latitude,longitude,IPv4,shopname,shopstatus,ref,membership_class,Payment_status,available_ads,membership_renewal_date,membership_renewal_expiry_date }) => async dispatch => {
+export const addSubscription = ({membershiptype,first_name,last_name,country_name,country_code,city,state,postal,latitude,longitude,IPv4,shopname,shopstatus,ref,membership_class,Payment_status,available_ads,membership_renewal_date,membership_renewal_expiry_date }) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
     }
   };
   
-const body = JSON.stringify({ first_name,last_name,country_name,country_code,city,state,postal,latitude,longitude,IPv4,shopname,shopstatus,ref,membership_class,Payment_status,available_ads,membership_renewal_date,membership_renewal_expiry_date });
+const body = JSON.stringify({membershiptype,first_name,last_name,country_name,country_code,city,state,postal,latitude,longitude,IPv4,shopname,shopstatus,ref,membership_class,Payment_status,available_ads,membership_renewal_date,membership_renewal_expiry_date });
   try {
     const res = await axios.post('/api/subscriptions', body, config);
 
@@ -229,10 +226,9 @@ export const pay = () => async dispatch => {
 
 
 
-
+ 
 // edit validity
 // Register User
- 
   export const editValidity = (userId,formData) => async dispatch => {
     const config = {
       headers: {
@@ -261,3 +257,103 @@ export const pay = () => async dispatch => {
     }
   };
     
+
+
+     // Add Reset
+export const addReset = formData => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  
+  try {
+    const res = await axios.post('/api/auth/resetnow', formData, config);
+
+    dispatch({
+      type: REGISTER_SUCCESS,
+      payload: res.data
+    });
+  
+    dispatch(setAlert('Reset  submitted', 'success'));
+   
+  } catch (err) {
+    dispatch({
+      type: REGISTER_FAIL,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+ 
+
+ 
+
+     // Add Register
+       export const addRegister = ({ r_email }) => async dispatch => {
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }; 
+      const body = JSON.stringify({ r_email });
+
+      try {
+        const res = await axios.post('/api/auth/registernow', body, config);
+    
+        dispatch({
+          type: ADD_REGISTER_SUCCESS,
+          payload: res.data
+        });
+     
+        dispatch(setAlert('Registeration  submitted', 'success'));
+       
+      } catch (err) {
+        const errors = err.response.data.errors;
+    
+        if (errors) {
+          errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
+        dispatch({
+          type: ADD_REGISTER_FAIL,
+          payload: { msg: err.response.statusText, status: err.response.status }
+        });
+      }
+    };
+
+
+
+
+         // Add RegisterByRef
+         export const addRegisterByRef = ({ r_email,r_ref }) => async dispatch => {
+
+          const config = {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }; 
+          const body = JSON.stringify({ r_email,r_ref });
+    
+          try {
+            const res = await axios.post('/api/auth/registernow/:ref', body, config);
+        
+            dispatch({
+              type: ADD_REGISTER_SUCCESS,
+              payload: res.data
+            });
+         
+            dispatch(setAlert('Registeration  submitted', 'success'));
+           
+          } catch (err) {
+            const errors = err.response.data.errors;
+        
+            if (errors) {
+              errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+            }
+            dispatch({
+              type: ADD_REGISTER_FAIL,
+              payload: { msg: err.response.statusText, status: err.response.status }
+            });
+          }
+        };

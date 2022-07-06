@@ -17,23 +17,25 @@ import emptypic1 from './emptypic1.jpg';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Input } from 'postcss';
+ 
 
 const noneDisplayI = 'noneDisplayI';
 const displayI = 'displayI';
      
 const CreateShopEnglish = ({ setAlert ,createShop , isAuthenticated }) => {
 
-
   const [gostart,setgostart]= useState(displayI)
 
-  const [shopInfo,setShopInfo]= useState([])
+  // const [shopInfo,setShopInfo]= useState([])
   const [userShop,setuserShop]= useState([])
-
-
+  const [user, setUser] = useState([])
+ 
+ 
 	const [markets11,setMarkets11]= useState([])
 
 
 	const [shop_img, setPic10] = useState('')
+
 	const onChangePic10 = e => {
 		setPic10({ shop_img: e.target.files[0] });
 		};
@@ -51,9 +53,12 @@ const CreateShopEnglish = ({ setAlert ,createShop , isAuthenticated }) => {
         const removepic11 = ()=>{
           setPic11('')
           }
+          
 
 
-  const [loadingshopimg, setLoadingShopImg] = useState(false)
+
+
+	const [loadingshopimg, setLoadingShopImg] = useState(false)
   const [loadinglogo, setLoadingLogo] = useState(false)
 
   const [search,setSearch]= useState("")
@@ -92,7 +97,6 @@ const CreateShopEnglish = ({ setAlert ,createShop , isAuthenticated }) => {
     shop_phone1:'',
     shop_phone2:'',
     shop_phone3:'',
-
    
 	// shop_status:'',
 	// shop_country_code:'',
@@ -101,56 +105,53 @@ const CreateShopEnglish = ({ setAlert ,createShop , isAuthenticated }) => {
   const {shop_name,shop_type,shop_description,youtube,twitter,facebook,linkedin,instagram,shop_email,shop_website,shop_whatsaap,shop_mobile,shop_phone1,shop_phone2,shop_phone3} = formData;
 
   const onChange = e =>
-  setFormData({ ...formData, [e.target.name]: e.target.value });
-
-const onSubmit = async e => {
-  e.preventDefault();
-  if (shop_name === '') { 
-    setAlert('Store name is required');
-  }else if(shop_type === '') { 
-    setAlert('Store type is necessary Choose your target market');
-  }
-  else if(shop_img === '') { 
-    setAlert('No cover photo set for the store');
-  }
-  else if(shop_logo_img === '') { 
-    setAlert('No logo set for the store');
-  }
-   else{
-  createShop({shop_name,shop_type,shop_description,shop_img,shop_logo_img,shop_status,shop_country_code,shop_country_name,youtube,twitter,facebook,linkedin,instagram,shop_email,shop_website,shop_mobile,shop_whatsaap,shop_phone1,shop_phone2,shop_phone3 });   
-  setAlert('shop Created');
-  window.location= `/en/dashboard/main/`
-}
-};
-
- 
-const onSubmit2 = async e => {
-  e.preventDefault(); 
-  createShop({shop_name,shop_type,shop_description,shop_img,shop_logo_img,shop_status,shop_country_code,shop_country_name,youtube,twitter,facebook,linkedin,instagram,shop_email,shop_website,shop_mobile,shop_whatsaap,shop_phone1,shop_phone2,shop_phone3 });   
- window.location= `/en/dashboard/shops/edit`
-
-};
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
 
-  const gocreate= ()=>{
- 
+    const onSubmit = async e => {
+      e.preventDefault();
+      if (shop_name === '') { 
+        setAlert('Shop name is required ');
+      }
+      else if(shop_img === '') { 
+        setAlert('No cover photo set');
+      }
+      else if(shop_logo_img === '') { 
+        setAlert('Not set logo'); 
+      }
+       else{
+      createShop({shop_name,shop_type,shop_description,shop_img,shop_logo_img,shop_status,shop_country_code,shop_country_name,youtube,twitter,facebook,linkedin,instagram,shop_email,shop_website,shop_mobile,shop_whatsaap,shop_phone1,shop_phone2,shop_phone3 });   
+      setAlert('Shop created');
+      window.location= `/dashboard/main/`
+    } 
+    };
+
+  const onSubmit2 = async e => {
+    e.preventDefault(); 
+		createShop({shop_name,shop_type,shop_description,shop_img,shop_logo_img,shop_status,shop_country_code,shop_country_name,youtube,twitter,facebook,linkedin,instagram,shop_email,shop_website,shop_mobile,shop_whatsaap,shop_phone1,shop_phone2,shop_phone3 });   
+    window.location= `/dashboard/shops/edit`
+  };
+
+
+    const gocreate= ()=>{
+      createShop({shop_name,shop_type,shop_description,shop_img,shop_logo_img,shop_status,shop_country_code,shop_country_name,youtube,twitter,facebook,linkedin,instagram,shop_email,shop_website,shop_mobile,shop_whatsaap,shop_phone1,shop_phone2,shop_phone3 });   
+    window.location= `/dashboard/shops/edit`
       setgostart(noneDisplayI)
-  }
+    }
 
-    
   useEffect(() => {
 
 
 
-    axios.get('/api/shops/allshops')
-    .then(res => {
-      setShopInfo(res.data)
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    // axios.get('/api/shops/allshops')
+    // .then(res => {
+    //   setShopInfo(res.data)
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // })
 
-
+ 
     axios.get('/api/shops/usershop')
     .then(res => {
       console.log(res);
@@ -198,6 +199,17 @@ const onSubmit2 = async e => {
 	})
 
 
+
+  axios.get('/api/auth')
+  .then(res => {
+    console.log(res);
+    setUser(res.data)
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
+
  }, []);
 
 
@@ -210,7 +222,7 @@ const onSubmit2 = async e => {
 	const files = e.target.files
 	const data = new FormData()
 	data.append('file', files[0])
-	data.append('upload_preset', 'magazine')
+	data.append('upload_preset', 'faizshops')
 	setLoadingShopImg(true)
 	const res = await fetch(
 	  'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -233,7 +245,7 @@ const onSubmit2 = async e => {
     const files = e.target.files
     const data = new FormData()
     data.append('file', files[0])
-    data.append('upload_preset', 'magazine')
+    data.append('upload_preset', 'faizshops')
     setLoadingLogo(true)
     const res = await fetch(
       'https://api.cloudinary.com/v1_1/momad191/image/upload',
@@ -249,46 +261,48 @@ const onSubmit2 = async e => {
     }
 
 
+     
 
-  // if (userShop) {
-  //   return <Redirect to='/en/dashboard/shops/edit' />;
-  // }
-
+    // if (userShop) {
+    //   return <Redirect to='/ar/dashboard/shops/edit' />;
+    // }else{
+    //   return <Redirect to='/ar/dashboard/create-shop' />;
+    // }
  
-  return (
+   
+ 
+  const CreateShop1 = (
+
+    
     <Fragment>
   
-        <NavbarEnglish />
+       
+
+ 
+      
+
+    
+ 
+
+
+
+
  
        
      <div className="aqle3-main" >
       <div className="mainword2">
       <div className="mainForm">
-  
+   
    
 	  <center> 
-
-
-    {/* <div className={gostart}> 
-    <form className="" onSubmit={e => onSubmit2(e)}>
-    <div className="login-title"> Do you want to set up your store now?    </div>
-    <button className="Formbutton" type='submit' style={{marginRight:'1%'}}> Later </button>
-    
-      </form>
-      <button className="Formbutton"  onClick={gocreate}> Yes  </button>
+ 
      
-      </div> */}
+        
+   <div className="new-ad-title"> Set up your shop </div>
 
-<div className="new-ad-title"> Set up your store </div>
-
-
-      <form className="" onSubmit={e => onSubmit(e)}>
+    <form className="" onSubmit={e => onSubmit(e)}>
 	  <div className='shop'> 
-      {/* <div className="login-title"> Set up your shop    </div> */}
-
-
-
-
+     
       <div className="">
 	                 <div className={shop_img}>
                        <input  
@@ -300,7 +314,7 @@ const onSubmit2 = async e => {
                        //value={m_image} 
                        onChange={uploadPic10} />
                      {loadingshopimg ? (
-                      <span> loading ....</span>
+                      <div style={{width:'200px',height:'200px'}}> loading ....</div> 
                      ) : (
                        <Fragment> 
                        <span>
@@ -308,7 +322,7 @@ const onSubmit2 = async e => {
                         <label for="file10" className="imageLabel">
                            <div className="shop-img-container1"> 
                      <img src={emptypic} style={{ height:'200px',width:'100%'}} />
-                     </div>
+                     </div> 
                      </label>
                          ):(
                           <label for="file10" className="imageLabel">
@@ -327,7 +341,7 @@ const onSubmit2 = async e => {
                     </div>
                     </div>
 
-
+               
 
 
 
@@ -345,7 +359,7 @@ const onSubmit2 = async e => {
                      {loadinglogo ? (
                       <span> loading ....</span>
                      ) : (
-                       <Fragment> 
+                       <Fragment>  
                        <span>
                          {shop_logo_img ===''?(
                         <label for="file11" className="imageLabel">
@@ -372,11 +386,12 @@ const onSubmit2 = async e => {
  
 <center> 
 <div className="login-form" > 
- 
+  
 	  <span className="login-text">  Shop name    </span>
 		<input
 		 className="login-input"
 		  type='text'
+      maxLength='60'
 		  placeholder='Example: Sunrise Store'
 		  name='shop_name'
 		  value={shop_name}
@@ -385,8 +400,8 @@ const onSubmit2 = async e => {
 
 
 
-				<div className=''>
-                <span className='login-text'>In which market do you want to advertise?  </span>
+				{/* <div className=''>
+                <span className='login-text'>Shop type  </span>
                 <select 
 				className="login-input"
                  
@@ -394,31 +409,32 @@ const onSubmit2 = async e => {
                   value={shop_type} 
                   onChange={e => onChange(e)}
                   > 
-                  <option selected="selected" value='cars'> Choose </option>
+                  <option selected="selected" value='cars'> What market would you like to advertise in? </option>
                   {markets11.map(catego=>(
                   <option required value={catego.m_code}> {catego.m_EN_name} </option>
                     ))}
                   </select>
-                  </div>
+                  </div> */}
 
 
 
-<span className="login-text">  Description    </span>
+<span className="login-text">   Description (150 Character)   </span>
 		<textarea
-		 className="login-input"
+		 className="login-input-textarea"
 		  type='text'
-		  placeholder='Example: a Shop that sells flowers, plants and gardening tools'
+		  placeholder='Example: a shop that sells flowers, plants and gardening tools'
 		  name='shop_description'
 		  value={shop_description}
 		  onChange={e => onChange(e)}
+      maxLength='150'
 		/>
 
  
-<span className="login-text">  Youtube channel link     </span>
+<span className="login-text">  YouTube     </span>
 		<input
 		 className="login-input"
 		  type='text'
-		  placeholder='Shop YouTube channel link'
+		  placeholder='https://www.youtube.com/c/your_channel_url'
 		  name='youtube'
 		  value={youtube}
 		  onChange={e => onChange(e)}
@@ -431,7 +447,7 @@ const onSubmit2 = async e => {
 		<input
 		 className="login-input"
 		  type='text'
-		  placeholder='Your store Twitter account'
+		  placeholder='https://twitter.com/your_acccount_name'
 		  name='twitter'
 		  value={twitter}
 		  onChange={e => onChange(e)}
@@ -439,11 +455,11 @@ const onSubmit2 = async e => {
 
 
 
-<span className="login-text">  Facebook     </span>
+<span className="login-text">  Facebook page or group of your shop     </span>
 		<input
 		 className="login-input"
 		  type='text'
-		  placeholder='Facebook page or group of your Shop'
+		  placeholder='https://www.facebook.com/your_acccount_name'
 		  name='facebook'
 		  value={facebook}
 		  onChange={e => onChange(e)}
@@ -452,11 +468,11 @@ const onSubmit2 = async e => {
 
 
 
-<span className="login-text">  Linkedin     </span>
+<span className="login-text">  Linkedin account     </span>
 		<input
 		 className="login-input"
 		  type='text'
-		  placeholder='LinkedIn account'
+		  placeholder='https://www.linkedin.com/in/your_acccount_name/'
 		  name='linkedin'
 		  value={linkedin}
 		  onChange={e => onChange(e)}
@@ -464,11 +480,11 @@ const onSubmit2 = async e => {
 
 
 
-<span className="login-text">  Instagram     </span>
+<span className="login-text">  Instagram account    </span>
 		<input
 		 className="login-input"
 		  type='text'
-		  placeholder='Instagram account'
+		  placeholder='https://www.instagram.com/your_acccount_name/'
 		  name='instagram'
 		  value={instagram}
 		  onChange={e => onChange(e)}
@@ -476,13 +492,11 @@ const onSubmit2 = async e => {
 
 
 
-
-
 <span className="login-text">  Email     </span>
 		<input
 		 className="login-input"
 		  type='text'
-		  placeholder='shop_email'
+		  placeholder='example@example.com'
 		  name='shop_email'
 		  value={shop_email}
 		  onChange={e => onChange(e)}
@@ -494,7 +508,7 @@ const onSubmit2 = async e => {
 		<input
 		 className="login-input"
 		  type='text'
-		  placeholder='shop_website'
+		  placeholder='www.example.com'
 		  name='shop_website'
 		  value={shop_website}
 		  onChange={e => onChange(e)}
@@ -502,11 +516,11 @@ const onSubmit2 = async e => {
 
 
 
-<span className="login-text">  Whatsapp     </span>
+<span className="login-text">  Whatsapp </span>
 		<input
 		 className="login-input"
 		  type='number'
-		  placeholder='shop_whatsaap'
+		  placeholder='+4415XXXXXXXX'
 		  name='shop_whatsaap'
 		  value={shop_whatsaap}
 		  onChange={e => onChange(e)}
@@ -518,19 +532,19 @@ const onSubmit2 = async e => {
 		<input
 		 className="login-input"
 		  type='number'
-		  placeholder='mobile'
+		  placeholder='+4415XXXXXXXX'
 		  name='shop_mobile'
 		  value={shop_mobile}
 		  onChange={e => onChange(e)}
 		/>
 
- 
+  
 
-<span className="login-text">  Phone1     </span>
+<span className="login-text">  Phone1 (optional)   </span>
 		<input
 		 className="login-input"
 		  type='number'
-		  placeholder='phone1'
+		  placeholder='+4415XXXXXXXX'
 		  name='shop_phone1'
 		  value={shop_phone1}
 		  onChange={e => onChange(e)}
@@ -538,11 +552,11 @@ const onSubmit2 = async e => {
 
 
 
-<span className="login-text">  Phone2     </span>
+<span className="login-text">  Phone2 (optional)     </span>
 		<input
 		 className="login-input"
 		  type='number'
-		  placeholder='phone2'
+		  placeholder='+4415XXXXXXXX'
 		  name='shop_phone2'
 		  value={shop_phone2}
 		  onChange={e => onChange(e)}
@@ -550,22 +564,18 @@ const onSubmit2 = async e => {
 
 
 
-<span className="login-text">  Phone3     </span>
+<span className="login-text">  Phone3 (optional)     </span>
 		<input
 		 className="login-input"
 		  type='number'
-		  placeholder='phone3'
+		  placeholder='+4415XXXXXXXX'
 		  name='shop_phone3'
 		  value={shop_phone3}
 		  onChange={e => onChange(e)}
 		/>
 
-
-
-
-
-	 <Alert />
-	 <button className="Formbutton" type='submit'> save </button>
+<center>   <div className="alert-info" >  <Alert /> </div> </center>  
+	 <button className="Formbutton" type='submit'> Create </button>
    </div>
    </center>
 
@@ -581,6 +591,21 @@ const onSubmit2 = async e => {
       </div>
     </Fragment>
   );
+
+const EditShop1 =(
+  <Fragment>
+ 
+  <div className="new-ad-title"> You already have a shop that you can update  </div>
+ <center> <Link className='Action-button-status' to='/dashboard/shops/edit'>Update your shop</Link> </center>
+  </Fragment>
+)
+
+   
+
+return(
+  userShop ? EditShop1: CreateShop1
+)
+
 };
 
 CreateShopEnglish.propTypes = {
@@ -592,7 +617,7 @@ CreateShopEnglish.propTypes = {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
- 
+  
 export default connect(
   mapStateToProps,
   { setAlert,createShop }

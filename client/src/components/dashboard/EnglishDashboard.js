@@ -22,7 +22,7 @@ const EnglishDashboard = ({
   // profile: { profile, loading }
 }) => {
 
-  
+  moment.locale('en');
 
   // const [oneShop,setOneShop]= useState([])
   const [userShop,setuserShop]= useState([])
@@ -213,8 +213,8 @@ const EnglishDashboard = ({
     <Fragment>
 
  
-      <NavbarEnglish />
-  
+      {/* <NavbarEnglish /> */}
+   
 
 
       <div className="aqle3-main" >
@@ -227,8 +227,8 @@ const EnglishDashboard = ({
    <Fragment>
   
  <center> 
-
-   <Link to='/en/membership/prices' className="Dash-button-end-subscription">
+ 
+   <Link to='/membership/prices' className="Dash-button-end-subscription">
    Start Choosing Your Plan
 </Link>
  
@@ -326,11 +326,11 @@ const EnglishDashboard = ({
 
   {userShop ?(
 <Fragment> 
-<a href='/en/dashboard/shops/edit' > <button className="Dash-button-open">  Manage your shop   </button>  </a>
-<a href={`http://localhost:3000/ar/shops/${user.username}`} target="_blank" > <button className="Dash-button"> <i class="fa fa-external-link-square fa-0x" aria-hidden="true"></i> preview   </button>  </a>
+<Link to='/en/dashboard/shops/edit' > <button className="Dash-button-open">  Manage your shop   </button>  </Link>
+<Link to={`/shops/${user.username}`} target="_blank" > <button className="Dash-button"> <i class="fa fa-external-link-square fa-0x" aria-hidden="true"></i> preview   </button>  </Link>
 </Fragment>
   ):(
-  <a href='/en/dashboard/create-shop'> <button className="Dash-button">  open new shop  </button>  </a>
+  <Link to='/dashboard/create-shop'> <button className="Dash-button">  open new shop  </button>  </Link>
  )}
 
 
@@ -357,12 +357,18 @@ const EnglishDashboard = ({
 
 
    
-
+      {user.username ?(
 
       <DashboardActionsEnglish />
-
-
+      ):(
+          <Spinner />
+      )}
  
+
+ {/* //////////////////////////////////////start of affiliate /////////////////////////////////// */}
+ {user.username ?(
+ 
+ <Fragment>
 
       <center> 
       <div className="affiliate-nav">
@@ -372,9 +378,10 @@ const EnglishDashboard = ({
   <tr>
   <th> Your link   </th>
    <th>       <i class="fa fa-link fa-1x" aria-hidden="true"></i>   {'   '}
-       <a href={`http://localhost:3000/user/register/${user.username}`}>  
-      {`http://localhost:3000/user/register/${user.username}`}
-         </a>  {'   '}
+     {user.username ?(<>
+       <a href={`http://localhost:3000/user/createAccount/${user.username}`}> 
+      {`http://localhost:3000/user/createAccount/${user.username}`}
+         </a> </> ):(<>loading ...</> )}  {'   '}
        <i class="fa fa-link fa-1x" aria-hidden="true"></i> 
        </th>
   </tr>
@@ -626,10 +633,17 @@ const EnglishDashboard = ({
        </center>
   )}
 
+</div>
+</center>
 
+ </Fragment>
+ ):(
+<Spinner />
+ )}
+         
+  
+  {/* //////////////////////////////////////End of affiliate /////////////////////////////////// */}
 
-        </div>
-        </center>
 
 {/*       
       {profile === null ? (

@@ -8,7 +8,11 @@ const Schema = mongoose.Schema;
       type: Schema.Types.ObjectId,
       ref: 'user'
     },  
-   
+    membershiptype: { 
+      type: Schema.Types.ObjectId,
+      ref: 'membershiptype'
+    },
+    
     first_name: {
       type: String,
       required: true

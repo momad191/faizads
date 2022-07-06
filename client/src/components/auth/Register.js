@@ -5,13 +5,14 @@ import moment from 'moment';
 import Moment from 'react-moment';
 import { register } from '../../actions/auth';
 import { addvisual } from '../../actions/auth';
-    
+       
 import Navbar from '../../components/layout/Navbar';
 import NavbarEnglish from '../../components/layout/NavbarEnglish';
+import { useTranslation } from 'react-i18next';
   
 import { addSubscription } from '../../actions/auth';
 import { setAlert } from '../../actions/alert';
-import Alert from '../layout/Alert';
+import Alert from '../layout/Alert'; 
    
  
 import PropTypes from 'prop-types';
@@ -20,9 +21,15 @@ import { Input } from 'postcss';
      
 const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
 
+  const [t, i18next] = useTranslation()
+
   const  freeDate= moment();
   freeDate.add(5,'days') 
 
+  
+  const [showalertI,setshowalertI]= useState('no')
+
+  const [registerInfo,setRegisterInfo]= useState([])
 
   const [search,setSearch]= useState("")
   
@@ -30,6 +37,9 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
   const [userInfo,setUserInfo]= useState([])
   // const [alert,setAlert]= useState('')
   const [geolocation,setgeolocation]= useState([])
+
+
+  const email = registerInfo.r_email;
 
   const country_name = geolocation.country_name;
   const country_code = geolocation.country_code;
@@ -42,7 +52,7 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
   const validity='normal';
   const shopname = '';
   const shopstatus='closed'; 
-  const ref = match.params.id;
+  const ref = registerInfo.r_ref;
   const membership_class = 'free';
   const Payment_status ='no'
   const available_ads = 2;
@@ -58,60 +68,60 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
     first_name: '',
     last_name: '',
     username:'',
-    email: '',
+  
     password: '',
     password2: '',
     Visual_Code:''
 
   }); 
   
-  const { first_name,last_name,username, email, password, password2, Visual_Code} = formData;
+  const { first_name,last_name,username, password, password2, Visual_Code} = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-
-   
-   
   const onSubmit = async e => {
     e.preventDefault();
+    setshowalertI('yes')
     if (first_name === '') { 
-      setAlert('الاسم الأول مطلوب');
+      setAlert('First name is required');
     }
     else if (last_name === '') { 
-      setAlert('الاسم الاخير مطلوب');
+      setAlert('Last name is required');
     }
     else if (username === '') { 
-      setAlert('اسم المستخدم مطلوب');
+      setAlert('Username is required');
     }
     else if (email === '') { 
-      setAlert('البريد الالكتروني مطلوب');
+      setAlert('Email is required');
     }
     else if (password === '') { 
-      setAlert('كلمة المرور مطلوبة');
+      setAlert('Password is required');
     }
 
     else if (password !== password2) { 
-      setAlert('كلمة المرور غير مطابقة');
+      setAlert('Passwords do not match');
     }
 
-    else if (Visual_Code === '') { 
-      setAlert('الرمز المرئي مطلوب');
-    }
+    // else if (Visual_Code === '') { 
+    //   setAlert('الرمز المرئي مطلوب');
+    // }
 
-    else if (Visual_Code !== visualCodeShow.toString()) { 
-      setAlert('الرمز المرئي غير مطابق');
-    }
-     
+    // else if (Visual_Code !== visualCodeShow.toString()) { 
+    //   setAlert('الرمز المرئي غير مطابق');
+    // }
+    
     
      else{
        register({ first_name,last_name,username, email, password,validity,country_name,country_code, city, state, postal, latitude, longitude, IPv4, shopname, shopstatus, ref, membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date,Visual_Code });
        addvisual({Visual_Code});
+      //  window.location= `/user/emailSendingComfirmation`
+ 
     }
   };
 
-
-    
+ 
+     
   useEffect(() => {
 
     axios.get('https://geolocation-db.com/json/297364b0-2bc6-11ec-a8a6-1fc54772a803')
@@ -140,54 +150,64 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
       console.log(err);
     })
 
- 
+
+   
+    axios.get('/api/auth/registerinfo/'+match.params.id)
+    .then(res => {
+      setRegisterInfo(res.data)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
+  
 
 
  }, []);
 
 
 
-  // if (isAuthenticated && Lang === 'ar') {
-  //   return <Redirect to='/ar/dashboard/main' />;
-  // } 
+  if (isAuthenticated ) {
+    return <Redirect to='/dashboard/main' />;
+  } 
 
-  // if (isAuthenticated && Lang === 'en') {
-  //   return <Redirect to='/en/dashboard/main' />;
-  // } 
+
 
   
-  
+    
  
   return (
     <Fragment>
-      {Lang === 'ar'?(
-        <Navbar />
-      ):(
-      <NavbarEnglish />
-      )}
+  {i18next.language === 'ar'&&( <Navbar />)}
+  {i18next.language === 'en'&&( <NavbarEnglish />)}
        
      <div className="aqle3-main" >
       <div className="mainword2">
       <div className="mainForm">
 
-   
+ 
      
       
       
       {/* <div className="loginSmalltitle" >
         <i className='fa fa-user' />  
       </div> */}
- {Lang === 'ar'?(
+{i18next.language === 'ar'&&(
  <Fragment> 
 
       <center> 
       <form className="login-form" onSubmit={e => onSubmit(e)}>
       <div className='FormCover'> 
-      {Lang === 'ar' ?(
-      <div className="login-title"> حساب جديد  </div>
-      ):(
-     <div className="login-title"> New Account  </div>
-      )}   
+      
+        <Fragment> 
+      <div className="login-title"> الخطوة 2 من 2  </div>
+      <div className="login-title">   {registerInfo.r_email}  </div>
+      </Fragment>
+ 
+
+     
+
+       
 
 
 
@@ -278,7 +298,7 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
 </Fragment>
    )}
 
-        <div className=''>
+        {/* <div className=''>
         <span className="login-text"> البريد الالكتروني </span>
           <input
             className="login-input"
@@ -288,7 +308,7 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
             value={email}
             onChange={e => onChange(e)}
           />
-          </div>
+          </div> */}
          
           </div>
           
@@ -337,7 +357,7 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
     
           
    
-          <div className=''>
+          {/* <div className=''>
             <img src=''/>
          
             <span className="login-text"> الرمز المرئي </span>
@@ -350,7 +370,7 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
             value={Visual_Code}
             onChange={e => onChange(e)}
           />
-          </div>
+          </div> */}
 
 
 
@@ -366,26 +386,27 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
           />
           </div>
 
-   
+    
 
 <p className='login-alert'> {alert} </p>
 </div>
-   
+    
         
-       <Alert />
+      {showalertI === 'yes' && (
+      <center>   <div className="alert-info" >  <Alert />  </div> </center>  
+        )}
         <button className="Formbutton" type='submit'> تسجيل </button>
         
       </form>
       </center>
 
       <div className="loginSmalltitle">
-  لدي حساب <Link to='/ar/user/login'>دخول</Link>
+  لدي حساب <Link to='/user/login'>دخول</Link>
  </div>
 
       </Fragment>
- ):(
-
-
+ )}
+{i18next.language === 'en'&&(
 
 
   <Fragment> 
@@ -394,7 +415,12 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
   <form className="login-form" onSubmit={e => onSubmit(e)}>
   <div className='FormCover'> 
 
- <div className="login-title"> New Account  </div>
+ 
+     <div className="login-title"> New Account   </div>
+     <div className="login-title">   {registerInfo.r_email}  </div>
+  
+
+ <div className="login-title"> Step 2 of 2  </div>
   
 
 
@@ -486,7 +512,7 @@ return  <h1 className='notusernames'> {post.username} -</h1>;
 </Fragment>
 )}
 
-    <div className=''>
+    {/* <div className=''>
     <span className="login-text"> Email </span>
       <input
         className="login-input"
@@ -496,7 +522,7 @@ return  <h1 className='notusernames'> {post.username} -</h1>;
         value={email}
         onChange={e => onChange(e)}
       />
-      </div>
+      </div> */}
      
       </div>
       
@@ -545,7 +571,7 @@ return  <h1 className='notusernames'> {post.username} -</h1>;
 
       
 
-      <div className=''>
+      {/* <div className=''>
         <img src=''/>
      
         <span className="login-text"> visual code </span>
@@ -558,7 +584,7 @@ return  <h1 className='notusernames'> {post.username} -</h1>;
         value={Visual_Code}
         onChange={e => onChange(e)}
       />
-      </div>
+      </div> */}
 
 
 
@@ -578,9 +604,11 @@ return  <h1 className='notusernames'> {post.username} -</h1>;
 
 <p className='login-alert'> {alert} </p>
 </div>
-
+ 
     
-   <Alert />
+         {showalertI === 'yes' && (
+         <center>   <div className="alert-info" >  <Alert />  </div> </center>  
+          )}
     <button className="Formbutton" type='submit'> Register </button>
     
   </form>
@@ -608,7 +636,6 @@ Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
   addvisual: PropTypes.func.isRequired,
-  
   isAuthenticated: PropTypes.bool
 };
   

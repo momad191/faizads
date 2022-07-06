@@ -44,7 +44,7 @@ const App = () => {
          
            
           <Switch>
-            <Route exact path='/:lang' component={Home} />
+            {/* <Route exact path='/:lang' component={Home} /> */}
             <Route exact path='/' component={Home} />
            
             <Route component={Routes} />

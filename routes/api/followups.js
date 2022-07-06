@@ -31,15 +31,19 @@ router.post(
       } 
          
       try {
+        // const following_shop111 = await Shop.findOne({username:req.body.following_shop11});
+        // const following_user111 = await User.findOne({username:req.body.following_user11});
+
+
         
         const user = await User.findById(req.user.id).select('-password');
-        const shop = await Shop.findOne({username:user.username});
+        const shop = await Shop.findOne({user:user._id});
 
         const newFollowup = new Followup({
-          following_shop:  req.body.following_shop,
+          following_shop: req.body.following_shop,
           following_user: req.body.following_user,
-
-          follower_user: user.username,
+ 
+          follower_user: req.user.id,
           follower_shop :shop.id,
           
 
@@ -64,8 +68,9 @@ router.post(
 router.get('/doyoufollow/:username', auth, async (req, res) => { 
     try { 
        // const username = await User.findById(req.user.id).select('-password');
-      const doyoufollow = await Followup.findOne({user:req.user.id,following_user:req.params.username});
-   
+       const user = await User.findOne({username:req.params.username})
+      const doyoufollow = await Followup.findOne({user:req.user.id,following_user:user._id});
+      
       if(doyoufollow === null ){
         res.json({
           follower_shop: '',
@@ -89,7 +94,7 @@ router.get('/doyoufollow/:username', auth, async (req, res) => {
   });
 
 
-
+ 
   // @route    DELETE api/followups/:id
 // @desc     Delete a followup
 // @access   Private
@@ -124,13 +129,19 @@ router.delete('/:id', auth, async (req, res) => {
 // @access   private
 router.get('/userfollowing/:username', async (req, res) => {
   try {
+    var populateQuery =
+    [
+    {path:'user', select: 'first_name last_name username'},
+    {path: 'following_shop', select:'shop_name shop_logo_img shop_description username clicks'},
+    {path: 'following_user', select:'first_name last_name username'},
+
+    {path: 'follower_shop', select:'shop_name shop_logo_img shop_description username clicks'},
+    {path: 'follower_user', select:'first_name last_name username'},
+
+   ]; 
       // const username = await User.findById(req.user.id).select('-password');
-    const userfollowing = await Followup.find({follower_user:req.params.username})
-    .populate({
-      path: 'following_shop',
-      select:
-      'shop_name shop_logo_img shop_description username'
-    });
+      const user = await User.findOne({username:req.params.username})
+    const userfollowing = await Followup.find({follower_user:user._id}).populate(populateQuery);
 
     // .populate('shop', ['shop_name', 'shop_logo_img','shop_description','username']);
  
@@ -165,14 +176,21 @@ router.get('/userfollowing/:username', async (req, res) => {
 // @access   private
 router.get('/userfollowers/:username', async (req, res) => {
   try {  
-      // const username = await User.findById(req.user.id).select('-password');
-    const userfollowers = await Followup.find({following_user:req.params.username})
 
-    .populate({
-      path: 'follower_shop',
-      select:
-      'shop_name shop_logo_img shop_description username'
-    });
+    var populateQuery =
+    [
+    // {path:'user', select: 'first_name last_name username'},
+    {path: 'following_shop', select:'shop_name shop_logo_img shop_description username clicks'},
+    {path: 'following_user', select:'first_name last_name username'},
+
+    {path: 'follower_shop', select:'shop_name shop_logo_img shop_description username clicks'},
+    {path: 'follower_user', select:'first_name last_name username'},
+   ]; 
+      // const username = await User.findById(req.user.id).select('-password');
+      const user = await User.findOne({username:req.params.username})
+    const userfollowers = await Followup.find({following_user:user._id}).populate(populateQuery);
+
+    
 
 
     // .populate('shop', ['shop_name', 'shop_logo_img','shop_description','username']);

@@ -4,14 +4,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import Navbar from '../layout/Navbar';
+import NavbarEnglish from '../layout/NavbarEnglish';
 //import MarketItem from './MarketItem';
 //import MarketForm from './PostForm';
 import { deleteMarket } from '../../actions/market';
 import ConfirmButton from "./ConfirmButton";
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
+   
   
- 
 const Markets = ({loading , deleteMarket}) => {
+    const [t, i18next] = useTranslation()
+    const [user,setUser]= useState([])
     const [getMarkets,setMarkets]= useState([])
     const [visible,setVisible]= useState(20)
     //const [search,setSearch]= useState('')
@@ -30,6 +34,16 @@ const Markets = ({loading , deleteMarket}) => {
 
 
     useEffect(() => {
+
+      axios.get('/api/auth')
+      .then(res => {
+        setUser(res.data)
+      }) 
+      .catch((err) => {
+        console.log(err);
+      })
+
+
         axios.get('/api/markets')
         .then(res => {
           console.log(res);
@@ -40,24 +54,20 @@ const Markets = ({loading , deleteMarket}) => {
         })
 
 
-      }, [getMarkets]);
+      }, [getMarkets, user]);
 
 
-      return loading ? (
-        <Spinner />
-      ) : (
+      const MarketsValid = (
        
     
-  
-        <div className="aqle3-main">
-        <div className="mainword2">
-          <Navbar />
-        <div className="mainForm">
+   
+
+        <div className="mainForm"> 
   
       <center>
-        <div className="dash-title"> الأسواق </div>
-        <Link to="/ar/dashboard/main" className="Action-button-plus-admin">  <i className="fa fa-arrow-left fa-1x"></i> رجوع </Link>
-      <Link to="/ar/dashboard/Addmarket" className="Action-button-plus-admin">  <i className="fa fa-plus fa-1x"></i> اضافة </Link>
+        <div className="dash-title"> {t('market_management_title')} </div>
+        <Link to="/dashboard/main" className="Action-button-plus-admin">  <i className="fa fa-arrow-left fa-1x"></i> {t('backButton')} </Link>
+      <Link to="/dashboard/Addmarket" className="Action-button-plus-admin">  <i className="fa fa-plus fa-1x"></i> {t('addButton')} </Link>
 
       </center>
   
@@ -82,10 +92,13 @@ const Markets = ({loading , deleteMarket}) => {
   
 
     <div className="title-in-list">
-    <a className="title-in-list" href={market.m_code}>
-    {market.m_AR_name}  </a>
-   
+    <div className="title-in-list" >
+    {i18next.language === 'ar'&& market.m_AR_name}
+    {i18next.language === 'en'&& market.m_EN_name} {' '}
     <i className={market.m_fontawesome_class} aria-hidden="true"></i>
+     </div>
+   
+   
     </div>
  
 
@@ -93,15 +106,15 @@ const Markets = ({loading , deleteMarket}) => {
     <img src={market.m_image} style={{ width: '120px', height:'80px',marginBottom:''}} />
     )}
 
-     
+      
       <div>
-      <p class="list-details"> <span className="redColor">الوصف:</span>{market.m_description} </p>
+      <p class="list-details">  <span className="redColor"> {t('desc_title')}:</span>{market.m_description}  </p>
       <p class="list-button">
       <button className="Action-button-status">  <i class="fa fa-eye fa-1x"></i>  </button> 
       <Link to={`/dashboard/editMarket/${market._id}`}  style={{textDecoration:'none'}}>   <button  className="Action-button-status">  <i class="fa fa-edit fa-1x"></i>   </button> </Link>
 
             <ConfirmButton
-            dialog={["", "هل انت متأكد ؟", "تأكيد الحذف"]}
+            dialog={["", "?are you sure ", "Confirm deletion"]}
             action={() => deleteMarket(market._id)}
               />
 
@@ -131,12 +144,32 @@ const Markets = ({loading , deleteMarket}) => {
   )}
 
         </div>
-        </div>
-        </div>
+
 
 
       
     )
+
+
+
+    const notValidPage =(
+      <Fragment>
+            <center> 
+           <Spinner />
+          </center>
+      </Fragment>
+    )
+
+    return(
+      <div className="aqle3-main">
+      <div className="mainword2">
+      {i18next.language === 'ar'&&(<Navbar />)}
+      {i18next.language === 'en'&&(<NavbarEnglish />)}
+
+      {user.validity === "super" || user.validity === "admin"  ?  MarketsValid : notValidPage}
+      </div>
+      </div>
+      );
 }
  
 

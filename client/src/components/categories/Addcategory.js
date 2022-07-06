@@ -5,11 +5,15 @@ import { Link } from 'react-router-dom';
 import { addCategory } from '../../actions/category';
 import { setAlert } from '../../actions/alert';
 import axios from 'axios';
+import Spinner from '../layout/Spinner';
 import Navbar from '../layout/Navbar';
-
+import NavbarEnglish from '../layout/NavbarEnglish';
+import { useTranslation } from 'react-i18next';
+ 
+  
 const Addcategory = ({setAlert,addCategory}) => {
-   
-
+  const [t, i18next] = useTranslation()
+  const [user,setUser]= useState([])
   const [markets11,setMarkets11]= useState([])
     const [image, setImage] = useState('')
     const [loading, setLoading] = useState(false)
@@ -48,14 +52,14 @@ const Addcategory = ({setAlert,addCategory}) => {
         const files = e.target.files
         const data = new FormData()
         data.append('file', files[0])
-        data.append('upload_preset', 'magazine')
+        data.append('upload_preset', 'faizcategories')
         setLoading(true)
         const res = await fetch(
           'https://api.cloudinary.com/v1_1/momad191/image/upload',
           {
             method: 'POST',
             body: data
-          }
+          } 
         )
         const file = await res.json()
     
@@ -65,6 +69,15 @@ const Addcategory = ({setAlert,addCategory}) => {
 
 
       useEffect(()=>{
+
+      axios.get('/api/auth')
+      .then(res => {
+        setUser(res.data)
+      }) 
+      .catch((err) => {
+        console.log(err);
+      })
+
       
         axios.get('/api/markets')
         .then(res => {
@@ -94,18 +107,16 @@ const Addcategory = ({setAlert,addCategory}) => {
       }
 
 
-    return (
+    const AddCategoryValid = (
           
                   
         
-                <div className="aqle3-main">
-                <div className="mainword2">
-                  <Navbar />
+            
                 <div className="mainForm">
                 <center> 
-                <div class="login-title">  اضافة تصنيف رئيسي جديد <i class="fa fa-plus-circle"></i></div>
+                <div class="login-title">  <i class="fa fa-plus-circle"></i>  {t('addCategory')} </div>
  
-                <Link to="/ar/dashboard/categories" className="Action-button-plus-admin">  <i className="fa fa-arrow-left fa-1x"></i> رجوع </Link>
+                <Link to="/dashboard/categories" className="Action-button-plus-admin">  <i className="fa fa-arrow-left fa-1x"></i> {t('backButton')} </Link>
                 </center>
          
                 <center> 
@@ -114,14 +125,14 @@ const Addcategory = ({setAlert,addCategory}) => {
                 <div className='FormCover'>  
 
                 <div className=''>
-                <span>السوق كود </span>
+                <span>{t('code_title')} </span>
                 <select className="login-input" 
                  
                   name="market_code" 
                   value={market_code} 
                   onChange={e => onChange(e)}
                   > 
-                  <option value='nothing chosen'> اختر السوق الذي تود ان تضيف له تصنيف </option>
+                  <option value='nothing chosen'> choose </option>
                   {markets11.map(catego=>(
                   <option required value={catego.m_code}> {catego.m_code} </option>
                     ))}
@@ -132,14 +143,14 @@ const Addcategory = ({setAlert,addCategory}) => {
 
   
                 <div className=''>
-                <span> اي دي السوق </span>
+                <span> {t('code_title')} </span>
                 <select className="login-input" 
                 
                   name="market_id" 
                   value={market_id} 
                   onChange={e => onChange(e)}
                   > 
-                  <option value='nothing chosen'> اختر السوق الذي تود ان تضيف له تصنيف </option>
+                  <option value='nothing chosen'> choose </option>
                   {markets11.map(catego=>(
                   <option required value={catego._id}> {catego.m_AR_name} </option>
                     ))}
@@ -150,7 +161,7 @@ const Addcategory = ({setAlert,addCategory}) => {
 
               
                 <div className=''>
-                <span>اسم التصنيف عربي </span>
+                <span>{t('category_ar_name')} </span>
                 <input className="login-input"
                  type="text" 
                  placeholder=""
@@ -163,7 +174,7 @@ const Addcategory = ({setAlert,addCategory}) => {
 
 
                  <div className=''>
-                <span>اسم التصنيف انجليزي </span>
+                <span>{t('category_en_name')} </span>
                 <input className="login-input"
                  type="text" 
                  placeholder=""
@@ -176,7 +187,7 @@ const Addcategory = ({setAlert,addCategory}) => {
 
 
                  <div className=''>
-                <span>رمز التصنيف </span>
+                <span>{t('category_code')} </span>
                 <input className="login-input"
                  type="text" 
                  placeholder=""
@@ -189,7 +200,7 @@ const Addcategory = ({setAlert,addCategory}) => {
 
 
                 <div className=''>
-                 <span>الوصف </span>
+                 <span>{t('category_description')}  </span>
                  <textarea className="login-input"  
                  placeholder=""
                  name="c_description" 
@@ -201,7 +212,7 @@ const Addcategory = ({setAlert,addCategory}) => {
 
 
                     <div className=''>
-                    <span>ارفع صورة  </span>
+                    <span>{t('upload_picture')}   </span>
                         <input 
                           className="login-input"
                           placeholder=""
@@ -242,22 +253,39 @@ const Addcategory = ({setAlert,addCategory}) => {
         
                 
               <center>
-             <button className="Formbutton"  type="submit" name="" >اضافة</button>
+             <button className="Formbutton"  type="submit" name="" >{t('save')} </button>
          
              </center>
              </div>
              </form>
              </center>
-        
- 
-                </div>
-                </div>
-                </div>
+             </div>
+               
         
     
     )
-}
 
+    const notValidPage =(
+      <Fragment>
+             <center> 
+           <Spinner />
+          </center>
+      </Fragment>
+    )
+ 
+
+    return(
+      <div className="aqle3-main">
+      <div className="mainword2">
+      {i18next.language === 'ar'&&(<Navbar />)}
+      {i18next.language === 'en'&&(<NavbarEnglish />)}
+      {user.validity === "super" || user.validity === "admin"  ?  AddCategoryValid : notValidPage}
+      </div>
+      </div>
+      );
+
+}
+ 
 
 
 

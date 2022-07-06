@@ -1,4 +1,5 @@
 import React, { Component ,Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 import Moment from 'react-moment';
@@ -6,8 +7,12 @@ import Navbar from '../layout/Navbar';
 import NavbarEnglish from '../layout/NavbarEnglish';
 import emptypic from './emptypic.jpg';
 import emptypic1 from './emptypic1.jpg';
-//import 'moment/locale/ar'; 
+// import 'moment/locale/ar'; 
 
+import { Translation } from 'react-i18next';
+import i18next from 'i18next';
+
+ 
 export default class MyProfile extends Component {
  
 
@@ -45,10 +50,11 @@ export default class MyProfile extends Component {
 
     this.state = {
       Lang :this.props.match.params.lang,
-      _id:'',
+      shopId:'',
+      user:'',
       shop_name: '',
       shop_type: '',
-      
+       
 
       shop_description: '',
       shop_img: '',
@@ -78,7 +84,8 @@ export default class MyProfile extends Component {
     axios.get('/api/shops/usershop')
       .then(response => {
         this.setState({
-          _id: response.data._id,
+          shopId: response.data._id,
+          user: response.data.user,
           username: response.data.username,
           shop_name: response.data.shop_name,
           shop_type: response.data.shop_type,
@@ -302,6 +309,8 @@ export default class MyProfile extends Component {
         })
       }
 
+
+
  
   async onSubmit(e) {
   e.preventDefault();
@@ -327,19 +336,19 @@ export default class MyProfile extends Component {
         shop_phone3: this.state.shop_phone3 ,
     }
       
-   if(this.state.shop_type ===''){
+   if(this.state.shop_name ===''){
     
     this.setState({
-      alert:'نوع المتجر ضروري'
+      alert:'The name of the shop is required'
     })
        
    }else{
 
-    axios.post('/api/shops/updateShop/'+this.state._id,shop);
-    window.location = '/ar/dashboard/shops/edit';
+    axios.post('/api/shops/updateShop/'+this.state.shopId,shop);
+    window.location = '/en/dashboard/shops/edit';
 
    }
-
+ 
     }
 
 
@@ -355,16 +364,35 @@ export default class MyProfile extends Component {
     
     // }
 
+    displayNavbar = ()=>{
+      if(i18next.language === 'ar'){
+        return <Navbar /> 
+      }
+
+      if(i18next.language === 'en'){
+        return <NavbarEnglish /> 
+      }
+      
+      }
+
+
+   
 
 
   render(loading) {
     return (
       <Fragment>
          
-      <Navbar />
-    
-   
- 
+      {this.state.Lang === 'ar' &&(
+        this.displayNavbar()
+      )}  
+
+{this.state.Lang === 'en' &&(
+        this.displayNavbar()
+      )}  
+
+  
+
         <div className="aqle3-main">
         <div className="mainword2">
         <div className="mainForm">
@@ -386,9 +414,9 @@ export default class MyProfile extends Component {
     <div class="login-title">    
 
       <i class="fa fa-link fa-1x" aria-hidden="true"></i>   {'     '}
-       <a href={`http://localhost:3000/shops/${this.state.username}`}>  
-      {`http://localhost:3000/shops/${this.state.username}`}
-         </a>  {'     '} <i class="fa fa-link fa-1x" aria-hidden="true"></i>
+       <Link to={`/shops/${this.state.user.username}`}>  
+     @{`${this.state.user.username}`}
+         </Link>  {'     '} <i class="fa fa-link fa-1x" aria-hidden="true"></i>
 
          </div> 
 
@@ -478,9 +506,13 @@ export default class MyProfile extends Component {
  
 <div className="login-form" > 
  
-                <span className='login-text'>اسم المتجر </span>
+                <span className='login-text'> 
+                {this.state.Lang === 'ar'&&( <>اسم المتجر </>)}
+                {this.state.Lang === 'en'&&( <>Shop name </>)}  
+                </span>
                 <input className="login-input"
                  type="text" 
+                 maxLength='40'
                  placeholder=""
                  name="shop_name" 
                  value={this.state.shop_name} 
@@ -489,7 +521,10 @@ export default class MyProfile extends Component {
                  </input>
 
   
-                 <span className='login-text'>نوع المتجر </span>
+                 {/* <span className='login-text'>
+                 {this.state.Lang === 'ar'&&( <>نوع المتجر </>)}
+                 {this.state.Lang === 'en'&&( <>Shop type </>)}  
+                 </span>
 
                 <select className="login-input"
                  type="text" 
@@ -503,14 +538,17 @@ export default class MyProfile extends Component {
               {this.state.markets.map(market=>(
                   <option  className="optiontitleinput" required value={market.m_code}> {market.m_AR_name}  </option>
                     ))}
-                 </select>
+                 </select> */}
 
 
 
-                <span className='login-text'> وصف مختصر للمتجر </span>
+                <span className='login-text'> 
+                {this.state.Lang === 'ar'&&( <>وصف مختصر  </>)}
+                {this.state.Lang === 'en'&&( <>Brief description </>)} 
+                 </span>
                 <input className="login-input"
                  type="text" 
-                 placeholder="150 حرف"
+                 placeholder="150 characters"
                  name="shop_description" 
                  value={this.state.shop_description} 
                  onChange={this.onChangeshop_description}
@@ -521,7 +559,10 @@ export default class MyProfile extends Component {
   
 
 
-                 <span className='login-text'>يوتيوب </span>
+                 <span className='login-text'>
+                 {this.state.Lang === 'ar'&&( <>رابط قناة يوتيوب  </>)}
+                 {this.state.Lang === 'en'&&( <> YouTube channel URL  </>)} 
+                 </span>
                 <input className="login-input"
                  type="text" 
                  name="youtube" 
@@ -532,7 +573,10 @@ export default class MyProfile extends Component {
 
 
 
-                 <span className='login-text'>تويتر </span>
+                 <span className='login-text'>
+                 {this.state.Lang === 'ar'&&( <>رابط حساب تويتر  </>)}
+                 {this.state.Lang === 'en'&&( <> Twitter account link  </>)} 
+                   </span>
                 <input className="login-input"
                  type="text" 
                  name="twitter" 
@@ -544,7 +588,10 @@ export default class MyProfile extends Component {
 
 
 
-                 <span className='login-text'>فيس بوك </span>
+                 <span className='login-text'>
+                 {this.state.Lang === 'ar'&&( <>رابط حساب فيس بوك  </>)}
+                 {this.state.Lang === 'en'&&( <> Facebook account link  </>)} 
+                   </span>
                 <input className="login-input"
                  type="text" 
                  name="facebook" 
@@ -554,7 +601,10 @@ export default class MyProfile extends Component {
                  </input>
 
 
-                 <span className='login-text'>linkedin </span>
+                 <span className='login-text'>
+                 {this.state.Lang === 'ar'&&( <>رابط حساب لنكد ان  </>)}
+                 {this.state.Lang === 'en'&&( <> Linkedin account link  </>)} 
+                   </span>
                 <input className="login-input"
                  type="text" 
                  name="linkedin" 
@@ -565,7 +615,10 @@ export default class MyProfile extends Component {
 
 
 
-                 <span className='login-text'>instagram </span>
+                 <span className='login-text'>                  
+                 {this.state.Lang === 'ar'&&( <>رابط حساب انستغرام  </>)}
+                 {this.state.Lang === 'en'&&( <> Instagram account link  </>)} 
+                 </span>
                 <input className="login-input"
                  type="text" 
                  name="instagram" 
@@ -576,7 +629,10 @@ export default class MyProfile extends Component {
 
 
 
-                 <span className='login-text'> البريد الإلكتروني </span>
+                 <span className='login-text'>
+                 {this.state.Lang === 'ar'&&( <> البريد الإلكتروني للمتجر </>)}
+                 {this.state.Lang === 'en'&&( <> Shop email  </>)} 
+                  </span>
                 <input className="login-input"
                  type="text" 
                  name="shop_email" 
@@ -588,7 +644,10 @@ export default class MyProfile extends Component {
 
 
 
-                 <span className='login-text'> الموقع الإلكتروني </span>
+                 <span className='login-text'> 
+                 {this.state.Lang === 'ar'&&( <> رابط الموقع الإلكتروني </>)}
+                 {this.state.Lang === 'en'&&( <> Website Link  </>)}  
+                </span>
                 <input className="login-input"
                  type="text" 
                  name="shop_website" 
@@ -600,7 +659,10 @@ export default class MyProfile extends Component {
 
 
 
-                 <span className='login-text'> للتواصل عبر الواتس اب </span>
+                 <span className='login-text'> 
+                 {this.state.Lang === 'ar'&&( <> للتواصل عبر الواتس اب </>)}
+                 {this.state.Lang === 'en'&&( <> Contact via WhatsApp  </>)}  
+                  </span>
                 <input className="login-input"
                  type="text" 
                  name="shop_whatsaap" 
@@ -611,7 +673,10 @@ export default class MyProfile extends Component {
 
 
 
-                 <span className='login-text'> الهاتف 1 </span>
+                 <span className='login-text'> 
+                 {this.state.Lang === 'ar'&&( <> رقم الهاتف 1 </>)}
+                 {this.state.Lang === 'en'&&( <> Phone number 1  </>)}   
+                </span>
                 <input className="login-input"
                  type="text" 
                  name="shop_phone1" 
@@ -622,7 +687,10 @@ export default class MyProfile extends Component {
 
 
 
-                 <span className='login-text'> الهاتف 2 </span>
+                 <span className='login-text'>  
+                 {this.state.Lang === 'ar'&&( <> رقم الهاتف 2 </>)}
+                 {this.state.Lang === 'en'&&( <> Phone number 2  </>)}   
+                  </span>
                 <input className="login-input"
                  type="text" 
                  name="shop_phone2" 
@@ -634,7 +702,10 @@ export default class MyProfile extends Component {
 
  
 
-                 <span className='login-text'> الهاتف 3 </span>
+                 <span className='login-text'> 
+                 {this.state.Lang === 'ar'&&( <> رقم الهاتف 3  </>)}
+                 {this.state.Lang === 'en'&&( <> Phone number 3  </>)}  
+                  </span>
                 <input className="login-input"
                  type="text" 
                  name="shop_phone3" 
@@ -666,7 +737,11 @@ export default class MyProfile extends Component {
 
       )}
 
-	 <button className="Formbutton"  type="submit" name="" >حفظ</button>
+	 <button className="Formbutton"  type="submit" name="" >
+   {this.state.Lang === 'ar'&&( <> حفظ  </>)}
+   {this.state.Lang === 'en'&&( <> Save  </>)}  
+
+   </button>
  
 	 </center>
 

@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 import ff from './ttt.jpg';
-
+import { useTranslation } from 'react-i18next';
  
 import axios from 'axios';
-
  
 
 const mySidenav0 = 'sidenavnone';
@@ -16,6 +15,8 @@ const sidenav = 'sidenav';
 
  
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+
+  const [t, i18next] = useTranslation()
 
   const [mySidenav, setmySidenav] = useState(mySidenav0)
 
@@ -53,8 +54,8 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   }, [categories11]);
 
- 
- 
+  
+   
  
   const authLinks = (
  
@@ -64,33 +65,35 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <img className="logo" src={ff}/>
         </Link>
         </div>
-         <div id="mySidenav"   className={mySidenav}>
+<div id="mySidenav"   className={mySidenav}>
  <center> 
  <button onClick={closeMenu} className="closebtn">&times;</button>
- </center>
- {categories11.map(catego=>(
+ 
+
+
+ {/* {categories11.map(catego=>(
 <Fragment> 
-
- <a href={`/displayCategoryItems/${catego._id}#/${catego.c_name}`} > 
+  <a href={`/displayCategoryItems/${catego._id}#/${catego.c_name}`} > 
  <span><img className="" src={catego.image} style={{width:'50px' , height:'50px', marginRight:'20px'}}/></span>
- {catego.c_name} </a>
-
- </Fragment>
- ))}
+ {catego.c_name} </a> 
+  </Fragment>
+ ))} */}
+ <Link to='/shops'>المتاجر {' '} <i class="fa fa-shopping-cart" aria-hidden="true"></i> </Link>
+ <Link to='/dashboard/MyProfile'> الملف الشخصي  {' '} <i class="fa fa-user" aria-hidden="true"></i> </Link>
+ <Link to='/dashboard/posts'>   أضف إعلانك   <i class="fa fa-plus" aria-hidden="true"></i> </Link>
+ <Link to='/dashboard/main'> <i class="fa fa-cog" aria-hidden="true"></i> {' '}  لوحة التحكم </Link>
+ <Link to='/membership/prices'>   العضويات  {' '} <i className="fa fa-rocket fa-1x"></i>  </Link>
+ </center>
 </div>
+ 
       {/* <li className="left">
       <Link to='/'>
         <img src={ss} width="60px" height="40px"/>
         </Link>
         </li> */} 
+
       <li className="">
-        <Link to='/ar/shops'>
-          المتاجر
-          {' '} <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-          </Link>
-      </li> 
-      <li className="">
-        <Link to='/ar/dashboard/MyProfile'>
+        <Link to='/dashboard/MyProfile'>
           الملف الشخصي
           {' '} <i class="fa fa-user" aria-hidden="true"></i> 
           </Link>
@@ -102,45 +105,73 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           </Link>
       </li> */}
       <li className="">
-        <Link to='/ar/dashboard/posts'>المنشورات</Link>
+        <Link to='/dashboard/posts'>أضف إعلانك  
+        {' '} <i class="fa fa-plus" aria-hidden="true"></i>
+        </Link>
+        
       </li>
       <li className="">
-        <Link to='/ar/dashboard/main'>
-        <i class="fa fa-home" aria-hidden="true"></i> {' '}
-          <span className='hide-sm'>  لوحة التحكم</span>
+        <Link to='/dashboard/main'>
+        <span className='hide-sm'>  لوحة التحكم</span>
+        {' '}<i class="fa fa-cog" aria-hidden="true"></i> 
+           
         </Link>
       </li>
       <li className="">
-      <Link to='/ar/membership/prices'>
-
-        <i className="fa fa-rocket fa-1x"></i> {' '}
+      <Link to='/membership/prices'> 
           <span className='hide-sm'>العضويات </span>
+          {' '}<i className="fa fa-rocket fa-1x"></i> 
         </Link>
 
       </li>
+
+
+      <li className="">
+        <Link to='/shops'>
+          المتاجر
+          {' '} <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          </Link>
+      </li>  
       
-      <li className=" ">
-        <a className="LogoutColor" onClick={logout} href='/ar'>
-          <i className='fas fa-sign-out-alt' />{' '}
-          <span className=''><i class="fa fa-power-off" aria-hidden="true"></i></span>
-        </a>
-      </li> 
   
       <li>
       <button className="buttonNav" onClick={openMenu}>  &#9776;   </button>
       </li>
 
-      <div className="listdownArabic">
+  
+     <li className="">
+     {i18next.language === 'ar' && <Link  onClick={()=>{i18next.changeLanguage('en')}}> 
+          <span className='hide-sm'>{t('lang')} </span>
+          {' '}<i className="fa fa-globe fa-1x"></i> 
+        </Link>}
+
+        {i18next.language === 'en' && <Link  onClick={()=>{i18next.changeLanguage('ar')}}> 
+          <span className='hide-sm'>{t('lang')} </span>
+          {' '}<i className="fa fa-globe fa-1x"></i> 
+        </Link>}
+
+      </li>
+      
+  
+  
+      <li className=" ">
+        <Link className="LogoutColor" onClick={logout} to='/'>
+          
+          <span className=''><i class="fa fa-power-off" aria-hidden="true"></i></span>
+          {' '} <i className='fas fa-sign-out-alt' />
+        </Link>
+      </li> 
+
+ 
+
+ {/* <div className="listdownArabic">
   <li><a><i class="fa fa-language fa-3x" ></i>
       </a></li>
   <div class="listdownArabic-content">
     <Link to="/en/dashboard/main">English</Link>
     <Link to="/ar/dashboard/main">عربي</Link> 
-   
-
   </div>
-  
-  </div> 
+  </div>  */}
 
     </ul>
   );
@@ -149,7 +180,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <ul className="topnav">
 
         <div className="logoContent">
-        <Link to='/ar'>
+        <Link to='/'>
         <img className="logo" src={ff}/>
         </Link>
         </div>
@@ -164,7 +195,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
  <center> 
  <button onClick={closeMenu} className="closebtn">&times;</button>
  </center>
- {categories11.map(catego=>(
+ {/* {categories11.map(catego=>(
 
 <Fragment> 
 
@@ -174,48 +205,82 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
 </Fragment>
 
- ))}
-</div>
+ ))} */}
+
+ <Link to='/user/createAccount'>انشئ حساب   <i class="fa fa-user-plus fa-1x" ></i> {' '} </Link>
+ <Link to='/user/login'> الدخول   <i class="fa fa-sign-in" aria-hidden="true"></i> {' '}</Link>
+ <Link to='/membership/prices'>   العضويات   <i className="fa fa-rocket fa-1x"></i> {' '}</Link>
+ <Link to='/shops'>  المتاجر    <i class="fa fa-shopping-cart" aria-hidden="true"></i>{' '}</Link>
+ {i18next.language === 'ar' && <Link  onClick={()=>{i18next.changeLanguage('en')}}> 
+ <span className='hide-sm'>{t('lang')} </span>
+ {' '}<i className="fa fa-globe fa-1x"></i> 
+ </Link>}
+
+  {i18next.language === 'en' && <Link  onClick={()=>{i18next.changeLanguage('ar')}}> 
+  <span className='hide-sm'>{t('lang')} </span>
+  {' '}<i className="fa fa-globe fa-1x"></i> 
+  </Link>}
 
  
+</div>
+
+    
  
     <li className="">
-        <Link to='/ar/user/register'>
-        <i class="fa fa-user-plus fa-1x" ></i> {' '}
+        <Link to='/user/createAccount'>
           <span className='hide-sm'>انشئ حساب </span>
+          {' '}<i class="fa fa-user-plus fa-1x" ></i> 
           </Link>
       </li>
  
  
       <li className="">
-        <Link to='/ar/user/login'> 
-        <i class="fa fa-sign-in" aria-hidden="true"></i> {' '}
-        
+        <Link to='/user/login'> 
         <span className='hide-sm'>الدخول </span>
+        {' '}<i class="fa fa-sign-in" aria-hidden="true"></i> 
         </Link>
       </li>
 
  
       <li className="">
-        <Link to='/ar/membership/prices'>
-
-        <i className="fa fa-rocket fa-1x"></i> {' '}
+        <Link to='/membership/prices'>
           <span className='hide-sm'>العضويات </span>
+          {' '}<i className="fa fa-rocket fa-1x"></i> 
         </Link>
+
+        <Link to='/shops'>
+          المتاجر
+          {' '}<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          </Link>
+
+          
+
+      </li>
+      <li className="">
+     {i18next.language === 'ar' && <Link  onClick={()=>{i18next.changeLanguage('en')}}> 
+          <span className='hide-sm'>{t('lang')} </span>
+          {' '}<i className="fa fa-globe fa-1x"></i> 
+        </Link>}
+
+        {i18next.language === 'en' && <Link  onClick={()=>{i18next.changeLanguage('ar')}}> 
+          <span className='hide-sm'>{t('lang')} </span>
+          {' '}<i className="fa fa-globe fa-1x"></i> 
+        </Link>}
 
       </li>
 
       
- <div className="listdownArabic">
+ {/* <div className="listdownArabic">
   <li><a><i class="fa fa-language fa-3x" ></i>
       </a></li>
   <div class="listdownArabic-content">
     <Link to="/en">English</Link>
     <Link to="/ar">Arabic</Link>
-
   </div>
-  
-  </div> 
+  </div>  */}
+
+
+
     </ul>
 
 

@@ -155,7 +155,7 @@ export const removeFollower = id => async dispatch => {
 
 // Add click
 export const addClick = id => async dispatch => {
-  
+   
   try {
     const res = await axios.put(`/api/shops/click/${id}`);
 

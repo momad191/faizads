@@ -4,28 +4,32 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import Moment from 'react-moment';
-   
+      
 import { addLike, removeLike, deletePost, addFiveStars , addFourStars, addThreeStars, addTwoStars, addOneStars } from '../../actions/post';
 
 import ConfirmButton from "./ConfirmButton";
 import axios from 'axios';
 
 import greenFace from './greenFace.png';
+import noimg from './emptypic2.jpg';
+
+
 import redFace from './redFace.png';
 import yallowFace from './yallowFace.png';
-import NavbarEnglish from '../../components/layout/NavbarEnglish';
-
+import Navbar from '../../components/layout/Navbar';
+ 
+ 
 const noneDisplayI = 'noneDisplayI';
 const displayI = 'displayI';
       
   
-const PostsEnglish = ({loading , addLike,auth,five_stars,
+const PostsEnglish = ({loading ,match, addLike,auth,five_stars,
   removeLike, 
   deletePost,
   addFiveStars, addFourStars, addThreeStars, addTwoStars,addOneStars,
 }) => {
-
  
+   
   
   // const [getfivestarsuser,setgetfivestarsuser]= useState([])
 
@@ -65,6 +69,8 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
     const [showModal ,setShowModal]= useState(true)
     const [hideModal  ,setHideModal]= useState(true)
 
+
+    
 
     const loadMore = async e => {
         setVisible(visible+10)
@@ -114,11 +120,11 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
       setmyoptionActive(noneDisplayI);
     }
 
-
+ 
 
     useEffect(() => {
       
-        axios.get('/api/posts')
+        axios.get('/api/posts/userposts')
         .then(res => {
           //console.log(res);
           setPosts(res.data)
@@ -161,7 +167,7 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
         })
 
 
- 
+
 
         axios.get('/api/posts/activationComplete')
         .then(res => {
@@ -195,11 +201,11 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
           console.log(err);
         })
 
+ 
+  
+     
 
-
-        
-
-
+ 
 
         // axios.get('/api/posts/getfivestarsuser')
         // .then(res => {
@@ -257,30 +263,33 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
       ) : (
         <div>
         
-        <NavbarEnglish />
+        {/* <Navbar /> */}
+
+          
+    
         <div className="aqle3-main">
         <div className="mainword2">
         <div className="mainForm">
-  
  
+
       <center>
         <div className="dash-title"> Your Ads </div>
         {/* <Link to="/dashboard/posts/AddPremiumPost" className="Action-button-plus">  <i className="fa fa-star fa-1x"></i> أضف إعلان مميز </Link> */}
-        <Link to="/en/dashboard/posts/Addpost" className="Action-button-add-ads">  <i className="fa fa-plus fa-1x"></i> Add an ad </Link>
-        <Link to="/en/dashboard/posts/searchPost" className="Action-button-add-ads">  <i className="fa fa-search fa-1x"></i> Search </Link>
+        <Link to="/dashboard/posts/Addpost" className="Action-button-add-ads">  <i className="fa fa-plus fa-1x"></i> Add an ad </Link>
+        <Link to="/dashboard/posts/searchPost" className="Action-button-add-ads">  <i className="fa fa-search fa-1x"></i> search </Link>
         </center>
 
- 
+
       <center>
       <div className='statistics'> 
-      <center> <div className="button-statistics" onClick={optionoptionAll1}> All ads <span>({getPosts.length}) </span>  </div></center>
+      <center> <div className="button-statistics" onClick={optionoptionAll1}> All ads: <span>{ getPosts.length} </span> <i class="fa fa-filter" aria-hidden="true"></i> </div></center>
       </div>
       </center>
 
       <center>
       <div className='statistics'> 
-      <center> <div className="button-statistics1" onClick={optionActive1}>   <i className="fa fa-check fa-1x"></i>  Activated  :{activationComplete.length}  </div></center>
-      <center> <div className="button-statistics2" onClick={optionActiveWait1}>  <i className="fa fa-circle-o-notch fa-1x"></i> Waiting for activation :{activationNo.length}  </div></center>
+      <center> <div className="button-statistics1" onClick={optionActive1}>   <i className="fa fa-check fa-1x"></i>  Activated  :{activationComplete.length}   <i class="fa fa-filter" aria-hidden="true"></i> </div></center>
+      <center> <div className="button-statistics2" onClick={optionActiveWait1}>  <i className="fa fa-circle-o-notch fa-1x"></i>  Waiting for activation:{activationNo.length}   <i class="fa fa-filter" aria-hidden="true"></i> </div></center>
       {/* <center> <div className="button-statistics3" onClick={optionPremium1}>   <i className="fa fa-star fa-1x"></i>   عدد الاعلانات المميزة  :{premiumComplete.length}  </div></center> */}
 
       </div>
@@ -292,7 +301,7 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
 <Fragment> 
 
 <Spinner/>
-<div className="dash-title"> Start promoting your service or products 
+<div className="dash-title"> Start advertising your service or merchandise 
 
  
  </div>
@@ -306,7 +315,7 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
      
 <center>
     <div className={optionAll}> 
-
+ 
  {currentResults
    
   
@@ -315,15 +324,15 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
      <Fragment>
          
         
-      
+       
 <center>
     <div className="main-list" key={post._id}>
 
-      
+    
 
       {post.premium === 'no' &&(
         <div className='title-in-list'>
-        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -332,7 +341,7 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
 
         {post.premium === 'yes' &&(
         <div className='title-in-list-premium'>
-        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -342,128 +351,72 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
   <div className='section-list'>
     <div>
     {post.image ? (
-      <a target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={post.image}  /></a>
+      <Link   to={`/posts/${post._id}#/${post.purpose_code}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={post.image}  /></Link>
       ):(
   
-        <a target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={greenFace}  /></a>
+        <Link   to={`/posts/${post._id}#/${post.purpose_code}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={noimg}  /></Link>
       )}
 </div>
 
-  
+   
      
       <div>
 
         
- 
+   
  
           
-      <p className="list-details"> <span className="redColor">user :</span>{post.name} | <span className="redColor">category :</span>{post.category_code} | <span className="redColor">market :</span>{post.market_code} </p>
-     <p className="list-details"> {post.Main_paragraph}</p>
- 
-      {/* {getVote.post_id === post._id &&  getVote.user === getAuth._id   ? (
-
-      <h1>no</h1>
-        ):(
-      <h1>yes</h1>
-        )
-        } */}
-
-
- 
+      <p className="list-details-english"> <span className="redColor"> User :</span>{post.user.username} | <span className="redColor">Category :</span>{post.category.c_EN_name} | <span className="redColor">Market :</span>{post.market.m_EN_name}
+      
+      | <span className="redColor"> Shop :</span>{post.shop.shop_name}
+       </p>
+     <p className="list-details"> {post.Main_paragraph} </p>
  
 
-    
 
 <p className="list-button">
 
-
-
 {post.premium === 'no' &&(
-
-<Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status">   Normal ad    <i className="fa fa-circle-o-notch fa-1x"></i></button> </Link>
-
+  <button className="Action-button-status">   Normal     <i className="fa fa-circle-o-notch fa-1x"></i></button> 
 )}
 
  
 {post.premium === 'yes' &&(
-
-<Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status-premium">   premium ad     <i className="fa fa-star fa-1x"></i></button> </Link>
-
+  <button className="Action-button-status-premium">   special     <i className="fa fa-star fa-1x"></i></button> 
 )}
 
 
 
 
       {post.activation === 'no' && (
-
-      <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status">     Waiting for activation     <i className="fa fa-circle-o-notch fa-1x"></i></button> </Link>
-  
+       <button className="Action-button-status">   Waiting for activation     <i className="fa fa-circle-o-notch fa-1x"></i></button> 
       )}
       
       {post.activation === 'yes' && (
-
-        <Link to={`/en/dashboard/posts/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status-active">   Activated     <i className="fa fa-check fa-1x"></i></button> </Link>
-
+      <button className="Action-button-status-active">   Activated     <i className="fa fa-check fa-1x"></i></button> 
       )}
 
 
 
-
-
-
-      <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status">   Posted on <Moment format='YYYY/MM/DD'>{post.date}</Moment>  <i className="fa fa-calendar fa-1x"></i></button> </Link>
-
-
-
-
-      {/* <button
-            onClick={() => addLike(post._id)}
-            type='button'
-            className='Action-button-update'
-          >
-            <i className='fa fa-thumbs-up' />{' '}
-            
-          </button>
-          <span>{post.likes.length > 0 && <span>{post.likes.length}</span>}</span>
-
-
-          <button
-            onClick={() => removeLike(post._id)}
-            type='button'
-            className='Action-button-update'
-          >
-            <i className='fa fa-thumbs-down' />
-          </button> */}
-
+   <button className="Action-button-status">   Posted on <Moment format='YYYY/MM/DD'>{post.date}</Moment>  <i className="fa fa-calendar fa-1x"></i></button> 
 
   
-
- {!auth.loading && post.user === auth.user._id && (
+ {/* {!auth.loading && post.user === auth.user._id && ( */}
 <Fragment> 
-<Link to={`/dashboard/posts/editPost/${post._id}`}  style={{textDecoration:'none'}} > <button  className="Action-button-status" >  Edit Post <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+ <Link to={`/dashboard/posts/editPost/${post._id}`}  style={{textDecoration:'none'}} > <button  className="Action-button-status" >  Edit post <i className="fa fa-edit fa-1x"></i></button>   </Link> 
 
+{/* <Link to={`/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link>   */}
 
-<Link to={`/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  Activation <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+<Link   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  {post.clicks.length} <i className="fa fa-eye fa-1x"></i></button>   </Link> 
 
  
             <ConfirmButton
-            dialog={[" ", "Are you sure", "confirm deletion"]}
+            dialog={[" ", "Are you sure ?", "Again for deletion"]}
             action={() => deletePost(post._id)}
               />
 
-
-
-
   </Fragment>
-)}
-
-
  
-
-      {/* <button
-      onClick={() => deleteMarket(market._id)}
-      class="Action-button-delete">  <i class="fa fa-close fa-1x"></i> 
-       </button> */}
 
       </p>
 
@@ -564,14 +517,14 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
    .map(post => (
        <Fragment>
            
-          
+           
         
   <center>
       <div className="main-list" key={post._id}>
   
       {post.premium === 'no' &&(
         <div className='title-in-list'>
-        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -580,7 +533,7 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
 
         {post.premium === 'yes' &&(
         <div className='title-in-list-premium'>
-        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -589,10 +542,10 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
     <div className='section-list'>
       <div>
       {post.image ? (
-        <a target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={post.image}  /></a>
+        <a target="_blank" href={`/posts/${post._id}#/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={post.image}  /></a>
         ):(
     
-          <a target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={greenFace}  /></a>
+          <a target="_blank" href={`/posts/${post._id}#/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={noimg}  /></a>
         )}
   </div>
   
@@ -604,34 +557,26 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
   
    
             
-        <p className="list-details"> <span className="redColor">المستخدم :</span>{post.name} | <span className="redColor">التصنيف :</span>{post.CategoryName} | <span className="redColor">تفاصيل الإعلان :</span>{post.Main_paragraph} </p>
-       
-  
-        {/* {getVote.post_id === post._id &&  getVote.user === getAuth._id   ? (
-  
-        <h1>no</h1>
-          ):(
-        <h1>yes</h1>
-          )
-          } */}
-  
+        <p className="list-details-english"> <span className="redColor"> User :</span>{post.user.username} | <span className="redColor">Category :</span>{post.category.c_EN_name} | <span className="redColor">Market :</span>{post.market.m_EN_name}
+      | <span className="redColor"> shop :</span>{post.shop.shop_name}
+       </p>    
+       <p className="list-details"> {post.Main_paragraph} </p>   
   
    
-   
   
-      
+  
   
         <p className="list-button">
   
         {post.activation === 'no' &&(
   
-        <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status">   في انتظار التفعيل     <i className="fa fa-circle-o-notch fa-1x"></i></button> </Link>
+        <button className="Action-button-status">  Waiting for activation     <i className="fa fa-circle-o-notch fa-1x"></i></button> 
     
         )}
 
        {post.activation === 'yes' && (
   
-          <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status-active">   تم التفعيل     <i className="fa fa-check fa-1x"></i></button> </Link>
+       <button className="Action-button-status-active">   Activated     <i className="fa fa-check fa-1x"></i></button> 
   
         )}
   
@@ -639,53 +584,38 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
   
   {post.premium === 'no' &&(
   
-  <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status">   Normal ad    <i className="fa fa-circle-o-notch fa-1x"></i></button> </Link>
+  <button className="Action-button-status">   Normal     <i className="fa fa-circle-o-notch fa-1x"></i></button> 
   
   )}
   
   
   {post.premium === 'yes' &&(
   
-  <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status-premium">   Premium ad     <i className="fa fa-star fa-1x"></i></button> </Link>
+  <button className="Action-button-status-premium">   Special     <i className="fa fa-star fa-1x"></i></button> 
   
   )}
   
   
-        <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status">   نشر بتاريخ <Moment format='YYYY/MM/DD'>{post.date}</Moment>  <i className="fa fa-calendar fa-1x"></i></button> </Link>
+   <button className="Action-button-status">   Posted on  <Moment format='YYYY/MM/DD'>{post.date}</Moment>  <i className="fa fa-calendar fa-1x"></i></button> 
+  
+  
+  
+
   
   
   
   
-        {/* <button
-              onClick={() => addLike(post._id)}
-              type='button'
-              className='Action-button-update'
-            >
-              <i className='fa fa-thumbs-up' />{' '}
-              
-            </button>
-            <span>{post.likes.length > 0 && <span>{post.likes.length}</span>}</span>
-  
-  
-            <button
-              onClick={() => removeLike(post._id)}
-              type='button'
-              className='Action-button-update'
-            >
-              <i className='fa fa-thumbs-down' />
-            </button> */}
-  
-  
-  
-  
-   {!auth.loading && post.user === auth.user._id && (
+   {/* {!auth.loading && post.user === auth.user._id && ( */}
   <Fragment> 
   
-  <Link to={`/dashboard/posts/editPost/${post._id}`}  target="_blank" style={{textDecoration:'none'}} > <button  className="Action-button-status" >   Edit Post <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+  <Link to={`/dashboard/posts/editPost/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  Edit post <i className="fa fa-edit fa-1x"></i></button>   </Link> 
   
+
+   
+
    
               <ConfirmButton
-              dialog={[" ", "هل أنت متأكد ؟", "مرة أخرى للحذف"]}
+              dialog={[" ", "are you sure ?", "again for deletion"]}
               action={() => deletePost(post._id)}
                 />
   
@@ -693,59 +623,10 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
   
   
     </Fragment>
-  )}
+
+  </p>
   
-  
-   
-  
-        {/* <button
-        onClick={() => deleteMarket(market._id)}
-        class="Action-button-delete">  <i class="fa fa-close fa-1x"></i> 
-         </button> */}
-  
-        </p>
-  
-  
-   
-  
-  {/*   
-  <div className='' style={{display:'flex',alignContent:'center', width:'40%'}}>
-  
-  
-  
-  
-  <button className='Action-button-update' >
-  <img  src={greenFace} />
-  {post.five_stars.length} 
-  </button>
-  
-  
-  
-  
-  
-  
-  <button className='Action-button-update' >
-  <img  src={yallowFace} />
-  <span>{post.four_stars.length} </span>
-  </button>
-  
-  
-    
-  
-  
-  <button className='Action-button-update'>
-  <img  src={redFace} />
-  <span>{post.three_stars.length}</span>
-  </button>
-  </div> */}
-  
-  
-           
-  
-  
-          
-  
-   
+
   
   
         </div> 
@@ -770,7 +651,7 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
     {visible < activationComplete.length && (
       <center> 
     <button   onClick={loadMore} 
-        className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> المزيد  </button> 
+        className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> More  </button> 
          </center>
     )}
 
@@ -800,7 +681,7 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
   
       {post.premium === 'no' &&(
         <div className='title-in-list'>
-        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -809,7 +690,7 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
 
         {post.premium === 'yes' &&(
         <div className='title-in-list-premium'>
-        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -819,10 +700,10 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
     <div className='section-list'>
       <div>
       {post.image ? (
-        <a target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={post.image}  /></a>
+        <a target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={post.image}  /></a>
         ):(
     
-          <a target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={greenFace}  /></a>
+          <a target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={noimg}  /></a>
         )}
   </div>
   
@@ -834,34 +715,26 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
   
    
             
-        <p className="list-details"> <span className="redColor">المستخدم :</span>{post.name} | <span className="redColor">التصنيف :</span>{post.CategoryName} | <span className="redColor">تفاصيل الإعلان :</span>{post.Main_paragraph} </p>
-       
+        <p className="list-details"> <span className="redColor">the user :</span>{post.user.username} | <span className="redColor">Category :</span>{post.category.c_AR_name} | <span className="redColor">market :</span>{post.market.m_AR_name}
+      
+      | <span className="redColor">the shop :</span>{post.shop.shop_name}
+       </p>  
+       <p className="list-details"> {post.Main_paragraph} </p>     
   
-        {/* {getVote.post_id === post._id &&  getVote.user === getAuth._id   ? (
-  
-        <h1>no</h1>
-          ):(
-        <h1>yes</h1>
-          )
-          } */}
-  
-  
-   
-   
-  
+
       
   
         <p className="list-button">
   
         {post.activation === 'no' && (
   
-        <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status">   في انتظار التفعيل     <i className="fa fa-circle-o-notch fa-1x"></i></button> </Link>
+         <button className="Action-button-status">   Waiting for activation     <i className="fa fa-circle-o-notch fa-1x"></i></button> 
     
         )}
 
         {post.activation === 'yes' && (
   
-          <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status-active">   Activated     <i className="fa fa-check fa-1x"></i></button> </Link>
+         <button className="Action-button-status-active">   Activated     <i className="fa fa-check fa-1x"></i></button> 
   
         )}
   
@@ -869,53 +742,32 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
   
   {post.premium === 'no' &&(
   
-  <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status">   normal ad     <i className="fa fa-circle-o-notch fa-1x"></i></button> </Link>
+  <button className="Action-button-status">   Normal     <i className="fa fa-circle-o-notch fa-1x"></i></button> 
   
   )}
   
   
   {post.premium === 'yes' &&(
   
-  <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status-premium">   premium ad     <i className="fa fa-star fa-1x"></i></button> </Link>
+  <button className="Action-button-status-premium">   Special     <i className="fa fa-star fa-1x"></i></button> 
   
   )}
   
   
-        <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status">   نشر بتاريخ <Moment format='YYYY/MM/DD'>{post.date}</Moment>  <i className="fa fa-calendar fa-1x"></i></button> </Link>
+    <button className="Action-button-status">   Posted on <Moment format='YYYY/MM/DD'>{post.date}</Moment>  <i className="fa fa-calendar fa-1x"></i></button>
+
   
   
-  
-  
-        {/* <button
-              onClick={() => addLike(post._id)}
-              type='button'
-              className='Action-button-update'
-            >
-              <i className='fa fa-thumbs-up' />{' '}
-              
-            </button>
-            <span>{post.likes.length > 0 && <span>{post.likes.length}</span>}</span>
-  
-  
-            <button
-              onClick={() => removeLike(post._id)}
-              type='button'
-              className='Action-button-update'
-            >
-              <i className='fa fa-thumbs-down' />
-            </button> */}
-  
-  
-  
-  
-   {!auth.loading && post.user === auth.user._id && (
+   {/* {!auth.loading && post.user === auth.user._id && ( */}
   <Fragment> 
   
-  <Link to={`/dashboard/posts/editPost/${post._id}`}  target="_blank" style={{textDecoration:'none'}} > <button  className="Action-button-status" >   Edit Post <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+  <Link to={`/dashboard/posts/editPost/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  Edit post <i className="fa fa-edit fa-1x"></i></button>   </Link> 
   
+   <Link to={`/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  Activation <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+
    
               <ConfirmButton
-              dialog={[" ", "هل أنت متأكد ؟", "مرة أخرى للحذف"]}
+              dialog={[" ", "are you sure ?", "again for deletion"]}
               action={() => deletePost(post._id)}
                 />
   
@@ -923,60 +775,9 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
   
   
     </Fragment>
-  )}
-  
-  
-   
-  
-        {/* <button
-        onClick={() => deleteMarket(market._id)}
-        class="Action-button-delete">  <i class="fa fa-close fa-1x"></i> 
-         </button> */}
-  
+
         </p>
-  
-  
-   
-  
-  {/*   
-  <div className='' style={{display:'flex',alignContent:'center', width:'40%'}}>
-  
-  
-  
-  
-  <button className='Action-button-update' >
-  <img  src={greenFace} />
-  {post.five_stars.length} 
-  </button>
-  
-  
-  
-  
-  
-  
-  <button className='Action-button-update' >
-  <img  src={yallowFace} />
-  <span>{post.four_stars.length} </span>
-  </button>
-  
-  
-    
-  
-  
-  <button className='Action-button-update'>
-  <img  src={redFace} />
-  <span>{post.three_stars.length}</span>
-  </button>
-  </div> */}
-  
-  
-           
-  
-  
-          
-  
-   
-  
+
   
         </div> 
   
@@ -1000,7 +801,7 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
     {visible < activationNo.length && (
       <center> 
     <button   onClick={loadMore} 
-        className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> المزيد  </button> 
+        className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> More  </button> 
          </center>
     )}
 
@@ -1034,7 +835,7 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
   
       {post.premium === 'no' &&(
         <div className='title-in-list'>
-        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -1043,7 +844,7 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
 
         {post.premium === 'yes' &&(
         <div className='title-in-list-premium'>
-        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`}  >    
+        <a className='title-in-list-premium'  target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`}  >    
          {post.title}  
          </a>
         </div>
@@ -1052,10 +853,10 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
     <div className='section-list'>
       <div>
       {post.image ? (
-        <a target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={post.image}  /></a>
+        <a target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={post.image}  /></a>
         ):(
     
-          <a target="_blank" href={`/posts/${post._id}#/${post.body}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={greenFace}  /></a>
+          <a target="_blank" href={`/posts/${post._id}#/${post.purpose_code}/${post.title}`} style={{color:'#fff',textDecoration:'none'}} > <img className='image-in-list' src={noimg}  /></a>
         )}
   </div>
   
@@ -1067,34 +868,20 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
   
    
             
-        <p className="list-details"> <span className="redColor">المستخدم :</span>{post.name} | <span className="redColor">التصنيف :</span>{post.CategoryName} | <span className="redColor">تفاصيل الإعلان :</span>{post.Main_paragraph} </p>
+        <p className="list-details"> <span className="redColor">the user :</span>{post.name} | <span className="redColor">Category :</span>{post.CategoryName} | <span className="redColor">Details</span>{post.Main_paragraph} </p>
        
-  
-        {/* {getVote.post_id === post._id &&  getVote.user === getAuth._id   ? (
-  
-        <h1>no</h1>
-          ):(
-        <h1>yes</h1>
-          )
-          } */}
-  
-  
-   
-   
-  
-      
   
         <p className="list-button">
   
         {post.activation === 'no' && (
   
-        <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status">   في انتظار التفعيل     <i className="fa fa-circle-o-notch fa-1x"></i></button> </Link>
+      <button className="Action-button-status">   Waiting for activation     <i className="fa fa-circle-o-notch fa-1x"></i></button> 
     
         )}
 
         {post.activation === 'yes' && (
   
-          <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status-active">   تم التفعيل     <i className="fa fa-check fa-1x"></i></button> </Link>
+      <button className="Action-button-status-active">   Activated     <i className="fa fa-check fa-1x"></i></button> 
   
         )}
   
@@ -1102,53 +889,31 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
   
   {post.premium === 'no' &&(
   
-  <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status">   عادي     <i className="fa fa-circle-o-notch fa-1x"></i></button> </Link>
+   <button className="Action-button-status">   Normal     <i className="fa fa-circle-o-notch fa-1x"></i></button> 
   
   )}
   
   
   {post.premium === 'yes' &&(
   
-  <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status-premium">   مميز     <i className="fa fa-star fa-1x"></i></button> </Link>
+    <button className="Action-button-status-premium">   Special     <i className="fa fa-star fa-1x"></i></button> 
   
   )}
   
   
-        <Link to={`/posts/${post._id}`} target="_blank" style={{textDecoration:'none'}} >   <button className="Action-button-status">   نشر بتاريخ <Moment format='YYYY/MM/DD'>{post.date}</Moment>  <i className="fa fa-calendar fa-1x"></i></button> </Link>
+    <button className="Action-button-status">   Posted on <Moment format='YYYY/MM/DD'>{post.date}</Moment>  <i className="fa fa-calendar fa-1x"></i></button>
   
-  
-  
-  
-        {/* <button
-              onClick={() => addLike(post._id)}
-              type='button'
-              className='Action-button-update'
-            >
-              <i className='fa fa-thumbs-up' />{' '}
-              
-            </button>
-            <span>{post.likes.length > 0 && <span>{post.likes.length}</span>}</span>
-  
-  
-            <button
-              onClick={() => removeLike(post._id)}
-              type='button'
-              className='Action-button-update'
-            >
-              <i className='fa fa-thumbs-down' />
-            </button> */}
-  
-  
-  
-  
-   {!auth.loading && post.user === auth.user._id && (
+
+   {/* {!auth.loading && post.user === auth.user._id && ( */}
   <Fragment> 
   
-  <Link to={`/dashboard/posts/editPost/${post._id}`}  target="_blank" style={{textDecoration:'none'}} > <button  className="Action-button-status" >   Edit Post <i className="fa fa-edit fa-1x"></i></button>   </Link> 
-  
+  <Link to={`/dashboard/posts/editPost/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  Edit post <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+
+  <Link to={`/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  Activation <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+
    
               <ConfirmButton
-              dialog={[" ", "هل أنت متأكد ؟", "مرة أخرى للحذف"]}
+              dialog={[" ", "are you sure ?", "again for deletion"]}
               action={() => deletePost(post._id)}
                 />
   
@@ -1156,59 +921,9 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
   
   
     </Fragment>
-  )}
-  
-  
-   
-  
-        {/* <button
-        onClick={() => deleteMarket(market._id)}
-        class="Action-button-delete">  <i class="fa fa-close fa-1x"></i> 
-         </button> */}
+ 
   
         </p>
-  
-  
-   
-  
-  {/*   
-  <div className='' style={{display:'flex',alignContent:'center', width:'40%'}}>
-  
-  
-  
-  
-  <button className='Action-button-update' >
-  <img  src={greenFace} />
-  {post.five_stars.length} 
-  </button>
-  
-  
-  
-  
-  
-  
-  <button className='Action-button-update' >
-  <img  src={yallowFace} />
-  <span>{post.four_stars.length} </span>
-  </button>
-  
-  
-    
-  
-  
-  <button className='Action-button-update'>
-  <img  src={redFace} />
-  <span>{post.three_stars.length}</span>
-  </button>
-  </div> */}
-  
-  
-           
-  
-  
-          
-  
-   
   
   
         </div> 
@@ -1233,7 +948,7 @@ const PostsEnglish = ({loading , addLike,auth,five_stars,
     {visible < premiumComplete.length && (
       <center> 
     <button   onClick={loadMore} 
-        className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> المزيد  </button> 
+        className="loadMorebtn">  <i class="fa fa-arrow-down fa-1x"></i> More  </button> 
          </center>
     )}
 

@@ -1,0 +1,269 @@
+{
+    "lang":"English",
+    "addButton":"إضافة",
+    "backButton":"رجوع",
+    "desc_title":"وصف",
+    "code_title":"الرمز",
+    "save":"حفظ",
+    "upload_picture":"أرفع صورة",
+    "fontawesome":"وسم الخط",
+    "moreButton":"المزيد",
+    "searchButton":"ابحث",
+    "linkWasSentBefore":"لقد تم استخدام هذا الرابط من قبل",
+    "linkToSendAgain":"اضغط لإعادة إرسال الرابط مرة أخرى",
+    "SendAgain":"إعادة تعيين كلمة المرور",  
+ 
+    
+  
+
+
+
+   
+  
+
+    "country_management_title":" ادارة الدول",
+    "addCity":"إضافة مدينة",
+    "editCountry":"تعديل الدولة",
+    "addCountry":"إضافة دولة",
+    "country_code":"رمز الدولة",
+    "country_en_name":" الاسم الإنجليزي",
+    "country_ar_name":"الاسم العربي",
+    "country_description":"وصف",
+    "city_code":"رمز المدينة",
+    "city_list":"قائمة المدن المضافة ",
+
+
+
+
+    
+
+
+
+
+
+    "market_management_title":" إدارة الأسواق",
+    "editMarket":"تعديل السوق",
+    "market_en_name":" الاسم الإنجليزي",
+    "market_ar_name":"الاسم العربي",
+    "market_description":"وصف",
+    "market_code":"رمز السوق",
+    "addMarket":"إضافة سوق",
+ 
+    
+
+    
+
+      
+    "categories_management_title":" ادارة التصنيفات",
+    "categories_properties":"عقارات",
+    "categories_cars":"سيارات",
+    "categories_Jobs":"وظائف",
+    "categories_Services":"خدمات",
+    "categories_Classifieds":"سلع أخرى",
+    "categories_Electronics":"الكترونيات",
+    "categories_Animals":"حيوانات",
+    "categories_Furniture":"اثاث",
+    "categories_Personalitems":"مستلزمات شخصية",
+    "categories_Fooddrinks":"أطعمة ومشروبات",
+
+
+
+    "editCategory":"تعديل التصنيف",
+    "category_en_name":" الاسم الإنجليزي",
+    "category_ar_name":"الاسم العربي",
+    "category_description":"وصف",
+    "category_code":"الرمز",
+    "addCategory":"إضافة تصنيف",
+
+
+
+
+    "x6":"/////////////////////////////////////////////ترجمة صفحات الإعلانات/////////////////////////////////////////////",
+    "Countries_of_the_world":"الدول",
+    "citiesButton":"مدن",
+    "categoriesButton":"التصنيفات",
+    "marketsButton":"الأسواق",
+    "for-saleButton":"للبيع",
+    "rentalButton":"للإيجار",
+    "ask-buyButton":"مطلوب للشراء",
+    "ask-rentButton":"مطلوب للإيجار",
+    "vacanciesButton":"وظائف شاغرة",
+    "seeking-workButton":"يبحث عن عمل",
+
+
+
+    "x7":"/////////////////////////////////////////////ادارة الأغراض/////////////////////////////////////////////",
+    "purposes_management_title":"إدارة الأغراض",
+    "purpose_edit_title":"تعديل غرض",
+    "purposes_AR_name":"الاسم العربي",
+    "purposes_EN_name":"الاسم الانجليزي",
+    "purposes_code":"الرمز",
+    "purposes_description":"الوصف",
+
+
+
+  
+
+    "x8":"/////////////////////////////////////////////ادارة المستخدمين/////////////////////////////////////////////",
+    "users_management_title":"إدارة المستخدمين",
+    "user_search":"ابحث",
+    "user_search_by_username":"البحث باسم المستخدم",
+    "user_search_by_email":"البحث بالبريد الالكتروني",
+    "user_name":"الاسم",
+    "user_email":"البريد الالكتروني",
+    "user_validity":"الصلاحية",
+    "user_validity_button":"تغيير الصلاحية",
+    
+
+
+"x9":"/////////////////////////////////////////////لوحة ادخال الإعلان /////////////////////////////////////////////",
+"Addpost_title":"أضف إعلان جديد",
+"Addpost_market_title":"ماهي السوق التي تريد ان تعلن فيها؟",
+"Addpost_market_Properties":"سوق العقارات",
+"Addpost_market_Cars":"سوق السيارات",
+"Addpost_market_Jobs":"الوظائف",
+"Addpost_market_Services":"سوق الخدمات",
+"Addpost_market_Classifieds":"سوق سلع متفرقة",
+"Addpost_market_Electronics":"سوق إلكترونيات",
+"Addpost_market_Animals":" حيوانات",
+"Addpost_market_Furniture":" الأثاث",
+"Addpost_market_Personalitems":" المستلزمات الشخصية",
+"Addpost_market_Fooddrinks":" الأطعمة والمشروبات",
+"Addpost_purpose_title":"ما الغرض من الإعلان؟", 
+"Addpost_purpose_car_for_sale":"عرض سيارة للبيع",
+"Addpost_purpose_car_rental":"عرض سيارة للإيجار",
+"Addpost_purpose_car_ask-buy":"أبحث عن سيارة للشراء",
+"Addpost_purpose_car_ask-rent":"أبحث عن سيارة للايجار",
+"Addpost_purpose_Properties_for_sale":"عرض عقار للبيع",
+"Addpost_purpose_Properties_rental":"عرض عقار للإيجار",
+"Addpost_purpose_Properties_ask-buy":"أبحث عن عقار للشراء",
+"Addpost_purpose_Properties_ask-rent":"أبحث عن عقار للايجار",
+"Addpost_purpose_Classifieds_for_sale":"عرض سلعة للبيع",
+"Addpost_purpose_Classifieds_rental":"عرض سلعة للإيجار",
+"Addpost_purpose_Classifieds_ask-buy":"أبحث عن سلعة للشراء",
+"Addpost_purpose_Classifieds_ask-rent":"أبحث عن سلعة للايجار",
+"Addpost_purpose_Electronics_for_sale":"عرض إلكترونيات للبيع",
+"Addpost_purpose_Electronics_rental":"عرض إلكترونيات للإيجار",
+"Addpost_purpose_Electronics_ask-buy":"أبحث عن مماثل للشراء",
+"Addpost_purpose_Electronics_ask-rent":"أبحث عن مماثل للايجار",
+"Addpost_purpose_Animals_for_sale":"عرض حيوانات للبيع",
+"Addpost_purpose_Animals_ask-buy":"أبحث عن مماثل للشراء",
+"Addpost_purpose_Furniture_for_sale":"عرض أثاث للبيع",
+"Addpost_purpose_Furniture_ask-buy":"أبحث عن أثاث للشراء",
+"Addpost_purpose_PersonalItems_for_sale":"عرض  للبيع",
+"Addpost_purpose_PersonalItems_ask-buy":"أبحث عن مماثل للشراء للشراء",
+"Addpost_purpose_FoodDrinks_for_sale":"عرض  للبيع",
+"Addpost_purpose_FoodDrinks_ask-buy":"أبحث عن مماثل للشراء للشراء",
+"chose":"اختر التصنيف",
+"Addpost_car_type":"اختر تصنيف السيارة",
+"Addpost_property_type":"اختر تصنيف العقار",
+"Addpost_job_type":"اختر تصنيف الوظيفة",
+"Addpost_service_type":"اختر تصنيف الخدمة",
+"Addpost_classified_type":"اختر تصنيف السلعة أو المنتج",
+"Addpost_electronic_type":"اختر تصنيف الإلكترونيات",
+"Addpost_animal_type":"اختر تصنيف الحيوانات",
+"Addpost_furniture_type":"اختر تصنيف الأثاث",
+"Addpost_personalItems_type":"اختر تصنيف المستلزمات الشخصية",
+"Addpost_foodDrink_type":"اختر تصنيف الأطعمة والمشروبات",
+"Addpost_country_type":"اختر الدولة",
+"Addpost_city_type":"اخترالمدينة",
+"Addpost_country_Europe":"أوروبا",
+"Addpost_country_Asia":"آسيا",
+"Addpost_country_Africa":"أفريقيا",
+"Addpost_country_Australia":"أستراليا",
+"Addpost_country_NorthAmarica":"أمريكا الشمالية",
+"Addpost_country_SouthAmerica":"أمريكا الجنوبية",
+"Addpost_country_MiddleEast":"الشرق الأوسط",
+"Addpost_next_step":"الخطوة التالية",
+"Addpost_add_details":"تفاصيل ",
+"Addpost_add_title":"العنوان ",
+"Addpost_add_title_placeholder":"ضع عنوان مناسب لإعلانك (120 حرف)",
+"Addpost_add_description":"وصف الإعلان",
+"Addpost_add_description_placeholder":"وصف الإعلان  (400 حرف)",
+"Addpost_price":"السعر",
+"Addpost_period":"مدة الإعلان بعدد الأيام",
+"Addpost_10_days":"10 أيام",
+"Addpost_20_days":"20 يوما",
+"Addpost_30_days":"30 يوما",
+"Addpost_60_days":"60 يوما",
+"Addpost_90_days":"90 يوما",
+"Addpost_120_days":"120 يوما",
+"Addpost_365_days":"365 يوما",
+"Addpost_Expiry_date":"تاريخ الإنتهاء",
+"Addpost_add_title_english":"عنوان إنجليزي",
+"Addpost_add_description_english":"وصف الإعلان الإنجليزي",
+"Addpost_add_title_english_placeholder":"عنوان باللغة الإنجليزية (120حرف)",
+"Addpost_add_description_english_placeholder":"وصف الإعلان باللغة الإنجليزية (250 حرف)",
+"Addpost_add_pictures_title":"إضافة الصور",
+"Addpost_add_main_pictures":"صورة العرض الرئيسية",
+"Addpost_add_other_picture":"أضف صورة أخرى",
+"Addpost_continue":"استمرار",
+"Addpost_Publish":"نشر الإعلان",
+"Addpost_msg_warning_no_shop":"قم بإعداد متجرك لتستطيع ادخال الاعلانات",
+"Addpost_msg_warning_no_plan":"البدء باختيار خطتك",
+
+
+
+
+
+ 
+
+
+"x10":"/////////////////////////////////////////////صفحة الإعلان الواحد /////////////////////////////////////////////",
+
+"postItems_mobile":"الجوال",
+"postItems_tel":"الهاتف",
+"postItems_whatsapp":"تواصل",
+"postItems_msg":"مراسلة",
+"postItems_website":"الموقع",
+"postItems_report":"ابلاغ",
+
+
+"postItems_your_comment":"تعليقك",
+"postItems_your_thanks":"شكرا لك",
+ 
+
+"postItems_send_your_comment":"أرسل تعليقك",
+"postItems_notsure_your_comment":"لست متأكدا",
+
+
+"postItems_comment_form_writeComment":"اكتب تعليقا",
+"postItems_comment_form_sendComment":"أرسل",
+
+ 
+
+
+"x11":"/////////////////////////////////////////////صفحة البحث عن اعلاناتك  /////////////////////////////////////////////",
+"searchPost_title":"عن ماذا تبحث؟",
+"searchPost_your_adds":"إعلاناتك",
+"searchPost_search_in_cars":"البحث في السيارات",
+"searchPost_search_in_properties":"البحث في العقارات",
+"searchPost_search_in_jobs":"البحث في الوظائف",
+"searchPost_search_in_services":"البحث في الخدمات",
+"searchPost_search_in_classifieds":"البحث في السلع الأخرى",
+"searchPost_search_in_electronics":"البحث في الأجهزة الإلكترونية",
+"searchPost_search_in_animals":"البحث في الحيوانات",
+"searchPost_search_in_furniture":"البحث في الأثاث",
+"searchPost_search_in_personalItems":"البحث في المستلزمات الشخصية",
+"searchPost_search_in_foodDrinks":"البحث في الأطعمة والمشروبات",
+
+
+
+"x12":"/////////////////////////////////////////////صفحة المتجر الواحد لليوزر  /////////////////////////////////////////////",
+"shops_edit":"تعديل",
+"shops_visitors":"الزيارات",
+"shops_Followers":"المتابِعين",
+"shops_following":"يتابع",
+"shops_rating":"تقييم",
+"shops_open":"فتح متجر"
+
+
+
+
+
+
+
+
+}
+ 
+ 

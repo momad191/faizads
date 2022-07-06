@@ -18,23 +18,170 @@ const DashboardActionsEnglish = () => {
   return (
      
     <>   
-    <center> 
-    <ul className="Dash-nav">
-      {user.validity}
-    <div className="DashBoxTitle" > Start Promot your services and products  </div>
-    <center>
-      <li className="left"><Link to='/en/dashboard/posts'> <i className="fa fa-bullhorn fa-2x"></i>   Publications </Link></li>
  
-      <li className="left"><Link to='/en/dashboard/categories'> <i className="fa fa-cubes fa-2x"></i>   Categories </Link></li>
-     <li className="left"><Link to='/en/dashboard/markets'> <i className="fa fa-credit-card-alt fa-2x"></i>  Markets </Link></li>  
-     <li className="left"><Link to='/en/dashboard/countries'> <i className="fa fa-globe fa-2x"></i>  Countries </Link></li>
-     <li className="left"><Link to='/en/dashboard/questions'> <i className="fa fa-pie-chart fa-2x"></i>  Reports </Link></li>
-     <li className="left"><Link to='/en/membership/prices'> <i className="fa fa-level-up fa-2x"></i>  Upgrade  </Link></li>
+{/* ///////////////////////////////////super///////////////////////////////// */}
+
+{user.validity === "super" &&(
+
  
-     </center>
-    </ul>
-    </center>
+<Fragment>
+
+<center> 
+<ul className="Dash-nav"> 
+<div className="DashBoxTitle" > Start Promot your services and products  </div>
+<center>
+  <li className="left"><Link to='/dashboard/posts'>    Publications  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
+ {/* <li className="left"><Link to='/questions'> <i className="fa fa-question-circle fa-2x"></i>  Questions </Link></li> */}
  
+ <li className="left"><Link to='/dashboard/categories'>   Categories <i className="fa fa-cubes fa-2x"></i></Link></li>
+ <li className="left"><Link to='/dashboard/markets'>   Markets <i className="fa fa-credit-card-alt fa-2x"></i></Link></li>  
+ <li className="left"><Link to='/dashboard/countries'>   Countries <i className="fa fa-globe fa-2x"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/questions'>   Reports <i className="fa fa-pie-chart fa-2x"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/users'>   User Management <i className="fa fa-users fa-2x"></i> </Link></li>  
+ <li className="left"><Link to='/dashboard/requests'>  Commission management  <i className="fa fa-usd fa-2x"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/Addpurpose'>   Types of purposes  <i class="fa fa-cogs fa-2x" aria-hidden="true"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/Addmembershiptype'>   Memberships types  <i class="fa fa-address-card fa-2x" aria-hidden="true"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/AdminPosts'>  Manage all posts  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>  
+ </center>
+</ul> 
+</center>
+
+ 
+  </Fragment>
+ 
+ 
+)}
+
+
+ 
+    
+  
+
+
+{/* ///////////////////////////////////Admin///////////////////////////////// */}
+{user.validity === "admin"&&(
+<Fragment>
+
+<center> 
+<ul className="Dash-nav"> 
+<div className="DashBoxTitle" > Start Promot your services and products  </div>
+<center>
+  <li className="left"><Link to='/dashboard/posts'>    Publications  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
+ {/* <li className="left"><Link to='/questions'> <i className="fa fa-question-circle fa-2x"></i>  Questions </Link></li> */}
+ 
+ <li className="left"><Link to='/dashboard/categories'>   Categories <i className="fa fa-cubes fa-2x"></i></Link></li>
+ <li className="left"><Link to='/dashboard/markets'>   Markets <i className="fa fa-credit-card-alt fa-2x"></i></Link></li>  
+ <li className="left"><Link to='/dashboard/countries'>   Countries <i className="fa fa-globe fa-2x"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/questions'>   Reports <i className="fa fa-pie-chart fa-2x"></i> </Link></li>
+ {/* <li className="left"><Link to='/dashboard/users'>   ادارة المستخدمين <i className="fa fa-users fa-2x"></i> </Link></li>   */}
+ {/* <li className="left"><Link to='/dashboard/requests'>  ادارة عمولات الأعضاء  <i className="fa fa-usd fa-2x"></i> </Link></li> */}
+ <li className="left"><Link to='/dashboard/Addpurpose'>   Types of purposes   <i class="fa fa-cogs fa-2x" aria-hidden="true"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/Addmembershiptype'>   Memberships types  <i class="fa fa-address-card fa-2x" aria-hidden="true"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/AdminPosts'>  Manage all posts  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>  
+ </center>
+</ul> 
+</center>
+
+
+  </Fragment>
+)}
+
+
+
+
+{/* ///////////////////////////////////Normal///////////////////////////////// */}
+{user.validity === "normal"&&(
+<Fragment>
+
+<center> 
+<ul className="Dash-nav"> 
+<div className="DashBoxTitle" > Start Promot your services and products  </div>
+<center>
+  <li className="left"><Link to='/dashboard/posts'>    Publications  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
+ {/* <li className="left"><Link to='/dashboard/categories'>   التصنيفات الفرعية <i className="fa fa-cubes fa-2x"></i></Link></li>
+ <li className="left"><Link to='/dashboard/markets'>   الاسواق <i className="fa fa-credit-card-alt fa-2x"></i></Link></li>  
+ <li className="left"><Link to='/dashboard/countries'>   الدول <i className="fa fa-globe fa-2x"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/questions'>   تقارير <i className="fa fa-pie-chart fa-2x"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/users'>   ادارة المستخدمين <i className="fa fa-users fa-2x"></i> </Link></li>  
+ <li className="left"><Link to='/dashboard/requests'>  ادارة عمولات الأعضاء  <i className="fa fa-usd fa-2x"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/Addpurpose'>   أنواع   الأغراض  <i class="fa fa-cogs fa-2x" aria-hidden="true"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/Addmembershiptype'>   أنواع العضويات  <i class="fa fa-address-card fa-2x" aria-hidden="true"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/AdminPosts'>  ادارة جميع المنشورات  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>   */}
+ </center>
+</ul> 
+</center>
+  </Fragment>
+)}
+
+    
+
+
+ 
+ 
+{/* ///////////////////////////////////Marketer///////////////////////////////// */}
+{user.validity === "marketer"&&(
+<Fragment>
+
+<center> 
+<ul className="Dash-nav"> 
+<div className="DashBoxTitle" > Start Promot your services and products  </div>
+<center>
+  <li className="left"><Link to='/dashboard/posts'>    Publications  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
+ {/* <li className="left"><Link to='/questions'> <i className="fa fa-question-circle fa-2x"></i>  Questions </Link></li> */}
+ 
+ {/* <li className="left"><Link to='/dashboard/categories'>   التصنيفات الفرعية <i className="fa fa-cubes fa-2x"></i></Link></li>
+ <li className="left"><Link to='/dashboard/markets'>   الاسواق <i className="fa fa-credit-card-alt fa-2x"></i></Link></li>  
+ <li className="left"><Link to='/dashboard/countries'>   الدول <i className="fa fa-globe fa-2x"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/questions'>   تقارير <i className="fa fa-pie-chart fa-2x"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/users'>   ادارة المستخدمين <i className="fa fa-users fa-2x"></i> </Link></li>  
+ <li className="left"><Link to='/dashboard/requests'>  ادارة عمولات الأعضاء  <i className="fa fa-usd fa-2x"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/Addpurpose'>   أنواع   الأغراض  <i class="fa fa-cogs fa-2x" aria-hidden="true"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/Addmembershiptype'>   أنواع العضويات  <i class="fa fa-address-card fa-2x" aria-hidden="true"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/AdminPosts'>  ادارة جميع المنشورات  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>   */}
+   <li className="left"><Link to='/dashboard/posts'>  My Commissions   <i className="fa fa-usd fa-2x"></i> </Link></li>
+
+ </center>
+</ul> 
+</center>
+
+
+  </Fragment>
+)}
+
+ 
+ 
+
+
+ {/* ///////////////////////////////////Agency///////////////////////////////// */}
+ {user.validity === "agency"&&(
+<Fragment>
+ 
+<center> 
+<ul className="Dash-nav"> 
+<div className="DashBoxTitle" > Start Promot your services and products  </div>
+<center>
+  <li className="left"><Link to='/dashboard/posts'>    Publications  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
+ {/* <li className="left"><Link to='/questions'> <i className="fa fa-question-circle fa-2x"></i>  Questions </Link></li> */}
+ 
+ {/* <li className="left"><Link to='/dashboard/categories'>   التصنيفات الفرعية <i className="fa fa-cubes fa-2x"></i></Link></li>
+ <li className="left"><Link to='/dashboard/markets'>   الاسواق <i className="fa fa-credit-card-alt fa-2x"></i></Link></li>  
+ <li className="left"><Link to='/dashboard/countries'>   الدول <i className="fa fa-globe fa-2x"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/questions'>   تقارير <i className="fa fa-pie-chart fa-2x"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/users'>   ادارة المستخدمين <i className="fa fa-users fa-2x"></i> </Link></li>  
+ <li className="left"><Link to='/dashboard/requests'>  ادارة عمولات الأعضاء  <i className="fa fa-usd fa-2x"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/Addpurpose'>   أنواع   الأغراض  <i class="fa fa-cogs fa-2x" aria-hidden="true"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/Addmembershiptype'>   أنواع العضويات  <i class="fa fa-address-card fa-2x" aria-hidden="true"></i> </Link></li>
+ <li className="left"><Link to='/dashboard/AdminPosts'>  ادارة جميع المنشورات  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>   */}
+   <li className="left"><Link to='/dashboard/posts'>  My Commissions  <i className="fa fa-usd fa-2x"></i> </Link></li>
+
+ </center>
+</ul> 
+</center>
+
+
+  </Fragment>
+)}
+
 
 
 
