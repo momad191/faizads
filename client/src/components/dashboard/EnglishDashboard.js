@@ -102,7 +102,7 @@ const EnglishDashboard = ({
     })
 
 
-    axios.get('/api/auth')
+    axios.get('/api/auth') 
     .then(res => {
       console.log(res);
       setUser(res.data)
@@ -239,7 +239,7 @@ const EnglishDashboard = ({
 {subscription.membership_class === 'golden' &&(
   <Fragment>
 <center>
-      <Link className="Dash-button-gold ">  {subscription.user.first_name}  { subscription.user.last_name} </Link>
+      <Link className="Dash-button-gold ">   {subscription.user.first_name && subscription.user.first_name}  { subscription.user.last_name && subscription.user.last_name} </Link>
       <Link className="Dash-button-gold ">  <i className="fa fa-user fa-0x"></i> Gold Membership  </Link>
       <Link className="Dash-button-gold">  expires on : <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment>    </Link>
 
@@ -253,7 +253,7 @@ const EnglishDashboard = ({
 {subscription.membership_class === 'silver' &&(
   <Fragment>
 <center>
-      <Link className="Dash-button-silver">  {subscription.user.first_name}  { subscription.user.last_name}   </Link>
+      <Link className="Dash-button-silver">   {subscription.user.first_name && subscription.user.first_name}  { subscription.user.last_name && subscription.user.last_name}   </Link>
       <Link className="Dash-button-silver">  <i className="fa fa-user fa-0x"></i> Silver Membership  </Link>
       <Link className="Dash-button-silver">  expires on: <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment> </Link>
 
@@ -268,7 +268,7 @@ const EnglishDashboard = ({
 {subscription.membership_class === 'bronze' &&(
   <Fragment>
 <center>
-      <Link className="Dash-button-bronze">  {subscription.user.first_name}  { subscription.user.last_name}  </Link>
+      <Link className="Dash-button-bronze">   {subscription.user.first_name && subscription.user.first_name}  { subscription.user.last_name && subscription.user.last_name}   </Link>
       <Link className="Dash-button-bronze">  <i className="fa fa-user fa-0x"></i> Bronze Membership  </Link>
       <Link className="Dash-button-bronze">  expires on : <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment>    </Link>
 
@@ -282,7 +282,7 @@ const EnglishDashboard = ({
   <Fragment>
 <center>
 
-      <Link className="Dash-button-special">  {subscription.user.first_name}  { subscription.user.last_name}   </Link>
+      <Link className="Dash-button-special">  {subscription.user.first_name && subscription.user.first_name}  { subscription.user.last_name && subscription.user.last_name}   </Link>
       <Link className="Dash-button-special">  <i className="fa fa-user fa-0x"></i> Special membership  </Link>
       <Link className="Dash-button-special"> expires on:  <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment> </Link>
 
@@ -296,7 +296,7 @@ const EnglishDashboard = ({
   <Fragment>
 <center>
  
-      <Link className="Dash-button-special ">  {subscription.user.first_name}  { subscription.user.last_name}  </Link>
+      <Link className="Dash-button-special ">   {subscription.user.first_name && subscription.user.first_name}  { subscription.user.last_name && subscription.user.last_name}   </Link>
       <Link className="Dash-button-special ">  <i className="fa fa-user fa-0x"></i> Free Membership  </Link>
       <Link className="Dash-button-special">  expires on: <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment>  </Link>
 
@@ -310,8 +310,8 @@ const EnglishDashboard = ({
   <Fragment>
 <center>
 
-       <Link className="Dash-button-special "> welcome {user.first_name}  { user.last_name}  </Link>
-       <Link to='/prices' className="Dash-button-special ">  <i className="fa fa-rocket fa-0x"></i> Choose Your Plan Now To Get Started  </Link>
+       <Link className="Dash-button-special "> welcome {user.first_name && user.first_name }  { user.last_name && user.last_name }  </Link>
+       <Link to='/membership/prices' className="Dash-button-special ">  <i className="fa fa-rocket fa-0x"></i> Choose Your Plan Now To Get Started  </Link>
 </center>
 </Fragment>
 )} 
@@ -340,9 +340,9 @@ const EnglishDashboard = ({
       <div className="DashBoxTitle" >Statistics </div>
       <center>
       {/* <div className="Dash-button">  <i class="fa fa-buysellads fa-2x" aria-hidden="true"></i>  ads assigned to this subscription:({subscription.available_ads})     </div> */}
-      <div className="Dash-button">  <i class="fa fa-bullhorn fa-2x" aria-hidden="true"></i>  Effective Ads:({userPosts.length})   </div>
+      <div className="Dash-button">  <i class="fa fa-bullhorn fa-2x" aria-hidden="true"></i>  Effective Ads:({userPosts && userPosts.length})   </div>
       {/* <div className="Dash-button">  <i class="fa fa-buysellads fa-2x" aria-hidden="true"></i>  Your remaining ad balance:({subscription.available_ads - userPosts.length })   </div> */}
-      <div className="Dash-button">  <i class="fa fa-users fa-2x" aria-hidden="true"></i>  Referral Membership Number:({userRef.length})  </div>
+      <div className="Dash-button">  <i class="fa fa-users fa-2x" aria-hidden="true"></i>  Referral Membership Number:({userRef && userRef.length})  </div>
       </center>
 
        </div>

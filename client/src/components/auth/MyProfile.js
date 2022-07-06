@@ -109,7 +109,6 @@ export default class MyProfile extends Component {
       .then(response => {
         this.setState({
         
-          
           registration_date: response.data.registration_date,
           membership_class: response.data.membership_class,
           membershiptype: response.data.membershiptype,
@@ -731,13 +730,13 @@ export default class MyProfile extends Component {
 
 
 
-
+ 
    
 {(moment(this.state.membership_renewal_expiry_date).isAfter(Date.now())) &&(
   <Fragment>
     <center>
     <div className="Dash-button-still-subscription">
-  <p class="login-title"> مشترك بالخطة {this.state.membershiptype.m_t_AR_name}    </p>
+  <p class="login-title"> مشترك بالخطة {this.state.membershiptype.m_t_AR_name && this.state.membershiptype.m_t_AR_name }    </p>
    <p> 
      ينتهي اشتراكك في يوم <Moment format='YYYY/MM/DD'>{this.state.membership_renewal_expiry_date}</Moment> 
 </p>
@@ -1210,7 +1209,7 @@ export default class MyProfile extends Component {
   <Fragment>
     <center>
     <div className="Dash-button-still-subscription">
-  <p class="login-title"> Current Subscription {this.state.membershiptype.m_t_EN_name}    </p>
+  <p class="login-title"> Current Subscription {this.state.membershiptype.m_t_EN_name && this.state.membershiptype.m_t_EN_name}    </p>
    <p> 
    Your subscription expires  <Moment format='YYYY/MM/DD'>{this.state.membership_renewal_expiry_date}</Moment> 
 </p>

@@ -116,7 +116,7 @@ const Dashboard = ({
     })
     .catch((err) => {
       console.log(err);
-    })
+    }) 
 
  
  
@@ -221,9 +221,6 @@ const Dashboard = ({
   }, []);
 
 
-
- 
-  
   return loading  ? (
     <Spinner />
   ) : (
@@ -244,7 +241,7 @@ const Dashboard = ({
 <div className="login-title"></div>
 {moment(subscription.membership_renewal_expiry_date).isBefore(Date.now()) ?(
    <Fragment>
- 
+  
  <center> 
 
    <Link to='/membership/prices' className="Dash-button-end-subscription">
@@ -260,7 +257,7 @@ const Dashboard = ({
 <center>
       <Link className="Dash-button-gold">   <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment>  : تنتهي يوم  </Link>
       <Link className="Dash-button-gold ">  <i className="fa fa-user fa-0x"></i> عضوية ذهبية  </Link>
-      <Link className="Dash-button-gold ">  {subscription.user.first_name}  { subscription.user.last_name} </Link>
+      <Link className="Dash-button-gold ">  {subscription.user.first_name && subscription.user.first_name}  { subscription.user.last_name && subscription.user.last_name} </Link>
 </center>
 </Fragment>
 )} 
@@ -273,7 +270,7 @@ const Dashboard = ({
 <center>
       <Link className="Dash-button-silver">   <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment>  : تنتهي يوم  </Link>
       <Link className="Dash-button-silver">  <i className="fa fa-user fa-0x"></i> عضوية فضية  </Link>
-      <Link className="Dash-button-silver">  {subscription.user.first_name}  { subscription.user.last_name}   </Link>
+      <Link className="Dash-button-silver">   {subscription.user.first_name && subscription.user.first_name}  { subscription.user.last_name && subscription.user.last_name}  </Link>
 </center>
 </Fragment>
 )}
@@ -287,7 +284,7 @@ const Dashboard = ({
 <center>
       <Link className="Dash-button-bronze">   <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment>  : تنتهي يوم  </Link>
       <Link className="Dash-button-bronze">  <i className="fa fa-user fa-0x"></i> عضوية برونزية  </Link>
-      <Link className="Dash-button-bronze">  {subscription.user.first_name}  { subscription.user.last_name}  </Link>
+      <Link className="Dash-button-bronze">   {subscription.user.first_name && subscription.user.first_name}  { subscription.user.last_name && subscription.user.last_name}  </Link>
 </center>
 </Fragment>
 )}
@@ -299,20 +296,20 @@ const Dashboard = ({
 <center>
       <Link className="Dash-button-special">   <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment>  : تنتهي يوم  </Link>
       <Link className="Dash-button-special">  <i className="fa fa-user fa-0x"></i> عضوية خاصة  </Link>
-      <Link className="Dash-button-special">  {subscription.user.first_name}  { subscription.user.last_name}   </Link>
+      <Link className="Dash-button-special">  {subscription.user.first_name && subscription.user.first_name}  { subscription.user.last_name && subscription.user.last_name}  </Link>
 
 </center>
 </Fragment>
 )}
 
-
+ 
 
 {subscription.membership_class === 'free' &&(
   <Fragment>
 <center>
       <Link className="Dash-button-special">   <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment>  : تنتهي يوم  </Link>
       <Link className="Dash-button-special ">  <i className="fa fa-user fa-0x"></i> عضوية مجانية  </Link>
-      <Link className="Dash-button-special ">  {subscription.user.first_name}  { subscription.user.last_name}  </Link>
+      <Link className="Dash-button-special ">  {subscription.user.first_name && subscription.user.first_name}  { subscription.user.last_name && subscription.user.last_name}  </Link>
 </center>
 </Fragment>
 )} 
@@ -322,21 +319,18 @@ const Dashboard = ({
 {subscription.membership_class === '' &&(
   <Fragment>
 <center>
-       <Link to='/prices' className="Dash-button-special ">  <i className="fa fa-rocket fa-0x"></i> اختر خطتك الآن للبدء  </Link>
-      <Link className="Dash-button-special "> مرحبا {user.first_name}  { user.last_name}  </Link>
+<Link to='/membership/prices' className="Dash-button-special ">  <i className="fa fa-rocket fa-0x"></i> اختر خطتك الآن للبدء  </Link>
+<Link className="Dash-button-special "> مرحبا {user.first_name && user.first_name}  { user.last_name && user.last_name}  </Link>
 </center>
 </Fragment>
 )} 
 
-
+ 
 </Fragment>
  
 )}
     
    
- 
-   
- 
 <center>  
 {userShop ?(
 <Fragment> 
@@ -360,9 +354,9 @@ const Dashboard = ({
       <div className="DashBoxTitle" >إحصاءات </div>
       <center>
       {/* <div className="Dash-button">  ({subscription.available_ads}): عدد الاعلانات المخصصة لهذا الاشتراك   <i class="fa fa-buysellads fa-2x" aria-hidden="true"></i>  </div> */}
-      <div className="Dash-button">  ({userPosts.length}):  إعلانات      <i class="fa fa-bullhorn fa-2x" aria-hidden="true"></i> </div>
+      <div className="Dash-button">  ({userPosts && userPosts.length}):  إعلانات      <i class="fa fa-bullhorn fa-2x" aria-hidden="true"></i> </div>
       {/* <div className="Dash-button">  ({subscription.available_ads - userPosts.length }) :رصيد الاعلانات المتبقي لديك <i class="fa fa-buysellads fa-2x" aria-hidden="true"></i> </div> */}
-      <div className="Dash-button">  ({userRef.length}): عدد عضوية الإحالة <i class="fa fa-users fa-2x" aria-hidden="true"></i> </div>
+      <div className="Dash-button">  ({userRef && userRef.length}): عدد عضوية الإحالة <i class="fa fa-users fa-2x" aria-hidden="true"></i> </div>
       
       {/* <div className="Dash-button">  ({userPostsInToday.length}): عدد الإعلانات المنشورة اليوم <i class="fa fa-calendar-check-o fa-2x" aria-hidden="true"></i> </div> */}
 

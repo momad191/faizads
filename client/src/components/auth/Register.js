@@ -58,7 +58,7 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
   const available_ads = 2;
   const membership_renewal_date = Date.now();
   const membership_renewal_expiry_date = freeDate;
- const visualCodeShow = visualCode.visual_code+1;
+//  const visualCodeShow = visualCode.visual_code+1;
 
  const Lang = match.params.lang;
  
