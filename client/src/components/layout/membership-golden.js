@@ -177,7 +177,7 @@ const Golden = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
     <center>
     <div className="Dash-button-still-subscription">
   {/* <p class="login-title"> {subscription.membership_class}  الاشتراك الحالي  </p> */}
-  <p class="login-title">الاشتراك الحالي الخطة {subscription.membershiptype.m_t_AR_name && subscription.membershiptype.m_t_AR_name}   </p>
+  <p class="login-title">الاشتراك الحالي الخطة {subscription.membership_class && subscription.membership_class}   </p>
 
 
    <p> 
@@ -237,7 +237,7 @@ const Golden = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
 <center>
 <div className="Dash-button-still-subscription">
 {/* <p class="login-title"> Current Subscription:{subscription.membership_class}    </p> */}
-<p class="login-title"> Current Subscription: {subscription.membershiptype.m_t_EN_name && subscription.membershiptype.m_t_EN_name} Plan   </p>
+<p class="login-title"> Current Subscription: {subscription.membership_class && subscription.membership_class} Plan   </p>
 
 <p> 
 Your subscription expires <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment> 

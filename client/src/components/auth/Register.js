@@ -167,9 +167,9 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
 
 
 
-  if (isAuthenticated ) {
-    return <Redirect to='/dashboard/main' />;
-  } 
+  // if (isAuthenticated ) {
+  //   return <Redirect to='/dashboard/main' />;
+  // } 
 
 
 

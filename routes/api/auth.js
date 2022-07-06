@@ -220,7 +220,7 @@ router.post('/resetpassword',(req,res)=>{
                   subject:" من موقع رحال لاستعادة كلمة المرور ",
                   html:`
                   <p>طلبت استعادة كلمة المرور</p>
-                  <h5>اضغط هنا <a href="http://localhost:3000/user/Newpassword/${user._id}">الرابط</a> لتغيير كلمة المرور</h5>
+                  <h5>اضغط هنا <a href="https://faizads.herokuapp.com/user/Newpassword/${user._id}">الرابط</a> لتغيير كلمة المرور</h5>
                   <p>Thank you </p>
                   ` 
               })
@@ -457,7 +457,7 @@ router.post(
     </head> 
     <body>
       <p> طلبت استعادة كلمة المرور  </p>
-      <h5>اضغط هنا <a href="http://localhost:3000/user/Newpassword/${lastreset._id}"> الرابط</a> لمتابعة عملية التسجيل    </h5>
+      <h5>اضغط هنا <a href="https://faizads.herokuapp.com/user/Newpassword/${lastreset._id}"> الرابط</a> لمتابعة عملية التسجيل    </h5>
       <p>Thank you </p>
       </body>
       </html>
@@ -522,7 +522,7 @@ router.post(
   </head> 
   <body>
     <p> اكمل التسجيل  </p>
-    <h5>اضغط هنا <a href="http://localhost:3000/user/register/${lastregister._id}">الرابط</a> لمتابعة عملية التسجيل    </h5>
+    <h5>اضغط هنا <a href="https://faizads.herokuapp.com/user/register/${lastregister._id}">الرابط</a> لمتابعة عملية التسجيل    </h5>
     <p>Thank you </p>
     </body>
     </html>
@@ -589,7 +589,7 @@ router.post(
   </head>
   <body>
     <p color=#000'> اكمل التسجيل  </p>
-    <h5>اضغط هنا <a href="http://localhost:3000/user/register/${lastregister._id}">الرابط</a> لمتابعة عملية التسجيل    </h5>
+    <h5>اضغط هنا <a href="https://faizads.herokuapp.com/user/register/${lastregister._id}">الرابط</a> لمتابعة عملية التسجيل    </h5>
     <p>Thank you </p>
     </body>
     </html>

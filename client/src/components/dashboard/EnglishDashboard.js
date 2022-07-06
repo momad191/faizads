@@ -327,7 +327,7 @@ const EnglishDashboard = ({
   {userShop ?(
 <Fragment> 
 <Link to='/en/dashboard/shops/edit' > <button className="Dash-button-open">  Manage your shop   </button>  </Link>
-<Link to={`/shops/${user.username}`} target="_blank" > <button className="Dash-button"> <i class="fa fa-external-link-square fa-0x" aria-hidden="true"></i> preview   </button>  </Link>
+<Link to={`/shops/${user.username && user.username}`} target="_blank" > <button className="Dash-button"> <i class="fa fa-external-link-square fa-0x" aria-hidden="true"></i> preview   </button>  </Link>
 </Fragment>
   ):(
   <Link to='/dashboard/create-shop'> <button className="Dash-button">  open new shop  </button>  </Link>
@@ -379,8 +379,8 @@ const EnglishDashboard = ({
   <th> Your link   </th>
    <th>       <i class="fa fa-link fa-1x" aria-hidden="true"></i>   {'   '}
      {user.username ?(<>
-       <a href={`http://localhost:3000/user/createAccount/${user.username}`}> 
-      {`http://localhost:3000/user/createAccount/${user.username}`}
+       <a href={`https://faizads.herokuapp.com/user/createAccount/${user.username && user.username}`}> 
+      {`https://faizads.herokuapp.com/user/createAccount/${user.username && user.username}`}
          </a> </> ):(<>loading ...</> )}  {'   '}
        <i class="fa fa-link fa-1x" aria-hidden="true"></i> 
        </th>
@@ -408,7 +408,7 @@ const EnglishDashboard = ({
     (${profit})
    {' '}
    {profit >= 12 &&
-   <RequestForm userId={user._id} amout11={profit} />
+   <RequestForm userId={user._id && user._id} amout11={profit} />
    } 
 
   </th>
