@@ -310,7 +310,7 @@ export default class MyProfile extends Component {
                 <span className='details-title'> الاسم الاول </span>
                 <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="الاسم الأول"
                  name="first_name" 
                  value={this.state.first_name} 
                  onChange={this.onChangefirst_name} 
@@ -321,7 +321,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'> الاسم الاخير </span>
                 <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="الاسم الاخير"
                  name="last_name" 
                  value={this.state.last_name} 
                  onChange={this.onChangelast_name}
@@ -332,7 +332,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'> البريد الإلكتروني  </span>
                  <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="example@example.com"
                  name="email" 
                  value={this.state.email} 
                 // onChange={this.onChangeemail}
@@ -614,7 +614,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'>  رقم الهاتف </span>
                 <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder='+4415XXXXXXXX'
                  name="phone" 
                  value={this.state.phone} 
                  onChange={this.onChangephone}
@@ -625,7 +625,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'>العنوان1  </span>
                  <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="address line1"
                  name="address1" 
                  value={this.state.address1} 
                  onChange={this.onChangeaddress1}
@@ -636,7 +636,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'> العنوان 2  </span>
                  <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="address line2"
                  name="address2" 
                  value={this.state.address2} 
                  onChange={this.onChangeaddress2}
@@ -647,7 +647,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'>المدينة  </span>
                  <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="مثال:برمنغهام"
                  name="city" 
                  value={this.state.city} 
                  onChange={this.onChangecity}
@@ -658,7 +658,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'>المنطقة  </span>
                  <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="مثال :إنجلترا"
                  name="state" 
                  value={this.state.state} 
                  onChange={this.onChangestate}
@@ -670,7 +670,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'>الرمز البريدي  </span>
                  <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="Example: B9"
                  name="postal" 
                  value={this.state.postal} 
                  onChange={this.onChangepostal}
@@ -683,7 +683,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'>اسم المستفيد (للدفع) </span>
                 <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="اسم المستفيد في حساب باي بال"
                  name="payee_name" 
                  value={this.state.payee_name} 
                  onChange={this.onChangepayee_name}
@@ -694,7 +694,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'>ايميل المستفيد (paypal) </span>
                 <input className="login-input"
                  type="email" 
-                 placeholder=""
+                 placeholder="example@example.com"
                  name="paypal_account" 
                  value={this.state.paypal_account} 
                  onChange={this.onChangepaypal_account}
@@ -729,13 +729,13 @@ export default class MyProfile extends Component {
 
 
 
- 
-   
+{this.state.membership_class &&(
+  <Fragment>
 {(moment(this.state.membership_renewal_expiry_date).isAfter(Date.now())) &&(
   <Fragment>
     <center>
     <div className="Dash-button-still-subscription">
-  <p class="login-title">  {this.state.membership_class && this.state.membership_class }   :مشترك بالخطة </p>
+  <p class="login-title"> مشترك بالخطة {this.state.membershiptype.m_t_AR_name && this.state.membershiptype.m_t_AR_name }    </p>
    <p> 
      ينتهي اشتراكك في يوم <Moment format='YYYY/MM/DD'>{this.state.membership_renewal_expiry_date}</Moment> 
 </p>
@@ -745,6 +745,9 @@ export default class MyProfile extends Component {
   )}
 
 
+
+</Fragment>
+)}   
 
 
    </div>
@@ -778,7 +781,7 @@ export default class MyProfile extends Component {
                 <span className='details-title'>First name </span>
                 <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="First name"
                  name="first_name" 
                  value={this.state.first_name} 
                  onChange={this.onChangefirst_name}
@@ -789,7 +792,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'>Last name </span>
                 <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="Last name"
                  name="last_name" 
                  value={this.state.last_name} 
                  onChange={this.onChangelast_name}
@@ -800,7 +803,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'>Email</span>
                  <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="example@example.com"
                  name="email" 
                  value={this.state.email} 
                 // onChange={this.onChangeemail}
@@ -1083,7 +1086,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'> Phone Number </span>
                 <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder='+4415XXXXXXXX'
                  name="phone" 
                  value={this.state.phone} 
                  onChange={this.onChangephone}
@@ -1094,7 +1097,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'>address line 1  </span>
                  <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="Line1"
                  name="address1" 
                  value={this.state.address1} 
                  onChange={this.onChangeaddress1}
@@ -1105,7 +1108,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'> address line 2  </span>
                  <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="Line2"
                  name="address2" 
                  value={this.state.address2} 
                  onChange={this.onChangeaddress2}
@@ -1116,7 +1119,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'>City  </span>
                  <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="Example:Birmingham"
                  name="city" 
                  value={this.state.city} 
                  onChange={this.onChangecity}
@@ -1127,7 +1130,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'>the state  </span>
                  <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="Example:England"
                  name="state" 
                  value={this.state.state} 
                  onChange={this.onChangestate}
@@ -1139,7 +1142,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'>Postal code  </span>
                  <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="Example: B9"
                  name="postal" 
                  value={this.state.postal} 
                  onChange={this.onChangepostal}
@@ -1152,7 +1155,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'> Payee name </span>
                 <input className="login-input"
                  type="text" 
-                 placeholder=""
+                 placeholder="The name of the beneficiary of the PayPal account"
                  name="payee_name" 
                  value={this.state.payee_name} 
                  onChange={this.onChangepayee_name}
@@ -1163,7 +1166,7 @@ export default class MyProfile extends Component {
                  <span className='details-title'> (paypal email) </span>
                 <input className="login-input"
                  type="email" 
-                 placeholder=""
+                 placeholder="example@example.com"
                  name="paypal_account" 
                  value={this.state.paypal_account} 
                  onChange={this.onChangepaypal_account}
@@ -1198,15 +1201,16 @@ export default class MyProfile extends Component {
 	 </center>
 
 
+ 
 
-
-
+   {this.state.membership_class &&(
+  <Fragment>
    
 {(moment(this.state.membership_renewal_expiry_date).isAfter(Date.now())) &&(
   <Fragment>
     <center>
     <div className="Dash-button-still-subscription">
-  <p class="login-title"> Current Subscription: {this.state.membership_class && this.state.membership_class}    </p>
+  <p class="login-title"> Current Subscription: {this.state.membershiptype.m_t_EN_name && this.state.membershiptype.m_t_EN_name}    </p>
    <p> 
    Your subscription expires  <Moment format='YYYY/MM/DD'>{this.state.membership_renewal_expiry_date}</Moment> 
 </p>
@@ -1216,7 +1220,8 @@ export default class MyProfile extends Component {
   )}
 
 
-
+</Fragment>
+   )}
 
    </div>
 	 </form>

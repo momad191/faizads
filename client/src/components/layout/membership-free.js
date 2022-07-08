@@ -196,13 +196,9 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
 
  const subscriptionFormEnglish = (
   <Fragment>
-
-
 <center> 
 <form className="login-form" onSubmit={e => onSubmit(e)}>
-
 <div class="login-title">  Subscribe to a Free plan  </div>
- 
 <div className=''>    
 <div className="login-title">    </div>
 
@@ -300,7 +296,7 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
      <div className="aqle3-main" >
       <div className="mainword2">
 
-      { i18next.language === 'ar'?(
+      { i18next.language === 'ar'&&(
       <div className="mainForm">
       <center>
         <div className="side-columns">
@@ -354,8 +350,9 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
 
       </div>
 
-      ):(
+      )}
 
+ {i18next.language === 'en'&&(
 ////////////////////////////ENGLISH///////////////////////////////////////
 
 <div className="mainForm">
@@ -393,7 +390,6 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
 {subscription.membership_class &&(
   <Fragment>
 <p class="login-title"> Current Subscription: {subscription.membershiptype.m_t_EN_name && subscription.membershiptype.m_t_EN_name}    </p>
-
 <p> 
 Your subscription expires <Moment format='YYYY/MM/DD'>{subscription.membership_renewal_expiry_date}</Moment> 
 </p>

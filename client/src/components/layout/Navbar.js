@@ -69,7 +69,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
  <center> 
  <button onClick={closeMenu} className="closebtn">&times;</button>
  
-
+ 
 
  {/* {categories11.map(catego=>(
 <Fragment> 
@@ -81,7 +81,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
  <Link to='/shops'>المتاجر {' '} <i class="fa fa-shopping-cart" aria-hidden="true"></i> </Link>
  <Link to='/dashboard/MyProfile'> الملف الشخصي  {' '} <i class="fa fa-user" aria-hidden="true"></i> </Link>
  <Link to='/dashboard/posts'>   أضف إعلانك   <i class="fa fa-plus" aria-hidden="true"></i> </Link>
- <Link to='/dashboard/main'> <i class="fa fa-cog" aria-hidden="true"></i> {' '}  لوحة التحكم </Link>
+ <Link to='/dashboard/main'> لوحة التحكم  {' '}<i class="fa fa-cog" aria-hidden="true"></i>    </Link>
  <Link to='/membership/prices'>   العضويات  {' '} <i className="fa fa-rocket fa-1x"></i>  </Link>
  </center>
 </div>

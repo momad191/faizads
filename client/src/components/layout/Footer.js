@@ -1,12 +1,12 @@
 	  import React, { Fragment } from 'react';
     import { Link } from 'react-router-dom';
-    
+      
       const Footer = () => {
 		return (
 		  <Fragment>
  <footer className="myFooter">
 
- <center>
+ {/* <center>
 <div className='vertical-menu-wrapper'>
  
   <ul className='vertical-menu'> 
@@ -41,7 +41,7 @@
 
 </div>
 </center>
-			
+			 */}
 
 <footer className="myFooter2">
  <div className="copyrighttext">  

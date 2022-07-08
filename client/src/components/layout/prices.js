@@ -35,8 +35,8 @@ return (
     <li className="header"> <i class="fa fa-free" aria-hidden="true"></i> مجانية</li>
     <li className="grey">00.00$</li>
       <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> مدة الإعلان تصل إلى 20 يوم  </li>
-    <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> عدد الإعلانات  (2) </li>
-    <li> <span className="notFeatures"> <i class="fa fa-window-close fa-2x" aria-hidden="true"></i> </span> تميز الإعلان </li>
+    <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span>  عدد الإعلانات  (2) خلال الشهر</li>
+    <li> <span className="notFeatures"> <i class="fa fa-window-close fa-2x" aria-hidden="true"></i> </span> تميز الإعلان </li>  
      <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> صفحة الإعلانات الخاصة    </li> 
      <li>  <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span>   للتجربة   </li> 
      <li className="grey"><Link to="/membership/prices/free" className="button-pricing">اشترك</Link></li>
@@ -52,7 +52,7 @@ return (
     <li className="bronze">البرونزية</li>
     <li className="grey">$ 11.00 / شهر واحد</li>
       <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> مدة الإعلان تصل إلى 30 يوم  </li>
-    <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> عدد الإعلانات  (غير محدود) </li>
+    <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> عدد الإعلانات  (30) خلال الشهر </li>
     <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> تميز الإعلان </li>
      <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> صفحة الإعلانات الخاصة    </li> 
      <li>  <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span>   بداية حالمة   </li> 
@@ -73,7 +73,7 @@ return (
     <li> مدة الاعلان 25 يوم  </li>
     <li>  مدة الاعلان 30 يوم </li> */}
     {/* <li>  مدة الاعلان 60 يوم </li> */}
-    <li><span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span>  عدد الإعلانات  ( غير محدود  ) </li>
+    <li><span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> عدد الإعلانات  (90) خلال الشهر </li>
     <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> تميز الإعلان </li>
     <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span>  صفحة الإعلانات الخاصة    </li>
     <li>  <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span>   الأكثر طلبا   </li>
@@ -149,7 +149,7 @@ return (
     <li className="header">  Free</li>
     <li className="grey">$ 00.00 / For Month </li>
       <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> Advertisement period is up to 20 days  </li>
-    <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> Number of Ads (2) </li>
+    <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> Number of ads (2) during the month </li>
     <li> <span className="notFeatures"> <i class="fa fa-window-close fa-2x" aria-hidden="true"></i> </span> Advertising Excellence </li>
      <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> Your public ads page    </li> 
      <li>  <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span>   To Try   </li> 
@@ -165,7 +165,7 @@ return (
     <li className="bronze">Bronze</li>
     <li className="grey">$ 11.00 / For Month </li>
       <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> Advertisement period is up to 30 days  </li>
-    <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> Number of Ads (Unlimited) </li>
+    <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> Number of ads (30) during the month </li>
     <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> Advertising Excellence </li>
      <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> Your public ads page    </li> 
      <li>  <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span>   Dreamy start   </li> 
@@ -182,7 +182,7 @@ return (
     <li> مدة الاعلان 25 يوم  </li>
     <li>  مدة الاعلان 30 يوم </li> */}
     {/* <li>  مدة الاعلان 60 يوم </li> */}
-    <li><span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> Number of ads (Unlimited) </li>
+    <li><span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> Number of ads (90) during the month </li>
     <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span> Advertising Excellence </li>
     <li> <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span>  Your public ads page    </li>
     <li>  <span className="features"> <i class="fa fa-check-square fa-2x" aria-hidden="true"></i> </span>   The Most wanted   </li>

@@ -2,7 +2,7 @@ import React, { Fragment, useEffect ,useState } from 'react';
 import { BrowserRouter as Router, Route, Switch,useParams  } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import NavbarEnglish from './components/layout/NavbarEnglish';
-import Footer from './components/layout/Footer';
+import Footer from './components/layout/Footer'; 
 import Landing from './components/layout/Landing';
 import Home from './components/layout/home';
   

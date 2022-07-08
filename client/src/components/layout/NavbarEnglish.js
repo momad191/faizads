@@ -8,10 +8,10 @@ import { useTranslation } from 'react-i18next';
  
 import axios from 'axios';
 
-   
+    
 
-const mySidenav0 = 'sidenavnone';
-const sidenav = 'sidenav';
+const mySidenav0 = 'sidenavnoneEnglish';
+const sidenav = 'sidenavEnglish';
 
 
  
@@ -66,19 +66,26 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <img className="logo" src={ff}/>
         </Link>
         </div>
-         <div id="mySidenav"   className={mySidenav}>
- <center> 
- <button onClick={closeMenu} className="closebtn">&times;</button>
- </center>
- {categories11.map(catego=>(
-<Fragment> 
-
- <a href={`/displayCategoryItems/${catego._id}#/${catego.c_name}`} > 
- <span><img className="" src={catego.image} style={{width:'50px' , height:'50px', marginRight:'20px'}}/></span>
- {catego.c_name} </a>
+<div id="mySidenav"   className={mySidenav}>
  
- </Fragment>
- ))} 
+  <center> 
+ <button onClick={closeMenu} className="closebtn">&times;</button>
+ 
+ 
+
+ {/* {categories11.map(catego=>(
+<Fragment> 
+  <a href={`/displayCategoryItems/${catego._id}#/${catego.c_name}`} > 
+ <span><img className="" src={catego.image} style={{width:'50px' , height:'50px', marginRight:'20px'}}/></span>
+ {catego.c_name} </a> 
+  </Fragment>
+ ))} */}
+ <Link to='/shops'>  <i class="fa fa-shopping-cart" aria-hidden="true"></i> {' '} Shops </Link>
+ <Link to='/dashboard/MyProfile'> <i class="fa fa-user" aria-hidden="true"></i>{' '}  Profile</Link>
+ <Link to='/dashboard/posts'> <i class="fa fa-plus" aria-hidden="true"></i>{' '}  Add your ad</Link>
+ <Link to='/dashboard/main'> <i class="fa fa-cog" aria-hidden="true"></i> {' '}  Control Panel </Link>
+ <Link to='/membership/prices'> <i className="fa fa-rocket fa-1x"></i>{' '}  Membership</Link>
+ </center> 
 </div> 
       {/* <li className="left">
       <Link to='/'>
