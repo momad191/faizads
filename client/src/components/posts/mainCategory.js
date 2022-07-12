@@ -113,10 +113,10 @@ const Exercise = props => (
     </button>
   
   
-  
-     <Link onClick={() => props.shopClick(props.exercise.shop._id)} to={`/shops/${props.exercise.shop.username}`} target="_blank"> 
+   
+     <Link onClick={() => props.shopClick(props.exercise.shop._id)} to={`/shops/${props.exercise.user.username}`} target="_blank"> 
     <button className="button-in-list-home-big">
-    {props.exercise.shop.username} <i class="fa fa-home" aria-hidden="true"></i> 
+    {props.exercise.user.username} <i class="fa fa-home" aria-hidden="true"></i> 
     </button>
     </Link> 
   
@@ -248,7 +248,7 @@ const Exercise = props => (
     <div className='section-list'> 
   
   
-    <Link onClick={() => props.shopClick(props.exercise.shop._id)} to={`/shops/${props.exercise.shop.username}`} target="_blank"> 
+    <Link onClick={() => props.shopClick(props.exercise.shop._id)} to={`/shops/${props.exercise.user.username}`} target="_blank"> 
     <button className="button-in-list-home-small">
     <i class="fa fa-home fa-1x" aria-hidden="true"></i>   
     </button>
@@ -1232,7 +1232,9 @@ allCategoriesListCars(){
 
 
  {/* ////////////////////////////////////////القائمةللكل ////////////////////////////////////// */}
- <div className="mainword-section-right">
+ {i18next.language === 'ar'&&(
+  <Fragment> 
+ <div className="mainword-section-list-right">
 <Fragment> 
  <div id="mySidenav"   className='sideNavHome'>
  <center> 
@@ -1267,6 +1269,56 @@ allCategoriesListCars(){
 </div>
 </Fragment>
   </div>
+
+  </Fragment> 
+    )}
+
+
+
+
+{i18next.language === 'en'&&(
+  <Fragment> 
+ <div className="mainword-section-list-left">
+<Fragment> 
+ <div id="mySidenav"   className='sideNavHome'>
+ <center> 
+
+ { this.state.menulist===true&&(
+ <button className="categoryListButtonTop" onClick={this.showmenulist}>  
+   <Translation>{t => <>{t('categoriesButton')}</>}</Translation>{' '}
+      <i class="fa fa-arrow-circle-o-up fa-2x" aria-hidden="true"></i></button>
+ )}
+  
+ { this.state.menulist2===true&&(
+ <button className="categoryListButtonTop" onClick={this.showmenulist2}>  
+   <Translation>{t => <>{t('categoriesButton')}</>}</Translation>{' '}
+   <i class="fa fa-arrow-circle-o-down fa-2x" aria-hidden="true"></i></button>
+ )} 
+
+   </center>
+ 
+   { this.state.menulist===true&&(
+   <Fragment> 
+
+ {this.props.match.params.market_code != 'cars'&&(
+   this.allCategoriesList()
+ )}
+
+{this.props.match.params.market_code === 'cars'&&(
+   this.allCategoriesListCars()
+ )}
+ 
+</Fragment>
+)}
+</div>
+</Fragment>
+  </div>
+
+  </Fragment> 
+    )}
+
+  
+
 
 {/* //////////////////////////////////////////////////////انتهاء القائمة الجانبية ///////////////////////////////////////////// */}
 

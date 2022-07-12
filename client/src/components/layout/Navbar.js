@@ -12,8 +12,6 @@ import axios from 'axios';
 const mySidenav0 = 'sidenavnone';
 const sidenav = 'sidenav';
 
-
- 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   const [t, i18next] = useTranslation()
@@ -55,10 +53,10 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   }, [categories11]);
 
   
-   
+    
  
   const authLinks = (
- 
+  
         <ul className="topnav">
         <div className="logoContent">
         <Link to='/'>
@@ -83,6 +81,17 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
  <Link to='/dashboard/posts'>   أضف إعلانك   <i class="fa fa-plus" aria-hidden="true"></i> </Link>
  <Link to='/dashboard/main'> لوحة التحكم  {' '}<i class="fa fa-cog" aria-hidden="true"></i>    </Link>
  <Link to='/membership/prices'>   العضويات  {' '} <i className="fa fa-rocket fa-1x"></i>  </Link>
+
+ {i18next.language === 'ar' && <Link  onClick={()=>{i18next.changeLanguage('en')}}> 
+          <span className='hide-sm'>{t('lang')} </span>
+          {' '}<i className="fa fa-globe fa-1x"></i> 
+        </Link>}
+
+        {i18next.language === 'en' && <Link  onClick={()=>{i18next.changeLanguage('ar')}}> 
+          <span className='hide-sm'>{t('lang')} </span>
+          {' '}<i className="fa fa-globe fa-1x"></i> 
+        </Link>}
+
  </center>
 </div>
  
@@ -253,7 +262,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           {' '}<i class="fa fa-shopping-cart" aria-hidden="true"></i>
           </Link>
 
-          
+           
 
       </li>
       <li className="">

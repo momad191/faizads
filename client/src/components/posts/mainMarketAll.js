@@ -115,9 +115,9 @@ const Exercise = props => (
   
   
   
-     <Link onClick={() => props.shopClick(props.exercise.shop._id)} to={`/shops/${props.exercise.shop.username}`} target="_blank"> 
+     <Link onClick={() => props.shopClick(props.exercise.shop._id)} to={`/shops/${props.exercise.user.username}`} target="_blank"> 
     <button className="button-in-list-home-big">
-    {props.exercise.shop.username} <i class="fa fa-home" aria-hidden="true"></i> 
+    {props.exercise.user.username} <i class="fa fa-home" aria-hidden="true"></i> 
     </button>
     </Link> 
   
@@ -244,12 +244,12 @@ const Exercise = props => (
   
       </div>
   
-        
+         
   <center> 
     <div className='section-list'> 
   
   
-    <Link onClick={() => props.shopClick(props.exercise.shop._id)} to={`/shops/${props.exercise.shop.username}`} target="_blank"> 
+    <Link onClick={() => props.shopClick(props.exercise.shop._id)} to={`/shops/${props.exercise.user.username}`} target="_blank"> 
     <button className="button-in-list-home-small">
     <i class="fa fa-home fa-1x" aria-hidden="true"></i>   
     </button>
@@ -1094,10 +1094,12 @@ allCategoriesList(){
        {i18next.language === 'en'&&(<NavbarEnglish />)}
    
 
-
+ 
 
  {/* ////////////////////////////////////////القائمةللكل ////////////////////////////////////// */}
- <div className="mainword-section-right">
+ {i18next.language === 'ar'&&(
+  <Fragment> 
+ <div className="mainword-section-list-right">
 <Fragment> 
  <div id="mySidenav"   className='sideNavHome'>
  <center> 
@@ -1108,6 +1110,28 @@ allCategoriesList(){
 </div>
 </Fragment>
   </div>
+
+  </Fragment>
+ )}
+
+
+
+{i18next.language === 'en'&&(
+  <Fragment> 
+ <div className="mainword-section-list-left">
+<Fragment> 
+ <div id="mySidenav"   className='sideNavHome'>
+ <center> 
+ <button className="categoryListButtonTop" onClick={this.handleSelectAll}> التصنيفات  <i class="fa fa-list" aria-hidden="true"></i></button>
+ </center>
+ 
+{this.allCategoriesList()} 
+</div>
+</Fragment>
+  </div>
+
+  </Fragment>
+ )}
 
 {/* //////////////////////////////////////////////////////انتهاء القائمة الجانبية ///////////////////////////////////////////// */}
 

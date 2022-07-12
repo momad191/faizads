@@ -505,7 +505,7 @@ router.get('/homePage/:country_code/:city_code/:market_code/:purpose_code', asyn
 
 router.get('/homePage/:country_code/:city_code/:market_code/:purpose_code/:category_code', async (req, res) => {
   try {
-
+ 
     var populateQuery =
     [
     {path:'shop', select: 'shop_name shop_logo_img shop_description username'},
@@ -1229,6 +1229,9 @@ router.put('/one_stars/:id', auth, async (req, res) => {
 
 router.get('/postsofshop/:username', async (req, res) => {
   try {
+
+    const user = await User.findOne({username:req.params.username});
+ 
     var populateQuery =
     [
     {path:'shop', select: 'shop_name shop_logo_img shop_description username'},
@@ -1239,17 +1242,19 @@ router.get('/postsofshop/:username', async (req, res) => {
     {path:'country', select: 'country_AR_name country_EN_name country_code'},
     {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
    ];
-    const posts = await Post.find({username:req.params.username}).sort({ premium:-1,date:-1 }).populate(populateQuery);
+    const posts = await Post.find({user:user._id}).sort({ premium:-1,date:-1 }).populate(populateQuery);
     res.json(posts);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
 });
-
+ 
 ////////////////////////////////////المنشورات التي تظهر في متجر المستخدم////////////////////////////////////////
 router.get('/postsofshop/:username/:market_code', async (req, res) => {
   try {
+ 
+    const user = await User.findOne({username:req.params.username});
 
     var populateQuery =
     [
@@ -1262,7 +1267,7 @@ router.get('/postsofshop/:username/:market_code', async (req, res) => {
     {path:'purpose', select: 'p_AR_name p_EN_name p_code p_description'},
    ];
 
-    const posts = await Post.find({username:req.params.username,market_code:req.params.market_code}).sort({ premium:-1,date:-1 }).populate(populateQuery);
+    const posts = await Post.find({user:user._id,market_code:req.params.market_code}).sort({ premium:-1,date:-1 }).populate(populateQuery);
     res.json(posts);
   } catch (err) {
     console.error(err.message);

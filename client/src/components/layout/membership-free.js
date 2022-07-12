@@ -286,11 +286,8 @@ const Free = ({ setAlert ,addSubscription, isAuthenticated, match }) => {
   return (
     <Fragment>
 
-{i18next.language === 'ar' ?(
-        <Navbar />
-      ):(
-      <NavbarEnglish />
-      )}
+{i18next.language === 'ar' &&( <Navbar /> )}
+{i18next.language === 'en' &&( <NavbarEnglish />)}
 
 
      <div className="aqle3-main" >

@@ -120,7 +120,7 @@ const formatter = new Intl.NumberFormat('en',{
           })
 
 
-  
+    
 
           axios.get('/api/posts/postsofshop/'+match.params.username)
           .then(res => {
@@ -266,11 +266,12 @@ const formatter = new Intl.NumberFormat('en',{
 
 {user._id === shop.user._id ?(
   <Fragment>
-<Link to="/dashboard/shops/edit"> 
+{/* <Link to="/dashboard/shops/edit"> 
 <button className="FollowButtons"> 
 {t('shops_edit')} 
 </button>
- </Link>
+ </Link> */}
+ <></>
  </Fragment>
 ):(
 <Fragment>
@@ -304,11 +305,13 @@ const formatter = new Intl.NumberFormat('en',{
 
 {user._id === shop.user._id &&(
            
-            <Link to="/dashboard/shops/edit"> 
-            <button className="Action-button-plus"> 
-            {t('shops_edit')}
-            </button>
-             </Link>
+            // <Link to="/dashboard/shops/edit"> 
+            // <button className="Action-button-plus"> 
+            // {t('shops_edit')}
+            // </button>
+            //  </Link>
+
+            <></>
              
             )}  
 

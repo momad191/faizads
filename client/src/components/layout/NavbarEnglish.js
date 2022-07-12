@@ -56,7 +56,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   }, [categories11]);
 
 
-
+ 
 
   const authLinks = (
  
@@ -85,6 +85,17 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
  <Link to='/dashboard/posts'> <i class="fa fa-plus" aria-hidden="true"></i>{' '}  Add your ad</Link>
  <Link to='/dashboard/main'> <i class="fa fa-cog" aria-hidden="true"></i> {' '}  Control Panel </Link>
  <Link to='/membership/prices'> <i className="fa fa-rocket fa-1x"></i>{' '}  Membership</Link>
+
+ {i18next.language === 'ar' && <Link  onClick={()=>{i18next.changeLanguage('en')}}> 
+          <span className='hide-sm'>{t('lang')} </span>
+          {' '}<i className="fa fa-globe fa-1x"></i> 
+        </Link>}
+
+        {i18next.language === 'en' && <Link  onClick={()=>{i18next.changeLanguage('ar')}}> 
+          <span className='hide-sm'>{t('lang')} </span>
+          {' '}<i className="fa fa-globe fa-1x"></i> 
+        </Link>}
+
  </center> 
 </div> 
       {/* <li className="left">
@@ -177,17 +188,16 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         </div>
 
  
- 
+    
         
  
-<button className="buttonNav" onClick={openMenu}>  &#9776;   </button>
+<button className="buttonNavEN" onClick={openMenu}>  &#9776;   </button>
  
 
 <div id="mySidenav"   className={mySidenav}>
  <center> 
  <button onClick={closeMenu} className="closebtn">&times;</button>
- </center>
- {categories11.map(catego=>(
+ {/* {categories11.map(catego=>(
 
 <Fragment> 
 
@@ -197,7 +207,25 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
 </Fragment>
 
- ))}
+ ))} */}
+
+<Link to='/shops'>  <i class="fa fa-shopping-cart" aria-hidden="true"></i> {' '} Shops </Link>
+ <Link to='/dashboard/MyProfile'> <i class="fa fa-user" aria-hidden="true"></i>{' '}  Profile</Link>
+ <Link to='/dashboard/posts'> <i class="fa fa-plus" aria-hidden="true"></i>{' '}  Add your ad</Link>
+ <Link to='/dashboard/main'> <i class="fa fa-cog" aria-hidden="true"></i> {' '}  Control Panel </Link>
+ <Link to='/membership/prices'> <i className="fa fa-rocket fa-1x"></i>{' '}  Membership</Link>
+
+ {i18next.language === 'ar' && <Link  onClick={()=>{i18next.changeLanguage('en')}}> 
+          <span className='hide-sm'>{t('lang')} </span>
+          {' '}<i className="fa fa-globe fa-1x"></i> 
+        </Link>}
+
+        {i18next.language === 'en' && <Link  onClick={()=>{i18next.changeLanguage('ar')}}> 
+          <span className='hide-sm'>{t('lang')} </span>
+          {' '}<i className="fa fa-globe fa-1x"></i> 
+        </Link>}
+
+ </center>
 </div>
 
 

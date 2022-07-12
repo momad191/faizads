@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 module.exports = async (email, subject,html) => {
 	try {
 		const transporter = nodemailer.createTransport({
-			pool: true,
+			// pool: true,
             host: "mail.privateemail.com",
             port: 465,
 			secure: true,

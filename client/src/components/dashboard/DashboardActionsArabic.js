@@ -32,7 +32,7 @@ const DashboardActionsArabic = () => {
 <ul className="Dash-nav"> 
 <div className="DashBoxTitle" > البدء بالإعلان عن خدماتك ومنتجاتك  </div>
 <center>
-  <li className="left"><Link to='/ar/dashboard/posts'>    منشوراتك  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
+  <li className="left"><Link to='/dashboard/posts'>    منشوراتك  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
  {/* <li className="left"><Link to='/questions'> <i className="fa fa-question-circle fa-2x"></i>  Questions </Link></li> */}
    
  <li className="left"><Link to='/dashboard/categories'>   التصنيفات الفرعية <i className="fa fa-cubes fa-2x"></i></Link></li>
@@ -63,12 +63,12 @@ const DashboardActionsArabic = () => {
 {/* ///////////////////////////////////Admin///////////////////////////////// */}
 {user.validity === "admin"&&(
 <Fragment>
-
+ 
 <center> 
 <ul className="Dash-nav"> 
 <div className="DashBoxTitle" > البدء بالإعلان عن خدماتك ومنتجاتك  </div>
 <center>
-  <li className="left"><Link to='/ar/dashboard/posts'>    منشوراتك  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
+  <li className="left"><Link to='/dashboard/posts'>    منشوراتك  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
  {/* <li className="left"><Link to='/questions'> <i className="fa fa-question-circle fa-2x"></i>  Questions </Link></li> */}
  
  <li className="left"><Link to='/dashboard/categories'>   التصنيفات الفرعية <i className="fa fa-cubes fa-2x"></i></Link></li>

@@ -107,7 +107,7 @@ ul.topnavEN {
   overflow: hidden;
   background-color: #002147;
   border-bottom: 4px solid #3498DB;
-  text-align: right;
+  text-align: left;
   color: #fff;
 }
 
@@ -186,11 +186,16 @@ ul.topnavEN li a.LogoutColor { background-color:#D70505;color:white;}
 @media screen and (max-width: 600px) {
   ul.topnav li.right, ul.topnav li.left,
   ul.topnav li {float: none; }
-  
   ul.topnav li a.active {display: none;}
-  
   ul.topnav  {width:100%;}
 }
+
+@media screen and (max-width: 600px) {
+	ul.topnavEN li.right, ul.topnavEN li.left,
+	ul.topnavEN li {float: none; }
+	ul.topnavEN li a.active {display: none;}
+	ul.topnavEN  {width:100%;}
+  }
 
 @media screen and (max-width: 1000px) { ul.topnav li a {display: none;}}
 @media screen and (max-width: 950px) { ul.topnav li a {display: none;}}
@@ -526,20 +531,35 @@ ul.topnavEN li a.LogoutColor { background-color:#D70505;color:white;}
 	padding-bottom:20px;
 	 width:80%;
 	 height:auto;
-	 float: right;
-	 margin-right: 5%;
+	 float: left;
+	 margin-left: 0%;
 	 
 }
 
-.mainword-section-right{
+.mainword-section-list-right{
 	 
 	 width:15%;
 	 height:auto;
 	 float: right;
 }
+.mainword-section-list-left{
+	 
+	width:15%;
+	height:auto;
+	float: left;
+	margin-left: 2.5%;
+ 
+}
 
 @media screen and (max-width: 800px) {
-	.mainword-section-right{
+	.mainword-section-list-right{
+		margin-left: 13%;
+		padding-bottom:20px;
+		 width:90%;
+		 height:auto;
+		 float: none;
+	}
+	.mainword-section-list-left{
 		margin-left: 13%;
 		padding-bottom:20px;
 		 width:90%;
@@ -2469,12 +2489,12 @@ display: inline-block;
  
  
 .sidenavnone {
-	height: 90%;
+	height: 100%;
 	width: 0px;
 	position: fixed;
 	z-index: 1;
 	top: 0;
-	right: 0;
+	right: 0; 
 	background-color: #fff;
 	overflow-x: scroll;
 	transition: 0.5s;
@@ -2485,7 +2505,7 @@ display: inline-block;
 
 
   .sidenavnoneEnglish {
-	height: 90%;
+	height: 100%;
 	width: 0px;
 	position: fixed;
 	z-index: 1;
@@ -2674,7 +2694,7 @@ height: 25px;
 }
 
 .sidenavEnglish {
- 
+    
 	height: 100%;
 	width: 250px;
 	position: fixed;
@@ -2685,8 +2705,8 @@ height: 25px;
 	overflow-x: scroll;
 	transition: 0.5s;
 	padding-top: 0px;
-	 border-top: 1px solid #FF5733;
-	 border-right: 2px solid #1c75b1;
+	border-top: 1px solid #FF5733;
+	border-right: 2px solid #1c75b1;
 	  
   }
 
@@ -2766,7 +2786,7 @@ height: 25px;
   .sidenav {padding-top: 0px;}
   .sidenav a {font-size: 18px;}
 
-  .sidenavEnglish {padding-top: 0px;}
+  .sidenavEnglish {padding-top: 0px; float: left;}
   .sidenavEnglish a {font-size: 18px;}
 }
 
@@ -2843,7 +2863,7 @@ height: 25px;
 .buttonNav{
 	display: none;
 	font-size:33px;
-	float:left;
+	float:right;
 	margin-right:1%; 
 	background-color:#1c75b1;
 	color:#fff;
@@ -2863,9 +2883,9 @@ height: 25px;
 
 }
 
-@media screen and (max-width: 600px) {.buttonNav{display: block; float: right;}
-
-.buttonNavEN{display: block; float: left; margin-left:0%; }
+@media screen and (max-width: 600px) {
+.buttonNav{display: block; float: right; margin-right:2%;}
+.buttonNavEN{display: block; float: left; margin-left:0%;} 
 }
 
 
@@ -4599,6 +4619,10 @@ background-color:#68686C;
 	color: #afe1fa;
   }
  
+
+
+
+
 
 
   .vertical-menu-home {

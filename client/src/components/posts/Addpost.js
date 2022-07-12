@@ -3189,7 +3189,15 @@ const optionSubBackImages = async e => {
    
  
         <center> 
-        <div  className="topadtitleinput" onClick={optionSubBackCountry}> your ad will be published in {user.country_code}   <i class="fa fa-globe" aria-hidden="true"> </i> </div>
+        <div  className="topadtitleinput" onClick={optionSubBackCountry}>
+          {i18next.language === 'ar'&&(
+           <>إعلانك سيتم نشره في {user.country_name}  </> 
+          )}
+           {i18next.language === 'en'&&(
+           <>your ad will be published in {user.country_name}  </> 
+          )}
+           
+             <i class="fa fa-globe" aria-hidden="true"> </i> </div>
         
         <center> <div  className="Formbutton" onClick={optionDetailsNext}> <i class="fa fa-arrow-down" aria-hidden="true"></i> {t('Addpost_next_step')}  </div> </center>
 
