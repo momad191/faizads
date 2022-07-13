@@ -218,7 +218,7 @@ router.post('/resetpassword',(req,res)=>{
                   to:user.email,
                   from:"noreply@faizads.com",
                   subject:" من موقع رحال لاستعادة كلمة المرور ",
-                  html:`
+                  text:`
                   <p>طلبت استعادة كلمة المرور</p>
                   <h5>اضغط هنا <a href="https://faizads.herokuapp.com/user/Newpassword/${user._id}">الرابط</a> لتغيير كلمة المرور</h5>
                   <p>Thank you </p>
@@ -238,43 +238,72 @@ router.post('/resetpassword',(req,res)=>{
  
   
 
-router.route('/new-password/:id').post((req, res) => {
+  router.post(
+    '/new-password/:id',
+    async (req, res) => {
+      // const errors = validationResult(req);
+      // if (!errors.isEmpty()) {
+      //   return res.status(400).json({ errors: errors.array() });
+      // }
+
   const newPassword = req.body.password
   const email = req.body.email
   // const sentToken = req.body.resetToken
   // User.findOne({resetToken:sentToken,expireToken:{$gt:Date.now()}})
   try {
 
-  User.findOne({email:email})
-  .then(user=>{ 
-      if(!user){
-          return res.status(422).json({error:"Try again session expired"})
-      }
-      bcrypt.hash(newPassword,12).then(hashedpassword=>{
-         user.password = hashedpassword
-         user.resetToken = undefined
-         user.expireToken = undefined
-         user.save().then((saveduser)=>{
-             res.json({message:"تم تحديث كلمة المرور بنجاح"})
-         })
-      })
-  }).catch(err=>{
-      console.log(err)
-  })
+   const user = await User.findOne({email:email});
+   
+   if (!user) {
+    return res
+      .status(400)
+      .json({ errors: [{ msg: 'Invalid Credentials' }] });
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(newPassword, salt);
+
+  user.save();
+  res.json(user);
+
+  const payload = {
+    user: {
+      id: user.id
+    }
+  };
+
+  jwt.sign(
+    payload,
+    config.get('jwtSecret'),
+    { expiresIn: 360000 },
+    (err, token) => {
+      if (err) throw err;
+      res.json({ token });
+    }
+  );
+
+      // bcrypt.hash(newPassword,12).then(hashedpassword=>{
+      //    user.password = hashedpassword
+      //    user.resetToken = undefined
+      //    user.expireToken = undefined
+      //    user.save().then((saveduser)=>{
+      //        res.json({message:"تم تحديث كلمة المرور بنجاح"})
+      //    })
+      // })
  
 
-  Reset.findOne({r_email:email}).sort({r_date:-1}).then(lastreset=>{ 
+  const lastreset = await Reset.findOne({r_email:email}).sort({r_date:-1});
     lastreset.r_status = "closed"
-    lastreset.save().then((saveduser)=>{
-           res.json({message:"تم تحديث كلمة المرور بنجاح"})
-       })
-  }) 
+    lastreset.save()
+    // res.json({message:"تم تحديث كلمة المرور بنجاح"})
+     
+ 
 
 
 
 }catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Error');
+  res.status(500).send('Server error');
 }
 
 })
@@ -446,7 +475,7 @@ router.post(
       const lastreset = await Reset.findOne({r_email: req.body.r_email}).sort({r_date:-1});
   
     
-      const html =
+      const text =
       `
       <html>
       <head>
@@ -463,7 +492,7 @@ router.post(
       </html>
       ` 
 
-    await sendEmail(lastreset.r_email, "من موقع اعلانات فائز || استعادة كلمة المرور", html);
+    await sendEmail(lastreset.r_email, "من موقع اعلانات فائز || استعادة كلمة المرور", text);
 
     } catch (err) {
       console.error(err.message);
@@ -511,7 +540,7 @@ router.post(
     //     <p>Thank you </p>
     //     `  
     // })
-    const html =
+    const text =
     `
     <html>
     <head>
@@ -527,8 +556,8 @@ router.post(
     </body>
     </html>
     ` 
-
-    await sendEmail(lastregister.r_email, "من موقع اعلانات فائز || اكمال عملية التسجيل", html);
+ 
+    await sendEmail(lastregister.r_email, "من موقع اعلانات فائز || اكمال عملية التسجيل", text);
     
   
 
@@ -578,7 +607,7 @@ router.post(
     //     <p>Thank you </p>
     //     `  
     // })
-    const html =
+    const text =
     ` 
     <html>
     <head>
@@ -594,7 +623,7 @@ router.post(
     </body>
     </html>
     ` 
-    await sendEmail(lastregister.r_email, "من موقع اعلانات فائز || اكمال عملية التسجيل",html);
+    await sendEmail(lastregister.r_email, "من موقع اعلانات فائز || اكمال عملية التسجيل",text);
     
     } catch (err) {
       console.error(err.message);

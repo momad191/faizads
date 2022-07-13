@@ -5,9 +5,11 @@ import { addReport } from '../../actions/report';
 import { setAlert } from '../../actions/alert';
 import Alert from '../layout/Alert';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next'; 
        
 const ReportForm = ({setAlert,addReport,r_username}) => {
 
+  const [t, i18next] = useTranslation()
   const [ShowButton,setShowButton]= useState('showButton11')
   
    
@@ -69,7 +71,12 @@ const ReportForm = ({setAlert,addReport,r_username}) => {
                 <form className="" onSubmit={e => onSubmit(e)}>
                 <div className={ShowButton}> 
 
-                <h1 className="report-title">  ابلاغ عن اعلان مخالف  <i class="fa fa-flag" aria-hidden="true"></i> </h1>
+                <h1 className="report-title"> 
+                <i class="fa fa-flag" aria-hidden="true"></i>{''}
+                {i18next.language === 'ar' && <> ابلاغ عن اعلان مخالف</>}
+                {i18next.language === 'en' && <> Report a contrary ad</>}
+                 
+                 </h1>
                 {/* <div className=''>
                  <span className="login-text">ابلاغ عن اعلان مخالف  </span> 
                 <input className="Forminput"
@@ -84,14 +91,34 @@ const ReportForm = ({setAlert,addReport,r_username}) => {
     
                 <div className=''>
                 
+                {i18next.language === 'ar' &&(
+                  <Fragment>
                 <textarea className="inputreport"
-              
                  type="text" 
                  placeholder="اذكر نوع المخالفة"
                  name="r_message" 
                  value={r_message} 
                  onChange={e => onChange(e)}
                  />
+                  </Fragment>
+
+                )}
+
+
+
+            {i18next.language === 'en' &&(
+                  <Fragment>
+                <textarea className="inputreport"
+                 type="text" 
+                 placeholder="Indicate the type of violation"
+                 name="r_message" 
+                 value={r_message} 
+                 onChange={e => onChange(e)}
+                 />
+                  </Fragment>
+
+                )}
+
                  </div> 
  
                  
@@ -101,7 +128,10 @@ const ReportForm = ({setAlert,addReport,r_username}) => {
              
              <button className="Formbutton" onClick={hideButton}   type="submit" name="" >
              <i class="fa fa-flag" aria-hidden="true"></i>{'  '}
-               إبلاغ </button>
+             {i18next.language === 'ar' && <> أرسل البلاغ</>}
+             {i18next.language === 'en' && <> Send Report</>}
+               
+               </button>
             
             
              </center>

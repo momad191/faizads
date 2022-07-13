@@ -57,7 +57,7 @@ export default class MyProfile extends Component {
       city:'',
       state:'',
       postal:'',
-      // validity:'',
+       validity:'',
       shopstatus:'',
       registration_date:'',
       membership_class: '',
@@ -92,7 +92,7 @@ export default class MyProfile extends Component {
           city: response.data.city,
           state: response.data.state,
           postal: response.data.postal,
-          // validity: response.data.validity,
+          validity: response.data.validity,
             
 
         })   
@@ -339,7 +339,8 @@ export default class MyProfile extends Component {
                  >    
                  </input>
 
-
+{this.state.validity === 'super' &&(
+<Fragment>
                  <span className='details-title'>الدولة </span>   
                  {/* <input className="login-input"
                  type="text" 
@@ -609,7 +610,8 @@ export default class MyProfile extends Component {
     <option value="ZM">Zambia</option>
     <option value="ZW">Zimbabwe</option>
 </select>
-
+</Fragment>
+)}
 
                  <span className='details-title'>  رقم الهاتف </span>
                 <input className="login-input"
@@ -810,7 +812,8 @@ export default class MyProfile extends Component {
                  >    
                  </input>
 
-
+{this.state.validity === 'super' &&(
+<Fragment>
                  <span className='details-title'>Country</span>
                  {/* <input className="login-input"
                  type="text" 
@@ -820,6 +823,9 @@ export default class MyProfile extends Component {
                  onChange={this.onChangecountry_code}
                  >    
                  </input> */}
+
+
+
 
      <select
       className="login-input"
@@ -1081,7 +1087,8 @@ export default class MyProfile extends Component {
     <option value="ZM">Zambia</option>
     <option value="ZW">Zimbabwe</option>
 </select>
-
+</Fragment>
+)} 
 
                  <span className='details-title'> Phone Number </span>
                 <input className="login-input"

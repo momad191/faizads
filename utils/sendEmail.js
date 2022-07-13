@@ -1,8 +1,8 @@
 const nodemailer = require("nodemailer");
 
-module.exports = async (email, subject,html) => {
+module.exports = async (email, subject,text) => {
 	try {
-		const transporter = nodemailer.createTransport({
+		const transporter = nodemailer.createTransport({ 
 			// pool: true,
             host: "mail.privateemail.com",
             port: 465,
@@ -17,8 +17,8 @@ module.exports = async (email, subject,html) => {
 			from:"support@faizads.com",
 			to: email,
 			subject: subject,
-			// text: 'hi',
-			html:html
+			text: text,
+			// html:html
 		});
 		// console.log("email sent successfully");
 	} catch (error) {

@@ -14,7 +14,7 @@ import Alert from '../layout/Alert';
 import { setAlert } from '../../actions/alert';
 import ConfirmButton from "./ConfirmButton";
 
-import noimg from './noimg.jpg';
+import noimg from './noimg.png';
  
 
 import Moment from 'react-moment';
@@ -452,7 +452,7 @@ const formatter = new Intl.NumberFormat('en',{
  
   <Link to={`/posts/${post._id}`}  onClick={() => addClick(post._id)}  target="_blank"> <img src={post.image} /> </Link>
   ):(
-   <Link  to={`/posts/${post._id}`} onClick={() => addClick(post._id)}  target="_blank"> <img src={shopImg.shop_img} /> </Link>
+   <Link  to={`/posts/${post._id}`} onClick={() => addClick(post._id)}  target="_blank"> <img src={noimg} /> </Link>
   )}     
   
  

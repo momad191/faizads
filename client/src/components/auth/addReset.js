@@ -2,7 +2,7 @@ import React, { useState,useEffect ,Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addReset } from '../../actions/auth'; 
+import { addReset } from '../../actions/auth';  
 import { setAlert } from '../../actions/alert'; 
 import axios from 'axios';
   
@@ -38,7 +38,7 @@ const AddReset = ({setAlert,addReset,match}) => {
       const onSubmit = async e => {
         e.preventDefault();
         addReset({ r_email});
-        window.location = '/user/emailSendingComfirmation/';
+        window.location = '/ar/user/emailSendingComfirmation/';
         
       };
 
@@ -46,7 +46,7 @@ const AddReset = ({setAlert,addReset,match}) => {
       const onSubmit2 = async e => {
         e.preventDefault();
         addReset({ r_email});
-        window.location = '/user/emailSendingComfirmation/';
+        window.location = '/en/user/emailSendingComfirmation/';
         
       };
 

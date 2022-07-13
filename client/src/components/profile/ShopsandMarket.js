@@ -20,7 +20,7 @@ import Navbar from '../layout/Navbar';
 import NavbarEnglish from '../layout/NavbarEnglish';
 import { useTranslation } from 'react-i18next';
 
-import noimg from './noimg.jpg';
+import noimg from './noimg.png';
  
 
 import Moment from 'react-moment';

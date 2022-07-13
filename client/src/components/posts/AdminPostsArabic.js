@@ -404,7 +404,7 @@ const AdminPostsArabic = ({loading ,match, addLike,auth,five_stars,
    
  {/* {!auth.loading && post.user === auth.user._id && ( */}
 <Fragment> 
-<Link to={`/ar/dashboard/posts/editPost/${post._id}`}  style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+<Link to={`/dashboard/posts/editPost/${post._id}`}  style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
 
 {/* <Link to={`/ar/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link>  */}
 <EditActivationFormEx postId={post._id} validity={post.activation} />
@@ -765,8 +765,8 @@ const AdminPostsArabic = ({loading ,match, addLike,auth,five_stars,
   
   <Link to={`/ar/dashboard/posts/editPost/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
   
-   <Link to={`/ar/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link> 
-
+   {/* <Link to={`/ar/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link>  */}
+   <EditActivationFormEx postId={post._id} validity={post.activation} />
    
               <ConfirmButton
               dialog={[" ", "هل أنت متأكد ؟", "مرة أخرى للحذف"]}
@@ -905,14 +905,14 @@ const AdminPostsArabic = ({loading ,match, addLike,auth,five_stars,
   
     <button className="Action-button-status">   نشر بتاريخ <Moment format='YYYY/MM/DD'>{post.date}</Moment>  <i className="fa fa-calendar fa-1x"></i></button>
   
-
+ 
    {/* {!auth.loading && post.user === auth.user._id && ( */}
   <Fragment> 
   
   <Link to={`/ar/dashboard/posts/editPost/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
 
-  <Link to={`/ar/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link> 
-
+  {/* <Link to={`/ar/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link>  */}
+  <EditActivationFormEx postId={post._id} validity={post.activation} />
    
               <ConfirmButton
               dialog={[" ", "هل أنت متأكد ؟", "مرة أخرى للحذف"]}

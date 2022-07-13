@@ -765,7 +765,8 @@ const AdminPostsEnglish = ({loading ,match, addLike,auth,five_stars,
   
   <Link to={`/ar/dashboard/posts/editPost/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
   
-   <Link to={`/ar/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+   {/* <Link to={`/ar/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link>  */}
+   <EditActivationFormEx postId={post._id} validity={post.activation} />
 
    
               <ConfirmButton
@@ -911,7 +912,8 @@ const AdminPostsEnglish = ({loading ,match, addLike,auth,five_stars,
   
   <Link to={`/ar/dashboard/posts/editPost/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تعديل النشر <i className="fa fa-edit fa-1x"></i></button>   </Link> 
 
-  <Link to={`/ar/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link> 
+  {/* <Link to={`/ar/dashboard/posts/editPostActivate/${post._id}`}   style={{textDecoration:'none'}} > <button  className="Action-button-status" >  تفعيل الإعلان <i className="fa fa-edit fa-1x"></i></button>   </Link>  */}
+  <EditActivationFormEx postId={post._id} validity={post.activation} />
 
    
               <ConfirmButton

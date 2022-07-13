@@ -768,22 +768,29 @@ const PostItem = ({
       
 
  
-      
+      {image &&(
+          <Fragment>
+
+
        <div style={{display:'flex',marginTop:'-40px', alignItems: 'center'}}>
        <center>
-       {image &&(<button className='forPic1' onClick={optionselectpic0}> . </button> )}
-       {pic1 &&(<button className='forPic1' onClick={optionselectpic1}> . </button>)}
-       {pic2 &&(<button className='forPic1' onClick={optionselectpic2}> . </button>)}
-       {pic3 &&(<button className='forPic1' onClick={optionselectpic3}> . </button>)}
-       {pic4 &&(<button className='forPic1' onClick={optionselectpic4}> . </button>)}
-       {pic5 &&(<button className='forPic1' onClick={optionselectpic5}> . </button>)}
-       {pic6 &&(<button className='forPic1' onClick={optionselectpic6}> . </button>)}
-       {pic7 &&(<button className='forPic1' onClick={optionselectpic7}> . </button>)}
-       {pic8 &&(<button className='forPic1' onClick={optionselectpic8}> . </button>)}
-       {pic9 &&(<button className='forPic1' onClick={optionselectpic9}> . </button>)}
-       {pic10 &&(<button className='forPic1' onClick={optionselectpic10}>.</button>)}
+       {image &&(<button className='forPic1' onClick={optionselectpic0}></button> )}
+       {pic1 &&(<button className='forPic1' onClick={optionselectpic1}></button>)}
+       {pic2 &&(<button className='forPic1' onClick={optionselectpic2}></button>)}
+       {pic3 &&(<button className='forPic1' onClick={optionselectpic3}></button>)}
+       {pic4 &&(<button className='forPic1' onClick={optionselectpic4}></button>)}
+       {pic5 &&(<button className='forPic1' onClick={optionselectpic5}></button>)}
+       {pic6 &&(<button className='forPic1' onClick={optionselectpic6}></button>)}
+       {pic7 &&(<button className='forPic1' onClick={optionselectpic7}></button>)}
+       {pic8 &&(<button className='forPic1' onClick={optionselectpic8}></button>)}
+       {pic9 &&(<button className='forPic1' onClick={optionselectpic9}></button>)}
+       {pic10 &&(<button className='forPic1' onClick={optionselectpic10}></button>)}
        </center>
+        
      </div>
+     </Fragment>
+      )}
+     
     
 
        </div>
@@ -791,11 +798,11 @@ const PostItem = ({
 
        <div className="pic-slider-container"> 
        {shop.shop_name ?(
-        <Link to={`/shops/${shop.username}`}> 
+        <Link to={`/shops/${user.username}`}> 
        <button className="pic-slider-smal"> {shop.shop_name} <i class="fa fa-bullhorn fa-1x" aria-hidden="true"></i></button>
        </Link>
        ):(
-       <Link to={`/shops/${shop.username}`}> 
+       <Link to={`/shops/${user.username}`}> 
       <button className="pic-slider-smal"> متجر المعلن <i class="fa fa-bullhorn fa-1x" aria-hidden="true"></i></button>
       </Link>
        )}
@@ -819,14 +826,23 @@ const PostItem = ({
  
 
        <div style={{display:'flex',border:'1px solid #add8e6'}}> 
-       <button className="post-contact-button" onClick={optionContact1}> <i class="fa fa-mobile" aria-hidden="true"></i> <span> {t('postItems_mobile')} </span>  </button>
+       {/* <button className="post-contact-button" onClick={optionContact1}> <i class="fa fa-mobile" aria-hidden="true"></i> <span> {t('postItems_mobile')} </span>  </button>
        <button className="post-contact-button" onClick={optionContact2}> <i class="fa fa-phone" aria-hidden="true"></i> <span> {t('postItems_tel')}</span>  </button>
        <button className="post-contact-button" onClick={optionContact3}> <i class="fa fa-whatsapp" aria-hidden="true"></i> <span> {t('postItems_whatsapp')} </span> </button>
        <button className="post-contact-button" onClick={optionContact4}> <i class="fa fa-envelope" aria-hidden="true"></i> <span> {t('postItems_msg')} </span>  </button>
        <button className="post-contact-button" onClick={optionContact5}> <i class="fa fa-globe" aria-hidden="true"></i> <span> {t('postItems_website')} </span>  </button>
-       <button className="post-report-button"  onClick={optionContact6}> <i class="fa fa-flag" aria-hidden="true"></i> <span> {t('postItems_report')} </span>  </button>
-       </div>
+       <button className="post-report-button"  onClick={optionContact6}> <i class="fa fa-flag" aria-hidden="true"></i> <span> {t('postItems_report')} </span>  </button> */}
+      
+      
+       <button className="post-contact-button" onClick={optionContact1}> <i class="fa fa-mobile" aria-hidden="true"></i> <span></span></button>
+       <button className="post-contact-button" onClick={optionContact2}> <i class="fa fa-phone" aria-hidden="true"></i> <span></span></button>
+       <button className="post-contact-button" onClick={optionContact3}> <i class="fa fa-whatsapp" aria-hidden="true"></i> <span></span></button>
+       <button className="post-contact-button" onClick={optionContact4}> <i class="fa fa-envelope" aria-hidden="true"></i> <span></span> </button>
+       <button className="post-contact-button" onClick={optionContact5}> <i class="fa fa-globe" aria-hidden="true"></i> <span></span></button>
+       <button className="post-report-button"  onClick={optionContact6}> <i class="fa fa-flag" aria-hidden="true"></i> <span></span></button>
 
+       </div>
+ 
        <div className={optionContactphone1}> 
        <a className="post-contact-show" href={`tel:${shop.shop_phone1}`}> 
        <i class="fa fa-mobile" aria-hidden="true"></i>  {shop.shop_phone1} 
@@ -855,7 +871,7 @@ const PostItem = ({
 {isAuthenticated ?(
         <Fragment>
         <div className="post-contact-show" >    
-         <MessageForm toUser={shop.username}   />
+         <MessageForm toUser={user.username}   />
         </div>
          </Fragment>
         ):(

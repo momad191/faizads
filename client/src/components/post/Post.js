@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect ,useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';  
+import { Link } from 'react-router-dom';   
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import PostItem from '../posts/PostItem';

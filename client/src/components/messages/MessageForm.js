@@ -5,9 +5,10 @@ import { addMessage } from '../../actions/message';
 import { setAlert } from '../../actions/alert';
 import Alert from '../layout/Alert';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
        
 const MessageForm = ({setAlert,addMessage,toUser}) => {
-
+  const [t, i18next] = useTranslation()
   const [ShowButton,setShowButton]= useState('showButton11')
  
      const [formData, setFormData] = useState({
@@ -64,12 +65,16 @@ const MessageForm = ({setAlert,addMessage,toUser}) => {
                 <form className="" onSubmit={e => onSubmit(e)}>
                 <div className={ShowButton}> 
 
-                <h1 className="report-title"> ({toUser}) ارسال رسالة الى   <i class="fa fa-envelope" aria-hidden="true"></i> </h1>
-              
+                <h1 className="report-title">
+                  <i class="fa fa-envelope" aria-hidden="true"></i> 
+                  {i18next.language === 'ar'&& <> ({toUser})  ارسال رسالة الى</> }
+                  {i18next.language === 'en'&& <> Send a message to  ({toUser})</> }
+                  </h1>
  
     
                 <div className=''>
-                
+                {i18next.language === 'ar'&&(
+                  <Fragment>
                 <textarea className="inputreport"
                  type="text" 
                  placeholder="اكتب رسالتك هنا"
@@ -77,16 +82,39 @@ const MessageForm = ({setAlert,addMessage,toUser}) => {
                  value={text} 
                  onChange={e => onChange(e)}
                  />
+                  </Fragment>
+                )}
+
+
+
+                {i18next.language === 'en'&&(
+                 <Fragment>
+                <textarea className="inputreport"
+                 type="text" 
+                 placeholder="Write your message here"
+                 name="text" 
+                 value={text} 
+                 onChange={e => onChange(e)}
+                 />
+                  </Fragment>
+                )}
+
+
                  </div> 
  
                  
               <center>
               
- 
+   
              
              <button className="Formbutton" onClick={hideButton}   type="submit" name="" >
              <i class="fa fa-paper-plane" aria-hidden="true"></i> {'  '}
-               إرسال </button>
+               
+               {i18next.language === 'ar' && <>أرسل</>}
+               {i18next.language === 'en' && <>Send</>} 
+ 
+               
+               </button>
              
             
              </center>

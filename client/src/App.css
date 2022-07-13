@@ -2943,10 +2943,11 @@ height: 25px;
 	width:100%; 
 	height:auto;
 	border-radius: 0px 0px 0px 0px;
+	
 }
 
 .detail-no-picture{
-	width:auto;  
+	width:100%;  
 	height:326px;
 	border-radius: 1px solid #000;
 	margin-bottom: 0px;
@@ -5752,10 +5753,7 @@ color: #002147;
 }
 
  
-.CommentbuttonENglish:hover{
-	background-color:#3ab11c;
-	color: #fff;
-}
+
 .CommentbuttonENglish{
 	background-color:#00a800;
 	border-top-left-radius:15px;
@@ -5767,14 +5765,18 @@ color: #002147;
 	direction:rtl;
 	margin-bottom:0px;
 	padding: 0px 0px;
-    font-size: 19px;
+    font-size: 17px;
 	font-weight:bold;
 	cursor:pointer;
 	float:left;
 	border-right: 2px solid #1c75b1;
 	border-top: 2px solid #1c75b1;
 	border-bottom: 2px solid #1c75b1;
-		
+		 
+}
+.CommentbuttonENglish:hover{
+	background-color:#3ab11c;
+	color: #fff;
 }
 
  .forPic1{
@@ -5785,14 +5787,32 @@ color: #002147;
 	 cursor: pointer;
 	 border: none;
 	 margin-left: 5px;
+	 background-color: #1f75fe;
+	 height: 25px;
+	 width: 25px;
  }
  .forPic1:hover{
 	background-color: #111;
 	border: 1px solid #1c75b1;
 	margin-left: 5px;
 	align-items: center;
+	height: 24px;
+	width: 24px;
 }
 
+.forPic2{
+	align-items: center;
+	background-color: #111;
+	border: 1px solid #1c75b1;
+	border-radius: 15px;
+	cursor: pointer;
+	border: none;
+	margin-left: 5px;
+	background-color: #1f75fe;
+	height: 25px;
+	width: 25px;
+	float: right;
+}
 
 
 

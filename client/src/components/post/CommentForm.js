@@ -62,7 +62,7 @@ const CommentForm = ({ postId, addComment }) => {
           value={text}
           onChange={e => setText(e.target.value)}
           required
-        />
+        /> 
          
     
 
