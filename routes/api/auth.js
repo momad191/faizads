@@ -477,10 +477,12 @@ router.post(
     
       const text =
       `
+      :::::::::::::::::::::::::::::::::موقع إعلانات فائز يرحب بكم::::::::::::::::::::::::::::::::
       طلبت استعادة كلمة المرور 
       لمتابعة العملية أضغط على الرابط التالي
       https://faizads.herokuapp.com/user/Newpassword/${lastreset._id}
-      Thank you 
+      شكرا لكم لزيارة موقع إعلانات فائز
+       
       `
 
     await sendEmail(lastreset.r_email, "من موقع اعلانات فائز || استعادة كلمة المرور", text);
@@ -533,10 +535,12 @@ router.post(
     // })
     const text =
     `
+    :::::::::::::::::::::::::::::::::موقع إعلانات فائز يرحب بكم::::::::::::::::::::::::::::::::
     اكمل التسجيل  
     لمتابعة عملية التسجيل اضغط على الرابط التالي 
     https://faizads.herokuapp.com/user/register/${lastregister._id}
-    Thank you
+    شكرا لكم لزيارة موقع إعلانات فائز
+
     ` 
  
     await sendEmail(lastregister.r_email, "من موقع اعلانات فائز || اكمال عملية التسجيل", text);
@@ -591,10 +595,11 @@ router.post(
     // })
     const text =
     `
+    :::::::::::::::::::::::::::::::::موقع إعلانات فائز يرحب بكم::::::::::::::::::::::::::::::::
     اكمل التسجيل  
     لمتابعة عملية التسجيل اضغط على الرابط التالي 
     https://faizads.herokuapp.com/user/register/${lastregister._id}
-    Thank you
+    شكرا لكم لزيارة موقع إعلانات فائز
     ` 
     await sendEmail(lastregister.r_email, "من موقع اعلانات فائز || اكمال عملية التسجيل",text);
     
