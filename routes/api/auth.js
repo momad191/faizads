@@ -477,20 +477,11 @@ router.post(
     
       const text =
       `
-      <html>
-      <head>
-      <meta charset="utf-8">
-      <style amp4email-boilerplate>body{visibility:hidden}</style>
-      <script async src="https://cdn.ampproject.org/v0.js"></script>
-      <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
-    </head> 
-    <body>
-      <p> طلبت استعادة كلمة المرور  </p>
-      <h5>اضغط هنا <a href="https://faizads.herokuapp.com/user/Newpassword/${lastreset._id}"> الرابط</a> لمتابعة عملية التسجيل    </h5>
-      <p>Thank you </p>
-      </body>
-      </html>
-      ` 
+      طلبت استعادة كلمة المرور 
+      لمتابعة العملية أضغط على الرابط التالي
+      https://faizads.herokuapp.com/user/Newpassword/${lastreset._id}
+      Thank you 
+      `
 
     await sendEmail(lastreset.r_email, "من موقع اعلانات فائز || استعادة كلمة المرور", text);
 
@@ -542,19 +533,10 @@ router.post(
     // })
     const text =
     `
-    <html>
-    <head>
-    <meta charset="utf-8">
-    <style amp4email-boilerplate>body{visibility:hidden}</style>
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
-  </head> 
-  <body>
-    <p> اكمل التسجيل  </p>
-    <h5>اضغط هنا <a href="https://faizads.herokuapp.com/user/register/${lastregister._id}">الرابط</a> لمتابعة عملية التسجيل    </h5>
-    <p>Thank you </p>
-    </body>
-    </html>
+    اكمل التسجيل  
+    لمتابعة عملية التسجيل اضغط على الرابط التالي 
+    https://faizads.herokuapp.com/user/register/${lastregister._id}
+    Thank you
     ` 
  
     await sendEmail(lastregister.r_email, "من موقع اعلانات فائز || اكمال عملية التسجيل", text);
@@ -608,20 +590,11 @@ router.post(
     //     `  
     // })
     const text =
-    ` 
-    <html>
-    <head>
-    <meta charset="utf-8">
-    <style amp4email-boilerplate>body{visibility:hidden}</style>
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
-  </head>
-  <body>
-    <p color=#000'> اكمل التسجيل  </p>
-    <h5>اضغط هنا <a href="https://faizads.herokuapp.com/user/register/${lastregister._id}">الرابط</a> لمتابعة عملية التسجيل    </h5>
-    <p>Thank you </p>
-    </body>
-    </html>
+    `
+    اكمل التسجيل  
+    لمتابعة عملية التسجيل اضغط على الرابط التالي 
+    https://faizads.herokuapp.com/user/register/${lastregister._id}
+    Thank you
     ` 
     await sendEmail(lastregister.r_email, "من موقع اعلانات فائز || اكمال عملية التسجيل",text);
     

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import moment from 'moment';
 import Moment from 'react-moment';
-import { register } from '../../actions/auth';
+import { register } from '../../actions/auth'; 
 import { addvisual } from '../../actions/auth';
        
 import Navbar from '../../components/layout/Navbar';
@@ -115,6 +115,7 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
      else{
        register({ first_name,last_name,username, email, password,validity,country_name,country_code, city, state, postal, latitude, longitude, IPv4, shopname, shopstatus, ref, membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date,Visual_Code });
        addvisual({Visual_Code});
+       
       //  window.location= `/user/emailSendingComfirmation`
  
     }

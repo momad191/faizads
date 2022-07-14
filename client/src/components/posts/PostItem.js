@@ -769,9 +769,7 @@ const PostItem = ({
 
  
       {image &&(
-          <Fragment>
-
-
+       <Fragment>
        <div style={{display:'flex',marginTop:'-40px', alignItems: 'center'}}>
        <center>
        {image &&(<button className='forPic1' onClick={optionselectpic0}></button> )}

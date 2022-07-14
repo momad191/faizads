@@ -59,10 +59,9 @@ const body = JSON.stringify({ first_name,last_name,username, email, password, va
       payload: res.data
     });
 
-      
- 
     dispatch(loadUser());
-    // window.location= `/dashboard/create-shop`
+    setAlert('Account created successfully');
+     window.location= `/dashboard/main`
   } catch (err) {
     const errors = err.response.data.errors;
 

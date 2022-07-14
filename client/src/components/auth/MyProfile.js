@@ -811,7 +811,7 @@ export default class MyProfile extends Component {
                 // onChange={this.onChangeemail}
                  >    
                  </input>
-
+ 
 {this.state.validity === 'super' &&(
 <Fragment>
                  <span className='details-title'>Country</span>
