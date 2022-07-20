@@ -15,7 +15,7 @@ const ValidiryForm = ({editValidity,userId}) => {
  
   // const validity = 'normal';
   
-  
+   
     const [formData, setFormData] = useState({
         validity: '',
         userId:''

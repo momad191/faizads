@@ -38,15 +38,15 @@ const AddReset = ({setAlert,addReset,match}) => {
       const onSubmit = async e => {
         e.preventDefault();
         addReset({ r_email});
-        window.location = '/ar/user/emailSendingComfirmation/';
+        window.location = '/user/emailSendingComfirmation/';
         
       };
 
-
+ 
       const onSubmit2 = async e => {
         e.preventDefault();
         addReset({ r_email});
-        window.location = '/en/user/emailSendingComfirmation/';
+        window.location = '/user/emailSendingComfirmation/';
         
       };
 

@@ -602,11 +602,11 @@ const formatter = new Intl.NumberFormat('en',{
   <div className='section-list'> 
  
 
-  <Link onClick={() => shopClick(post.shop._id)} to={`/shops/${post.shop.username}`} target="_blank"> 
+  {/* <Link onClick={() => shopClick(post.shop._id)} to={`/shops/${post.shop.username}`} target="_blank"> 
   <button className="button-in-list-home-big">
   <i class="fa fa-home fa-1x" aria-hidden="true"></i>   
   </button>
-  </Link> 
+  </Link>  */}
 
 
   <Link  onClick={() => addClick(post._id)} to={`/main/${post.country_code}/${post.city_code}/${post.market_code}`} target="_blank" style={{textDecoration:'none'}} >   <button className="button-in-list-home-small" > 

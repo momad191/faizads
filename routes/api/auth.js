@@ -220,11 +220,11 @@ router.post('/resetpassword',(req,res)=>{
                   subject:" من موقع رحال لاستعادة كلمة المرور ",
                   text:`
                   <p>طلبت استعادة كلمة المرور</p>
-                  <h5>اضغط هنا <a href="https://faizads.herokuapp.com/user/Newpassword/${user._id}">الرابط</a> لتغيير كلمة المرور</h5>
+                  <h5>اضغط هنا <a href="https://faizads.com/user/Newpassword/${user._id}">الرابط</a> لتغيير كلمة المرور</h5>
                   <p>Thank you </p>
                   ` 
               })
-
+ 
 
               res.json({message:"check your email"})
           })
@@ -236,8 +236,7 @@ router.post('/resetpassword',(req,res)=>{
  
  
  
-  
-
+  ////////////////////////////////تغيير الباسورد في حال نسيت كلمة السر/////////////////////////////
   router.post(
     '/new-password/:id',
     async (req, res) => {
@@ -386,6 +385,47 @@ router.post('/editValidity/:id', async (req, res) => {
 });
 //************************************************************************ */
 
+
+ 
+//**************************edit username********************************************** */
+router.post('/edit-username/:id',auth, async (req, res) => { 
+  const {username, password} = req.body;
+
+  
+  try { 
+
+           //see if username  exists
+           let usernameCheck = await User.findOne({ username });
+           if (usernameCheck) {
+             return res
+               .status(400)
+               .json({ errors: [{ msg: 'The username you chose already exists...try another' }] });
+           }
+
+    const pp = await User.findById(req.params.id);
+    pp.username = req.body.username; 
+
+
+
+    const isMatch = await bcrypt.compare(password, pp.password);
+    if (!isMatch) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'Wrong password' }] });
+    }
+
+ 
+
+    await pp.save();
+    return res.json('username updated successfully');
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+//**************************end edit username********************************************** */
+
   
 router.post('/update/:id',auth, async (req, res) => {
   try {
@@ -480,7 +520,7 @@ router.post(
       :::::::::::::::::::::::::::::::::موقع إعلانات فائز يرحب بكم::::::::::::::::::::::::::::::::
       طلبت استعادة كلمة المرور 
       لمتابعة العملية أضغط على الرابط التالي
-      https://faizads.herokuapp.com/user/Newpassword/${lastreset._id}
+      https://faizads.com/user/Newpassword/${lastreset._id}
       شكرا لكم لزيارة موقع إعلانات فائز
        
       `
@@ -538,7 +578,7 @@ router.post(
     :::::::::::::::::::::::::::::::::موقع إعلانات فائز يرحب بكم::::::::::::::::::::::::::::::::
     اكمل التسجيل  
     لمتابعة عملية التسجيل اضغط على الرابط التالي 
-    https://faizads.herokuapp.com/user/register/${lastregister._id}
+    https://faizads.com/user/register/${lastregister._id}
     شكرا لكم لزيارة موقع إعلانات فائز
 
     ` 
@@ -598,7 +638,7 @@ router.post(
     :::::::::::::::::::::::::::::::::موقع إعلانات فائز يرحب بكم::::::::::::::::::::::::::::::::
     اكمل التسجيل  
     لمتابعة عملية التسجيل اضغط على الرابط التالي 
-    https://faizads.herokuapp.com/user/register/${lastregister._id}
+    https://faizads.com/user/register/${lastregister._id}
     شكرا لكم لزيارة موقع إعلانات فائز
     ` 
     await sendEmail(lastregister.r_email, "من موقع اعلانات فائز || اكمال عملية التسجيل",text);

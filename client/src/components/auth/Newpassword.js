@@ -13,7 +13,7 @@ import i18next from 'i18next';
 export default class Editwebinars extends Component {
   constructor(props) {
     super(props);
-       
+        
 
     //this.onChangeL_Img = this.onChangeL_Img.bind(this);
    // this.onChangename = this.onChangename.bind(this);
@@ -100,7 +100,7 @@ export default class Editwebinars extends Component {
       password: this.state.password,
       // resetToken: this.state.resetToken
     }
- 
+  
     // console.log(user);
  
     axios.post('/api/auth/new-password/'+this.props.match.params.id, user)

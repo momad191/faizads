@@ -393,11 +393,11 @@ const Dashboard = ({
 
 <table>
   <tr>
-  
+   
    <th>       <i class="fa fa-link fa-1x" aria-hidden="true"></i>   {'   '}
        {user.username ?(<>
-       <a href={`https://faizads.herokuapp.com/user/createAccount/${user.username}`}> 
-      {`https://faizads.herokuapp.com/user/createAccount/${user.username}`}
+       <a href={`https://faizads.com/user/createAccount/${user.username}`}> 
+      {`https://faizads.com/user/createAccount/${user.username}`}
          </a> </> ):(<>loading ...</> )}
  
          {'   '}

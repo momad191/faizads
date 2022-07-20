@@ -2,10 +2,10 @@ import React, { useState,useEffect ,Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addRegister } from '../../actions/auth';   
+import { addRegister } from '../../actions/auth';    
 import { setAlert } from '../../actions/alert';
 import Alert from '../layout/Alert';
-import axios from 'axios';
+import axios from 'axios'; 
       
 import Navbar from '../../components/layout/Navbar';
 import NavbarEnglish from '../../components/layout/NavbarEnglish';
@@ -14,11 +14,11 @@ import { useTranslation } from 'react-i18next';
 const AddRegister = ({setAlert,addRegister,match}) => {
   const [t, i18next] = useTranslation()
 
-  const [alertEnglish, setAlertEnglish] = useState('')
-
+  const [alertArabic, setAlertArabic] = useState('no')
+  const [alertEnglish, setAlertEnglish] = useState('no')
   const [showalertI,setshowalertI]= useState('no')
-
-
+  const [sendSuccessfully,setsendSuccessfully]= useState('no')
+  const [sendSuccessfullyEnglish,setsendSuccessfullyEnglish]= useState('no')
  
 //   const [markets11,setMarkets11]= useState([])
 //     const [image, setImage] = useState('')
@@ -48,29 +48,38 @@ const AddRegister = ({setAlert,addRegister,match}) => {
       const onSubmit = async e => {
         e.preventDefault();
         if (r_email === '') { 
-          setAlert('البريد الإلكتروني مطلوب');
-          setAlertEnglish('Email is required');
+          setAlertArabic('البريد الإلكتروني مطلوب');
           setshowalertI('yes')
         } else{
         addRegister({ r_email});
-        window.location = '/user/emailSendingRegistration/';
+        // window.location = '/user/emailSendingRegistration/';
+        setsendSuccessfully(' لقد تم إرسال رسالة على عنوان  بريدك الالكتروني تحتوي على الخطوة الثانية والأخيرة لإتمام عملية إنشاء حسابك. نرجو منك تفقد صندوق بريدك الإلكتروني ')
         }
-      }; 
+      };  
  
 
       const onSubmit2 = async e => {
         e.preventDefault();
         if (r_email === '') { 
-          setAlert('Email is required');
+          setAlertEnglish('Email is required');
           setshowalertI('yes')
         } else{
         addRegister({ r_email});
-        window.location = '/user/emailSendingRegistration/';
+        // window.location = '/user/emailSendingRegistration/';
+        setsendSuccessfullyEnglish('A message has been sent to your email address containing the second and final step to complete the process of creating your account. Please check your email inbox ')
         }
       };
 
  
 
+      const Reenter = () =>(
+        setsendSuccessfully('no'),
+        setsendSuccessfullyEnglish('no'),
+        setAlert(''),
+        setAlertEnglish(''),
+        setFormData(''),
+        setshowalertI('no')
+      )
 
       useEffect(()=>{
     
@@ -81,7 +90,7 @@ const AddRegister = ({setAlert,addRegister,match}) => {
  
 
     return (
-          <Fragment> 
+ <Fragment> 
 
 
   {i18next.language === 'ar'&&( <Navbar />)}
@@ -99,13 +108,24 @@ const AddRegister = ({setAlert,addRegister,match}) => {
               
                 <center> 
                 <form className="login-form" onSubmit={e => onSubmit(e)} >
-                <div className='FormCover' style={{height:'500px'}}>  
+                <div className='FormCover' style={{height:'550px'}}>  
                 <div class="login-title">
                 انشئ حساب جديد                     
                  <i className="fa fa-envelope-square"></i>  
                 </div>
 
                 <div class="login-title"> الخطوة 1 من 2 </div>
+
+                {sendSuccessfully !== 'no' ?(
+                  <Fragment> 
+                <center>
+               <div className="alert-info">  {sendSuccessfully} </div> 
+               <div class="smallText"> اذا لم تصلك الرسالة قم بالضغط على اعادة الإرسال</div>
+               <div className="Formbutton" onClick={Reenter}>اعادة الإرسال</div>
+               </center> 
+                 </Fragment> 
+                ):(
+                  <Fragment> 
 
                 <div class="smallText">    ملاحظة: سيتم إرسال رسالة إلكترونية على عنوان بريدك الإلكتروني للتأكد من ملكيتك للعنوان فلذلك نرجو منك التأكد من كتابة عنوان بريدك الإلكتروني بشكل صحيح قبل المتابعة.     </div>
                 <br/><br/> 
@@ -117,15 +137,19 @@ const AddRegister = ({setAlert,addRegister,match}) => {
                  value={r_email} 
                  onChange={e => onChange(e)}
                  />   
-                  <center>
+                  <center> 
                   {showalertI === 'yes' && (
-
-                  <center>   <div className="alert-danger" >  <Alert />  </div> </center>  
+                  <center>   <div className="alert-danger" >  {alertArabic} </div> </center>  
 
                     )}
                  <button className="Formbutton"  type="submit" name="" >تسجيل</button>
-         
-                </center>
+                
+
+                 </center>
+                 </Fragment>
+                 )}
+                 
+                
                 </div>
                 </form>
                 </center>
@@ -142,13 +166,23 @@ const AddRegister = ({setAlert,addRegister,match}) => {
  
                 <center> 
                 <form className="login-form" onSubmit={e => onSubmit2(e)} >
-                <div className='FormCover' style={{height:'500px'}}>  
+                <div className='FormCover' style={{height:'600px'}}>  
                 <div class="login-title">
                 <i className="fa fa-envelope-square"></i> 
                  Create new account       
                 </div>
                 <div class="login-title"> Step 1 of 2 </div>
 
+                {sendSuccessfullyEnglish !=='no' ? (
+                  <Fragment> 
+                    <center>
+                  <div className="alert-info" >  {sendSuccessfullyEnglish} </div> 
+                <div class="smallText"> If you did not receive the message, press resend</div>
+                  <div className="Formbutton" onClick={Reenter}>Resend</div>
+                  </center>
+                  </Fragment>
+                ):(
+                  <Fragment> 
                 <div class="smallTextEnglish">    
                 Note: An email will be sent to your email address to confirm that you own the address, so we kindly ask you to make sure that you type your email address correctly before proceeding.                
                    </div>
@@ -163,10 +197,21 @@ const AddRegister = ({setAlert,addRegister,match}) => {
                  onChange={e => onChange(e)}
                  />   
                   <center>
+
+                  {showalertI === 'yes' && (
+ 
+                <center>   <div className="alert-danger" > {alertEnglish}</div> </center>  
+
+                  )}
                  <button className="Formbutton"  type="submit" name="" >Sign Up</button>
-         
+
+                 
                 </center>
+                </Fragment>
+                 )}
                 </div>
+
+                
                 </form>
                 </center>
         

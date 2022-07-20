@@ -6,7 +6,7 @@ import { Fragment } from 'react';
 import { deletePost } from '../../actions/post';
 import ConfirmButton from "./ConfirmButton";
  
-import noimg from './noimg.jpg';
+import noimg from './noimg.png';
 import greenFace from './greenFace.png';
 import redFace from './redFace.png';
 import yallowFace from './yallowFace.png';

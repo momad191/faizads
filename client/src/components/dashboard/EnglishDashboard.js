@@ -379,8 +379,8 @@ const EnglishDashboard = ({
   <th> Your link   </th>
    <th>       <i class="fa fa-link fa-1x" aria-hidden="true"></i>   {'   '}
      {user.username ?(<>
-       <a href={`https://faizads.herokuapp.com/user/createAccount/${user.username && user.username}`}> 
-      {`https://faizads.herokuapp.com/user/createAccount/${user.username && user.username}`}
+       <a href={`https://faizads.com/user/createAccount/${user.username && user.username}`}> 
+      {`https://faizads.com/user/createAccount/${user.username && user.username}`}
          </a> </> ):(<>loading ...</> )}  {'   '}
        <i class="fa fa-link fa-1x" aria-hidden="true"></i> 
        </th>

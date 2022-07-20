@@ -31,6 +31,8 @@ const DashboardActionsEnglish = () => {
 <div className="DashBoxTitle" > Start Promot your services and products  </div>
 <center>
   <li className="left"><Link to='/dashboard/posts'>    Publications  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
+  <li className="left"><Link to='/dashboard/users/editUsername'>  Change your username  <i className="fa fa-user-circle-o fa-2x"></i> </Link></li>  
+
  {/* <li className="left"><Link to='/questions'> <i className="fa fa-question-circle fa-2x"></i>  Questions </Link></li> */}
  
  <li className="left"><Link to='/dashboard/categories'>   Categories <i className="fa fa-cubes fa-2x"></i></Link></li>
@@ -66,7 +68,9 @@ const DashboardActionsEnglish = () => {
 <ul className="Dash-nav"> 
 <div className="DashBoxTitle" > Start Promot your services and products  </div>
 <center>
-  <li className="left"><Link to='/dashboard/posts'>    Publications  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
+<li className="left"><Link to='/dashboard/posts'>    Publications  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
+<li className="left"><Link to='/dashboard/users/editUsername'>  Change your username  <i className="fa fa-user-circle-o fa-2x"></i> </Link></li>  
+
  {/* <li className="left"><Link to='/questions'> <i className="fa fa-question-circle fa-2x"></i>  Questions </Link></li> */}
  
  <li className="left"><Link to='/dashboard/categories'>   Categories <i className="fa fa-cubes fa-2x"></i></Link></li>
@@ -98,6 +102,7 @@ const DashboardActionsEnglish = () => {
 <div className="DashBoxTitle" > Start Promot your services and products  </div>
 <center>
   <li className="left"><Link to='/dashboard/posts'>    Publications  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
+  <li className="left"><Link to='/dashboard/users/editUsername'>  Change your username  <i className="fa fa-user-circle-o fa-2x"></i> </Link></li>  
  {/* <li className="left"><Link to='/dashboard/categories'>   التصنيفات الفرعية <i className="fa fa-cubes fa-2x"></i></Link></li>
  <li className="left"><Link to='/dashboard/markets'>   الاسواق <i className="fa fa-credit-card-alt fa-2x"></i></Link></li>  
  <li className="left"><Link to='/dashboard/countries'>   الدول <i className="fa fa-globe fa-2x"></i> </Link></li>
@@ -127,6 +132,8 @@ const DashboardActionsEnglish = () => {
 <div className="DashBoxTitle" > Start Promot your services and products  </div>
 <center>
   <li className="left"><Link to='/dashboard/posts'>    Publications  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
+  <li className="left"><Link to='/dashboard/users/editUsername'>  Change your username  <i className="fa fa-user-circle-o fa-2x"></i> </Link></li>  
+
  {/* <li className="left"><Link to='/questions'> <i className="fa fa-question-circle fa-2x"></i>  Questions </Link></li> */}
  
  {/* <li className="left"><Link to='/dashboard/categories'>   التصنيفات الفرعية <i className="fa fa-cubes fa-2x"></i></Link></li>
@@ -161,6 +168,8 @@ const DashboardActionsEnglish = () => {
 <div className="DashBoxTitle" > Start Promot your services and products  </div>
 <center>
   <li className="left"><Link to='/dashboard/posts'>    Publications  <i className="fa fa-bullhorn fa-2x"></i> </Link></li>
+  <li className="left"><Link to='/dashboard/users/editUsername'>  Change your username  <i className="fa fa-user-circle-o fa-2x"></i> </Link></li>  
+
  {/* <li className="left"><Link to='/questions'> <i className="fa fa-question-circle fa-2x"></i>  Questions </Link></li> */}
  
  {/* <li className="left"><Link to='/dashboard/categories'>   التصنيفات الفرعية <i className="fa fa-cubes fa-2x"></i></Link></li>

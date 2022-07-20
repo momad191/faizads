@@ -2,7 +2,7 @@ import React, { Component ,Fragment } from 'react';
 import axios from 'axios'; 
 import moment from 'moment';
 import Moment from 'react-moment';
-
+ 
 import Navbar from '../layout/Navbar';
 import NavbarEnglish from '../layout/NavbarEnglish';
 //import 'moment/locale/ar'; 
@@ -222,7 +222,7 @@ export default class MyProfile extends Component {
 
 
     e.preventDefault();
-
+ 
     const today_date = moment();
     const expire_date = moment();
     expire_date.add(30,'days');
@@ -242,8 +242,6 @@ export default class MyProfile extends Component {
       postal: this.state.postal, 
       // validity: this.state.validity, 
     }
-     
-   
     axios.post('/api/auth/updateProfile/'+para, user);
 
     this.setState({
@@ -260,6 +258,9 @@ export default class MyProfile extends Component {
     }
  
     
+
+
+ 
 
 
  

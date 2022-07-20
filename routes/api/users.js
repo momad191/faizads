@@ -54,7 +54,6 @@ router.post(
     try {
         //see if username  exists
         let usernameCheck = await User.findOne({ username });
-
         if (usernameCheck) {
           return res
             .status(400)

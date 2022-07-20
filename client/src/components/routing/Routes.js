@@ -4,6 +4,7 @@ import Register from '../auth/Register';
 import MyProfile from '../auth/MyProfile';
 import users from '../auth/users'; 
 import EditUser from '../auth/EditUser';
+import editUsername from '../auth/editUserNameForm';
  
 import RegisterByRef from '../auth/RegisterByRef';
 import CreateAccount from '../auth/create-account';
@@ -196,6 +197,11 @@ const Routes = () => {
 
         <PrivateRoute exact path='/:lang/dashboard/users/editUser/:id' component={EditUser} />
         <PrivateRoute exact path='/dashboard/users/editUser/:id' component={EditUser} />
+
+
+        <PrivateRoute exact path='/:lang/dashboard/users/editUsername' component={editUsername} />
+        <PrivateRoute exact path='/dashboard/users/editUsername' component={editUsername} />
+        
         
         
 

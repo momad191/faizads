@@ -11,7 +11,7 @@ import { setAlert } from '../../actions/alert';
 import { getPost } from '../../actions/post';
 import axios from 'axios';
 
-import noimg from './noimg.jpg';
+import noimg from './noimg.png';
 import greenFace from './greenFace.png';
 import redFace from './redFace.png';
 import yallowFace from './yallowFace.png';

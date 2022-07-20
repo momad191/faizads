@@ -16,7 +16,8 @@ import {
   PAY_SUCCESS,
   PAY_FAIL,
   ADD_REGISTER_SUCCESS,
-  ADD_REGISTER_FAIL
+  ADD_REGISTER_FAIL,
+  UPDATE_USERNAME 
 } from './types';
  
 import setAuthToken from '../utils/setAuthToken';
@@ -255,7 +256,43 @@ export const pay = () => async dispatch => {
       });
     }
   };
-    
+       
+  //////////////////////////////////////edit username/////////////////////////////////////////////
+  export const editUsername = (userId,formData) => async dispatch => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }; 
+   
+    try {
+      const res = await axios.post(
+        `/api/auth/edit-username/${userId}`,
+        formData,
+        config
+      );
+  
+      dispatch({
+        type: UPDATE_USERNAME,
+        payload: res.data
+      });
+  
+      window.location = '/dashboard/users/editUsername';
+    } catch (err) {
+      const errors = err.response.data.errors;
+  
+      if (errors) {
+        errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      }
+
+      // dispatch({
+      //   type: REGISTER_FAIL,
+      //   payload: { msg: errors.response.statusText, status: errors.response.status }
+      // });
+    }
+  };
+
+ ///////////////////////////////////////end edit username////////////////////////////////////////////
 
 
      // Add Reset
