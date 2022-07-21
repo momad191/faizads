@@ -98,9 +98,13 @@ const UserSchema = new mongoose.Schema({
  
   ref: { 
     type: String,
-     
-    
   },
+   
+  ref_id: { 
+    type: Schema.Types.ObjectId,
+    ref: 'user'
+  },
+  
  
   validity: {
     type: String,

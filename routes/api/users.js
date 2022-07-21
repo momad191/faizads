@@ -48,7 +48,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { first_name,last_name,username, email, password,validity,country_code,country_name,city,state,postal,latitude,longitude,IPv4,shopname,shopstatus,membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date,Visual_Code} = req.body;
+    const { first_name,last_name,username, email, password,validity,country_code,country_name,city,state,postal,latitude,longitude,IPv4,shopname,shopstatus,ref,membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date,Visual_Code} = req.body;
     
 
     try {
@@ -162,7 +162,7 @@ router.post(
 // @access   Public
 router.post(
   '/:ref',
-  [ 
+  [  
     check('name', 'Name is required')
       .not()
       .isEmpty(),
@@ -179,12 +179,12 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { first_name,last_name,username, email, password,validity,country_code,country_name,city,state,postal,latitude,longitude,IPv4,shopname,shopstatus,r_ref,membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date,Visual_Code} = req.body;
+    const { first_name,last_name,username, email, password,validity,country_code,country_name,city,state,postal,latitude,longitude,IPv4,shopname,shopstatus,ref,membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date,Visual_Code} = req.body;
     
 
     try {
 
-      const Rref = await User.findOne({ username:r_ref });
+      const RRef = await User.findOne({username:ref});
         //see if user exists
       let user = await User.findOne({ email });
 
@@ -219,7 +219,8 @@ router.post(
         IPv4,
         shopname,
         shopstatus,
-        ref:Rref._id,
+        ref,
+        ref_id:RRef._id, 
         membership_class,
         Payment_status,
         available_ads,
