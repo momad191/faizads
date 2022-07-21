@@ -120,7 +120,7 @@ router.post(
       };
  
       //return jsonwebtoken
-     
+    
       jwt.sign(
         payload,
         config.get('jwtSecret'),
@@ -179,12 +179,12 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { first_name,last_name,username, email, password,validity,country_code,country_name,city,state,postal,latitude,longitude,IPv4,shopname,shopstatus,membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date,Visual_Code} = req.body;
+    const { first_name,last_name,username, email, password,validity,country_code,country_name,city,state,postal,latitude,longitude,IPv4,shopname,shopstatus,r_ref,membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date,Visual_Code} = req.body;
     
 
     try {
 
-      const user_ref =  await User.findOne({ username:req.params.ref });
+      const Rref = await User.findOne({ username:r_ref });
         //see if user exists
       let user = await User.findOne({ email });
 
@@ -218,8 +218,8 @@ router.post(
         longitude,
         IPv4,
         shopname,
-        shopstatus, 
-        ref:user_ref._id,
+        shopstatus,
+        ref:Rref._id,
         membership_class,
         Payment_status,
         available_ads,
