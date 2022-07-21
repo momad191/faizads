@@ -5,7 +5,7 @@ import moment from 'moment';
 import Moment from 'react-moment';
 import { register } from '../../actions/auth'; 
 import { addvisual } from '../../actions/auth';
-       
+         
 import Navbar from '../../components/layout/Navbar';
 import NavbarEnglish from '../../components/layout/NavbarEnglish';
 import { useTranslation } from 'react-i18next';

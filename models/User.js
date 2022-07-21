@@ -100,9 +100,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
   },
    
-  ref_id: { 
+  refid: { 
     type: Schema.Types.ObjectId,
-    ref: 'user'
+    ref: 'refid'
   },
   
  

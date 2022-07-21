@@ -184,7 +184,7 @@ router.post(
 
     try {
 
-      const RRef = await User.findOne({username:ref});
+      const rref = await User.findOne({username:req.body.ref});
         //see if user exists
       let user = await User.findOne({ email });
 
@@ -220,7 +220,7 @@ router.post(
         shopname,
         shopstatus,
         ref,
-        ref_id:RRef._id, 
+        refid:rref._id, 
         membership_class,
         Payment_status,
         available_ads,
