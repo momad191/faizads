@@ -362,14 +362,14 @@ export const addReset = formData => async dispatch => {
 
 
          // Add RegisterByRef
-         export const addRegisterByRef = ({ r_email,r_ref }) => async dispatch => {
+         export const addRegisterByRef = ({ r_email }) => async dispatch => {
 
           const config = {
             headers: {
               'Content-Type': 'application/json'
             }
           }; 
-          const body = JSON.stringify({ r_email,r_ref });
+          const body = JSON.stringify({ r_email });
     
           try {
             const res = await axios.post('/api/auth/registernow/:ref', body, config);

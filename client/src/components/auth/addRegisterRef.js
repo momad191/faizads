@@ -6,7 +6,7 @@ import { addRegisterByRef } from '../../actions/auth';
 import { setAlert } from '../../actions/alert';
 import Alert from '../layout/Alert';
 import axios from 'axios';
-        
+         
 import Navbar from '../../components/layout/Navbar';
 import NavbarEnglish from '../../components/layout/NavbarEnglish';
 import { useTranslation } from 'react-i18next';
@@ -22,9 +22,9 @@ const AddRegisterRef = ({setAlert,addRegisterByRef,match,isAuthenticated}) => {
 //   const [markets11,setMarkets11]= useState([])
 //     const [image, setImage] = useState('')
     const [loading, setLoading] = useState(false)
-
+ 
     const Lang = match.params.lang; 
-    const r_ref = match.params.ref;
+    // const r_ref = match.params.ref;
      
 
     const [formData, setFormData] = useState({
@@ -50,7 +50,7 @@ const AddRegisterRef = ({setAlert,addRegisterByRef,match,isAuthenticated}) => {
           setAlertArabic('البريد الإلكتروني مطلوب');
           setshowalertI('yes')
         } else{
-        addRegisterByRef({ r_email,r_ref});
+        addRegisterByRef({ r_email});
         setsendSuccessfully(' لقد تم إرسال رسالة على عنوان  بريدك الالكتروني تحتوي على الخطوة الثانية والأخيرة لإتمام عملية إنشاء حسابك. نرجو منك تفقد صندوق بريدك الإلكتروني ')
         }
       };
@@ -62,7 +62,7 @@ const AddRegisterRef = ({setAlert,addRegisterByRef,match,isAuthenticated}) => {
           setAlertEnglish('Email is required');
           setshowalertI('yes')
         } else{
-        addRegisterByRef({ r_email,r_ref});
+        addRegisterByRef({ r_email});
         setsendSuccessfullyEnglish('A message has been sent to your email address containing the second and final step to complete the process of creating your account. Please check your email inbox ')
         }
       };
