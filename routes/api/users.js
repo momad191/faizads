@@ -4,7 +4,7 @@ const router = express.Router();
 const gravatar = require('gravatar'); 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('config');
+const config = require('config'); 
 const { check, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
 const auth = require('../../middleware/auth');
@@ -179,10 +179,12 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { first_name,last_name,username, email, password,validity,country_code,country_name,city,state,postal,latitude,longitude,IPv4,shopname,shopstatus,ref,membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date,Visual_Code} = req.body;
+    const { first_name,last_name,username, email, password,validity,country_code,country_name,city,state,postal,latitude,longitude,IPv4,shopname,shopstatus,membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date,Visual_Code} = req.body;
     
 
     try {
+
+      const user_ref =  await User.findOne({ username:req.params.ref });
         //see if user exists
       let user = await User.findOne({ email });
 
@@ -216,8 +218,8 @@ router.post(
         longitude,
         IPv4,
         shopname,
-        shopstatus,
-        ref,
+        shopstatus, 
+        ref:user_ref._id,
         membership_class,
         Payment_status,
         available_ads,
@@ -237,9 +239,10 @@ router.post(
 
       const payload = {
         user: {
-          id: user.id
+          id: user.id,
+          username:user.username
         }
-      };
+      }; 
   
       //return jsonwebtoken
     

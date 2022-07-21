@@ -1,17 +1,17 @@
 import React, { useState,useEffect ,Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
 import { addRegister } from '../../actions/auth';    
 import { setAlert } from '../../actions/alert';
 import Alert from '../layout/Alert';
 import axios from 'axios'; 
-      
+          
 import Navbar from '../../components/layout/Navbar';
 import NavbarEnglish from '../../components/layout/NavbarEnglish';
 import { useTranslation } from 'react-i18next';
 
-const AddRegister = ({setAlert,addRegister,match}) => {
+const AddRegister = ({setAlert,addRegister,match,isAuthenticated,token}) => {
   const [t, i18next] = useTranslation()
 
   const [alertArabic, setAlertArabic] = useState('no')
@@ -83,11 +83,15 @@ const AddRegister = ({setAlert,addRegister,match}) => {
 
       useEffect(()=>{
     
-      
-      
+        axios.defaults.headers.common['x-auth-token'] = token;
+       
     },[ ])
 
  
+    if (isAuthenticated ) {
+      return <Redirect to='/dashboard/main' />;
+    } 
+  
 
     return (
  <Fragment> 
@@ -97,7 +101,7 @@ const AddRegister = ({setAlert,addRegister,match}) => {
   {i18next.language === 'en'&&( <NavbarEnglish />)}
 
      
-      
+      {token}
         
                 <div className="aqle3-main">
                 <div className="mainword2">
@@ -237,11 +241,16 @@ const AddRegister = ({setAlert,addRegister,match}) => {
 
 AddRegister.propTypes = {
     addRegister: PropTypes.func.isRequired,
-    setAlert: PropTypes.func.isRequired
+    setAlert: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
     
   };
+
+  const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+  });
   
   export default connect(
-    null,
+    mapStateToProps,
     { setAlert,addRegister }
   )(AddRegister);

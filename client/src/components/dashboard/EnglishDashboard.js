@@ -79,7 +79,7 @@ const EnglishDashboard = ({
  
   
   useEffect(() => {
-  
+ 
  
     axios.get('/api/shops/usershop')
     .then(res => {
@@ -216,12 +216,13 @@ const EnglishDashboard = ({
       {/* <NavbarEnglish /> */}
    
 
-
+ 
       <div className="aqle3-main" >
       <div className="mainword2">
       <div className="mainForm">
  
- 
+
+
 <div className="login-title"></div>
 {moment(subscription.membership_renewal_expiry_date).isBefore(Date.now()) ?(
    <Fragment>

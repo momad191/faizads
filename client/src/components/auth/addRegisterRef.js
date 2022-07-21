@@ -1,17 +1,17 @@
 import React, { useState,useEffect ,Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
 import { addRegisterByRef } from '../../actions/auth';   
 import { setAlert } from '../../actions/alert';
 import Alert from '../layout/Alert';
 import axios from 'axios';
-      
+        
 import Navbar from '../../components/layout/Navbar';
 import NavbarEnglish from '../../components/layout/NavbarEnglish';
 import { useTranslation } from 'react-i18next';
 
-const AddRegisterRef = ({setAlert,addRegisterByRef,match}) => {
+const AddRegisterRef = ({setAlert,addRegisterByRef,match,isAuthenticated}) => {
   const [t, i18next] = useTranslation()
   const [alertArabic, setAlertArabic] = useState('no')
   const [alertEnglish, setAlertEnglish] = useState('no')
@@ -86,6 +86,11 @@ const AddRegisterRef = ({setAlert,addRegisterByRef,match}) => {
     },[ ])
 
  
+
+    if (isAuthenticated ) {
+      return <Redirect to='/dashboard/main' />;
+    } 
+
 
     return (
  
@@ -238,11 +243,17 @@ const AddRegisterRef = ({setAlert,addRegisterByRef,match}) => {
 
 AddRegisterRef.propTypes = {
     addRegisterByRef: PropTypes.func.isRequired,
-    setAlert: PropTypes.func.isRequired
+    setAlert: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
     
   }; 
+
+  const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+  });
+
   
   export default connect(
-    null,
+    mapStateToProps,
     { setAlert,addRegisterByRef }
   )(AddRegisterRef);

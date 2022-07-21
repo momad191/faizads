@@ -15,6 +15,7 @@ export const Dashboard = ({match}) => {
   
 {i18next.language === 'ar'&&(
      <Fragment> 
+      
      <Navbar />
      <ArabicDashboard />
      </Fragment>

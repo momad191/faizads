@@ -48,7 +48,7 @@ const Login = ({ login, isAuthenticated,match,setAlert }) => {
   if (isAuthenticated) {
     return <Redirect to='/dashboard/main' />;
   }
-
+ 
 
   // if (isAuthenticated && i18next.language === 'en') {
   //   return <Redirect to='/dashboard/main' />;
