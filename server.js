@@ -1,5 +1,5 @@
 const express = require('express');
-// const enforce = require('express-sslify');
+const enforce = require('express-sslify');
 const connectDB = require('./config/db');
 const path = require('path');
 const fileUpload = require('express-fileupload');
@@ -18,7 +18,7 @@ connectDB();
   //  {extended:false}
 //));
 
-// app.use(enforce.HTTPS({ trustProtoHeader: true }));
+ app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 app.use(cors());
 app.use('/public',express.static('public'));
