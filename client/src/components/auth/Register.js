@@ -52,7 +52,7 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
   const validity='normal';
   const shopname = '';
   const shopstatus='closed'; 
-  const ref = registerInfo.r_ref;
+  // const ref = registerInfo.r_ref;
   const membership_class = 'free';
   const Payment_status ='no'
   const available_ads = 2;
@@ -113,7 +113,7 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
     
     
      else{
-       register({ first_name,last_name,username, email, password,validity,country_name,country_code, city, state, postal, latitude, longitude, IPv4, shopname, shopstatus, ref, membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date,Visual_Code });
+       register({ first_name,last_name,username, email, password,validity,country_name,country_code, city, state, postal, latitude, longitude, IPv4, shopname, shopstatus, membership_class,Payment_status,available_ads,membership_renewal_date, membership_renewal_expiry_date,Visual_Code });
        addvisual({Visual_Code});
        
       //  window.location= `/user/emailSendingComfirmation`
@@ -375,7 +375,7 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
 
 
 
-          <div className=''>
+          {/* <div className=''>
            
    
           <input
@@ -385,7 +385,7 @@ const Register = ({ setAlert ,register,addvisual, isAuthenticated, match }) => {
             value={ref}
             // onChange={e => onChange(e)}
           />
-          </div>
+          </div> */}
 
     
 
@@ -589,7 +589,7 @@ return  <h1 className='notusernames'> {post.username} -</h1>;
 
 
 
-      <div className=''>
+      {/* <div className=''>
        
 
       <input
@@ -599,7 +599,7 @@ return  <h1 className='notusernames'> {post.username} -</h1>;
         value={ref}
         // onChange={e => onChange(e)}
       />
-      </div>
+      </div> */}
 
 
 
